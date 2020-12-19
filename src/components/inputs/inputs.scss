@@ -1,0 +1,27 @@
+.normal-input-wrapper {
+  .normal-input {
+    direction: ltr;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .normal-input:focus {
+    border: 1px solid #1c3987;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .normal-input::placeholder {
+    font-family: "typecafe";
+    direction: rtl;
+  }
+
+  .label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+}

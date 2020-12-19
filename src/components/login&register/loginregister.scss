@@ -1,0 +1,44 @@
+.login-register-wrapper {
+  background-color: #fff;
+  display: inline-block;
+  width: 20rem;
+  padding: 0.8rem;
+  border-radius: 10px;
+
+  .tab-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .tab-item {
+    width: 50%;
+    text-align: center;
+    line-height: 2.2rem;
+  }
+
+  .active {
+    border-bottom: 2px solid #1c3987;
+  }
+
+  .tab-content {
+    padding: 1rem 0.5rem;
+    margin-top: 10px;
+  }
+
+  .login-submit-button {
+    padding: 7px 20px;
+    background-color: #1c3987;
+    color: white;
+    font-family: "typecafe";
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .login-submit-button:hover {
+    opacity: 0.9;
+  }
+}
