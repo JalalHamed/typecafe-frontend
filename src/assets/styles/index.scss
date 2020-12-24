@@ -16,6 +16,10 @@ p {
   margin-bottom: 0;
 }
 
+button {
+  user-select: none;
+}
+
 .no-select {
   user-select: none;
 }

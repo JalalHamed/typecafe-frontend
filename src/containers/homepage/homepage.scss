@@ -1,6 +1,13 @@
 .home-page-wrapper {
-  display: flex;
-  justify-content: center;
-  max-width: 1360px;
-  margin: 9rem auto;
+  .loginregister-section-wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 1360px;
+    margin: 9rem auto 12rem;
+  }
+
+  .gotowhatisit-section-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 }
