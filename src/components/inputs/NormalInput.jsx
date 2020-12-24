@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import "./inputs.scss";
 
 const NormalInput = forwardRef(
-  ({ label, name, placeholder, type, id }, ref) => {
+  ({ label, name, placeholder, type, id, style }, ref) => {
     return (
       <div className="normal-input-wrapper">
         <label htmlFor={id} className="label no-select">
@@ -17,6 +17,7 @@ const NormalInput = forwardRef(
           ref={ref}
           placeholder={placeholder}
           className="normal-input"
+          style={style && style}
         />
       </div>
     );

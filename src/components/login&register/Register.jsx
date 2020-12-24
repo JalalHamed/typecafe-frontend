@@ -6,11 +6,20 @@ import { useForm } from "react-hook-form";
 // Components
 import NormalInput from "components/inputs/NormalInput";
 
+// Request
+import { UserRegister } from "requests/Register";
+
 const Register = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
-    console.log("data", data);
+    const body = {
+      ...data,
+    };
+
+    UserRegister(body)
+      .then(res => res)
+      .catch(err => console.log(err));
   };
 
   return (
@@ -23,6 +32,11 @@ const Register = () => {
             id="username"
             name="username"
             ref={register({ required: true })}
+            style={{
+              direction: "rtl",
+              fontFamily: "typecafe",
+              fontSize: "12px",
+            }}
           />
           <NormalInput
             label="ایمیل"

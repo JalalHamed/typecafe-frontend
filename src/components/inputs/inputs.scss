@@ -1,11 +1,12 @@
 .normal-input-wrapper {
   .normal-input {
     direction: ltr;
-    padding: 10px;
+    padding: 5px 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 10px;
     width: 100%;
+    font-size: 15px;
   }
 
   .normal-input:focus {

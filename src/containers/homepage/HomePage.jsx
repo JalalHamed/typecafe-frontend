@@ -12,16 +12,7 @@ const HomePage = () => {
     <div>
       <Topbar />
       <div className="home-page-wrapper">
-        <div>
-          <p>به تایپ کافه خوش آمدید.</p>
-          <p>
-            پروژه های تایپ خود را آپلود کنید و آن ها را تایپ شده تحویل بگیرید.
-          </p>
-          <p>برای شروع وارد شوید.</p>
-        </div>
-        <div>
-          <LoginRegister />
-        </div>
+        <LoginRegister />
       </div>
     </div>
   );

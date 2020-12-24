@@ -3,7 +3,9 @@
   display: inline-block;
   width: 20rem;
   padding: 0.8rem;
+  border: 1px solid #dbdbdb;
   border-radius: 10px;
+  min-width: 315px;
 
   .tab-header {
     display: flex;
