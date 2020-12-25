@@ -1,12 +1,26 @@
 .home-page-wrapper {
-  .loginregister-section-wrapper {
+  .banner-section-wrapper {
     display: flex;
-    justify-content: center;
-    max-width: 1360px;
-    margin: 9rem auto 12rem;
+    justify-content: space-around;
+    align-items: center;
+    height: 700px;
+    max-width: 1330px;
+    margin: 0 auto;
   }
 
-  .gotowhatisit-section-wrapper {
+  @media screen and (max-height: 800px) {
+    .banner-section-wrapper {
+      height: 530px;
+    }
+  }
+
+  @media screen and (max-height: 700px) {
+    .banner-section-wrapper {
+      height: 450px;
+    }
+  }
+
+  .scrolldown-section-wrapper {
     display: flex;
     justify-content: center;
   }

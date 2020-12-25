@@ -5,12 +5,11 @@ import "./topbar.scss";
 
 const Topbar = () => {
   return (
-    <>
-      <div className="above-bar" />
+    <div className="topbar-section-wrapper">
       <div className="topbar">
         <p className="site-title no-select">تایپ کافه</p>
       </div>
-    </>
+    </div>
   );
 };
 
