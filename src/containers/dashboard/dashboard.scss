@@ -1,0 +1,12 @@
+.wrapper {
+  .main {
+    display: flex;
+    height: 93vh;
+
+    .sidebar {
+      width: 300px;
+      background-color: #30475e;
+      color: #fff;
+    }
+  }
+}

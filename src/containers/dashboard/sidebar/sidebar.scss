@@ -1,0 +1,45 @@
+.sidebar-wrapper {
+  .user-profile {
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    &_photo {
+      width: 37%;
+
+      .profile-picture {
+        width: 13vh;
+        height: 13vh;
+        border-radius: 50%;
+        background-color: #ddd;
+      }
+    }
+
+    &_info {
+      width: 55%;
+    }
+  }
+
+  .sidebar-items {
+    width: 100%;
+
+    &_item {
+      padding: 15px 30px;
+      cursor: pointer;
+      display: block !important;
+    }
+
+    &_item:hover {
+      background-color: #f05454;
+    }
+
+    &_item_selected {
+      padding: 15px 30px;
+      background-color: #f05454;
+      cursor: pointer;
+      display: block !important;
+    }
+  }
+}

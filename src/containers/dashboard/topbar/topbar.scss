@@ -1,0 +1,13 @@
+.topbar-wrapper {
+  height: 7vh;
+  background-color: #29313b;
+  display: flex;
+  align-items: center;
+
+  .site-title {
+    color: #fff;
+    margin-right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}

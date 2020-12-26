@@ -4,13 +4,13 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // Containers
-import HomePage from "containers/homepage/HomePage";
+import Dashboard from "containers/dashboard/Dashboard";
 
 const Routers = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <HomePage />
+        <Dashboard />
       </Route>
     </Switch>
   );
