@@ -24,20 +24,24 @@
 
   .sidebar-items {
     width: 100%;
+    user-select: none;
 
     &_item {
+      position: relative;
       padding: 15px 30px;
       cursor: pointer;
       display: block !important;
-    }
+      transition: all 0.4s;
 
-    &_item:hover {
-      background-color: #f05454;
+      &:hover {
+        background-color: #ad3e3e;
+      }
     }
 
     &_item_selected {
+      position: relative;
       padding: 15px 30px;
-      background-color: #f05454;
+      background-color: #ad3e3e;
       cursor: pointer;
       display: block !important;
     }
