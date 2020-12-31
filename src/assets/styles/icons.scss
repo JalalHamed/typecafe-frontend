@@ -1,6 +1,10 @@
 .icon {
   margin-left: 24px;
 
+  &.icon-less-margin {
+    margin-left: 18px !important;
+  }
+
   &.icon-menu {
     content: url("../svgs/menu.svg");
     width: 24px;
@@ -48,6 +52,13 @@
     content: url("../svgs/settings-white.svg");
     width: 24px;
     height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-user-red {
+    content: url("../svgs/user.svg");
+    width: 70px;
+    height: 70px;
     background-repeat: no-repeat;
   }
 }

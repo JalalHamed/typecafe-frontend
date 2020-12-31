@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Components
 import TouchRipple from "components/ripple/TouchRipple";
@@ -11,21 +11,33 @@ import "./sidebar.scss";
 import "components/ripple/ripple.scss";
 
 const SideBar = ({ setPage, page }) => {
+  const [isLogin, setIsLogin] = useState(false);
   const ProjectsRippleRef = useRef();
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
 
   return (
     <div className="sidebar-wrapper">
-      <div className="user-profile">
-        <div className="user-profile_photo">
-          <img src={profilePicture} alt="Guest" className="profile-picture" />
+      {isLogin ? (
+        <div className="user-profile">
+          <div className="user-profile_photo">
+            <img src={profilePicture} alt="Guest" className="profile-picture" />
+          </div>
+          <div className="user-profile_info">وارد شوید</div>
         </div>
-        <div className="user-profile_info">
-          برای دسترسی به همه‌ امکانات وبسایت،
-          <br /> وارد شوید.
+      ) : (
+        <div className="sidebar-login">
+          <div className="sidebar-login-icon">
+            <i className="icon icon-user-red icon-less-margin" />
+          </div>
+          <div className="sidebar-login-text">
+            <p className="sidebar-login-title">وارد شوید</p>
+            <p className="sidebar-login-description">
+              برای دسترسی به همه امکانات سایت، به حساب کاربری خود وارد شوید.
+            </p>
+          </div>
         </div>
-      </div>
+      )}
       <div className="sidebar-items">
         <div
           className={`sidebar-items_item${
