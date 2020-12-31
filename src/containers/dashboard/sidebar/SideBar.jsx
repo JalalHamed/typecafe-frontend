@@ -1,11 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
+
+// Components
+import TouchRipple from "components/ripple/TouchRipple";
+
+// Image
+import profilePicture from "assets/images/profile-picture.png";
 
 // Designs
 import "./sidebar.scss";
 import "components/ripple/ripple.scss";
-
-// Components
-import TouchRipple from "components/ripple/TouchRipple";
 
 const SideBar = ({ setPage, page }) => {
   const ProjectsRippleRef = useRef();
@@ -16,9 +19,12 @@ const SideBar = ({ setPage, page }) => {
     <div className="sidebar-wrapper">
       <div className="user-profile">
         <div className="user-profile_photo">
-          <div className="profile-picture"></div>
+          <img src={profilePicture} alt="Guest" className="profile-picture" />
         </div>
-        <div className="user-profile_info">recpor</div>
+        <div className="user-profile_info">
+          برای دسترسی به همه‌ امکانات وبسایت،
+          <br /> وارد شوید.
+        </div>
       </div>
       <div className="sidebar-items">
         <div
@@ -33,6 +39,13 @@ const SideBar = ({ setPage, page }) => {
             ProjectsRippleRef.current.stop();
           }}
         >
+          <i
+            className={`icon ${
+              page === "projects"
+                ? "icon-projects-black"
+                : "icon-projects-white"
+            }`}
+          />
           پروژه ها
           <TouchRipple ref={ProjectsRippleRef} />
         </div>
@@ -48,6 +61,11 @@ const SideBar = ({ setPage, page }) => {
             FinancialRippleRef.current.stop();
           }}
         >
+          <i
+            className={`icon ${
+              page === "financial" ? "icon-wallet-black" : "icon-wallet-white"
+            }`}
+          />
           کیف پول
           <TouchRipple ref={FinancialRippleRef} />
         </div>
@@ -63,6 +81,11 @@ const SideBar = ({ setPage, page }) => {
             SettingsRippleRef.current.stop();
           }}
         >
+          <i
+            className={`icon ${
+              page === "settings" ? "icon-gear-black" : "icon-gear-white"
+            }`}
+          />
           تنظیمات
           <TouchRipple ref={SettingsRippleRef} />
         </div>

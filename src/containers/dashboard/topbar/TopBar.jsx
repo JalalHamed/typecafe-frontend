@@ -6,7 +6,8 @@ import "./topbar.scss";
 const TopBar = () => {
   return (
     <div className="topbar-wrapper">
-      <p className="site-title">تایپ کافه</p>
+      <i className="icon icon-menu" />
+      <p className="site-title no-select">تایپ کافه</p>
     </div>
   );
 };

@@ -1,0 +1,53 @@
+.icon {
+  margin-left: 24px;
+
+  &.icon-menu {
+    content: url("../svgs/menu.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  &.icon-projects-black {
+    content: url("../svgs/projects-black.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-projects-white {
+    content: url("../svgs/projects-white.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-wallet-black {
+    content: url("../svgs/wallet-black.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-wallet-white {
+    content: url("../svgs/wallet-white.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-gear-black {
+    content: url("../svgs/settings-black.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-gear-white {
+    content: url("../svgs/settings-white.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+}

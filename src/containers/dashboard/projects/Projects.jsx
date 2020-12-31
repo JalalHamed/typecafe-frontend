@@ -5,8 +5,9 @@ import "./projects.scss";
 
 const Projects = () => {
   return (
-    <div>
-      <p>projects</p>
+    <div className="projects-wrapper">
+      <div className="projects-filterbar"></div>
+      <div className="projects-project-wrapper"></div>
     </div>
   );
 };

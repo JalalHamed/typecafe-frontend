@@ -1,23 +1,27 @@
 .sidebar-wrapper {
   .user-profile {
-    height: 15vh;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 20px;
+    font-size: 13px;
 
     &_photo {
       width: 37%;
+      max-height: 90px;
 
       .profile-picture {
-        width: 13vh;
-        height: 13vh;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
         background-color: #ddd;
+        object-fit: cover;
       }
     }
 
     &_info {
+      margin-right: 10px;
       width: 55%;
     }
   }
@@ -27,23 +31,26 @@
     user-select: none;
 
     &_item {
-      position: relative;
-      padding: 15px 30px;
       cursor: pointer;
-      display: block !important;
+      position: relative;
+      padding: 15px 20px;
       transition: all 0.4s;
+      display: flex;
+      align-items: center;
 
       &:hover {
-        background-color: #ad3e3e;
+        background-color: rgba(221, 221, 221, 0.219);
       }
     }
 
     &_item_selected {
-      position: relative;
-      padding: 15px 30px;
-      background-color: #ad3e3e;
       cursor: pointer;
-      display: block !important;
+      position: relative;
+      padding: 15px 20px;
+      background-color: #ddd;
+      color: #000;
+      display: flex;
+      align-items: center;
     }
   }
 }

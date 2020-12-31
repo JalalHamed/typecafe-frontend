@@ -1,12 +1,18 @@
 .wrapper {
   .main {
     display: flex;
-    height: 93vh;
+    height: 100%;
+    position: fixed;
 
     .sidebar {
       width: 300px;
+      min-width: 300px;
       background-color: #30475e;
       color: #fff;
+    }
+
+    .content {
+      width: 100%;
     }
   }
 }
