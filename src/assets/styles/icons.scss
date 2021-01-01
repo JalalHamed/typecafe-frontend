@@ -27,6 +27,20 @@
     background-repeat: no-repeat;
   }
 
+  &.icon-abacus-black {
+    content: url("../svgs/abacus-black.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-abacus-white {
+    content: url("../svgs/abacus-white.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
   &.icon-wallet-black {
     content: url("../svgs/wallet-black.svg");
     width: 24px;

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // Components
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
-import Projects from "./projects/Projects";
+import Projects from "./pages/projects/Projects";
 
 // Design
 import "./dashboard.scss";

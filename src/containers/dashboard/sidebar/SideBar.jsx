@@ -12,7 +12,9 @@ import "components/ripple/ripple.scss";
 
 const SideBar = ({ setPage, page }) => {
   const [isLogin, setIsLogin] = useState(false);
+
   const ProjectsRippleRef = useRef();
+  const TarrifsRippleRef = useRef();
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
 
@@ -60,6 +62,26 @@ const SideBar = ({ setPage, page }) => {
           />
           پروژه ها
           <TouchRipple ref={ProjectsRippleRef} />
+        </div>
+        <div
+          className={`sidebar-items_item${
+            page === "tarrifs" ? "_selected" : ""
+          }`}
+          onClick={() => setPage("tarrifs")}
+          onMouseDown={e => {
+            TarrifsRippleRef.current.start(e);
+          }}
+          onMouseUp={() => {
+            TarrifsRippleRef.current.stop();
+          }}
+        >
+          <i
+            className={`icon ${
+              page === "tarrifs" ? "icon-abacus-black" : "icon-abacus-white"
+            }`}
+          />
+          تعرفه ها
+          <TouchRipple ref={TarrifsRippleRef} />
         </div>
         <div
           className={`sidebar-items_item${
