@@ -1,14 +1,24 @@
 .wrapper {
   .main {
+    position: fixed;
     display: flex;
     height: 100%;
-    position: fixed;
+    width: 100%;
 
-    .sidebar {
-      width: 300px;
-      min-width: 300px;
+    .sidebar-open {
       background-color: #30475e;
       color: #fff;
+      width: 300px;
+      min-width: 300px;
+      transition: all 0.5s;
+    }
+
+    .sidebar-close {
+      background-color: #30475e;
+      color: #fff;
+      width: 65px;
+      min-width: 65px;
+      transition: all 0.5s;
     }
 
     .content {

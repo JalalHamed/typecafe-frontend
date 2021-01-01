@@ -69,10 +69,19 @@
     background-repeat: no-repeat;
   }
 
-  &.icon-user-red {
+  &.icon-user-red-big {
     content: url("../svgs/user.svg");
     width: 70px;
     height: 70px;
     background-repeat: no-repeat;
+    transition: all 0.5s;
+  }
+
+  &.icon-user-red-regular {
+    content: url("../svgs/user.svg");
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
   }
 }

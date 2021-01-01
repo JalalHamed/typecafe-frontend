@@ -11,6 +11,7 @@ import { changePage } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
   const page = useSelector(state => state.page);
+  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -38,7 +39,13 @@ const Item = forwardRef(({ status, title }, ref) => {
           page === status ? `icon-${status}-black` : `icon-${status}-white`
         }`}
       />
-      {title}
+      <div
+        className={
+          isSideBarOpen ? "sidebar-item-title" : "sidebar-item-no-title"
+        }
+      >
+        {title}
+      </div>
       <TouchRipple ref={ref} />
     </div>
   );

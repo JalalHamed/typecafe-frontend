@@ -37,16 +37,45 @@
     align-items: center;
     cursor: pointer;
     padding: 0 20px;
-    height: 120px;
-    color: #ff2d2d;
+    position: relative;
+
+    &.sidebar-login-wide {
+      height: 120px;
+    }
+
+    &.sidebar-login-short {
+      padding: 15px 20px;
+    }
 
     &:hover {
       background-color: rgba(221, 221, 221, 0.219);
     }
 
     .sidebar-login-text {
+      opacity: 1;
+      transition: opacity 0.5s, visibility 0.5s;
+      transition-delay: 0.27s;
+
       .sidebar-login-title {
         font-size: 20px;
+        color: #ff2d2d;
+      }
+
+      .sidebar-login-description {
+        font-size: 10px;
+        color: #fff;
+      }
+    }
+
+    .sidebar-login-no-text {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.5s;
+      height: 55px;
+
+      .sidebar-login-title {
+        font-size: 20px;
+        color: #ff2d2d;
       }
 
       .sidebar-login-description {
@@ -67,6 +96,7 @@
       transition: all 0.4s;
       display: flex;
       align-items: center;
+      height: 55px;
 
       &:hover {
         background-color: rgba(221, 221, 221, 0.219);
@@ -81,6 +111,19 @@
       color: #000;
       display: flex;
       align-items: center;
+      height: 55px;
+    }
+
+    .sidebar-item-title {
+      opacity: 1;
+      transition: opacity 0.5s, visibility 0.5s;
+      transition-delay: 0.27s;
+    }
+
+    .sidebar-item-no-title {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.5s;
     }
   }
 }

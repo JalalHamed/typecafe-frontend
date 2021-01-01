@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+
+// Libraries
+import { useSelector } from "react-redux";
 
 // Components
 import TopBar from "./topbar/TopBar";
@@ -9,14 +12,15 @@ import Projects from "./pages/projects/Projects";
 import "./dashboard.scss";
 
 const Dashboard = () => {
-  const [page, setPage] = useState("projects");
+  const page = useSelector(state => state.page);
+  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
 
   return (
     <div className="wrapper">
       <TopBar />
       <div className="main">
-        <div className="sidebar">
-          <SideBar page={page} setPage={setPage} />
+        <div className={isSideBarOpen ? "sidebar-open" : "sidebar-close"}>
+          <SideBar />
         </div>
         <div className="content">{page === "projects" && <Projects />}</div>
       </div>

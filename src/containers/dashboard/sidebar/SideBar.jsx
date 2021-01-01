@@ -11,14 +11,17 @@ import profilePicture from "assets/images/profile-picture.png";
 
 // Designs
 import "./sidebar.scss";
+import TouchRipple from "components/ripple/TouchRipple";
 
 const SideBar = () => {
+  const ProfileRippleRef = useRef();
   const ProjectsRippleRef = useRef();
   const TarrifsRippleRef = useRef();
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
 
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
 
   return (
     <div className="sidebar-wrapper">
@@ -30,16 +33,36 @@ const SideBar = () => {
           <div className="user-profile_info">نام کاربری</div>
         </div>
       ) : (
-        <div className="sidebar-login no-select">
-          <div className="sidebar-login-icon">
-            <i className="icon icon-user-red icon-less-margin" />
-          </div>
-          <div className="sidebar-login-text">
+        <div
+          className={`sidebar-login ${
+            isSideBarOpen ? "sidebar-login-wide" : "sidebar-login-short"
+          } no-select`}
+          onMouseDown={e => {
+            ProfileRippleRef.current.start(e);
+          }}
+          onMouseUp={() => {
+            ProfileRippleRef.current.stop();
+          }}
+          onMouseOut={() => {
+            ProfileRippleRef.current.stop();
+          }}
+        >
+          <i
+            className={`icon ${
+              isSideBarOpen ? "icon-user-red-big" : "icon-user-red-regular"
+            } icon-less-margin`}
+          />
+          <div
+            className={
+              isSideBarOpen ? "sidebar-login-text" : "sidebar-login-no-text"
+            }
+          >
             <p className="sidebar-login-title">وارد شوید</p>
             <p className="sidebar-login-description">
               برای دسترسی به همه امکانات سایت، به حساب کاربری خود وارد شوید.
             </p>
           </div>
+          <TouchRipple ref={ProfileRippleRef} />
         </div>
       )}
       <div className="sidebar-items">
