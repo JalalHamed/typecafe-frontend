@@ -1,11 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+
+// Libraries
 import { BrowserRouter as Router } from "react-router-dom";
-import "./assets/styles/index.scss";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import allReducers from "redux/reducers/Reducers";
+
+// Components
+import App from "./App";
+import allReducers from "redux/reducers";
+
+// Designs
+import "./assets/styles/index.scss";
+import "components/ripple/ripple.scss";
 
 const store = createStore(
   allReducers,
