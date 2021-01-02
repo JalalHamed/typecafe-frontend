@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ paddingLeft: "1.3rem" }}>
+        <div>
           <NormalInput
             label="ایمیل"
             type="email"

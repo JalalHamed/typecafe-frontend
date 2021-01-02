@@ -10,3 +10,15 @@ export const toggleSideBar = () => {
     type: "TOGGLE_SIDE_BAR",
   };
 };
+
+export const openLoginRegisterModal = () => {
+  return {
+    type: "OPEN_LOGIN_REGISTER_MODAL",
+  };
+};
+
+export const closeLoginRegisterModal = () => {
+  return {
+    type: "CLOSE_LOGIN_REGISTER_MODAL",
+  };
+};

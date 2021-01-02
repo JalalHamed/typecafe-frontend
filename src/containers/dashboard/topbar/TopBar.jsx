@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Libraries
 import { useDispatch } from "react-redux";
 
-// Designs
-import "./topbar.scss";
+// Components
+import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
 import { toggleSideBar } from "redux/actions";
 
+// Designs
+import "./topbar.scss";
+
 const TopBar = () => {
   const dispatch = useDispatch();
 
+  const MenuIconRippleRef = useRef();
+
   return (
     <div className="topbar-wrapper">
-      <i className="icon icon-menu" onClick={() => dispatch(toggleSideBar())} />
+      <div
+        className="hamburger-menu-icon no-select"
+        onClick={() => dispatch(toggleSideBar())}
+        onMouseDown={e => {
+          MenuIconRippleRef.current.start(e);
+        }}
+        onMouseUp={() => {
+          MenuIconRippleRef.current.stop();
+        }}
+        onMouseOut={() => {
+          MenuIconRippleRef.current.stop();
+        }}
+      >
+        <div className="line1"></div>
+        <div className="line2"></div>
+        <div className="line3"></div>
+        <TouchRipple ref={MenuIconRippleRef} />
+      </div>
       <p className="site-title no-select">تایپ کافه</p>
     </div>
   );

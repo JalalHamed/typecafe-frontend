@@ -9,79 +9,69 @@
     content: url("../svgs/menu.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
     cursor: pointer;
+    transition: transform 0.5s;
   }
 
   &.icon-projects-black {
     content: url("../svgs/projects-black.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-projects-white {
     content: url("../svgs/projects-white.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-tarrifs-black {
     content: url("../svgs/abacus-black.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-tarrifs-white {
     content: url("../svgs/abacus-white.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-financial-black {
     content: url("../svgs/wallet-black.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-financial-white {
     content: url("../svgs/wallet-white.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-settings-black {
     content: url("../svgs/settings-black.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-settings-white {
     content: url("../svgs/settings-white.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
   }
 
   &.icon-user-red-big {
     content: url("../svgs/user.svg");
     width: 70px;
     height: 70px;
-    background-repeat: no-repeat;
-    transition: all 0.5s;
+    transition: height 0.5s, width 0.5s;
   }
 
   &.icon-user-red-regular {
     content: url("../svgs/user.svg");
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
-    transition: all 0.5s;
+    transition: height 0.5s, width 0.5s;
   }
 }

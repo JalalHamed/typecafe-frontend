@@ -25,18 +25,13 @@ const Register = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ paddingLeft: "1.3rem" }}>
+        <div>
           <NormalInput
             label="نام کاربری"
             type="text"
             id="username"
             name="username"
             ref={register({ required: true })}
-            style={{
-              direction: "rtl",
-              fontFamily: "typecafe",
-              fontSize: "12px",
-            }}
           />
           <NormalInput
             label="ایمیل"

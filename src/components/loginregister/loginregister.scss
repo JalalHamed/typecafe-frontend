@@ -4,8 +4,27 @@
   width: 20rem;
   padding: 0.8rem;
   border: 1px solid #dbdbdb;
-  border-radius: 10px;
   min-width: 315px;
+  position: relative;
+  transition: all 0.5s;
+
+  .close-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    color: #242424;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+  }
 
   .tab-header {
     display: flex;
