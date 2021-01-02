@@ -32,7 +32,7 @@ const Login = forwardRef((props, ref) => {
       <i
         className={`icon ${
           isSideBarOpen ? "icon-user-red-big" : "icon-user-red-regular"
-        } icon-less-margin`}
+        } icon-margin-18`}
       />
       <div
         className={

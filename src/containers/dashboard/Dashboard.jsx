@@ -2,6 +2,7 @@ import React from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 // Components
 import TopBar from "./topbar/TopBar";
@@ -14,26 +15,39 @@ import LoginRegister from "components/loginregister/LoginRegister";
 import "./dashboard.scss";
 
 const Dashboard = () => {
-  const page = useSelector(state => state.page);
-  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
-  const loginRegisterModal = useSelector(state => state.loginRegisterModal);
+  const state = useSelector(state => state);
 
   return (
     <div className="wrapper">
       {/* MODALS */}
-      {loginRegisterModal && (
+      {state.loginRegisterModal && (
         <Modal>
           <LoginRegister />
         </Modal>
       )}
       {/* END OF MODALS */}
+
       <TopBar />
       <div className="main">
-        <div className={isSideBarOpen ? "sidebar-open" : "sidebar-close"}>
+        <div className={state.isSideBarOpen ? "sidebar-open" : "sidebar-close"}>
           <SideBar />
         </div>
-        <div className="content">{page === "projects" && <Projects />}</div>
+        <div className="content">
+          {state.page === "projects" && <Projects />}
+        </div>
       </div>
+
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

@@ -22,3 +22,9 @@ export const closeLoginRegisterModal = () => {
     type: "CLOSE_LOGIN_REGISTER_MODAL",
   };
 };
+
+export const userSignIn = () => {
+  return {
+    type: "SIGN_IN",
+  };
+};

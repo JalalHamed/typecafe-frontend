@@ -37,7 +37,8 @@ const TopBar = () => {
         <div className="line3"></div>
         <TouchRipple ref={MenuIconRippleRef} />
       </div>
-      <p className="site-title no-select">تایپ کافه</p>
+      <i className="icon icon-typecafe icon-no-margin" />
+      <p className="site-title no-select">تایپ‌کافه</p>
     </div>
   );
 };

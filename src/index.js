@@ -11,8 +11,9 @@ import App from "./App";
 import allReducers from "redux/reducers";
 
 // Designs
-import "./assets/styles/index.scss";
 import "components/ripple/ripple.scss";
+import "react-toastify/dist/ReactToastify.css";
+import "./assets/styles/index.scss";
 
 const store = createStore(
   allReducers,

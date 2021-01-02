@@ -1,8 +1,17 @@
 .icon {
-  margin-left: 24px;
-
-  &.icon-less-margin {
+  &.icon-margin-18 {
     margin-left: 18px !important;
+  }
+
+  &.icon-margin-24 {
+    margin-left: 24px !important;
+  }
+
+  &.icon-typecafe {
+    content: url("../svgs/typecafe-logo.svg");
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
   }
 
   &.icon-menu {

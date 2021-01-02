@@ -2,15 +2,20 @@ import React from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 // Components
 import NormalInput from "components/inputs/NormalInput";
 
 // Request
-import { UserRegister } from "requests/Register";
+import { UserRegister } from "requests";
+
+// Actions
+import { userSignIn, closeLoginRegisterModal } from "redux/actions";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = data => {
     const body = {
@@ -18,7 +23,10 @@ const Register = () => {
     };
 
     UserRegister(body)
-      .then(res => res)
+      .then(res => {
+        dispatch(userSignIn());
+        dispatch(closeLoginRegisterModal());
+      })
       .catch(err => console.log(err));
   };
 

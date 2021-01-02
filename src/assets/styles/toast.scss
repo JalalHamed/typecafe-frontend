@@ -1,0 +1,28 @@
+.Toastify__toast-body {
+  font-family: "typecafe";
+}
+
+.Toastify__toast-container {
+  width: 320px;
+}
+
+.Toastify__toast--default {
+  background: #fff;
+  color: #aaa;
+}
+
+.Toastify__toast--info {
+  background: #0099cc;
+}
+
+.Toastify__toast--success {
+  background: #007e33;
+}
+
+.Toastify__toast--warning {
+  background: #ff8800;
+}
+
+.Toastify__toast--error {
+  background: #cc0000;
+}

@@ -2,18 +2,35 @@ import React from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 // Componenets
 import NormalInput from "components/inputs/NormalInput";
+
+// Request
+import { UserLogin } from "requests";
+
+// Actions
+import { userSignIn, closeLoginRegisterModal } from "redux/actions";
 
 // Designs
 import "./loginregister.scss";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
-    console.log("data", data);
+    let body = {
+      username: data.email,
+      password: data.password,
+    };
+    UserLogin(body).then(res => {
+      dispatch(userSignIn());
+      dispatch(closeLoginRegisterModal());
+      toast.success("شما با موفقیت به حساب خود وارد شدید");
+    });
   };
 
   return (
