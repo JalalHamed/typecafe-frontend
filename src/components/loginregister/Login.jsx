@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <>
-      <p className="login-title">وارد شوید</p>
+      <p className="lr-title no-select">وارد شوید</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <NormalInput
           label="ایمیل"

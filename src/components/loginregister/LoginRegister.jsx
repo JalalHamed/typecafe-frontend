@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 
+// Libraries
+import { useDispatch } from "react-redux";
+
 // Components
 import Login from "./Login";
 import Register from "./Register";
-import LoginLeftSide from "./LoginLeftSide";
-import RegisterLeftSide from "./RegisterLeftSide";
+import LeftSide from "./LeftSide";
+
+// Actions
+import { closeLoginRegisterModal } from "redux/actions";
 
 // Design
 import "./loginregister.scss";
 
 const LoginRegister = () => {
+  const dispath = useDispatch();
   const [status, setStatus] = useState("login");
 
   return (
     <div className="lr-wrapper">
+      <div
+        className="lr-close-modal"
+        onClick={() => dispath(closeLoginRegisterModal())}
+      >
+        x
+      </div>
       <div className="lr-right">
         <div className="lr-right-content">
           {status === "login" && <Login />}
@@ -22,8 +34,10 @@ const LoginRegister = () => {
       </div>
       <div className="lr-left">
         <i className="icon icon-typecafe-big" />
-        {status === "login" && <LoginLeftSide />}
-        {status === "register" && <RegisterLeftSide />}
+        <LeftSide
+          setStatus={setStatus}
+          title={status === "login" ? "ثبت نام" : "ورود"}
+        />
       </div>
     </div>
   );

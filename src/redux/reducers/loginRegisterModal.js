@@ -1,9 +1,9 @@
-const LoginRegisterModal = (state = { isOpen: true }, action) => {
+const LoginRegisterModal = (state = true, action) => {
   switch (action.type) {
     case "OPEN_LOGIN_REGISTER_MODAL":
-      return { isOpen: true, ...action.payload };
+      return true;
     case "CLOSE_LOGIN_REGISTER_MODAL":
-      return { isOpen: false };
+      return false;
     default:
       return state;
   }

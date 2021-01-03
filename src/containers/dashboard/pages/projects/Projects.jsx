@@ -4,12 +4,7 @@ import React from "react";
 import "./projects.scss";
 
 const Projects = () => {
-  return (
-    <div className="projects-wrapper">
-      <div className="projects-filterbar"></div>
-      <div className="projects-project-wrapper"></div>
-    </div>
-  );
+  return <div className="projects-wrapper"></div>;
 };
 
 export default Projects;

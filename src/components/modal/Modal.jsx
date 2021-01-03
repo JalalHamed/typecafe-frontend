@@ -24,17 +24,7 @@ const Modal = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClick = e => {
-    if (e.currentTarget === e.target) {
-      dispatch(closeLoginRegisterModal());
-    }
-  };
-
-  return (
-    <div className="modal-bg" onClick={e => handleClick(e)}>
-      {children}
-    </div>
-  );
+  return <div className="modal-bg">{children}</div>;
 };
 
 export default Modal;

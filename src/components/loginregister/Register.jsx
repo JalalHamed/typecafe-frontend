@@ -32,6 +32,7 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <p className="lr-title no-select">ثبت نام کنید</p>
       <NormalInput
         label="نام کاربری"
         type="text"
