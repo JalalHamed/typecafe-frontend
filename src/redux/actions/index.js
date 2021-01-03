@@ -11,9 +11,10 @@ export const toggleSideBar = () => {
   };
 };
 
-export const openLoginRegisterModal = () => {
+export const openLoginRegisterModal = payload => {
   return {
     type: "OPEN_LOGIN_REGISTER_MODAL",
+    payload,
   };
 };
 

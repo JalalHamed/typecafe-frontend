@@ -1,65 +1,98 @@
-.login-register-wrapper {
+.lr-wrapper {
   background-color: #fff;
-  display: inline-block;
-  width: 20rem;
-  padding: 0.8rem;
-  border: 1px solid #dbdbdb;
-  min-width: 315px;
+  height: 400px;
+  border-radius: 3px;
   position: relative;
   transition: all 0.5s;
+  display: flex;
+  min-width: 600px;
 
-  .close-modal {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    color: #242424;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    cursor: pointer;
+  .lr-right {
+    padding: 20px 65px;
+    height: 100%;
+    width: 65%;
 
-    &:hover {
-      background-color: #ddd;
+    .login-title {
+      text-align: center;
+      font-size: 23px;
+      color: #1c3987;
+      margin: 20px 0;
+      font-weight: 600;
+    }
+
+    .login-submit-button {
+      position: relative;
+      padding: 4px 20px;
+      background-color: #1c3987;
+      color: white;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .login-submit-button:hover {
+      opacity: 0.9;
+    }
+
+    .login-submit-button:focus {
+      outline: none;
+    }
+
+    .login-forgot-password {
+      font-size: 12px;
+      display: inline-block;
+      color: #1c3987;
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 0 2px;
+
+      &:hover {
+        border-bottom: 1px solid #1c3987;
+      }
     }
   }
 
-  .tab-header {
+  .lr-left {
+    background-color: #29313b;
+    height: 100%;
+    width: 35%;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 90px 20px;
     display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-  }
+    flex-direction: column;
+    align-items: center;
 
-  .tab-item {
-    width: 50%;
-    text-align: center;
-    line-height: 2.2rem;
-  }
+    .register-options-wrapper {
+      margin-top: 15px;
 
-  .active {
-    border-bottom: 2px solid #1c3987;
-  }
+      .register-options {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+      }
+    }
 
-  .tab-content {
-    padding: 1rem 0.5rem;
-    margin-top: 10px;
-  }
+    .lr-left-button {
+      background-color: #29313b;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 5px 10px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
 
-  .login-submit-button {
-    padding: 7px 20px;
-    background-color: #1c3987;
-    color: white;
-    font-family: "typecafe";
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-  }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
 
-  .login-submit-button:hover {
-    opacity: 0.9;
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }

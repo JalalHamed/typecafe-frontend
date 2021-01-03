@@ -2,11 +2,11 @@
   .normal-input {
     direction: ltr;
     padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #1c3987;
+    border-radius: 3px;
     margin-bottom: 10px;
     width: 100%;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .normal-input:focus {
@@ -22,7 +22,7 @@
 
   .label {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
   }
 }

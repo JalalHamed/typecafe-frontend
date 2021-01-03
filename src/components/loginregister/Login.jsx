@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 // Componenets
 import NormalInput from "components/inputs/NormalInput";
+import SubmitButton from "components/buttons/SubmitButton";
 
 // Request
 import { UserLogin } from "requests";
@@ -16,10 +17,12 @@ import { userSignIn, closeLoginRegisterModal } from "redux/actions";
 
 // Designs
 import "./loginregister.scss";
+import { HiOutlineMailOpen } from "react-icons/hi";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const LoginRippleRef = useRef();
 
   const onSubmit = data => {
     let body = {
@@ -34,27 +37,33 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
+      <p className="login-title">وارد شوید</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <NormalInput
-            label="ایمیل"
-            type="email"
-            id="email"
-            name="email"
-            ref={register({ required: true })}
-          />
-          <NormalInput
-            label="رمز عبور"
-            type="password"
-            id="password"
-            name="password"
-            ref={register({ required: true })}
-          />
-        </div>
-        <button className="login-submit-button">ورود</button>
+        <NormalInput
+          label="ایمیل"
+          type="email"
+          id="email"
+          name="email"
+          ref={register({ required: true })}
+        />
+        <NormalInput
+          label="رمز عبور"
+          type="password"
+          id="password"
+          name="password"
+          ref={register({ required: true })}
+          style={{ margin: 0 }}
+          icon={HiOutlineMailOpen}
+        />
+        <p className="login-forgot-password no-select">فراموشی رمز عبور</p>
+        <SubmitButton
+          className="login-submit-button"
+          ref={LoginRippleRef}
+          title="ورود"
+        />
       </form>
-    </div>
+    </>
   );
 };
 
