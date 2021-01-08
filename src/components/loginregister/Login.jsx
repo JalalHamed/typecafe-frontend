@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -23,17 +23,23 @@ const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const LoginRippleRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
 
   const onSubmit = data => {
     let body = {
       username: data.email,
       password: data.password,
     };
-    UserLogin(body).then(res => {
-      dispatch(userSignIn());
-      dispatch(closeLoginRegisterModal());
-      toast.success("شما با موفقیت به حساب خود وارد شدید");
-    });
+    UserLogin(body)
+      .then(res => {
+        dispatch(userSignIn());
+        dispatch(closeLoginRegisterModal());
+        toast.success("شما با موفقیت به حساب خود وارد شدید");
+      })
+      .catch(err => {
+        console.log("err", err.message);
+        setErrMsg(err.message);
+      });
   };
 
   return (
@@ -58,11 +64,12 @@ const Login = () => {
         />
         <p className="login-forgot-password no-select">فراموشی رمز عبور</p>
         <SubmitButton
-          className="login-submit-button"
+          className="submit-button"
           ref={LoginRippleRef}
           title="ورود"
         />
       </form>
+      {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
     </>
   );
 };

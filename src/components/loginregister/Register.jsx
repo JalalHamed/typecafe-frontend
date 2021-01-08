@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import PuffLoader from "react-spinners/PuffLoader";
+import { css } from "@emotion/react";
 
 // Components
 import NormalInput from "components/inputs/NormalInput";
+import SubmitButton from "components/buttons/SubmitButton";
 
 // Request
 import { UserRegister } from "requests";
@@ -13,21 +16,29 @@ import { UserRegister } from "requests";
 // Actions
 import { userSignIn, closeLoginRegisterModal } from "redux/actions";
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #fff;
+`;
+
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const RegisterRippleRef = useRef();
 
   const onSubmit = data => {
-    const body = {
-      ...data,
-    };
-
-    UserRegister(body)
-      .then(res => {
-        dispatch(userSignIn());
-        dispatch(closeLoginRegisterModal());
-      })
-      .catch(err => console.log(err));
+    setLoading(true);
+    setTimeout(() => {
+      UserRegister(data)
+        .then(res => {
+          setLoading(false);
+          dispatch(userSignIn());
+          dispatch(closeLoginRegisterModal());
+        })
+        .catch(err => console.log(err));
+    }, 3000);
   };
 
   return (
@@ -54,7 +65,11 @@ const Register = () => {
         name="password"
         ref={register({ required: true })}
       />
-      <button className="login-submit-button">ثبت نام</button>
+      <SubmitButton
+        className="submit-button"
+        ref={RegisterRippleRef}
+        title="ثبت نام"
+      />
     </form>
   );
 };

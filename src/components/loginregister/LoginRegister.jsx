@@ -21,7 +21,7 @@ const LoginRegister = () => {
   return (
     <div className="lr-wrapper">
       <div
-        className="lr-close-modal"
+        className="lr-close-modal no-select"
         onClick={() => dispath(closeLoginRegisterModal())}
       >
         x
