@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 // Componenets
 import NormalInput from "components/inputs/NormalInput";
-import SubmitButton from "components/buttons/SubmitButton";
+import Button from "components/buttons/Button";
 
 // Request
 import { UserLogin } from "requests";
@@ -24,20 +24,24 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
+    setLoading(true);
     let body = {
       username: data.email,
       password: data.password,
     };
     UserLogin(body)
       .then(res => {
+        setLoading(false);
         dispatch(userSignIn());
         dispatch(closeLoginRegisterModal());
         toast.success("شما با موفقیت به حساب خود وارد شدید");
       })
       .catch(err => {
         console.log("err", err.message);
+        setLoading(false);
         setErrMsg(err.message);
       });
   };
@@ -63,10 +67,11 @@ const Login = () => {
           icon={HiOutlineMailOpen}
         />
         <p className="login-forgot-password no-select">فراموشی رمز عبور</p>
-        <SubmitButton
+        <Button
           className="submit-button"
           ref={LoginRippleRef}
           title="ورود"
+          loading={loading}
         />
       </form>
       {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 // Components
-import TouchRipple from "components/ripple/TouchRipple";
+import Button from "components/buttons/Button";
 
 const LeftSide = ({ setStatus, title }) => {
   const ButtonRippleRef = useRef();
@@ -17,7 +17,7 @@ const LeftSide = ({ setStatus, title }) => {
 
   return (
     <>
-      <div className="register-options-wrapper">
+      <div className="register-options-wrapper no-select">
         <p className="register-options">
           <i className="icon icon-check" />
           ثبت پروژه تایپ
@@ -31,22 +31,12 @@ const LeftSide = ({ setStatus, title }) => {
           فقط ۵٪ کارمزد
         </p>
       </div>
-      <button
-        className="lr-left-button"
-        onMouseDown={e => {
-          ButtonRippleRef.current.start(e);
-        }}
-        onMouseUp={() => {
-          ButtonRippleRef.current.stop();
-        }}
-        onMouseOut={() => {
-          ButtonRippleRef.current.stop();
-        }}
+      <Button
+        title={title}
+        ref={ButtonRippleRef}
         onClick={handleClick}
-      >
-        {title}
-        <TouchRipple ref={ButtonRippleRef} />
-      </button>
+        className="lr-left-button"
+      />
     </>
   );
 };

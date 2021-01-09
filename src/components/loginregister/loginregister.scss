@@ -52,6 +52,7 @@
       border-radius: 5px;
       font-size: 16px;
       width: 100%;
+      height: 33px;
 
       &:hover {
         opacity: 0.9;
@@ -90,7 +91,7 @@
     width: 35%;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    padding: 90px 20px;
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,6 +116,7 @@
       border-radius: 5px;
       cursor: pointer;
       position: relative;
+      width: 85px;
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);

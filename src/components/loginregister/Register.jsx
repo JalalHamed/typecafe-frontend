@@ -3,24 +3,16 @@ import React, { useState, useRef } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import PuffLoader from "react-spinners/PuffLoader";
-import { css } from "@emotion/react";
 
 // Components
 import NormalInput from "components/inputs/NormalInput";
-import SubmitButton from "components/buttons/SubmitButton";
+import Button from "components/buttons/Button";
 
 // Request
 import { UserRegister } from "requests";
 
 // Actions
 import { userSignIn, closeLoginRegisterModal } from "redux/actions";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: #fff;
-`;
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -30,15 +22,16 @@ const Register = () => {
 
   const onSubmit = data => {
     setLoading(true);
-    setTimeout(() => {
-      UserRegister(data)
-        .then(res => {
-          setLoading(false);
-          dispatch(userSignIn());
-          dispatch(closeLoginRegisterModal());
-        })
-        .catch(err => console.log(err));
-    }, 3000);
+    UserRegister(data)
+      .then(res => {
+        setLoading(false);
+        dispatch(userSignIn());
+        dispatch(closeLoginRegisterModal());
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   return (
@@ -65,10 +58,11 @@ const Register = () => {
         name="password"
         ref={register({ required: true })}
       />
-      <SubmitButton
+      <Button
         className="submit-button"
         ref={RegisterRippleRef}
         title="ثبت نام"
+        loading={loading}
       />
     </form>
   );
