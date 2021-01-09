@@ -1,27 +1,48 @@
-.normal-input-wrapper {
-  .normal-input {
-    direction: ltr;
-    padding: 5px 10px;
-    border: 1px solid #1c3987;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    width: 100%;
-    font-size: 16px;
-  }
-
-  .normal-input:focus {
-    border: 1px solid #1c3987;
-    outline: none;
-  }
-
-  .normal-input::placeholder {
-    font-family: "typecafe";
-    direction: rtl;
-  }
-
+.input-wrapper {
   .label {
     display: block;
     font-size: 16px;
     margin-bottom: 5px;
+  }
+
+  .input-break {
+    margin-bottom: 10px;
+  }
+
+  .input-error-wrapper {
+    position: relative;
+
+    .input {
+      direction: ltr;
+      padding: 5px 10px;
+      border: 1px solid #1c3987;
+      border-radius: 3px;
+      width: 100%;
+      font-size: 18px;
+
+      &:focus {
+        border: 2px solid #1c3987;
+        outline: none;
+      }
+
+      &::placeholder {
+        font-family: "typecafe";
+        direction: rtl;
+        padding-right: 15px;
+      }
+    }
+
+    .input-error {
+      border-color: #ff2d2d;
+
+      &:focus {
+        border-color: #ff2d2d;
+      }
+
+      &::placeholder {
+        color: #d8000ba1;
+        font-size: 13px;
+      }
+    }
   }
 }

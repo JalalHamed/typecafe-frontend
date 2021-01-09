@@ -1,11 +1,11 @@
 .lr-wrapper {
   background-color: #fff;
-  height: 400px;
+  height: 450px;
   border-radius: 3px;
   position: relative;
   display: flex;
-  min-width: 600px;
-  max-width: 600px;
+  min-width: 720px;
+  max-width: 720px;
   animation: fadeIn 0.3s ease forwards;
 
   .lr-close-modal {
@@ -21,6 +21,7 @@
     cursor: pointer;
     font-size: 20px;
     color: rgb(70, 70, 70);
+    z-index: 1;
 
     &:hover {
       background-color: #ddd;
@@ -29,9 +30,10 @@
   }
 
   .lr-right {
-    padding: 20px 65px;
+    padding: 20px 80px;
     height: 100%;
     width: 65%;
+    position: relative;
 
     .lr-title {
       text-align: center;
@@ -42,7 +44,7 @@
     }
 
     .submit-button {
-      position: relative;
+      position: absolute;
       padding: 4px 20px;
       background-color: #1c3987;
       color: white;
@@ -51,8 +53,11 @@
       cursor: pointer;
       border-radius: 5px;
       font-size: 16px;
-      width: 100%;
       height: 33px;
+      width: 308px;
+      bottom: 40px;
+      left: 50%;
+      transform: translate(-50%);
 
       &:hover {
         opacity: 0.9;
@@ -91,7 +96,7 @@
     width: 35%;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    padding-top: 90px;
+    padding-top: 110px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,7 +108,8 @@
         color: #fff;
         display: flex;
         align-items: center;
-        font-size: 12px;
+        font-size: 15px;
+        margin-top: 3px;
       }
     }
 
@@ -112,11 +118,11 @@
       color: #fff;
       border: 1px solid #fff;
       padding: 5px 10px;
-      margin-top: 20px;
+      margin-top: 25px;
       border-radius: 5px;
       cursor: pointer;
       position: relative;
-      width: 85px;
+      width: 100px;
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);

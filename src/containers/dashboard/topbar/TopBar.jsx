@@ -7,38 +7,59 @@ import { useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { toggleSideBar } from "redux/actions";
+import { toggleSideBar, openLoginRegisterModal } from "redux/actions";
 
 // Designs
 import "./topbar.scss";
 
 const TopBar = () => {
   const dispatch = useDispatch();
-
   const MenuIconRippleRef = useRef();
+  const SignUpRippleRef = useRef();
 
   return (
-    <div className="topbar-wrapper">
-      <div
-        className="hamburger-menu-icon no-select"
-        onClick={() => dispatch(toggleSideBar())}
-        onMouseDown={e => {
-          MenuIconRippleRef.current.start(e);
-        }}
-        onMouseUp={() => {
-          MenuIconRippleRef.current.stop();
-        }}
-        onMouseOut={() => {
-          MenuIconRippleRef.current.stop();
-        }}
-      >
-        <div className="line1"></div>
-        <div className="line2"></div>
-        <div className="line3"></div>
-        <TouchRipple ref={MenuIconRippleRef} />
+    <div className="topbar-wrapper no-select">
+      <div className="topbar-right">
+        <div
+          className="hamburger-menu-icon no-select"
+          onClick={() => dispatch(toggleSideBar())}
+          onMouseDown={e => {
+            MenuIconRippleRef.current.start(e);
+          }}
+          onMouseUp={() => {
+            MenuIconRippleRef.current.stop();
+          }}
+          onMouseOut={() => {
+            MenuIconRippleRef.current.stop();
+          }}
+        >
+          <div className="line1"></div>
+          <div className="line2"></div>
+          <div className="line3"></div>
+          <TouchRipple ref={MenuIconRippleRef} />
+        </div>
+        <i className="icon icon-typecafe icon-no-margin no-select" />
+        <p className="site-title no-select">تایپ‌کافه</p>
       </div>
-      <i className="icon icon-typecafe icon-no-margin no-select" />
-      <p className="site-title no-select">تایپ‌کافه</p>
+      <div className="topbar-left">
+        <div
+          className="topbar-sign-up"
+          onClick={() => dispatch(openLoginRegisterModal("register"))}
+          onMouseDown={e => {
+            SignUpRippleRef.current.start(e);
+          }}
+          onMouseUp={() => {
+            SignUpRippleRef.current.stop();
+          }}
+          onMouseOut={() => {
+            SignUpRippleRef.current.stop();
+          }}
+        >
+          <i className="icon icon-user-red-regular" />
+          <span style={{ color: "#ff2d2d" }}>ثبت‌نام</span>
+          <TouchRipple ref={SignUpRippleRef} />
+        </div>
+      </div>
     </div>
   );
 };

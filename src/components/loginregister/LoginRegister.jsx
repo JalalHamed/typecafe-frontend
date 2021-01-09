@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Login from "./Login";
@@ -16,7 +16,8 @@ import "./loginregister.scss";
 
 const LoginRegister = () => {
   const dispath = useDispatch();
-  const [status, setStatus] = useState("login");
+  const page = useSelector(state => state.loginRegisterModal.page);
+  const [status, setStatus] = useState(page);
 
   return (
     <div className="lr-wrapper">
@@ -27,16 +28,14 @@ const LoginRegister = () => {
         x
       </div>
       <div className="lr-right">
-        <div className="lr-right-content">
-          {status === "login" && <Login />}
-          {status === "register" && <Register />}
-        </div>
+        {status === "login" && <Login />}
+        {status === "register" && <Register />}
       </div>
       <div className="lr-left">
-        <i className="icon icon-typecafe-big" />
+        <i className="icon icon-typecafe-big no-select" />
         <LeftSide
           setStatus={setStatus}
-          title={status === "login" ? "ثبت نام" : "ورود"}
+          title={status === "login" ? "ثبت‌نام" : "ورود"}
         />
       </div>
     </div>

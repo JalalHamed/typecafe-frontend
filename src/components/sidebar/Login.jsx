@@ -18,7 +18,7 @@ const Login = forwardRef((props, ref) => {
       className={`sidebar-login ${
         isSideBarOpen ? "sidebar-login-wide" : "sidebar-login-short"
       } no-select`}
-      onClick={() => dispatch(openLoginRegisterModal())}
+      onClick={() => dispatch(openLoginRegisterModal("login"))}
       onMouseDown={e => {
         ref.current.start(e);
       }}

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 // Components
-import NormalInput from "components/inputs/NormalInput";
+import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 
 // Request
@@ -15,7 +15,7 @@ import { UserRegister } from "requests";
 import { userSignIn, closeLoginRegisterModal } from "redux/actions";
 
 const Register = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const RegisterRippleRef = useRef();
@@ -36,32 +36,35 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <p className="lr-title no-select">ثبت نام کنید</p>
-      <NormalInput
+      <p className="lr-title no-select">ثبت‌نام کنید</p>
+      <Input
         label="نام کاربری"
         type="text"
         id="username"
         name="username"
         ref={register({ required: true })}
+        error={errors.username}
       />
-      <NormalInput
+      <Input
         label="ایمیل"
         type="email"
         id="email"
         name="email"
         ref={register({ required: true })}
+        error={errors.email}
       />
-      <NormalInput
+      <Input
         label="کلمه عبور"
         type="password"
         id="password"
         name="password"
         ref={register({ required: true })}
+        error={errors.password}
       />
       <Button
         className="submit-button"
         ref={RegisterRippleRef}
-        title="ثبت نام"
+        title="ثبت‌نام"
         loading={loading}
       />
     </form>

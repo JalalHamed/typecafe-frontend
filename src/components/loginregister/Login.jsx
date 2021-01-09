@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 // Componenets
-import NormalInput from "components/inputs/NormalInput";
+import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 
 // Request
@@ -21,7 +21,7 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,21 +50,23 @@ const Login = () => {
     <>
       <p className="lr-title no-select">وارد شوید</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <NormalInput
+        <Input
           label="ایمیل"
           type="email"
           id="email"
           name="email"
           ref={register({ required: true })}
+          error={errors.email}
         />
-        <NormalInput
+        <Input
           label="رمز عبور"
           type="password"
           id="password"
           name="password"
           ref={register({ required: true })}
-          style={{ margin: 0 }}
           icon={HiOutlineMailOpen}
+          error={errors.password}
+          noBreak
         />
         <p className="login-forgot-password no-select">فراموشی رمز عبور</p>
         <Button

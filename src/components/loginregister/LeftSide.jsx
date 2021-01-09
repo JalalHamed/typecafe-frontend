@@ -7,7 +7,7 @@ const LeftSide = ({ setStatus, title }) => {
   const ButtonRippleRef = useRef();
 
   const handleClick = () => {
-    if (title === "ثبت نام") {
+    if (title === "ثبت‌نام") {
       setStatus("register");
     }
     if (title === "ورود") {
@@ -20,11 +20,11 @@ const LeftSide = ({ setStatus, title }) => {
       <div className="register-options-wrapper no-select">
         <p className="register-options">
           <i className="icon icon-check" />
-          ثبت پروژه تایپ
+          ثبت‌نامحدود پروژه تایپ
         </p>
         <p className="register-options">
           <i className="icon icon-check" />
-          انجام پروژه تایپ
+          انجام نامحدود پروژه تایپ
         </p>
         <p className="register-options">
           <i className="icon icon-check" />
