@@ -18,12 +18,17 @@ const SideBar = () => {
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
   const LogoutRippleRef = useRef();
+  const ProfileRippleRef = useRef();
 
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   return (
     <div className="sidebar-wrapper">
-      {isLoggedIn ? <SideBarProfile /> : <SideBarLogin ref={LoginRippleRef} />}
+      {isLoggedIn ? (
+        <SideBarProfile ref={ProfileRippleRef} />
+      ) : (
+        <SideBarLogin ref={LoginRippleRef} />
+      )}
       <div className="sidebar-items">
         <SideBarItem
           status="projects"

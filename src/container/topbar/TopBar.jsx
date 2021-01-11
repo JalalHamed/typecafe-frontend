@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import TouchRipple from "components/ripple/TouchRipple";
@@ -16,6 +16,7 @@ const TopBar = () => {
   const dispatch = useDispatch();
   const MenuIconRippleRef = useRef();
   const SignUpRippleRef = useRef();
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   return (
     <div className="topbar-wrapper no-select">
@@ -42,23 +43,25 @@ const TopBar = () => {
         <p className="site-title no-select">تایپ‌کافه</p>
       </div>
       <div className="topbar-left">
-        <div
-          className="topbar-sign-up"
-          onClick={() => dispatch(openlRModal("register"))}
-          onMouseDown={e => {
-            SignUpRippleRef.current.start(e);
-          }}
-          onMouseUp={() => {
-            SignUpRippleRef.current.stop();
-          }}
-          onMouseOut={() => {
-            SignUpRippleRef.current.stop();
-          }}
-        >
-          <i className="icon icon-user-red-regular" />
-          <span style={{ color: "#ff2d2d" }}>ثبت‌نام</span>
-          <TouchRipple ref={SignUpRippleRef} />
-        </div>
+        {!isLoggedIn && (
+          <div
+            className="topbar-sign-up"
+            onClick={() => dispatch(openlRModal("register"))}
+            onMouseDown={e => {
+              SignUpRippleRef.current.start(e);
+            }}
+            onMouseUp={() => {
+              SignUpRippleRef.current.stop();
+            }}
+            onMouseOut={() => {
+              SignUpRippleRef.current.stop();
+            }}
+          >
+            <i className="icon icon-user-red-regular" />
+            <span style={{ color: "#ff2d2d" }}>ثبت‌نام</span>
+            <TouchRipple ref={SignUpRippleRef} />
+          </div>
+        )}
       </div>
     </div>
   );

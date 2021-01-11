@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { changePage } from "redux/actions";
+import { changePage, userLogOut } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
   const page = useSelector(state => state.page);
@@ -15,7 +15,9 @@ const Item = forwardRef(({ status, title }, ref) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    if (page !== status) {
+    if (status === "logout") {
+      dispatch(userLogOut());
+    } else if (page !== status) {
       dispatch(changePage(status));
     }
   };

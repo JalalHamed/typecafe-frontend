@@ -13,7 +13,7 @@ import Button from "components/buttons/Button";
 import { UserLogin, handleErrors } from "requests";
 
 // Actions
-import { userSignIn, closelRModal } from "redux/actions";
+import { userLogIn, closelRModal } from "redux/actions";
 
 // Designs
 import "./loginregister.scss";
@@ -33,7 +33,7 @@ const Login = () => {
     UserLogin(data)
       .then(res => {
         setLoading(false);
-        dispatch(userSignIn());
+        dispatch(userLogIn());
         dispatch(closelRModal());
         toast.success("شما با موفقیت به حساب خود وارد شدید");
       })

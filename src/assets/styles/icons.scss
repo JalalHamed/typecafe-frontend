@@ -76,6 +76,18 @@
     height: 24px;
   }
 
+  &.icon-logout-white {
+    content: url("../svgs/logout-white.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-logout-black {
+    content: url("../svgs/logout-black.svg");
+    width: 24px;
+    height: 24px;
+  }
+
   &.icon-user-red-big {
     content: url("../svgs/user.svg");
     width: 70px;
@@ -85,6 +97,20 @@
 
   &.icon-user-red-regular {
     content: url("../svgs/user.svg");
+    width: 24px;
+    height: 24px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-user-default-big {
+    content: url("../svgs/user-default.svg");
+    width: 70px;
+    height: 70px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-user-default-regular {
+    content: url("../svgs/user-default.svg");
     width: 24px;
     height: 24px;
     transition: height 0.5s, width 0.5s;

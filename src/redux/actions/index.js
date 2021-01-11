@@ -36,8 +36,14 @@ export const lRModalRegisterFirstMount = () => {
   };
 };
 
-export const userSignIn = () => {
+export const userLogIn = () => {
   return {
-    type: "SIGN_IN",
+    type: "LOGIN",
+  };
+};
+
+export const userLogOut = () => {
+  return {
+    type: "LOGOUT",
   };
 };

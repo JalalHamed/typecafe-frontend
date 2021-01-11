@@ -1,7 +1,9 @@
-const IsLoggedIn = (state = false, action) => {
+const IsLoggedIn = (state = true, action) => {
   switch (action.type) {
-    case "SIGN_IN":
+    case "LOGIN":
       return true;
+    case "LOGOUT":
+      return false;
     default:
       return state;
   }
