@@ -13,7 +13,7 @@ import Button from "components/buttons/Button";
 import { UserLogin } from "requests";
 
 // Actions
-import { userSignIn, closeLoginRegisterModal } from "redux/actions";
+import { userSignIn, closelRModal } from "redux/actions";
 
 // Designs
 import "./loginregister.scss";
@@ -26,23 +26,36 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const loginErrorMessage = message => {
+    switch (message) {
+      case "Network Error":
+        setErrMsg("خطا در برقراری ارتباط با سرور");
+        break;
+      default:
+        break;
+    }
+  };
+
   const onSubmit = data => {
     setLoading(true);
+    setErrMsg("");
+
     let body = {
       username: data.email,
       password: data.password,
     };
+
     UserLogin(body)
       .then(res => {
         setLoading(false);
         dispatch(userSignIn());
-        dispatch(closeLoginRegisterModal());
+        dispatch(closelRModal());
         toast.success("شما با موفقیت به حساب خود وارد شدید");
       })
       .catch(err => {
         console.log("err", err.message);
         setLoading(false);
-        setErrMsg(err.message);
+        loginErrorMessage(err.message);
       });
   };
 

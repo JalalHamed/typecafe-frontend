@@ -1,11 +1,11 @@
 .lr-wrapper {
   background-color: #fff;
-  height: 450px;
+  height: 430px;
   border-radius: 3px;
   position: relative;
   display: flex;
-  min-width: 720px;
-  max-width: 720px;
+  min-width: 700px;
+  max-width: 700px;
   animation: fadeIn 0.3s ease forwards;
 
   .lr-close-modal {
@@ -37,14 +37,13 @@
 
     .lr-title {
       text-align: center;
-      font-size: 23px;
+      font-size: 25px;
       color: #1c3987;
       margin: 20px 0;
       font-weight: 600;
     }
 
     .submit-button {
-      position: absolute;
       padding: 4px 20px;
       background-color: #1c3987;
       color: white;
@@ -54,10 +53,7 @@
       border-radius: 5px;
       font-size: 16px;
       height: 33px;
-      width: 308px;
-      bottom: 40px;
-      left: 50%;
-      transform: translate(-50%);
+      width: 100%;
 
       &:hover {
         opacity: 0.9;
@@ -83,10 +79,14 @@
     .login-error-message {
       margin-top: 20px;
       padding: 5px 10px;
-      font-size: 12px;
+      font-size: 15px;
       color: #d8000c;
       border-radius: 2px;
       text-align: center;
+    }
+
+    .login-title-content-break-line {
+      margin-top: 60px;
     }
   }
 
@@ -96,10 +96,11 @@
     width: 35%;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    padding-top: 110px;
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 
     .register-options-wrapper {
       margin-top: 15px;
@@ -132,6 +133,33 @@
         outline: none;
       }
     }
+
+    .not-a-member {
+      color: #a2ffe1;
+      margin-top: 18px;
+      margin-left: 80px;
+      font-size: 14px;
+      visibility: hidden;
+      animation: zoomIn 1s forwards 1.5s;
+    }
+
+    #register-arrow-stem {
+      position: absolute;
+      bottom: 87px;
+      left: 81px;
+      stroke-dasharray: 71px;
+      stroke-dashoffset: 71px;
+      animation: stemEnter 1s ease-out forwards 2.5s;
+    }
+
+    #register-arrow-point {
+      position: absolute;
+      bottom: 109.5px;
+      left: 77px;
+      stroke-dasharray: 17px;
+      stroke-dashoffset: 17px;
+      animation: pointEnter 0.7s ease-out forwards 3.2s;
+    }
   }
 }
 
@@ -141,5 +169,29 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) rotate(-20deg);
+  }
+}
+
+@keyframes stemEnter {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pointEnter {
+  to {
+    stroke-dashoffset: 0;
   }
 }

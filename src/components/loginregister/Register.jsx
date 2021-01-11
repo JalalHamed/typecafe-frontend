@@ -12,7 +12,7 @@ import Button from "components/buttons/Button";
 import { UserRegister } from "requests";
 
 // Actions
-import { userSignIn, closeLoginRegisterModal } from "redux/actions";
+import { userSignIn, closelRModal } from "redux/actions";
 
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -26,7 +26,7 @@ const Register = () => {
       .then(res => {
         setLoading(false);
         dispatch(userSignIn());
-        dispatch(closeLoginRegisterModal());
+        dispatch(closelRModal());
       })
       .catch(err => {
         console.log(err);

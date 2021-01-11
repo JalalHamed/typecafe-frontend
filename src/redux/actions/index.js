@@ -11,16 +11,28 @@ export const toggleSideBar = () => {
   };
 };
 
-export const openLoginRegisterModal = payload => {
+export const openlRModal = payload => {
   return {
     type: "OPEN_LOGIN_REGISTER_MODAL",
     payload,
   };
 };
 
-export const closeLoginRegisterModal = () => {
+export const closelRModal = () => {
   return {
     type: "CLOSE_LOGIN_REGISTER_MODAL",
+  };
+};
+
+export const lRModalLoginFirstMount = () => {
+  return {
+    type: "LOGIN_FIRST_MOUNT",
+  };
+};
+
+export const lRModalRegisterFirstMount = () => {
+  return {
+    type: "REGISTER_FIRST_MOUNT",
   };
 };
 

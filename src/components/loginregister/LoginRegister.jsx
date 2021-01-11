@@ -9,21 +9,21 @@ import Register from "./Register";
 import LeftSide from "./LeftSide";
 
 // Actions
-import { closeLoginRegisterModal } from "redux/actions";
+import { closelRModal } from "redux/actions";
 
 // Design
 import "./loginregister.scss";
 
 const LoginRegister = () => {
   const dispath = useDispatch();
-  const page = useSelector(state => state.loginRegisterModal.page);
+  const page = useSelector(state => state.lRModal.page);
   const [status, setStatus] = useState(page);
 
   return (
     <div className="lr-wrapper">
       <div
         className="lr-close-modal no-select"
-        onClick={() => dispath(closeLoginRegisterModal())}
+        onClick={() => dispath(closelRModal())}
       >
         x
       </div>
