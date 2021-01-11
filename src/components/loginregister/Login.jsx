@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 
 // Request
-import { UserLogin } from "requests";
+import { UserLogin, handleErrors } from "requests";
 
 // Actions
 import { userSignIn, closelRModal } from "redux/actions";
@@ -26,26 +26,11 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const loginErrorMessage = message => {
-    switch (message) {
-      case "Network Error":
-        setErrMsg("خطا در برقراری ارتباط با سرور");
-        break;
-      default:
-        break;
-    }
-  };
-
   const onSubmit = data => {
     setLoading(true);
     setErrMsg("");
 
-    let body = {
-      username: data.email,
-      password: data.password,
-    };
-
-    UserLogin(body)
+    UserLogin(data)
       .then(res => {
         setLoading(false);
         dispatch(userSignIn());
@@ -53,9 +38,8 @@ const Login = () => {
         toast.success("شما با موفقیت به حساب خود وارد شدید");
       })
       .catch(err => {
-        console.log("err", err.message);
+        handleErrors(err, setErrMsg);
         setLoading(false);
-        loginErrorMessage(err.message);
       });
   };
 

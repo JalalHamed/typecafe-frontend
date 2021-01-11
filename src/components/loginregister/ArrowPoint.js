@@ -13,8 +13,8 @@ const ArrowPoint = () => {
       <path
         d="M0.774719 6.77165C1.41138 6.11569 6.7862 0.694868 7.60379 1.26718C8.17484 1.66691 8.58966 3.12061 8.73707 3.78393C9.1198 5.50623 9.49084 7.14385 9.78203 8.89102"
         stroke="#a2ffe1"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

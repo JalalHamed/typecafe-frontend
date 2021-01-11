@@ -4,7 +4,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // Containers
-import Dashboard from "containers/dashboard/Dashboard";
+import Dashboard from "container/Dashboard";
 
 const Routers = () => {
   return (

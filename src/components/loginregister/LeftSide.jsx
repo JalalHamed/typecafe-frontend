@@ -58,7 +58,7 @@ const LeftSide = ({ setStatus, title }) => {
       />
       {title === "ثبت‌نام" && loginFirstMount && (
         <>
-          <p className="not-a-member">عضو نیستید؟</p>
+          <p className="not-a-member no-select">عضو نیستید؟</p>
           <ArrowStem />
           <ArrowPoint />
         </>
