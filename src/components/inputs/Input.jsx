@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import "./inputs.scss";
 
 const Input = forwardRef(
-  ({ label, name, noBreak, type, id, style, error }, ref) => {
+  ({ label, name, noBreak, type, id, style, wrapperStyle, error }, ref) => {
     const errorMessageProducer = () => {
       switch (error?.ref?.name) {
         case "email":
@@ -19,7 +19,7 @@ const Input = forwardRef(
     };
 
     return (
-      <div className="input-wrapper">
+      <div className="input-wrapper" style={wrapperStyle && wrapperStyle}>
         <label htmlFor={id} className="label no-select">
           {label}
         </label>

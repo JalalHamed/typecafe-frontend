@@ -57,14 +57,26 @@ const Register = () => {
           ref={register({ required: true })}
           error={errors.email}
         />
-        <Input
-          label="کلمه عبور"
-          type="password"
-          id="password"
-          name="password"
-          ref={register({ required: true })}
-          error={errors.password}
-        />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Input
+            label="کلمه عبور"
+            type="password"
+            id="password"
+            name="password"
+            ref={register({ required: true })}
+            error={errors.password}
+            wrapperStyle={{ width: "49%" }}
+          />
+          <Input
+            label="تایید کلمه عبور"
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            ref={register({ required: true })}
+            error={errors.confirm_password}
+            wrapperStyle={{ width: "49%" }}
+          />
+        </div>
         <Button
           className="submit-button"
           ref={RegisterRippleRef}

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { GetProjects } from "requests";
+import React from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
@@ -17,12 +16,6 @@ import "./dashboard.scss";
 
 const Dashboard = () => {
   const state = useSelector(state => state);
-
-  useEffect(() => {
-    GetProjects().then(res => {
-      console.log("projects", res);
-    });
-  }, []);
 
   return (
     <div className="wrapper">
