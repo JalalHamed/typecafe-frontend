@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -19,7 +19,7 @@ import { userLogIn, closelRModal } from "redux/actions";
 import "./loginregister.scss";
 import { HiOutlineMailOpen } from "react-icons/hi";
 
-const Login = () => {
+const Login = ({ setStatus }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const LoginRippleRef = useRef();
@@ -65,7 +65,12 @@ const Login = () => {
           error={errors.password}
           noBreak
         />
-        <p className="login-forgot-password no-select">فراموشی رمز عبور</p>
+        <p
+          className="login-forgot-password no-select"
+          onClick={() => setStatus("forgotPassword")}
+        >
+          فراموشی رمز عبور
+        </p>
         <Button
           className="submit-button"
           ref={LoginRippleRef}

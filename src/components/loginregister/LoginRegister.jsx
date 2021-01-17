@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import Register from "./Register";
 import LeftSide from "./LeftSide";
+import ForgotPassword from "./ForgotPassword";
 
 // Actions
 import { closelRModal } from "redux/actions";
@@ -28,8 +29,9 @@ const LoginRegister = () => {
         x
       </div>
       <div className="lr-right">
-        {status === "login" && <Login />}
+        {status === "login" && <Login setStatus={setStatus} />}
         {status === "register" && <Register />}
+        {status === "forgotPassword" && <ForgotPassword />}
       </div>
       <div className="lr-left">
         <i className="icon icon-typecafe-big no-select" />

@@ -15,8 +15,8 @@ const Login = forwardRef((props, ref) => {
 
   return (
     <div
-      className={`sidebar-login ${
-        isSideBarOpen ? "sidebar-login-wide" : "sidebar-login-short"
+      className={`user-profile ${
+        isSideBarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
       onClick={() => dispatch(openlRModal("login"))}
       onMouseDown={e => {
@@ -36,11 +36,11 @@ const Login = forwardRef((props, ref) => {
       />
       <div
         className={
-          isSideBarOpen ? "sidebar-login-text" : "sidebar-login-no-text"
+          isSideBarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
         }
       >
-        <p className="sidebar-login-title">وارد شوید</p>
-        <p className="sidebar-login-description">
+        <p className="sidebar-profile-title">وارد شوید</p>
+        <p className="sidebar-profile-description">
           برای دسترسی به همه امکانات سایت، به حساب کاربری خود وارد شوید.
         </p>
       </div>

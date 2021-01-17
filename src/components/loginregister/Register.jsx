@@ -23,6 +23,8 @@ const Register = () => {
 
   const onSubmit = data => {
     setLoading(true);
+    setErrMsg("");
+
     UserRegister(data)
       .then(res => {
         setLoading(false);
