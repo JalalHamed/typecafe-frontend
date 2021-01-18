@@ -5,7 +5,7 @@ export const UserRegister = body => {
 };
 
 export const UserLogin = body => {
-  return axios.post("token/", body).then(res => res);
+  return axios.post("auth/token/", body).then(res => res);
 };
 
 export const GetProjects = () => {
@@ -26,12 +26,12 @@ export const handleErrors = (error, setMessage) => {
       setMessage("آدرس ایمیل معتبر وارد کنید.");
     } else if (
       err?.email &&
-      err?.email[0] === "user with this email already exists."
+      err?.email[0] === "account with this email already exists."
     ) {
       setMessage("کاربری با این ایمیل قبلا ایجاد شده است.");
     } else if (
       err?.username &&
-      err?.username[0] === "user with this username already exists."
+      err?.username[0] === "account with this username already exists."
     ) {
       setMessage("کابری با این نام کاربری قبلا ایجاد شده است.");
     } else if (
@@ -39,6 +39,12 @@ export const handleErrors = (error, setMessage) => {
       err?.password[0] === "Ensure this field has at least 8 characters."
     ) {
       setMessage("رمز عبور باید حداقل ۸ کاراکتر داشته باشد.");
+    } else if (
+      err?.password &&
+      err?.password.length &&
+      err?.password[0] === "passwords don't match."
+    ) {
+      setMessage("رمز های عبور با هم مطابقت ندارند.");
     } else if (
       err?.error &&
       err?.error[0] ===

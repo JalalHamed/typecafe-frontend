@@ -8,11 +8,13 @@ const Input = forwardRef(
     const errorMessageProducer = () => {
       switch (error?.ref?.name) {
         case "email":
-          return "لطفا آدرس ایمیل خود را وارد نمایید.";
+          return "آدرس ایمیل خود را وارد کنید.";
         case "password":
-          return "لطفا رمز عبور خود را وارد نمایید.";
+          return "رمز عبور خود را وارد کنید.";
+        case "confirm_password":
+          return "رمز عبور خود را تایید کنید.";
         case "username":
-          return "لطفا نام کاربری خود را وارد نمایید.";
+          return "نام کاربری خود را وارد کنید.";
         default:
           return "";
       }

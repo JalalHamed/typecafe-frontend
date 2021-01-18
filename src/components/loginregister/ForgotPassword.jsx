@@ -19,22 +19,23 @@ const ForgotPassword = () => {
 
   return (
     <div>
-      <p className="lr-title no-select">بازیابی مجدد رمز عبور</p>
-      <form onSubmit={handleSubmit(onSubmit)}></form>
-      <Input
-        label="ایمیل"
-        type="email"
-        id="email"
-        name="email"
-        ref={register({ required: true })}
-        error={errors.email}
-      />
-      <Button
-        className="submit-button"
-        ref={ForgotPasswordRippleRef}
-        title="بازیابی رمز"
-        loading={loading}
-      />
+      <p className="lr-title no-select">رمز خود را فراموش کرده‌اید؟</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="ایمیل"
+          type="email"
+          id="email"
+          name="email"
+          ref={register({ required: true })}
+          error={errors.email}
+        />
+        <Button
+          className="submit-button"
+          ref={ForgotPasswordRippleRef}
+          title="بازیابی رمز عبور"
+          loading={loading}
+        />
+      </form>
     </div>
   );
 };

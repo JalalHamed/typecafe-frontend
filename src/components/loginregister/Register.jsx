@@ -59,7 +59,7 @@ const Register = () => {
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Input
-            label="کلمه عبور"
+            label="رمز عبور"
             type="password"
             id="password"
             name="password"
@@ -68,7 +68,7 @@ const Register = () => {
             wrapperStyle={{ width: "49%" }}
           />
           <Input
-            label="تایید کلمه عبور"
+            label="تایید رمز عبور"
             type="password"
             id="confirm_password"
             name="confirm_password"
