@@ -13,11 +13,10 @@ import Button from "components/buttons/Button";
 import { UserLogin, handleErrors } from "requests";
 
 // Actions
-import { userLogIn, closelRModal } from "redux/actions";
+import { userLogIn, closeLrModal } from "redux/actions";
 
 // Designs
 import "./loginregister.scss";
-import { HiOutlineMailOpen } from "react-icons/hi";
 
 const Login = ({ setStatus }) => {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ const Login = ({ setStatus }) => {
       .then(res => {
         setLoading(false);
         dispatch(userLogIn());
-        dispatch(closelRModal());
+        dispatch(closeLrModal());
         toast.success("شما با موفقیت به حساب خود وارد شدید");
       })
       .catch(err => {
@@ -45,7 +44,11 @@ const Login = ({ setStatus }) => {
 
   return (
     <>
-      <p className="lr-title no-select">وارد شوید</p>
+      <p className="lr-title no-select">ورود&nbsp;&nbsp;/&nbsp;&nbsp;ثبت‌نام</p>
+      <p className="lr-sub-title">
+        جهت ورود به حساب کاربری خود و یا ثبت حساب کاربری جدید، آدرس ایمیل خود را
+        وارد کنید.
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="ایمیل"
@@ -55,26 +58,10 @@ const Login = ({ setStatus }) => {
           ref={register({ required: true })}
           error={errors.email}
         />
-        <Input
-          label="رمز عبور"
-          type="password"
-          id="password"
-          name="password"
-          ref={register({ required: true })}
-          icon={HiOutlineMailOpen}
-          error={errors.password}
-          noBreak
-        />
-        <p
-          className="login-forgot-password no-select"
-          onClick={() => setStatus("forgotPassword")}
-        >
-          فراموشی رمز عبور
-        </p>
         <Button
           className="submit-button"
           ref={LoginRippleRef}
-          title="ورود"
+          title="ادامه"
           loading={loading}
         />
       </form>

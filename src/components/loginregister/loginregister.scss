@@ -30,7 +30,7 @@
   }
 
   .lr-right {
-    padding: 20px 80px;
+    padding: 30px 80px;
     height: 100%;
     width: 65%;
     position: relative;
@@ -41,6 +41,11 @@
       color: #1c3987;
       margin: 20px 0;
       font-weight: 600;
+    }
+
+    .lr-sub-title {
+      font-size: 12px;
+      margin-bottom: 20px;
     }
 
     .submit-button {
@@ -106,7 +111,7 @@
     width: 35%;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    padding-top: 90px;
+    padding-top: 125px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,24 +157,6 @@
       visibility: hidden;
       animation: zoomIn 1s forwards 1.5s;
     }
-
-    #register-arrow-stem {
-      position: absolute;
-      bottom: 87px;
-      left: 81px;
-      stroke-dasharray: 71px;
-      stroke-dashoffset: 71px;
-      animation: stemEnter 1s ease-out forwards 2.5s;
-    }
-
-    #register-arrow-point {
-      position: absolute;
-      bottom: 109.5px;
-      left: 77px;
-      stroke-dasharray: 17px;
-      stroke-dashoffset: 17px;
-      animation: pointEnter 0.7s ease-out forwards 3.2s;
-    }
   }
 }
 
@@ -191,17 +178,5 @@
     opacity: 1;
     visibility: visible;
     transform: scale(1) rotate(-20deg);
-  }
-}
-
-@keyframes stemEnter {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes pointEnter {
-  to {
-    stroke-dashoffset: 0;
   }
 }

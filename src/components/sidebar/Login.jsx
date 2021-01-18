@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { openlRModal } from "redux/actions";
+import { openLrModal } from "redux/actions";
 
 const Login = forwardRef((props, ref) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Login = forwardRef((props, ref) => {
       className={`user-profile ${
         isSideBarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
-      onClick={() => dispatch(openlRModal("login"))}
+      onClick={() => dispatch(openLrModal())}
       onMouseDown={e => {
         ref.current.start(e);
       }}

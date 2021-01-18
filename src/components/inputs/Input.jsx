@@ -22,7 +22,10 @@ const Input = forwardRef(
 
     return (
       <div className="input-wrapper" style={wrapperStyle && wrapperStyle}>
-        <label htmlFor={id} className="label no-select">
+        <label
+          htmlFor={id}
+          className={`label no-select ${error ? "label-error" : ""}`}
+        >
           {label}
         </label>
         <div className="input-error-wrapper">

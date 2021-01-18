@@ -22,20 +22,27 @@ export const handleErrors = (error, setMessage) => {
     console.log("status", error.response.status);
     if (err?.detail === "No active account found with the given credentials") {
       setMessage("ایمیل یا رمز عبور خود را اشتباه وارد کرده اید.");
-    } else if (err?.email && err?.email[0] === "Enter a valid email address.") {
+    } else if (
+      err?.email &&
+      err?.email.length &&
+      err?.email[0] === "Enter a valid email address."
+    ) {
       setMessage("آدرس ایمیل معتبر وارد کنید.");
     } else if (
       err?.email &&
+      err?.email.length &&
       err?.email[0] === "account with this email already exists."
     ) {
       setMessage("کاربری با این ایمیل قبلا ایجاد شده است.");
     } else if (
       err?.username &&
+      err?.username.length &&
       err?.username[0] === "account with this username already exists."
     ) {
       setMessage("کابری با این نام کاربری قبلا ایجاد شده است.");
     } else if (
       err?.password &&
+      err?.password.length &&
       err?.password[0] === "Ensure this field has at least 8 characters."
     ) {
       setMessage("رمز عبور باید حداقل ۸ کاراکتر داشته باشد.");
