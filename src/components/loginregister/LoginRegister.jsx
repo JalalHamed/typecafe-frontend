@@ -4,11 +4,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 // Components
-import RightSide from "./RightSide";
 import LeftSide from "./LeftSide";
+import RightSide from "./rightside/RightSide";
 
 // Actions
-import { closeLrModal } from "redux/actions";
+import { closeLRModal } from "redux/actions";
 
 // Design
 import "./loginregister.scss";
@@ -20,7 +20,7 @@ const LoginRegister = () => {
     <div className="lr-wrapper">
       <div
         className="lr-close-modal no-select"
-        onClick={() => dispath(closeLrModal())}
+        onClick={() => dispath(closeLRModal())}
       >
         x
       </div>

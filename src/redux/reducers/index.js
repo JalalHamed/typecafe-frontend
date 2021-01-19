@@ -5,13 +5,13 @@ import { combineReducers } from "redux";
 import isLoggedIn from "./isLoggedIn";
 import page from "./page";
 import isSideBarOpen from "./isSideBarOpen";
-import lRModal from "./lRModal";
+import LRModal from "./LRModal";
 
 const allReducers = combineReducers({
   isLoggedIn,
   page,
   isSideBarOpen,
-  lRModal,
+  LRModal,
 });
 
 export default allReducers;

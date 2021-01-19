@@ -4,7 +4,10 @@ import React, { forwardRef } from "react";
 import "./inputs.scss";
 
 const Input = forwardRef(
-  ({ label, name, noBreak, type, id, style, wrapperStyle, error }, ref) => {
+  (
+    { label, name, noBreak, type, id, style, wrapperStyle, error, autoFocus },
+    ref
+  ) => {
     const errorMessageProducer = () => {
       switch (error?.ref?.name) {
         case "email":
@@ -38,6 +41,7 @@ const Input = forwardRef(
             placeholder={error && errorMessageProducer()}
             className={`input ${error ? "input-error" : ""}`}
             style={style && style}
+            autoFocus={autoFocus}
           />
         </div>
         {!noBreak && <div className="input-break" />}

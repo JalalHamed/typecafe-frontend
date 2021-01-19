@@ -11,14 +11,20 @@ export const toggleSideBar = () => {
   };
 };
 
-export const openLrModal = payload => {
+export const openLRModal = () => {
   return {
     type: "OPEN_LOGIN_REGISTER_MODAL",
+  };
+};
+
+export const LRModal = payload => {
+  return {
+    type: "LOGIN_REGISTER_MODAL",
     payload,
   };
 };
 
-export const closeLrModal = () => {
+export const closeLRModal = () => {
   return {
     type: "CLOSE_LOGIN_REGISTER_MODAL",
   };

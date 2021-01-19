@@ -20,7 +20,7 @@ const Dashboard = () => {
   return (
     <div className="wrapper">
       {/* MODALS */}
-      {state.lRModal.isOpen && (
+      {state.LRModal.isOpen && (
         <Modal>
           <LoginRegister />
         </Modal>

@@ -3,42 +3,41 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 // Componenets
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 
-// Request
-import { UserLogin, handleErrors } from "requests";
-
 // Actions
-import { userLogIn, closeLrModal } from "redux/actions";
+import { LRModal } from "redux/actions";
 
-// Designs
-import "./loginregister.scss";
+// Request
+import { CheckEmail, handleErrors } from "requests";
 
-const Login = ({ setStatus }) => {
-  const dispatch = useDispatch();
+const Email = () => {
   const { register, handleSubmit, errors } = useForm();
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [notMember, setNotMember] = useState(false);
+  const dispatch = useDispatch();
 
   const onSubmit = data => {
     setLoading(true);
     setErrMsg("");
 
-    UserLogin(data)
+    CheckEmail(data)
       .then(res => {
         setLoading(false);
-        dispatch(userLogIn());
-        dispatch(closeLrModal());
-        toast.success("شما با موفقیت به حساب خود وارد شدید");
+        if (res.data.is_member) {
+          dispatch(LRModal({ page: "Login", username: res.data.username }));
+        } else {
+          setNotMember(true);
+        }
       })
       .catch(err => {
-        handleErrors(err, setErrMsg);
         setLoading(false);
+        handleErrors(err, setErrMsg);
       });
   };
 
@@ -57,6 +56,7 @@ const Login = ({ setStatus }) => {
           name="email"
           ref={register({ required: true })}
           error={errors.email}
+          autoFocus
         />
         <Button
           className="submit-button"
@@ -65,9 +65,10 @@ const Login = ({ setStatus }) => {
           loading={loading}
         />
       </form>
+      {notMember && <div>عضو نیستی. میخوای ثبت نام کنی؟</div>}
       {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
     </>
   );
 };
 
-export default Login;
+export default Email;

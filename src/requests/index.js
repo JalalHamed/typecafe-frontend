@@ -12,6 +12,10 @@ export const GetProjects = () => {
   return axios.get("projects/").then(res => res.data);
 };
 
+export const CheckEmail = body => {
+  return axios.post("auth/check-email/", body).then(res => res);
+};
+
 // Handle Errors
 
 export const handleErrors = (error, setMessage) => {

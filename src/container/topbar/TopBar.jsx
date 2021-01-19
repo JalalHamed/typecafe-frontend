@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { toggleSideBar, openLrModal } from "redux/actions";
+import { toggleSideBar, openLRModal } from "redux/actions";
 
 // Designs
 import "./topbar.scss";
@@ -46,7 +46,7 @@ const TopBar = () => {
         {!isLoggedIn && (
           <div
             className="topbar-sign-up"
-            onClick={() => dispatch(openLrModal())}
+            onClick={() => dispatch(openLRModal())}
             onMouseDown={e => {
               SignUpRippleRef.current.start(e);
             }}

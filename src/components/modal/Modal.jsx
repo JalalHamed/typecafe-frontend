@@ -4,14 +4,14 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // Actions
-import { closeLrModal } from "redux/actions";
+import { closeLRModal } from "redux/actions";
 
 const Modal = ({ children }) => {
   const dispatch = useDispatch();
 
   const downHandler = ({ key }) => {
     if (key === "Escape") {
-      dispatch(closeLrModal());
+      dispatch(closeLRModal());
     }
   };
 
