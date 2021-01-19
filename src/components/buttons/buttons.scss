@@ -1,0 +1,52 @@
+.button {
+  position: relative;
+  padding: 4px 20px;
+  background-color: #1c3987;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 33px;
+  width: 100%;
+
+  &.w-68 {
+    width: 68%;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.back-button {
+  position: relative;
+  padding: 4px 20px;
+  background-color: #fff;
+  color: #1c3987;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 33px;
+  width: 100%;
+
+  &.w-30 {
+    width: 30%;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    background-color: #f7f7f7;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

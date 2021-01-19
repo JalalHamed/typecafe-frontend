@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-// Componenets
+// Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
@@ -12,13 +12,12 @@ import BackButton from "components/buttons/BackButton";
 // Actions
 import { LRModal } from "redux/actions";
 
-const Login = () => {
+const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const LoginRippleRef = useRef();
+  const RegisterRippleRef = useRef();
   const BackRippleRef = useRef();
-  const username = useSelector(state => state.LRModal.username);
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
@@ -27,9 +26,17 @@ const Login = () => {
 
   return (
     <>
-      <p className="lr-title no-select">وارد شوید</p>
-      <p className="lr-sub-title">رمز عبور خود را وارد کنید.</p>
+      <p className="lr-title no-select">ثبت نام کنید</p>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="نام کاربری"
+          type="text"
+          id="username"
+          name="username"
+          ref={register({ required: true })}
+          error={errors.username}
+          autoFocus
+        />
         <Input
           label="رمز عبور"
           type="password"
@@ -37,19 +44,19 @@ const Login = () => {
           name="password"
           ref={register({ required: true })}
           error={errors.password}
-          autoFocus
-          noBreak
         />
-        <p
-          className="login-forgot-password"
-          onClick={() => dispatch(LRModal({ page: "ForgotPassword" }))}
-        >
-          فراموشی رمز عبور
-        </p>
+        <Input
+          label="تایید رمز عبور"
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          ref={register({ required: true })}
+          error={errors.confirm_password}
+        />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="w-68"
-            ref={LoginRippleRef}
+            ref={RegisterRippleRef}
             title="ورود"
             loading={loading}
           />
@@ -65,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

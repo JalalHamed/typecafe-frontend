@@ -19,7 +19,6 @@ const Email = () => {
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [notMember, setNotMember] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = data => {
@@ -32,7 +31,7 @@ const Email = () => {
         if (res.data.is_member) {
           dispatch(LRModal({ page: "Login", username: res.data.username }));
         } else {
-          setNotMember(true);
+          dispatch(LRModal({ page: "ConfirmEmail", email: data.email }));
         }
       })
       .catch(err => {
@@ -65,7 +64,6 @@ const Email = () => {
           loading={loading}
         />
       </form>
-      {notMember && <div>عضو نیستی. میخوای ثبت نام کنی؟</div>}
       {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
     </>
   );

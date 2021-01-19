@@ -18,8 +18,27 @@ const Input = forwardRef(
           return "رمز عبور خود را تایید کنید.";
         case "username":
           return "نام کاربری خود را وارد کنید.";
+        case "confirm_email":
+          return "کد تایید ایمیل را وارد کنید.";
         default:
           return "";
+      }
+    };
+
+    const maxProducer = () => {
+      switch (name) {
+        case "email":
+          return 256;
+        case "password":
+          return 100;
+        case "confirm_password":
+          return 100;
+        case "username":
+          return 20;
+        case "confirm_email":
+          return 256;
+        default:
+          return 300;
       }
     };
 
@@ -32,16 +51,25 @@ const Input = forwardRef(
           {label}
         </label>
         <div className="input-error-wrapper">
-          {error && <i className="icon icon-error" />}
+          {error && (
+            <i
+              className={`icon icon-error ${
+                error?.ref?.name === "confirm_email" ? "confirm-email" : "" // pushes icon to left a little more
+              }`}
+            />
+          )}
           <input
             type={type || "text"}
             name={name}
             id={id}
             ref={ref}
             placeholder={error && errorMessageProducer()}
-            className={`input ${error ? "input-error" : ""}`}
+            className={`input ${error ? "input-error" : ""} ${
+              error?.ref?.name === "confirm_email" ? "confirm-email" : ""
+            }`}
             style={style && style}
             autoFocus={autoFocus}
+            max={maxProducer()}
           />
         </div>
         {!noBreak && <div className="input-break" />}

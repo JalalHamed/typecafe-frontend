@@ -3,6 +3,9 @@ import React from "react";
 // Components
 import Email from "./Email";
 import Login from "./Login";
+import ConfirmEmail from "./ConfirmEmail";
+import Register from "./Register";
+import ForgotPassword from "./ForgotPassword";
 
 // Libraries
 import { useSelector } from "react-redux";
@@ -17,6 +20,9 @@ const RightSide = () => {
     <>
       {page === "Email" && <Email />}
       {page === "Login" && <Login />}
+      {page === "ConfirmEmail" && <ConfirmEmail />}
+      {page === "Register" && <Register />}
+      {page === "ForgotPassword" && <ForgotPassword />}
     </>
   );
 };

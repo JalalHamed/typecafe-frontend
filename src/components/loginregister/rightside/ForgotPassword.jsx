@@ -2,14 +2,21 @@ import React, { useRef, useState } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
+import BackButton from "components/buttons/BackButton";
+
+// Actions
+import { LRModal } from "redux/actions";
 
 const ForgotPassword = () => {
   const { register, errors, handleSubmit } = useForm();
+  const dispatch = useDispatch();
   const ForgotPasswordRippleRef = useRef();
+  const BackRippleRef = useRef();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
@@ -19,7 +26,8 @@ const ForgotPassword = () => {
 
   return (
     <div>
-      <p className="lr-title no-select">رمز خود را فراموش کرده‌اید؟</p>
+      <p className="lr-title no-select">درخواست بازیابی رمز عبور</p>
+      <p className="lr-sub-title">آدرس ایمیل خود را وارد کنید.</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="ایمیل"
@@ -29,12 +37,19 @@ const ForgotPassword = () => {
           ref={register({ required: true })}
           error={errors.email}
         />
-        <Button
-          className="submit-button"
-          ref={ForgotPasswordRippleRef}
-          title="بازیابی رمز عبور"
-          loading={loading}
-        />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button
+            className="submit-button w-68"
+            ref={ForgotPasswordRippleRef}
+            title="ارسال"
+            loading={loading}
+          />
+          <BackButton
+            className="w-30"
+            ref={BackRippleRef}
+            onClick={() => dispatch(LRModal({ page: "Login" }))}
+          />
+        </div>
       </form>
     </div>
   );

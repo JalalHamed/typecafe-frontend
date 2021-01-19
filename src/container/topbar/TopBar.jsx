@@ -58,7 +58,7 @@ const TopBar = () => {
             }}
           >
             <i className="icon icon-user-red-regular" />
-            <span style={{ color: "#ff2d2d" }}>ثبت‌نام</span>
+            <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
             <TouchRipple ref={SignUpRippleRef} />
           </div>
         )}

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-// Componenets
+// Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
@@ -12,45 +12,42 @@ import BackButton from "components/buttons/BackButton";
 // Actions
 import { LRModal } from "redux/actions";
 
-const Login = () => {
+const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const LoginRippleRef = useRef();
+  const email = useSelector(state => state.LRModal.email);
+  const ConfirmEmailRippleRef = useRef();
   const BackRippleRef = useRef();
-  const username = useSelector(state => state.LRModal.username);
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
-    console.log("data", data);
+    console.log(data);
   };
 
   return (
     <>
-      <p className="lr-title no-select">وارد شوید</p>
-      <p className="lr-sub-title">رمز عبور خود را وارد کنید.</p>
+      <p className="lr-title no-select">تایید آدرس ایمیل</p>
+      <p className="lr-sub-title">
+        حساب کاربری با ایمیل {email} وجود ندارد.
+        <br />
+        برای ساخت حساب جدید،‌ کد تایید به این آدرس ایمیل شد.
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          label="رمز عبور"
-          type="password"
-          id="password"
-          name="password"
+          label="کد تایید"
+          type="number"
+          id="confirm_email"
+          name="confirm_email"
           ref={register({ required: true })}
-          error={errors.password}
+          error={errors.confirm_email}
           autoFocus
-          noBreak
         />
-        <p
-          className="login-forgot-password"
-          onClick={() => dispatch(LRModal({ page: "ForgotPassword" }))}
-        >
-          فراموشی رمز عبور
-        </p>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="w-68"
-            ref={LoginRippleRef}
-            title="ورود"
+            ref={ConfirmEmailRippleRef}
+            title="تایید ایمیل"
             loading={loading}
           />
           <BackButton
@@ -65,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ConfirmEmail;

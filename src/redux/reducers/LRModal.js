@@ -2,6 +2,7 @@ let initialState = {
   isOpen: false,
   page: "Email",
   username: "",
+  email: "",
 };
 
 const LRModal = (state = initialState, action) => {
@@ -11,8 +12,7 @@ const LRModal = (state = initialState, action) => {
     case "LOGIN_REGISTER_MODAL":
       return {
         ...state,
-        page: action.payload.page,
-        username: action.payload.username,
+        ...action.payload,
       };
     case "CLOSE_LOGIN_REGISTER_MODAL":
       return { ...state, isOpen: false };

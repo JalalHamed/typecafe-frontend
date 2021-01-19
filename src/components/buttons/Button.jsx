@@ -7,6 +7,9 @@ import { css } from "@emotion/react";
 // Components
 import TouchRipple from "components/ripple/TouchRipple";
 
+// Designs
+import "./buttons.scss";
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -16,7 +19,7 @@ const override = css`
 const Button = forwardRef(({ className, title, loading, onClick }, ref) => {
   return (
     <button
-      className={className && className}
+      className={`button ${className && className}`}
       disabled={loading}
       onClick={onClick}
       onMouseDown={e => {

@@ -1,0 +1,27 @@
+import React, { forwardRef } from "react";
+
+// Components
+import TouchRipple from "components/ripple/TouchRipple";
+
+const Button = forwardRef(({ className, onClick }, ref) => {
+  return (
+    <button
+      className={`back-button ${className && className}`}
+      onClick={onClick}
+      onMouseDown={e => {
+        ref.current.start(e);
+      }}
+      onMouseUp={() => {
+        ref.current.stop();
+      }}
+      onMouseOut={() => {
+        ref.current.stop();
+      }}
+    >
+      بازگشت
+      <TouchRipple ref={ref} />
+    </button>
+  );
+});
+
+export default Button;
