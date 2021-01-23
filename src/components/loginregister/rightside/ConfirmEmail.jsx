@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -12,17 +12,37 @@ import BackButton from "components/buttons/BackButton";
 // Actions
 import { LRModal } from "redux/actions";
 
+// Requests
+import { ConfirmEmailReq, handleErrors } from "requests";
+
 const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const email = useSelector(state => state.LRModal.email);
+  const [timeleft, setTimeLeft] = useState(
+    parseInt(useSelector(state => state.LRModal.timeleft))
+  );
   const ConfirmEmailRippleRef = useRef();
   const BackRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
-    console.log(data);
+    setLoading(true);
+
+    ConfirmEmailReq({ code: data.confirm_email_code, email })
+      .then(res => {
+        setLoading(false);
+        if (res.codes_match) {
+          setErrMsg("codes match");
+        } else {
+          setErrMsg("کد تایید وارد شده صحیح نمی‌باشد.");
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        handleErrors(err, setErrMsg);
+      });
   };
 
   return (
@@ -37,10 +57,10 @@ const ConfirmEmail = () => {
         <Input
           label="کد تایید"
           type="number"
-          id="confirm_email"
-          name="confirm_email"
+          id="confirm_email_code"
+          name="confirm_email_code"
           ref={register({ required: true })}
-          error={errors.confirm_email}
+          error={errors.confirm_email_code}
           autoFocus
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -57,7 +77,10 @@ const ConfirmEmail = () => {
           />
         </div>
       </form>
-      {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
+      <div className="login-send-confirm-code-again">
+        ارسال مجدد تا {timeleft} ثانیه دیگر
+      </div>
+      {!!errMsg.length && <div className="error-message confirm">{errMsg}</div>}
     </>
   );
 };

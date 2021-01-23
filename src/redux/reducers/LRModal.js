@@ -1,8 +1,8 @@
 let initialState = {
   isOpen: false,
   page: "Email",
-  username: "",
   email: "",
+  timeleft: 0,
 };
 
 const LRModal = (state = initialState, action) => {

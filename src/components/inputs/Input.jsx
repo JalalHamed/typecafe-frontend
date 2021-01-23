@@ -18,7 +18,7 @@ const Input = forwardRef(
           return "رمز عبور خود را تایید کنید.";
         case "username":
           return "نام کاربری خود را وارد کنید.";
-        case "confirm_email":
+        case "confirm_email_code":
           return "کد تایید ایمیل را وارد کنید.";
         default:
           return "";
@@ -35,10 +35,8 @@ const Input = forwardRef(
           return 100;
         case "username":
           return 20;
-        case "confirm_email":
-          return 256;
         default:
-          return 300;
+          return undefined;
       }
     };
 
@@ -54,7 +52,7 @@ const Input = forwardRef(
           {error && (
             <i
               className={`icon icon-error ${
-                error?.ref?.name === "confirm_email" ? "confirm-email" : "" // pushes icon to left a little more
+                error?.ref?.name === "confirm_email_code" ? "confirm-email" : "" // pushes icon to left a little more
               }`}
             />
           )}
@@ -65,7 +63,7 @@ const Input = forwardRef(
             ref={ref}
             placeholder={error && errorMessageProducer()}
             className={`input ${error ? "input-error" : ""} ${
-              error?.ref?.name === "confirm_email" ? "confirm-email" : ""
+              error?.ref?.name === "confirm_email_code" ? "confirm-email" : ""
             }`}
             style={style && style}
             autoFocus={autoFocus}

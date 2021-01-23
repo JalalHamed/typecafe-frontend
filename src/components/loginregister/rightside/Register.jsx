@@ -67,7 +67,7 @@ const Register = () => {
           />
         </div>
       </form>
-      {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
+      {!!errMsg.length && <div className="error-message">{errMsg}</div>}
     </>
   );
 };

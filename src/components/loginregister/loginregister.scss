@@ -61,17 +61,21 @@
       }
     }
 
-    .login-error-message {
+    .login-title-content-break-line {
+      margin-top: 60px;
+    }
+
+    .error-message {
       margin-top: 20px;
       padding: 5px 10px;
       font-size: 15px;
       color: #d8000c;
       border-radius: 2px;
       text-align: center;
-    }
 
-    .login-title-content-break-line {
-      margin-top: 60px;
+      &.confirm {
+        margin-top: 10px;
+      }
     }
 
     .register-error-message {
@@ -80,6 +84,13 @@
       font-size: 13px;
       color: #d8000c;
       border-radius: 2px;
+      text-align: center;
+    }
+
+    .login-send-confirm-code-again {
+      margin-top: 30px;
+      font-size: 14px;
+      color: rgb(36, 36, 36);
       text-align: center;
     }
   }

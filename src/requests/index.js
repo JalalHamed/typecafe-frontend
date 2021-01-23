@@ -13,7 +13,11 @@ export const GetProjects = () => {
 };
 
 export const CheckEmail = body => {
-  return axios.post("auth/check-email/", body).then(res => res);
+  return axios.post("auth/check-email/", body).then(res => res.data);
+};
+
+export const ConfirmEmailReq = body => {
+  return axios.post("auth/confirm-email/", body).then(res => res.data);
 };
 
 // Handle Errors
@@ -22,8 +26,8 @@ export const handleErrors = (error, setMessage) => {
   if (error.response) {
     // Request made and server responded
     const err = error.response.data;
-    console.log("1", err);
-    console.log("status", error.response.status);
+    // console.log("1", err);
+    // console.log("status", error.response.status);
     if (err?.detail === "No active account found with the given credentials") {
       setMessage("ایمیل یا رمز عبور خود را اشتباه وارد کرده اید.");
     } else if (
@@ -68,7 +72,9 @@ export const handleErrors = (error, setMessage) => {
   } else if (error.request) {
     // The request was made but no response was received
     console.log("2", error.request);
-    setMessage("خطا در برقراری ارتباط با سرور");
+    setMessage(
+      "خطا در برقراری ارتباط با سرور. پس از اطمینان از اتصال اینترنت خود، مجددا تلاش کنید."
+    );
   } else {
     // Something happened in setting up the request that triggered an Error
     console.log("3", error.message);

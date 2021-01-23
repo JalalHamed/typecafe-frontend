@@ -19,19 +19,33 @@ const Email = () => {
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errMsgStyle, setErrMsgStyle] = useState(undefined);
   const dispatch = useDispatch();
 
   const onSubmit = data => {
     setLoading(true);
     setErrMsg("");
 
+    setTimeout(() => {
+      setErrMsg(
+        "عملیات ارسال ایمیل بیش از حد معمول به طول انجامیده است. لطفا در صورت استفاده از سرویس های تغییر IP (فیلترشکن، VPN و ...)، این سرویس را غیرفعال کنید و سپس صفحه‌‌ را Refresh کنید و مجددا تلاش کنید."
+      );
+      setErrMsgStyle({ fontSize: "12px" });
+    }, 10000);
+
     CheckEmail(data)
       .then(res => {
         setLoading(false);
-        if (res.data.is_member) {
-          dispatch(LRModal({ page: "Login", username: res.data.username }));
+        if (res.is_member) {
+          dispatch(LRModal({ page: "Login" }));
         } else {
-          dispatch(LRModal({ page: "ConfirmEmail", email: data.email }));
+          dispatch(
+            LRModal({
+              page: "ConfirmEmail",
+              email: data.email,
+              timeleft: res.timeleft,
+            })
+          );
         }
       })
       .catch(err => {
@@ -64,7 +78,11 @@ const Email = () => {
           loading={loading}
         />
       </form>
-      {!!errMsg.length && <div className="login-error-message">{errMsg}</div>}
+      {!!errMsg.length && (
+        <div className="error-message" style={errMsgStyle && errMsgStyle}>
+          {errMsg}
+        </div>
+      )}
     </>
   );
 };
