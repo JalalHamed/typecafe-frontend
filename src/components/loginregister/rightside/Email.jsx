@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -19,19 +19,11 @@ const Email = () => {
   const LoginRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errMsgStyle, setErrMsgStyle] = useState(undefined);
   const dispatch = useDispatch();
 
   const onSubmit = data => {
     setLoading(true);
     setErrMsg("");
-
-    setTimeout(() => {
-      setErrMsg(
-        "عملیات ارسال ایمیل بیش از حد معمول به طول انجامیده است. لطفا در صورت استفاده از سرویس های تغییر IP (فیلترشکن، VPN و ...)، این سرویس را غیرفعال کنید و سپس صفحه‌‌ را Refresh کنید و مجددا تلاش کنید."
-      );
-      setErrMsgStyle({ fontSize: "12px" });
-    }, 10000);
 
     CheckEmail(data)
       .then(res => {
@@ -53,6 +45,20 @@ const Email = () => {
         handleErrors(err, setErrMsg);
       });
   };
+
+  useEffect(() => {
+    if (loading) {
+      let timeout = setTimeout(() => {
+        if (loading) {
+          setErrMsg(
+            "عملیات ارسال ایمیل بیش از حد معمول به طول انجامیده است. لطفا در صورت استفاده از سرویس های تغییر IP مانند فیلترشکن (VPN)، این سرویس را غیرفعال کنید و مجددا تلاش کنید."
+          );
+        }
+      }, 10000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [loading]);
 
   return (
     <>
@@ -78,11 +84,7 @@ const Email = () => {
           loading={loading}
         />
       </form>
-      {!!errMsg.length && (
-        <div className="error-message" style={errMsgStyle && errMsgStyle}>
-          {errMsg}
-        </div>
-      )}
+      {!!errMsg.length && <div className="error-message">{errMsg}</div>}
     </>
   );
 };

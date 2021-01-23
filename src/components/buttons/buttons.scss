@@ -15,6 +15,16 @@
     width: 68%;
   }
 
+  &.send-again {
+    display: block;
+    margin: 30px auto 0;
+    font-size: 13px;
+    width: 100px;
+    padding: 3px;
+    height: 30px;
+    background-color: #29313b;
+  }
+
   &:hover {
     opacity: 0.9;
   }

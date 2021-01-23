@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // Libraries
 import { useForm } from "react-hook-form";
@@ -13,19 +13,21 @@ import BackButton from "components/buttons/BackButton";
 import { LRModal } from "redux/actions";
 
 // Requests
-import { ConfirmEmailReq, handleErrors } from "requests";
+import { handleErrors, ConfirmEmailReq, CheckEmail } from "requests";
 
 const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const email = useSelector(state => state.LRModal.email);
-  const [timeleft, setTimeLeft] = useState(
-    parseInt(useSelector(state => state.LRModal.timeleft))
-  );
   const ConfirmEmailRippleRef = useRef();
   const BackRippleRef = useRef();
+  const SendCodeAgainRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sendCodeLoading, setSendCodeLoading] = useState(false);
+  const [timeleft, setTimeleft] = useState(
+    parseInt(useSelector(state => state.LRModal.timeleft))
+  );
 
   const onSubmit = data => {
     setLoading(true);
@@ -44,6 +46,30 @@ const ConfirmEmail = () => {
         handleErrors(err, setErrMsg);
       });
   };
+
+  const sendCodeAgain = () => {
+    setSendCodeLoading(true);
+
+    CheckEmail({ email: email })
+      .then(res => {
+        setSendCodeLoading(false);
+        setTimeleft(parseInt(res.timeleft));
+      })
+      .catch(err => {
+        setSendCodeLoading(false);
+        handleErrors(err, setErrMsg);
+      });
+  };
+
+  // Send code again count down
+  useEffect(() => {
+    if (timeleft !== 0) {
+      let interval = setInterval(() => {
+        setTimeleft(timeleft - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [timeleft]);
 
   return (
     <>
@@ -77,9 +103,19 @@ const ConfirmEmail = () => {
           />
         </div>
       </form>
-      <div className="login-send-confirm-code-again">
-        ارسال مجدد تا {timeleft} ثانیه دیگر
-      </div>
+      {timeleft ? (
+        <div className="login-send-confirm-code-again">
+          ارسال مجدد تا {timeleft} ثانیه دیگر
+        </div>
+      ) : (
+        <Button
+          ref={SendCodeAgainRippleRef}
+          title="ارسال مجدد"
+          className="send-again"
+          onClick={sendCodeAgain}
+          loading={sendCodeLoading}
+        />
+      )}
       {!!errMsg.length && <div className="error-message confirm">{errMsg}</div>}
     </>
   );

@@ -2,12 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Libraries
-import { BrowserRouter as Router } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 // Components
-import App from "./App";
+import Dashboard from "container/Dashboard";
 import allReducers from "redux/reducers";
 
 // Designs
@@ -23,9 +22,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <Dashboard />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
