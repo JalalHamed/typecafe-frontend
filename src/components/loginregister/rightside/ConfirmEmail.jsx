@@ -18,7 +18,7 @@ import { handleErrors, ConfirmEmailReq, CheckEmail } from "requests";
 const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const email = useSelector(state => state.LRModal.email);
+  const [email, setEmail] = useState(useSelector(state => state.LRModal.email));
   const ConfirmEmailRippleRef = useRef();
   const BackRippleRef = useRef();
   const SendCodeAgainRippleRef = useRef();
@@ -71,11 +71,21 @@ const ConfirmEmail = () => {
     }
   }, [timeleft]);
 
+  // Handle Email overflow
+  useEffect(() => {
+    if (email.length > 33) {
+      setEmail(email.slice(0, 30) + "...");
+    }
+  }, [email]);
+
   return (
     <>
       <p className="lr-title no-select">تایید آدرس ایمیل</p>
-      <p className="lr-sub-title">
-        حساب کاربری با ایمیل {email} وجود ندارد.
+      <div className="lr-email">
+        <div className="inner">{email}</div>
+      </div>
+      <p className="lr-sub-title confirm-email">
+        حساب کاربری با این ایمیل وجود ندارد.
         <br />
         برای ساخت حساب جدید،‌ کد تایید به این آدرس ایمیل شد.
       </p>
@@ -117,7 +127,14 @@ const ConfirmEmail = () => {
           loading={sendCodeLoading}
         />
       )}
-      {!!errMsg.length && <div className="error-message confirm">{errMsg}</div>}
+      {!!errMsg.length && (
+        <div className="error-message confirm">
+          <div className="close-error no-select" onClick={() => setErrMsg("")}>
+            x
+          </div>
+          {errMsg}
+        </div>
+      )}
     </>
   );
 };

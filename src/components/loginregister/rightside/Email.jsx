@@ -86,7 +86,11 @@ const Email = () => {
         />
       </form>
       {!!errMsg.length && (
-        <div className="error-message email-taking-too-long">{errMsg}</div>
+        <div
+          className={`error-message ${loading ? "email-taking-too-long" : ""}`}
+        >
+          {errMsg}
+        </div>
       )}
     </>
   );

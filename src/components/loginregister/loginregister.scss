@@ -58,14 +58,33 @@
       text-align: center;
       font-size: 25px;
       color: #1c3987;
-      margin: 20px 0;
+      margin: 20px 0 0;
       font-weight: 600;
+    }
+
+    .lr-email {
+      text-align: center;
+      direction: ltr;
+
+      .inner {
+        color: #1c3887;
+        font-size: 14px;
+        display: inline-block;
+        background-color: #1c388728;
+        border-radius: 50px;
+        padding: 3px 10px 0;
+        text-transform: lowercase;
+      }
     }
 
     .lr-sub-title {
       font-size: 13px;
-      margin-bottom: 20px;
+      margin: 20px 0;
       color: #29313b;
+
+      &.confirm-email {
+        margin: 15px 0;
+      }
     }
 
     .login-forgot-password {
@@ -85,16 +104,35 @@
     }
 
     .error-message {
-      margin-top: 10px;
+      margin-top: 15px;
       padding: 5px 10px;
-      font-size: 15px;
+      font-size: 14px;
       color: #d8000c;
       border-radius: 2px;
       text-align: center;
       background-color: #ffe3e5;
+      position: relative;
 
       &.confirm {
         margin-top: 10px;
+
+        .close-error {
+          display: inline-block;
+          position: absolute;
+          right: 5px;
+          background-color: #fb6b75;
+          width: 21px;
+          height: 21px;
+          border-radius: 50px;
+          font-size: 16px;
+          line-height: 22px;
+          color: #ffe3e5;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #ff3846;
+          }
+        }
       }
 
       &.email-taking-too-long {
@@ -113,7 +151,7 @@
     }
 
     .login-send-confirm-code-again {
-      margin-top: 30px;
+      margin-top: 25px;
       font-size: 14px;
       color: #29313b;
       text-align: center;
