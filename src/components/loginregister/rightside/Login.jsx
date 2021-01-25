@@ -27,7 +27,7 @@ const Login = () => {
 
   return (
     <>
-      <p className="lr-title no-select">وارد شوید</p>
+      <p className="lr-title no-select">ورود</p>
       <p className="lr-sub-title">رمز عبور خود را وارد کنید.</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input

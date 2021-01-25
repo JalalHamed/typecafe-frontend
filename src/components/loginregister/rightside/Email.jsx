@@ -76,6 +76,7 @@ const Email = () => {
           ref={register({ required: true })}
           error={errors.email}
           autoFocus
+          noBreak
         />
         <Button
           className="submit-button"
@@ -84,7 +85,9 @@ const Email = () => {
           loading={loading}
         />
       </form>
-      {!!errMsg.length && <div className="error-message">{errMsg}</div>}
+      {!!errMsg.length && (
+        <div className="error-message email-taking-too-long">{errMsg}</div>
+      )}
     </>
   );
 };

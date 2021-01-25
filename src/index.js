@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 // Components
-import Dashboard from "container/Dashboard";
+import App from "container/App";
 import allReducers from "redux/reducers";
 
 // Designs
@@ -22,7 +22,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Dashboard />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

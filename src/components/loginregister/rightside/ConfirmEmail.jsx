@@ -36,7 +36,7 @@ const ConfirmEmail = () => {
       .then(res => {
         setLoading(false);
         if (res.codes_match) {
-          setErrMsg("codes match");
+          dispatch(LRModal({ page: "Register" }));
         } else {
           setErrMsg("کد تایید وارد شده صحیح نمی‌باشد.");
         }
@@ -88,6 +88,7 @@ const ConfirmEmail = () => {
           ref={register({ required: true })}
           error={errors.confirm_email_code}
           autoFocus
+          noBreak
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button

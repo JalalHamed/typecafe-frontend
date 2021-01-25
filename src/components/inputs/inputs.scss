@@ -26,11 +26,11 @@
       }
 
       &::placeholder {
+        text-align: right;
         font-family: "typecafe";
         padding-right: 15px;
         color: #d8000ba1;
         font-size: 13px;
-        direction: rtl;
       }
 
       &.input-error {

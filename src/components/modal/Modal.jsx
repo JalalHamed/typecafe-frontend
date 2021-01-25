@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { closeLRModal } from "redux/actions";
+import { closeLRModal, LRModal } from "redux/actions";
 
 const Modal = ({ children }) => {
   const dispatch = useDispatch();
+  const LRModalIsOpen = useSelector(state => state.LRModal.isOpen);
 
   const downHandler = ({ key }) => {
     if (key === "Escape") {
-      dispatch(closeLRModal());
+      if (LRModalIsOpen) {
+        dispatch(LRModal({ page: "Email" }));
+        dispatch(closeLRModal());
+      }
     }
   };
 

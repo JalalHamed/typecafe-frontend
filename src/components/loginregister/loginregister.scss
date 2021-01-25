@@ -30,10 +30,29 @@
   }
 
   .lr-right {
-    padding: 30px 70px;
+    padding: 30px 50px;
     height: 100%;
     width: 65%;
     position: relative;
+
+    .usage-agreement {
+      font-size: 12px;
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      left: 0;
+      color: #29313b;
+      text-align: center;
+
+      .rules {
+        color: #1c3987;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 1px solid #1c3987;
+        }
+      }
+    }
 
     .lr-title {
       text-align: center;
@@ -72,9 +91,15 @@
       color: #d8000c;
       border-radius: 2px;
       text-align: center;
+      background-color: #ffe3e5;
 
       &.confirm {
         margin-top: 10px;
+      }
+
+      &.email-taking-too-long {
+        margin-top: 5px;
+        font-size: 14px;
       }
     }
 

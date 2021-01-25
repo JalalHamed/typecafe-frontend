@@ -7,14 +7,15 @@ import { ToastContainer } from "react-toastify";
 // Components
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
-import Projects from "./pages/projects/Projects";
 import Modal from "components/modal/Modal";
 import LoginRegister from "components/loginregister/LoginRegister";
+import Projects from "./pages/projects/Projects";
+import Rules from "./pages/rules/Rules";
 
 // Design
-import "./dashboard.scss";
+import "./app.scss";
 
-const Dashboard = () => {
+const App = () => {
   const state = useSelector(state => state);
 
   return (
@@ -34,6 +35,7 @@ const Dashboard = () => {
         </div>
         <div className="content">
           {state.page === "projects" && <Projects />}
+          {state.page === "rules" && <Rules />}
         </div>
       </div>
 
@@ -52,4 +54,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default App;
