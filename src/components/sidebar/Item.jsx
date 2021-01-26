@@ -7,18 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { changePage, userLogOut } from "redux/actions";
+import { Sidebar, User } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
-  const page = useSelector(state => state.page);
-  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
+  const page = useSelector(state => state.Sidebar.page);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
   const dispatch = useDispatch();
 
   const handleClick = () => {
     if (status === "logout") {
-      dispatch(userLogOut());
+      dispatch(User({ isLoggedIn: false }));
     } else if (page !== status) {
-      dispatch(changePage(status));
+      dispatch(Sidebar({ page: status }));
     }
   };
 
@@ -43,7 +43,7 @@ const Item = forwardRef(({ status, title }, ref) => {
       />
       <div
         className={
-          isSideBarOpen ? "sidebar-item-title" : "sidebar-item-no-title"
+          isSidebarOpen ? "sidebar-item-title" : "sidebar-item-no-title"
         }
       >
         {title}

@@ -10,19 +10,30 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LRModal } from "redux/actions";
+import { LR } from "redux/actions";
+
+// Requests
+import { handleErrors, UserLogin } from "requests";
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
+  const email = useSelector(state => state.LR.email);
   const LoginRippleRef = useRef();
   const BackRippleRef = useRef();
-  const username = useSelector(state => state.LRModal.username);
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
-    console.log("data", data);
+    setLoading(true);
+
+    UserLogin({ email, ...data })
+      .then(res => {
+        setLoading(false);
+      })
+      .catch(err => {
+        handleErrors(err, setErrMsg);
+      });
   };
 
   return (
@@ -42,7 +53,7 @@ const Login = () => {
         />
         <p
           className="login-forgot-password"
-          onClick={() => dispatch(LRModal({ page: "ForgotPassword" }))}
+          onClick={() => dispatch(LR({ page: "ForgotPassword" }))}
         >
           فراموشی رمز عبور
         </p>
@@ -56,7 +67,7 @@ const Login = () => {
           <BackButton
             ref={BackRippleRef}
             className="w-30"
-            onClick={() => dispatch(LRModal({ page: "Email" }))}
+            onClick={() => dispatch(LR({ page: "Email" }))}
           />
         </div>
       </form>

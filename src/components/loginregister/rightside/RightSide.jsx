@@ -11,20 +11,20 @@ import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
 
 // Actions
-import { closeLRModal, changePage } from "redux/actions";
+import { LR, Sidebar } from "redux/actions";
 
 // Designs
 import "../loginregister.scss";
 
 const RightSide = () => {
   const dispatch = useDispatch();
-  const page = useSelector(state => state.LRModal.page);
-  const websitePage = useSelector(state => state.page);
+  const page = useSelector(state => state.LR.page);
+  const sidebarPage = useSelector(state => state.Sidebar.page);
 
   const handleRulesClick = () => {
-    dispatch(closeLRModal());
-    if (websitePage !== "rules") {
-      dispatch(changePage("rules"));
+    dispatch(LR({ isModalOpen: false }));
+    if (sidebarPage !== "rules") {
+      dispatch(Sidebar({ page: "rules" }));
     }
   };
 

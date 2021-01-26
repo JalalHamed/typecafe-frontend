@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
+import { EmailOverFlow } from "components/helper";
 
 // Actions
-import { LRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 // Requests
 import { handleErrors, ConfirmEmailReq, CheckEmail } from "requests";
@@ -18,7 +19,7 @@ import { handleErrors, ConfirmEmailReq, CheckEmail } from "requests";
 const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState(useSelector(state => state.LRModal.email));
+  const email = useSelector(state => state.LR.email);
   const ConfirmEmailRippleRef = useRef();
   const BackRippleRef = useRef();
   const SendCodeAgainRippleRef = useRef();
@@ -26,7 +27,7 @@ const ConfirmEmail = () => {
   const [loading, setLoading] = useState(false);
   const [sendCodeLoading, setSendCodeLoading] = useState(false);
   const [timeleft, setTimeleft] = useState(
-    parseInt(useSelector(state => state.LRModal.timeleft))
+    parseInt(useSelector(state => state.LR.timeleft))
   );
 
   const onSubmit = data => {
@@ -36,7 +37,7 @@ const ConfirmEmail = () => {
       .then(res => {
         setLoading(false);
         if (res.codes_match) {
-          dispatch(LRModal({ page: "Register" }));
+          dispatch(LR({ page: "Register" }));
         } else {
           setErrMsg("کد تایید وارد شده صحیح نمی‌باشد.");
         }
@@ -71,18 +72,11 @@ const ConfirmEmail = () => {
     }
   }, [timeleft]);
 
-  // Handle Email overflow
-  useEffect(() => {
-    if (email.length > 33) {
-      setEmail(email.slice(0, 30) + "...");
-    }
-  }, [email]);
-
   return (
     <>
       <p className="lr-title no-select">تایید آدرس ایمیل</p>
       <div className="lr-email">
-        <div className="inner">{email}</div>
+        <div className="inner">{EmailOverFlow({ email })}</div>
       </div>
       <p className="lr-sub-title confirm-email">
         حساب کاربری با این ایمیل وجود ندارد.
@@ -110,7 +104,7 @@ const ConfirmEmail = () => {
           <BackButton
             ref={BackRippleRef}
             className="w-30"
-            onClick={() => dispatch(LRModal({ page: "Email" }))}
+            onClick={() => dispatch(LR({ page: "Email" }))}
           />
         </div>
       </form>
@@ -127,7 +121,7 @@ const ConfirmEmail = () => {
           loading={sendCodeLoading}
         />
       )}
-      {!!errMsg.length && (
+      {!!errMsg?.length && (
         <div className="error-message confirm">
           <div className="close-error no-select" onClick={() => setErrMsg("")}>
             x

@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div className="wrapper">
       {/* MODALS */}
-      {state.LRModal.isOpen && (
+      {state.LR.isModalOpen && (
         <Modal>
           <LoginRegister />
         </Modal>
@@ -30,12 +30,16 @@ const App = () => {
 
       <TopBar />
       <div className="main">
-        <div className={state.isSideBarOpen ? "sidebar-open" : "sidebar-close"}>
+        <div
+          className={
+            state.Sidebar.isSidebarOpen ? "sidebar-open" : "sidebar-close"
+          }
+        >
           <SideBar />
         </div>
         <div className="content">
-          {state.page === "projects" && <Projects />}
-          {state.page === "rules" && <Rules />}
+          {state.Sidebar.page === "projects" && <Projects />}
+          {state.Sidebar.page === "rules" && <Rules />}
         </div>
       </div>
 

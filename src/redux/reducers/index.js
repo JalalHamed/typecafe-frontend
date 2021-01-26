@@ -2,16 +2,14 @@
 import { combineReducers } from "redux";
 
 // Components
-import isLoggedIn from "./isLoggedIn";
-import page from "./page";
-import isSideBarOpen from "./isSideBarOpen";
-import LRModal from "./LRModal";
+import LR from "./LR";
+import Sidebar from "./Sidebar";
+import User from "./User";
 
 const allReducers = combineReducers({
-  isLoggedIn,
-  page,
-  isSideBarOpen,
-  LRModal,
+  LR,
+  Sidebar,
+  User,
 });
 
 export default allReducers;

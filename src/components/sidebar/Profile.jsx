@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 const Profile = forwardRef((props, ref) => {
-  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
   return (
     <div
       className={`user-profile ${
-        isSideBarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
+        isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
       onMouseDown={e => {
         ref.current.start(e);
@@ -26,15 +26,15 @@ const Profile = forwardRef((props, ref) => {
     >
       <i
         className={`icon ${
-          isSideBarOpen ? "icon-user-default-big" : "icon-user-default-regular"
+          isSidebarOpen ? "icon-user-default-big" : "icon-user-default-regular"
         } icon-margin-18`}
       />
       <div
         className={
-          isSideBarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
+          isSidebarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
         }
       >
-        نام کاربری
+        نام نمایشی
       </div>
       <TouchRipple ref={ref} />
     </div>

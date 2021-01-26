@@ -4,17 +4,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { closeLRModal, LRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 const Modal = ({ children }) => {
   const dispatch = useDispatch();
-  const LRModalIsOpen = useSelector(state => state.LRModal.isOpen);
+  const isLRModalOpen = useSelector(state => state.LR.isModalOpen);
 
   const downHandler = ({ key }) => {
     if (key === "Escape") {
-      if (LRModalIsOpen) {
-        dispatch(LRModal({ page: "Email" }));
-        dispatch(closeLRModal());
+      if (isLRModalOpen) {
+        dispatch(LR({ isModalOpen: false }));
       }
     }
   };

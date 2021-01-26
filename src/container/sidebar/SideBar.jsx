@@ -20,7 +20,7 @@ const SideBar = () => {
   const RulesRippleRef = useRef();
   const LogoutRippleRef = useRef();
   const ProfileRippleRef = useRef();
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
   return (
     <div className="sidebar-wrapper">

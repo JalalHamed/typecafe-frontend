@@ -14,12 +14,12 @@
     position: relative;
 
     .input {
-      direction: ltr;
       padding: 5px 10px;
       border: 1px solid #1c3987;
       border-radius: 3px;
       width: 100%;
       font-size: 18px;
+      font-family: "typecafe";
 
       &:focus {
         outline: none;

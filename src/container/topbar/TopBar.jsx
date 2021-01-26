@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { toggleSideBar, openLRModal } from "redux/actions";
+import { Sidebar, LR } from "redux/actions";
 
 // Designs
 import "./topbar.scss";
@@ -16,14 +16,15 @@ const TopBar = () => {
   const dispatch = useDispatch();
   const MenuIconRippleRef = useRef();
   const SignUpRippleRef = useRef();
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.User.isLoggedIn);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
   return (
     <div className="topbar-wrapper no-select">
       <div className="topbar-right">
         <div
           className="hamburger-menu-icon no-select"
-          onClick={() => dispatch(toggleSideBar())}
+          onClick={() => dispatch(Sidebar({ isSidebarOpen: !isSidebarOpen }))}
           onMouseDown={e => {
             MenuIconRippleRef.current.start(e);
           }}
@@ -46,7 +47,7 @@ const TopBar = () => {
         {!isLoggedIn && (
           <div
             className="topbar-sign-up"
-            onClick={() => dispatch(openLRModal())}
+            onClick={() => dispatch(LR({ isModalOpen: true }))}
             onMouseDown={e => {
               SignUpRippleRef.current.start(e);
             }}

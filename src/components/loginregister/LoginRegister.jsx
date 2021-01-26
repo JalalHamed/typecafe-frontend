@@ -8,7 +8,7 @@ import LeftSide from "./LeftSide";
 import RightSide from "./rightside/RightSide";
 
 // Actions
-import { closeLRModal, LRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 // Design
 import "./loginregister.scss";
@@ -17,8 +17,7 @@ const LoginRegister = () => {
   const dispath = useDispatch();
 
   const handleClose = () => {
-    dispath(LRModal({ page: "Email" }));
-    dispath(closeLRModal());
+    dispath(LR({ isModalOpen: false }));
   };
 
   return (

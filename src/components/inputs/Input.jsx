@@ -16,8 +16,8 @@ const Input = forwardRef(
           return ".رمز عبور خود را وارد کنید";
         case "confirm_password":
           return ".رمز عبور خود را تایید کنید";
-        case "username":
-          return ".نام کاربری خود را وارد کنید";
+        case "displayname":
+          return ".نام نمایشی خود را وارد کنید";
         case "confirm_email_code":
           return ".کد تایید ایمیل را وارد کنید";
         default:
@@ -33,7 +33,7 @@ const Input = forwardRef(
           return 100;
         case "confirm_password":
           return 100;
-        case "username":
+        case "displayname":
           return 20;
         default:
           return undefined;
@@ -68,6 +68,7 @@ const Input = forwardRef(
             style={style && style}
             autoFocus={autoFocus}
             max={maxProducer()}
+            dir="auto"
           />
         </div>
         {!noBreak && <div className="input-break" />}

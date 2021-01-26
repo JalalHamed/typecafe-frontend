@@ -26,8 +26,7 @@ export const handleErrors = (error, setMessage) => {
   if (error.response) {
     // Request made and server responded
     const err = error.response.data;
-    // console.log("1", err);
-    // console.log("status", error.response.status);
+    console.log("1", err);
     if (err?.detail === "No active account found with the given credentials") {
       setMessage("ایمیل یا رمز عبور خود را اشتباه وارد کرده اید.");
     } else if (
@@ -43,11 +42,13 @@ export const handleErrors = (error, setMessage) => {
     ) {
       setMessage("کاربری با این ایمیل قبلا ایجاد شده است.");
     } else if (
-      err?.username &&
-      err?.username.length &&
-      err?.username[0] === "account with this username already exists."
+      err?.displayname &&
+      err?.displayname.length &&
+      err?.displayname[0] === "invalid format."
     ) {
-      setMessage("کابری با این نام کاربری قبلا ایجاد شده است.");
+      setMessage(
+        "نام نمایشی فقط می‌تواند شامل حروف، کارکترهای عددی، فاصله (space) و خط ربط (hyphen) باشد."
+      );
     } else if (
       err?.password &&
       err?.password.length &&
@@ -60,12 +61,6 @@ export const handleErrors = (error, setMessage) => {
       err?.password[0] === "passwords don't match."
     ) {
       setMessage("رمز های عبور با هم مطابقت ندارند.");
-    } else if (
-      err?.error &&
-      err?.error[0] ===
-        "The username should only contain alphanumeric characters."
-    ) {
-      setMessage("نام کاربری فقط می‌تواند شامل حروف و اعداد باشد.");
     } else if (error.response.status === 500) {
       setMessage("خطای سرور");
     } else setMessage("");

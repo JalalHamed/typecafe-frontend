@@ -1,43 +1,20 @@
-export const changePage = title => {
+export const LR = payload => {
   return {
-    type: "CHANGE_PAGE",
-    payload: title,
-  };
-};
-
-export const toggleSideBar = () => {
-  return {
-    type: "TOGGLE_SIDE_BAR",
-  };
-};
-
-export const openLRModal = () => {
-  return {
-    type: "OPEN_LOGIN_REGISTER_MODAL",
-  };
-};
-
-export const LRModal = payload => {
-  return {
-    type: "LOGIN_REGISTER_MODAL",
+    type: "LOGIN_REGISTER",
     payload,
   };
 };
 
-export const closeLRModal = () => {
+export const Sidebar = payload => {
   return {
-    type: "CLOSE_LOGIN_REGISTER_MODAL",
+    type: "SIDEBAR",
+    payload,
   };
 };
 
-export const userLogIn = () => {
+export const User = payload => {
   return {
-    type: "LOGIN",
-  };
-};
-
-export const userLogOut = () => {
-  return {
-    type: "LOGOUT",
+    type: "USER",
+    payload,
   };
 };

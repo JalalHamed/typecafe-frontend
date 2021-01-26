@@ -7,18 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { openLRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 const Login = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const isSideBarOpen = useSelector(state => state.isSideBarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
   return (
     <div
       className={`user-profile ${
-        isSideBarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
+        isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
-      onClick={() => dispatch(openLRModal())}
+      onClick={() => dispatch(LR({ isModalOpen: true }))}
       onMouseDown={e => {
         ref.current.start(e);
       }}
@@ -31,12 +31,12 @@ const Login = forwardRef((props, ref) => {
     >
       <i
         className={`icon ${
-          isSideBarOpen ? "icon-user-red-big" : "icon-user-red-regular"
+          isSidebarOpen ? "icon-user-red-big" : "icon-user-red-regular"
         } icon-margin-18`}
       />
       <div
         className={
-          isSideBarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
+          isSidebarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
         }
       >
         <p className="sidebar-profile-title">وارد شوید</p>

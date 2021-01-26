@@ -9,7 +9,7 @@ import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 
 // Actions
-import { LRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 // Request
 import { CheckEmail, handleErrors } from "requests";
@@ -24,17 +24,18 @@ const Email = () => {
   const onSubmit = data => {
     setLoading(true);
     setErrMsg("");
+    let lowerCaseEmail = data.email.toLowerCase();
 
-    CheckEmail(data)
+    CheckEmail({ email: lowerCaseEmail })
       .then(res => {
         setLoading(false);
         if (res.is_member) {
-          dispatch(LRModal({ page: "Login" }));
+          dispatch(LR({ page: "Login" }));
         } else {
           dispatch(
-            LRModal({
+            LR({
               page: "ConfirmEmail",
-              email: data.email,
+              email: lowerCaseEmail,
               timeleft: res.timeleft,
             })
           );

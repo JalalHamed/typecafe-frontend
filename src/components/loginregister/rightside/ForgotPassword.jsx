@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LRModal } from "redux/actions";
+import { LR } from "redux/actions";
 
 const ForgotPassword = () => {
   const { register, errors, handleSubmit } = useForm();
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
           <BackButton
             className="w-30"
             ref={BackRippleRef}
-            onClick={() => dispatch(LRModal({ page: "Login" }))}
+            onClick={() => dispatch(LR({ page: "Login" }))}
           />
         </div>
       </form>
