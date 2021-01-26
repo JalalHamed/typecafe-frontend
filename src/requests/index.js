@@ -1,7 +1,7 @@
 import axios from "./Api";
 
 export const UserRegister = body => {
-  return axios.post("auth/register/", body).then(res => res);
+  return axios.post("auth/register/", body).then(res => res.data);
 };
 
 export const UserLogin = body => {
@@ -28,7 +28,7 @@ export const handleErrors = (error, setMessage) => {
     const err = error.response.data;
     console.log("1", err);
     if (err?.detail === "No active account found with the given credentials") {
-      setMessage("ایمیل یا رمز عبور خود را اشتباه وارد کرده اید.");
+      setMessage("رمز عبور صحیح نمی‌باشد.");
     } else if (
       err?.email &&
       err?.email.length &&

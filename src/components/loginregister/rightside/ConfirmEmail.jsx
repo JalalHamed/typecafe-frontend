@@ -100,6 +100,7 @@ const ConfirmEmail = () => {
             ref={ConfirmEmailRippleRef}
             title="تایید ایمیل"
             loading={loading}
+            type="submit"
           />
           <BackButton
             ref={BackRippleRef}

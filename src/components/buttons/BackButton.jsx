@@ -8,6 +8,7 @@ const Button = forwardRef(({ className, onClick }, ref) => {
     <button
       className={`back-button ${className && className}`}
       onClick={onClick}
+      type="button"
       onMouseDown={e => {
         ref.current.start(e);
       }}

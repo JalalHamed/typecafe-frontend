@@ -30,7 +30,7 @@ const Email = () => {
       .then(res => {
         setLoading(false);
         if (res.is_member) {
-          dispatch(LR({ page: "Login" }));
+          dispatch(LR({ page: "Login", email: lowerCaseEmail }));
         } else {
           dispatch(
             LR({
@@ -84,6 +84,7 @@ const Email = () => {
           ref={LoginRippleRef}
           title="ادامه"
           loading={loading}
+          type="submit"
         />
       </form>
       {!!errMsg.length && (

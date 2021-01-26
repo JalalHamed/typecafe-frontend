@@ -16,30 +16,38 @@ const override = css`
   border-color: #fff;
 `;
 
-const Button = forwardRef(({ className, title, loading, onClick }, ref) => {
-  return (
-    <button
-      className={`button ${className && className}`}
-      disabled={loading}
-      onClick={onClick}
-      onMouseDown={e => {
-        ref.current.start(e);
-      }}
-      onMouseUp={() => {
-        ref.current.stop();
-      }}
-      onMouseOut={() => {
-        ref.current.stop();
-      }}
-    >
-      {loading ? (
-        <PuffLoader color={"#fff"} loading={loading} css={override} size={25} />
-      ) : (
-        title
-      )}
-      <TouchRipple ref={ref} />
-    </button>
-  );
-});
+const Button = forwardRef(
+  ({ className, title, loading, onClick, type }, ref) => {
+    return (
+      <button
+        className={`button ${className && className}`}
+        disabled={loading}
+        onClick={onClick}
+        type={type && type}
+        onMouseDown={e => {
+          ref.current.start(e);
+        }}
+        onMouseUp={() => {
+          ref.current.stop();
+        }}
+        onMouseOut={() => {
+          ref.current.stop();
+        }}
+      >
+        {loading ? (
+          <PuffLoader
+            color={"#fff"}
+            loading={loading}
+            css={override}
+            size={25}
+          />
+        ) : (
+          title
+        )}
+        <TouchRipple ref={ref} />
+      </button>
+    );
+  }
+);
 
 export default Button;

@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LR } from "redux/actions";
+import { LR, User } from "redux/actions";
 
 // Requests
 import { handleErrors, UserLogin } from "requests";
@@ -30,8 +30,13 @@ const Login = () => {
     UserLogin({ email, ...data })
       .then(res => {
         setLoading(false);
+        dispatch(User({ isLoggedIn: true }));
+        dispatch(
+          LR({ page: "Email", timeleft: 0, isModalOpen: false, email: "" })
+        );
       })
       .catch(err => {
+        setLoading(false);
         handleErrors(err, setErrMsg);
       });
   };
@@ -39,6 +44,9 @@ const Login = () => {
   return (
     <>
       <p className="lr-title no-select">ورود</p>
+      <div className="lr-email">
+        <div className="inner">{email}</div>
+      </div>
       <p className="lr-sub-title">رمز عبور خود را وارد کنید.</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -63,6 +71,7 @@ const Login = () => {
             ref={LoginRippleRef}
             title="ورود"
             loading={loading}
+            type="submit"
           />
           <BackButton
             ref={BackRippleRef}

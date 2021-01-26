@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LR } from "redux/actions";
+import { LR, User } from "redux/actions";
 
 // Requests
 import { handleErrors, UserRegister } from "requests";
@@ -28,15 +28,29 @@ const Register = () => {
     setLoading(true);
     setErrMsg("");
 
-    UserRegister({ email, ...data })
-      .then(res => {
-        setLoading(false);
-        dispatch(LR({ isModalOpen: false }));
-      })
-      .catch(err => {
-        setLoading(false);
-        handleErrors(err, setErrMsg);
-      });
+    if (data.password.length < 8) {
+      setErrMsg("پسورد باید حداقل ۸ کاراکتر داشته باشد.");
+      setLoading(false);
+    } else {
+      UserRegister({ email, ...data })
+        .then(res => {
+          setLoading(false);
+          dispatch(
+            User({
+              isLoggedIn: true,
+              displayname: res.displayname,
+              email: res.email,
+            })
+          );
+          dispatch(
+            LR({ isModalOpen: false, page: "Email", email: "", timeleft: 0 })
+          );
+        })
+        .catch(err => {
+          setLoading(false);
+          handleErrors(err, setErrMsg);
+        });
+    }
   };
 
   return (
@@ -82,6 +96,7 @@ const Register = () => {
             ref={RegisterRippleRef}
             title="ثبت‌نام"
             loading={loading}
+            type="submit"
           />
           <BackButton
             ref={BackRippleRef}

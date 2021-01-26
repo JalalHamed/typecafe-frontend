@@ -43,6 +43,7 @@ const ForgotPassword = () => {
             ref={ForgotPasswordRippleRef}
             title="ارسال"
             loading={loading}
+            type="submit"
           />
           <BackButton
             className="w-30"
