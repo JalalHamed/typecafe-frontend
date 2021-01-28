@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LR, User } from "redux/actions";
+import { LR, User, Sidebar } from "redux/actions";
 
 // Requests
 import { handleErrors, UserLogin } from "requests";
@@ -30,7 +30,9 @@ const Login = () => {
     UserLogin({ email, ...data })
       .then(res => {
         setLoading(false);
-        dispatch(User({ isLoggedIn: true }));
+        console.log("res", res);
+        dispatch(User({ isLoggedIn: true, displayname: res.displayname }));
+        dispatch(Sidebar({ page: "dashboard" }));
         dispatch(
           LR({ page: "Email", timeleft: 0, isModalOpen: false, email: "" })
         );

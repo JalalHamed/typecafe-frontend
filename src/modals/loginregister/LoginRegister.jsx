@@ -22,7 +22,7 @@ const LoginRegister = () => {
 
   return (
     <div className="lr-wrapper">
-      <div className="lr-close-modal no-select" onClick={handleClose}>
+      <div className="close-modal no-select" onClick={handleClose}>
         x
       </div>
       <div className="lr-right">

@@ -1,5 +1,6 @@
 let initialState = {
   isLoggedIn: false,
+  isLogoutModalOpen: false,
   displayname: "",
   email: "",
 };

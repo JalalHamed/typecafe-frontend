@@ -4,17 +4,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { LR } from "redux/actions";
+import { LR, User } from "redux/actions";
 
-const Modal = ({ children }) => {
+const ModalWrapper = ({ children }) => {
   const dispatch = useDispatch();
   const isLRModalOpen = useSelector(state => state.LR.isModalOpen);
+  const isLogoutModalOpen = useSelector(state => state.User.isLogoutModalOpen);
 
   const downHandler = ({ key }) => {
     if (key === "Escape") {
-      if (isLRModalOpen) {
-        dispatch(LR({ isModalOpen: false }));
-      }
+      if (isLRModalOpen) dispatch(LR({ isModalOpen: false }));
+      if (isLogoutModalOpen) dispatch(User({ isLogoutModalOpen: false }));
     }
   };
 
@@ -30,4 +30,4 @@ const Modal = ({ children }) => {
   return <div className="modal-bg">{children}</div>;
 };
 
-export default Modal;
+export default ModalWrapper;

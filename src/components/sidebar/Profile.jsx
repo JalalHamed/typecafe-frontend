@@ -8,6 +8,7 @@ import TouchRipple from "components/ripple/TouchRipple";
 
 const Profile = forwardRef((props, ref) => {
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const user = useSelector(state => state.User);
 
   return (
     <div
@@ -34,7 +35,7 @@ const Profile = forwardRef((props, ref) => {
           isSidebarOpen ? "sidebar-profile-text" : "sidebar-profile-no-text"
         }
       >
-        نام نمایشی
+        {user.displayname}
       </div>
       <TouchRipple ref={ref} />
     </div>

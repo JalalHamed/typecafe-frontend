@@ -28,6 +28,18 @@
     transition: transform 0.5s;
   }
 
+  &.icon-dashboard-black {
+    content: url("../svgs/dashboard-black.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-dashboard-white {
+    content: url(../svgs/dashboard-white.svg);
+    width: 24px;
+    height: 24px;
+  }
+
   &.icon-projects-black {
     content: url("../svgs/projects-black.svg");
     width: 24px;

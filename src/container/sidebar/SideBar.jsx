@@ -14,6 +14,7 @@ import "./sidebar.scss";
 const SideBar = () => {
   const LoginRippleRef = useRef();
   const ProjectsRippleRef = useRef();
+  const DashboardRippleRef = useRef();
   const TarrifsRippleRef = useRef();
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
@@ -30,6 +31,13 @@ const SideBar = () => {
         <SideBarLogin ref={LoginRippleRef} />
       )}
       <div className="sidebar-items">
+        {isLoggedIn && (
+          <SideBarItem
+            status="dashboard"
+            title="داشبورد"
+            ref={DashboardRippleRef}
+          />
+        )}
         <SideBarItem
           status="projects"
           title="پروژه ها"

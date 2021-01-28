@@ -12,11 +12,12 @@ import { Sidebar, User } from "redux/actions";
 const Item = forwardRef(({ status, title }, ref) => {
   const page = useSelector(state => state.Sidebar.page);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isLogoutModalOpen = useSelector(state => state.User.isLogoutModalOpen);
   const dispatch = useDispatch();
 
   const handleClick = () => {
     if (status === "logout") {
-      dispatch(User({ isLoggedIn: false }));
+      if (!isLogoutModalOpen) dispatch(User({ isLogoutModalOpen: true }));
     } else if (page !== status) {
       dispatch(Sidebar({ page: status }));
     }

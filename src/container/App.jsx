@@ -4,13 +4,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
+// Pages
+import Dashboard from "./pages/dashboard/Dashboard";
+import Projects from "./pages/projects/Projects";
+import Rules from "./pages/rules/Rules";
+
 // Components
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
-import Modal from "components/modal/Modal";
-import LoginRegister from "components/loginregister/LoginRegister";
-import Projects from "./pages/projects/Projects";
-import Rules from "./pages/rules/Rules";
+
+// Modals
+import ModalWrapper from "modals/ModalWrapper";
+import LoginRegister from "modals/loginregister/LoginRegister";
+import Logout from "modals/logout/Logout";
 
 // Design
 import "./app.scss";
@@ -22,9 +28,14 @@ const App = () => {
     <div className="wrapper">
       {/* MODALS */}
       {state.LR.isModalOpen && (
-        <Modal>
+        <ModalWrapper>
           <LoginRegister />
-        </Modal>
+        </ModalWrapper>
+      )}
+      {state.User.isLogoutModalOpen && (
+        <ModalWrapper>
+          <Logout />
+        </ModalWrapper>
       )}
       {/* END OF MODALS */}
 
@@ -38,6 +49,7 @@ const App = () => {
           <SideBar />
         </div>
         <div className="content">
+          {state.Sidebar.page === "dashboard" && <Dashboard />}
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "rules" && <Rules />}
         </div>

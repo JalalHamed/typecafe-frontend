@@ -1,14 +1,14 @@
 .lr-wrapper {
   background-color: #fff;
   height: 430px;
+  min-width: 700px;
+  max-width: 700px;
   border-radius: 3px;
   position: relative;
   display: flex;
-  min-width: 700px;
-  max-width: 700px;
   animation: fadeIn 0.3s ease forwards;
 
-  .lr-close-modal {
+  .close-modal {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -172,42 +172,13 @@
     .register-options-wrapper {
       margin-top: 15px;
 
-      .register-options {
+      .register-option {
         color: #fff;
         display: flex;
         align-items: center;
         font-size: 15px;
         margin-top: 3px;
       }
-    }
-
-    .lr-left-button {
-      background-color: #29313b;
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 5px 10px;
-      margin-top: 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      position: relative;
-      width: 100px;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .not-a-member {
-      color: #a2ffe1;
-      margin-top: 18px;
-      margin-left: 80px;
-      font-size: 14px;
-      visibility: hidden;
-      animation: zoomIn 1s forwards 1.5s;
     }
   }
 }
@@ -218,17 +189,5 @@
   }
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes zoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(0);
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1) rotate(-20deg);
   }
 }
