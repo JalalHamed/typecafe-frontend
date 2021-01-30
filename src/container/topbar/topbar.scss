@@ -60,5 +60,23 @@
       position: relative;
       cursor: pointer;
     }
+
+    .create-project {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 4px 10px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      cursor: pointer;
+      color: #fff;
+
+      .create-project-title {
+        color: #fff;
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+    }
   }
 }

@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 
 // Pages
 import Projects from "./pages/projects/Projects";
-import AddNew from "./pages/addnew/AddNew";
 import Rules from "./pages/rules/Rules";
 
 // Components
@@ -49,7 +48,6 @@ const App = () => {
           <SideBar />
         </div>
         <div className="content">
-          {state.Sidebar.page === "addnew" && <AddNew />}
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "rules" && <Rules />}
         </div>

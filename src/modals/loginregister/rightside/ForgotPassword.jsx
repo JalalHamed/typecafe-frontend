@@ -15,8 +15,8 @@ import { LR } from "redux/actions";
 const ForgotPassword = () => {
   const { register, errors, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const ForgotPasswordRippleRef = useRef();
-  const BackRippleRef = useRef();
+  const forgotPasswordRippleRef = useRef();
+  const backRippleRef = useRef();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
@@ -40,14 +40,14 @@ const ForgotPassword = () => {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="submit-button w-68"
-            ref={ForgotPasswordRippleRef}
+            ref={forgotPasswordRippleRef}
             title="ارسال"
             loading={loading}
             type="submit"
           />
           <BackButton
             className="w-30"
-            ref={BackRippleRef}
+            ref={backRippleRef}
             onClick={() => dispatch(LR({ page: "Login" }))}
           />
         </div>

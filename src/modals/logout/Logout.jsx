@@ -15,8 +15,8 @@ import "./logout.scss";
 
 const Logout = () => {
   const dispatch = useDispatch();
-  const LogoutRippleRef = useRef();
-  const CancelRippleRef = useRef();
+  const logoutRippleRef = useRef();
+  const cancelRippleRef = useRef();
 
   return (
     <div className="logout-modal-wrapper">
@@ -30,7 +30,7 @@ const Logout = () => {
       <div className="button-wrapper">
         <Button
           title="خروج"
-          ref={LogoutRippleRef}
+          ref={logoutRippleRef}
           className="logout-button w-49"
           onClick={() => {
             dispatch(Sidebar({ page: "projects" }));
@@ -39,7 +39,7 @@ const Logout = () => {
         />
         <BackButton
           title="انصراف"
-          ref={CancelRippleRef}
+          ref={cancelRippleRef}
           className="w-49"
           onClick={() => dispatch(User({ isLogoutModalOpen: false }))}
         />

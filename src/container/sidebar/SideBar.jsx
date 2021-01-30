@@ -12,46 +12,38 @@ import SideBarProfile from "components/sidebar/Profile";
 import "./sidebar.scss";
 
 const SideBar = () => {
-  const LoginRippleRef = useRef();
-  const ProjectsRippleRef = useRef();
-  const AddNewRippleRef = useRef();
-  const TarrifsRippleRef = useRef();
-  const FinancialRippleRef = useRef();
-  const SettingsRippleRef = useRef();
-  const RulesRippleRef = useRef();
-  const LogoutRippleRef = useRef();
+  const loginRippleRef = useRef();
+  const projectsRippleRef = useRef();
+  const tarrifsRippleRef = useRef();
+  const financialRippleRef = useRef();
+  const settingsRippleRef = useRef();
+  const rulesRippleRef = useRef();
+  const logoutRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
   return (
     <div className="sidebar-wrapper">
-      {isLoggedIn ? <SideBarProfile /> : <SideBarLogin ref={LoginRippleRef} />}
+      {isLoggedIn ? <SideBarProfile /> : <SideBarLogin ref={loginRippleRef} />}
       <div className="sidebar-items">
         <SideBarItem
           status="projects"
           title="پروژه ها"
-          ref={ProjectsRippleRef}
+          ref={projectsRippleRef}
         />
-        {isLoggedIn && (
-          <SideBarItem
-            status="addnew"
-            title="ثبت پروژه"
-            ref={AddNewRippleRef}
-          />
-        )}
         <SideBarItem
           status="financial"
           title="کیف پول"
-          ref={FinancialRippleRef}
+          ref={financialRippleRef}
         />
-        <SideBarItem status="tarrifs" title="تعرفه ها" ref={TarrifsRippleRef} />
-        <SideBarItem status="rules" title="قوانین" ref={RulesRippleRef} />
+        <SideBarItem status="tarrifs" title="تعرفه ها" ref={tarrifsRippleRef} />
+        <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
         <SideBarItem
           status="settings"
           title="تنظیمات"
-          ref={SettingsRippleRef}
+          ref={settingsRippleRef}
         />
         {isLoggedIn && (
-          <SideBarItem status="logout" title="خروج" ref={LogoutRippleRef} />
+          <SideBarItem status="logout" title="خروج" ref={logoutRippleRef} />
         )}
       </div>
     </div>

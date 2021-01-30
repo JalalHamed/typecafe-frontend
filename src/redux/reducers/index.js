@@ -5,13 +5,13 @@ import { combineReducers } from "redux";
 import LR from "./LR";
 import Sidebar from "./Sidebar";
 import User from "./User";
-import Project from "./Project";
+import CreateProject from "./CreateProject";
 
 const allReducers = combineReducers({
   LR,
   Sidebar,
   User,
-  Project,
+  CreateProject,
 });
 
 export default allReducers;

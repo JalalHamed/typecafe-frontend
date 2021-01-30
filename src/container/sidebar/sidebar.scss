@@ -5,6 +5,14 @@
     padding: 0 20px;
     position: relative;
 
+    &.login {
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(221, 221, 221, 0.219);
+      }
+    }
+
     &.sidebar-profile-wide {
       height: 120px;
     }

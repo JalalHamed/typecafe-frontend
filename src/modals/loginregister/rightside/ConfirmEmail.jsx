@@ -20,9 +20,9 @@ const ConfirmEmail = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const email = useSelector(state => state.LR.email);
-  const ConfirmEmailRippleRef = useRef();
-  const BackRippleRef = useRef();
-  const SendCodeAgainRippleRef = useRef();
+  const confirmEmailRippleRef = useRef();
+  const backRippleRef = useRef();
+  const sendCodeAgainRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [sendCodeLoading, setSendCodeLoading] = useState(false);
@@ -100,13 +100,13 @@ const ConfirmEmail = () => {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="w-68"
-            ref={ConfirmEmailRippleRef}
+            ref={confirmEmailRippleRef}
             title="تایید ایمیل"
             loading={loading}
             type="submit"
           />
           <BackButton
-            ref={BackRippleRef}
+            ref={backRippleRef}
             className="w-30"
             onClick={() => dispatch(LR({ page: "Email" }))}
           />
@@ -118,7 +118,7 @@ const ConfirmEmail = () => {
         </div>
       ) : (
         <Button
-          ref={SendCodeAgainRippleRef}
+          ref={sendCodeAgainRippleRef}
           title="ارسال مجدد"
           className="send-again"
           onClick={sendCodeAgain}

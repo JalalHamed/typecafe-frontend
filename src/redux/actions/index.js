@@ -18,3 +18,10 @@ export const User = payload => {
     payload,
   };
 };
+
+export const CreateProject = payload => {
+  return {
+    type: "CREATE_PROJECT",
+    payload,
+  };
+};

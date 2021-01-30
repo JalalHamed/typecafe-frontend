@@ -15,7 +15,7 @@ const Login = forwardRef((props, ref) => {
 
   return (
     <div
-      className={`user-profile ${
+      className={`user-profile login ${
         isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
       onClick={() => dispatch(LR({ isModalOpen: true }))}

@@ -18,8 +18,8 @@ import { handleErrors, UserRegister } from "requests";
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-  const RegisterRippleRef = useRef();
-  const BackRippleRef = useRef();
+  const registerRippleRef = useRef();
+  const backRippleRef = useRef();
   const email = useSelector(state => state.LR.email);
   const [errMsg, setErrMsg] = useState();
   const [loading, setLoading] = useState(false);
@@ -94,13 +94,13 @@ const Register = () => {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="w-68"
-            ref={RegisterRippleRef}
+            ref={registerRippleRef}
             title="ثبت‌نام"
             loading={loading}
             type="submit"
           />
           <BackButton
-            ref={BackRippleRef}
+            ref={backRippleRef}
             className="w-30"
             onClick={() => dispatch(LR({ page: "Email" }))}
           />
