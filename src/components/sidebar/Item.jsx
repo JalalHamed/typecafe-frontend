@@ -7,18 +7,15 @@ import { useSelector, useDispatch } from "react-redux";
 import TouchRipple from "components/ripple/TouchRipple";
 
 // Actions
-import { Sidebar, User } from "redux/actions";
+import { Sidebar } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
   const page = useSelector(state => state.Sidebar.page);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
-  const isLogoutModalOpen = useSelector(state => state.User.isLogoutModalOpen);
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    if (status === "logout") {
-      if (!isLogoutModalOpen) dispatch(User({ isLogoutModalOpen: true }));
-    } else if (page !== status) {
+    if (page !== status) {
       dispatch(Sidebar({ page: status }));
     }
   };

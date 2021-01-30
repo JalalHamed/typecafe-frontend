@@ -15,7 +15,6 @@ import SideBar from "./sidebar/SideBar";
 // Modals
 import ModalWrapper from "modals/ModalWrapper";
 import LoginRegister from "modals/loginregister/LoginRegister";
-import Logout from "modals/logout/Logout";
 
 // Design
 import "./app.scss";
@@ -29,11 +28,6 @@ const App = () => {
       {state.LR.isModalOpen && (
         <ModalWrapper>
           <LoginRegister />
-        </ModalWrapper>
-      )}
-      {state.User.isLogoutModalOpen && (
-        <ModalWrapper>
-          <Logout />
         </ModalWrapper>
       )}
       {/* END OF MODALS */}

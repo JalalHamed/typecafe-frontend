@@ -18,7 +18,6 @@ const SideBar = () => {
   const financialRippleRef = useRef();
   const settingsRippleRef = useRef();
   const rulesRippleRef = useRef();
-  const logoutRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
   return (
@@ -42,9 +41,6 @@ const SideBar = () => {
           title="تنظیمات"
           ref={settingsRippleRef}
         />
-        {isLoggedIn && (
-          <SideBarItem status="logout" title="خروج" ref={logoutRippleRef} />
-        )}
       </div>
     </div>
   );
