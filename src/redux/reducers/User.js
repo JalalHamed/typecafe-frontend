@@ -1,8 +1,9 @@
 let initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   isLogoutModalOpen: false,
   displayname: "",
   email: "",
+  credit: 0,
 };
 
 const User = (state = initialState, action) => {

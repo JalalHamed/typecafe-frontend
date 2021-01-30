@@ -28,18 +28,6 @@
     transition: transform 0.5s;
   }
 
-  &.icon-dashboard-black {
-    content: url("../svgs/dashboard-black.svg");
-    width: 24px;
-    height: 24px;
-  }
-
-  &.icon-dashboard-white {
-    content: url(../svgs/dashboard-white.svg);
-    width: 24px;
-    height: 24px;
-  }
-
   &.icon-projects-black {
     content: url("../svgs/projects-black.svg");
     width: 24px;
@@ -48,6 +36,18 @@
 
   &.icon-projects-white {
     content: url("../svgs/projects-white.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-addnew-black {
+    content: url("../svgs/addnew-black.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-addnew-white {
+    content: url("../svgs/addnew-white.svg");
     width: 24px;
     height: 24px;
   }
@@ -153,5 +153,15 @@
     &.confirm-email {
       right: 30px;
     }
+  }
+
+  &.icon-upload {
+    content: url("../svgs/upload.svg");
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

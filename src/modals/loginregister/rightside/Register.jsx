@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import BackButton from "components/buttons/BackButton";
 
 // Actions
-import { LR, User, Sidebar } from "redux/actions";
+import { LR, User } from "redux/actions";
 
 // Requests
 import { handleErrors, UserRegister } from "requests";
@@ -38,11 +38,11 @@ const Register = () => {
           dispatch(
             User({
               isLoggedIn: true,
-              displayname: res.displayname,
               email: res.email,
+              displayname: res.displayname,
+              credit: 0,
             })
           );
-          dispatch(Sidebar({ page: "dashboard" }));
           dispatch(
             LR({ isModalOpen: false, page: "Email", email: "", timeleft: 0 })
           );

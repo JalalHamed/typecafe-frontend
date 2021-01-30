@@ -27,7 +27,10 @@ const ConfirmEmail = () => {
   const [loading, setLoading] = useState(false);
   const [sendCodeLoading, setSendCodeLoading] = useState(false);
   const [timeleft, setTimeleft] = useState(
-    parseInt(useSelector(state => state.LR.timeleft))
+    parseInt(
+      useSelector(state => state.LR.timeleft),
+      10
+    )
   );
 
   const onSubmit = data => {
@@ -54,7 +57,7 @@ const ConfirmEmail = () => {
     CheckEmail({ email: email })
       .then(res => {
         setSendCodeLoading(false);
-        setTimeleft(parseInt(res.timeleft));
+        setTimeleft(parseInt(res.timeleft, 10));
       })
       .catch(err => {
         setSendCodeLoading(false);

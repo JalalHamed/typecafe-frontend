@@ -14,35 +14,30 @@ import "./sidebar.scss";
 const SideBar = () => {
   const LoginRippleRef = useRef();
   const ProjectsRippleRef = useRef();
-  const DashboardRippleRef = useRef();
+  const AddNewRippleRef = useRef();
   const TarrifsRippleRef = useRef();
   const FinancialRippleRef = useRef();
   const SettingsRippleRef = useRef();
   const RulesRippleRef = useRef();
   const LogoutRippleRef = useRef();
-  const ProfileRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
   return (
     <div className="sidebar-wrapper">
-      {isLoggedIn ? (
-        <SideBarProfile ref={ProfileRippleRef} />
-      ) : (
-        <SideBarLogin ref={LoginRippleRef} />
-      )}
+      {isLoggedIn ? <SideBarProfile /> : <SideBarLogin ref={LoginRippleRef} />}
       <div className="sidebar-items">
-        {isLoggedIn && (
-          <SideBarItem
-            status="dashboard"
-            title="داشبورد"
-            ref={DashboardRippleRef}
-          />
-        )}
         <SideBarItem
           status="projects"
           title="پروژه ها"
           ref={ProjectsRippleRef}
         />
+        {isLoggedIn && (
+          <SideBarItem
+            status="addnew"
+            title="ثبت پروژه"
+            ref={AddNewRippleRef}
+          />
+        )}
         <SideBarItem
           status="financial"
           title="کیف پول"

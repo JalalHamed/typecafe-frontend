@@ -1,0 +1,72 @@
+.addnew-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .addnew-steps {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .step-title {
+      margin: 0 5px;
+
+      &.blur {
+        color: #666666;
+      }
+
+      &.bold {
+        color: #1c3987;
+      }
+    }
+
+    .progress-line {
+      width: 50px;
+      height: 4px;
+      border-radius: 50px;
+      margin: 0 10px;
+
+      &.blur {
+        background-color: #bbbdbf;
+      }
+
+      &.bold {
+        background-color: #1c3987;
+      }
+    }
+  }
+
+  .addnew-content {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .upload-icon-circle {
+      position: relative;
+      width: 135px;
+      height: 135px;
+      background-color: #ebebeb;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .upload-title {
+      margin-top: 20px;
+    }
+
+    .upload-valid-formats {
+      margin-top: 3px;
+      font-size: 14px;
+      color: #666666;
+    }
+
+    .upload-button {
+      margin-top: 20px;
+      width: initial;
+    }
+  }
+}

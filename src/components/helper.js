@@ -7,3 +7,7 @@ export const EmailOverFlow = props => {
     return email;
   }
 };
+
+export const PriceFormat = price => {
+  return Number(price).toLocaleString() + " تومان";
+};
