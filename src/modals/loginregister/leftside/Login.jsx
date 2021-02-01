@@ -15,6 +15,9 @@ import { LR, User } from "redux/actions";
 // Requests
 import { handleErrors, UserLogin } from "requests";
 
+// Cookies
+import Cookies from "universal-cookie";
+
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ const Login = () => {
   const backRippleRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const cookies = new Cookies();
 
   const onSubmit = data => {
     setLoading(true);
@@ -30,6 +34,8 @@ const Login = () => {
     UserLogin({ email, ...data })
       .then(res => {
         setLoading(false);
+        cookies.set("act", res.access, { path: "/" });
+        cookies.set("ret", res.refresh, { path: "/" });
         dispatch(
           User({
             isLoggedIn: true,

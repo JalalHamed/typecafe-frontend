@@ -4,17 +4,20 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { LR, User } from "redux/actions";
+import { LR, CreateProject } from "redux/actions";
 
 const ModalWrapper = ({ children }) => {
   const dispatch = useDispatch();
   const isLRModalOpen = useSelector(state => state.LR.isModalOpen);
-  const isLogoutModalOpen = useSelector(state => state.User.isLogoutModalOpen);
+  const isCreateProjectModalOpen = useSelector(
+    state => state.CreateProject.isModalOpen
+  );
 
   const downHandler = ({ key }) => {
     if (key === "Escape") {
       if (isLRModalOpen) dispatch(LR({ isModalOpen: false }));
-      if (isLogoutModalOpen) dispatch(User({ isLogoutModalOpen: false }));
+      if (isCreateProjectModalOpen)
+        dispatch(CreateProject({ isModalOpen: false }));
     }
   };
 

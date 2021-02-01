@@ -11,7 +11,7 @@
   .close-modal {
     position: absolute;
     top: 5px;
-    right: 5px;
+    left: 5px;
     width: 30px;
     height: 30px;
     display: flex;
@@ -29,7 +29,7 @@
     }
   }
 
-  .lr-right {
+  .lr-left {
     padding: 30px 50px;
     height: 100%;
     width: 65%;
@@ -157,7 +157,7 @@
     }
   }
 
-  .lr-left {
+  .lr-right {
     background-color: #29313b;
     height: 100%;
     width: 35%;

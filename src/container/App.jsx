@@ -15,6 +15,7 @@ import SideBar from "./sidebar/SideBar";
 // Modals
 import ModalWrapper from "modals/ModalWrapper";
 import LoginRegister from "modals/loginregister/LoginRegister";
+import CreateProject from "modals/createproject/CreateProject";
 
 // Design
 import "./app.scss";
@@ -28,6 +29,11 @@ const App = () => {
       {state.LR.isModalOpen && (
         <ModalWrapper>
           <LoginRegister />
+        </ModalWrapper>
+      )}
+      {state.CreateProject.isModalOpen && (
+        <ModalWrapper>
+          <CreateProject />
         </ModalWrapper>
       )}
       {/* END OF MODALS */}

@@ -27,7 +27,7 @@ export const handleErrors = (error, setMessage) => {
   if (error.response) {
     // Request made and server responded
     const err = error.response.data;
-    if (err?.detail === "No active account found with the given credentials") {
+    if (err?.detail === "Password is not correct.") {
       setMessage("رمز عبور صحیح نمی‌باشد.");
     } else if (
       err?.email &&
@@ -55,6 +55,12 @@ export const handleErrors = (error, setMessage) => {
       err?.password[0] === "passwords don't match."
     ) {
       setMessage("رمز های عبور با هم مطابقت ندارند.");
+    } else if (
+      err?.password &&
+      err?.password.length &&
+      err?.password[0] === "Ensure this field has at least 8 characters."
+    ) {
+      setMessage("رمز عبور صحیح نمی‌باشد.");
     } else if (error.response.status === 500) {
       setMessage("خطای سرور");
     } else setMessage("");

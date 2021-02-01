@@ -4,8 +4,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 // Components
-import LeftSide from "./LeftSide";
-import RightSide from "./rightside/RightSide";
+import RightSide from "./RightSide";
+import LeftSide from "./leftside/LeftSide";
 
 // Actions
 import { LR } from "redux/actions";
@@ -26,10 +26,10 @@ const LoginRegister = () => {
         x
       </div>
       <div className="lr-right">
+        <i className="icon icon-typecafe-big no-select" />
         <RightSide />
       </div>
       <div className="lr-left">
-        <i className="icon icon-typecafe-big no-select" />
         <LeftSide />
       </div>
     </div>

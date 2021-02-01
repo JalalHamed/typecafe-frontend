@@ -13,6 +13,7 @@ import "./sidebar.scss";
 
 const SideBar = () => {
   const loginRippleRef = useRef();
+  const profileRippleRef = useRef();
   const projectsRippleRef = useRef();
   const tarrifsRippleRef = useRef();
   const financialRippleRef = useRef();
@@ -22,7 +23,11 @@ const SideBar = () => {
 
   return (
     <div className="sidebar-wrapper">
-      {isLoggedIn ? <SideBarProfile /> : <SideBarLogin ref={loginRippleRef} />}
+      {isLoggedIn ? (
+        <SideBarProfile ref={profileRippleRef} />
+      ) : (
+        <SideBarLogin ref={loginRippleRef} />
+      )}
       <div className="sidebar-items">
         <SideBarItem
           status="projects"
