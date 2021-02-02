@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Components
-import TouchRipple from "components/ripple/TouchRipple";
+import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Actions
 import { LR } from "redux/actions";
@@ -14,20 +14,12 @@ const Login = forwardRef((props, ref) => {
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
   return (
-    <div
+    <RippleWrapper
       className={`user-profile login ${
         isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
       onClick={() => dispatch(LR({ isModalOpen: true }))}
-      onMouseDown={e => {
-        ref.current.start(e);
-      }}
-      onMouseUp={() => {
-        ref.current.stop();
-      }}
-      onMouseOut={() => {
-        ref.current.stop();
-      }}
+      ref={ref}
     >
       <i
         className={`icon ${
@@ -44,8 +36,7 @@ const Login = forwardRef((props, ref) => {
           برای دسترسی به همه امکانات سایت، به حساب کاربری خود وارد شوید.
         </p>
       </div>
-      <TouchRipple ref={ref} />
-    </div>
+    </RippleWrapper>
   );
 });
 

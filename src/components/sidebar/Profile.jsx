@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 
 // Components
-import TouchRipple from "components/ripple/TouchRipple";
+import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Functions
 import { PriceFormat } from "components/helper";
@@ -14,19 +14,11 @@ const Profile = forwardRef((props, ref) => {
   const user = useSelector(state => state.User);
 
   return (
-    <div
+    <RippleWrapper
       className={`user-profile ${
         isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
-      onMouseDown={e => {
-        ref.current.start(e);
-      }}
-      onMouseUp={() => {
-        ref.current.stop();
-      }}
-      onMouseOut={() => {
-        ref.current.stop();
-      }}
+      ref={ref}
     >
       <i
         className={`icon ${
@@ -43,8 +35,7 @@ const Profile = forwardRef((props, ref) => {
           اعتبار: {PriceFormat(user.credit)}
         </p>
       </div>
-      <TouchRipple ref={ref} />
-    </div>
+    </RippleWrapper>
   );
 });
 

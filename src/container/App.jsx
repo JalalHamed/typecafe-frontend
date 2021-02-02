@@ -11,6 +11,7 @@ import Rules from "./pages/rules/Rules";
 // Components
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
+import Image from "components/images/Image";
 
 // Modals
 import ModalWrapper from "modals/ModalWrapper";
@@ -34,6 +35,11 @@ const App = () => {
       {state.CreateProject.isModalOpen && (
         <ModalWrapper>
           <CreateProject />
+        </ModalWrapper>
+      )}
+      {state.CreateProject.isImageModalOpen && (
+        <ModalWrapper>
+          <Image />
         </ModalWrapper>
       )}
       {/* END OF MODALS */}

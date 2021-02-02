@@ -19,29 +19,29 @@ const UploadFiles = () => {
   const chooseFilesRippleRef = useRef();
   const addAnotherRippleRef = useRef();
   const nextStepRippleRef = useRef();
-  const [imagePrevUrls, setImagePrevUrls] = useState(
-    useSelector(state => state.CreateProject.files)
-  );
+  const files = useSelector(state => state.CreateProject.files);
+  const [images, setImages] = useState(files);
 
   const switchToInputFile = () => {
     uploadInput.current.click();
   };
 
   const handleUploadImage = e => {
-    let files = Array.from(e.target.files);
-    files.forEach(file => {
-      setImagePrevUrls(prevState => [...prevState, URL.createObjectURL(file)]);
-    });
+    setImages(prevState => [...prevState, ...Array.from(e.target.files)]);
+  };
+
+  const deletePic = file => {
+    setImages(images.filter(el => el !== file));
   };
 
   useEffect(() => {
-    dispatch(CreateProject({ files: imagePrevUrls }));
+    dispatch(CreateProject({ files: images }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imagePrevUrls]);
+  }, [images]);
 
-  const deletePic = url => {
-    setImagePrevUrls(imagePrevUrls.filter(el => el !== url));
-  };
+  useEffect(() => {
+    console.log(files);
+  }, [files]);
 
   return (
     <>
@@ -54,7 +54,7 @@ const UploadFiles = () => {
         multiple
         hidden
       />
-      {!imagePrevUrls.length ? (
+      {!images.length ? (
         <div className="upload-pics-wrapper">
           <div className="upload-icon-circle" onClick={switchToInputFile}>
             <i className="icon icon-upload no-select" />
@@ -73,17 +73,23 @@ const UploadFiles = () => {
       ) : (
         <div className="pics-uploaded-parent">
           <div className="pics-uploaded-wrapper">
-            {imagePrevUrls.map((url, index) => {
+            {images.map((file, index) => {
               return (
-                <div className="pics-uploaded" key={index}>
+                <div
+                  className="pics-uploaded"
+                  key={index}
+                  onClick={() =>
+                    dispatch(CreateProject({ isImageModalOpen: true }))
+                  }
+                >
                   <Close
-                    onClick={() => deletePic(url)}
+                    onClick={() => deletePic(file)}
                     className="delete-pic no-select"
                     onMouseOver="icon-close-red"
                   />
-                  <div className="pics-index">{index + 1}</div>
+                  <div className="pics-index no-select">{index + 1}</div>
                   <img
-                    src={url}
+                    src={URL.createObjectURL(file)}
                     alt={`imagePrevUrl${index}`}
                     className="pic no-select"
                   />

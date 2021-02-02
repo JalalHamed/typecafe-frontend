@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Components
-import TouchRipple from "components/ripple/TouchRipple";
+import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Actions
 import { Sidebar } from "redux/actions";
@@ -21,18 +21,10 @@ const Item = forwardRef(({ status, title }, ref) => {
   };
 
   return (
-    <div
+    <RippleWrapper
       className={`sidebar-items_item${page === status ? "_selected" : ""}`}
       onClick={handleClick}
-      onMouseDown={e => {
-        ref.current.start(e);
-      }}
-      onMouseUp={() => {
-        ref.current.stop();
-      }}
-      onMouseOut={() => {
-        ref.current.stop();
-      }}
+      ref={ref}
     >
       <i
         className={`icon icon-margin-24 ${
@@ -46,8 +38,7 @@ const Item = forwardRef(({ status, title }, ref) => {
       >
         {title}
       </div>
-      <TouchRipple ref={ref} />
-    </div>
+    </RippleWrapper>
   );
 });
 
