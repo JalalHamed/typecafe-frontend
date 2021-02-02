@@ -21,6 +21,7 @@ body {
   font-family: "typecafe";
   background-color: #fff;
   color: #29313b;
+  height: 100vh;
 }
 
 button {
@@ -35,7 +36,7 @@ button {
 .modal-bg {
   position: fixed;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;

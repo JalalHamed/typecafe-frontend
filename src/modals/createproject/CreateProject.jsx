@@ -34,6 +34,11 @@ const CreateNewProject = () => {
       <div className="cp-content">
         {step === "uploadpics" && <UploadPics />}
       </div>
+      <div className="user-agreement">
+        با ثبت پروژه خود در تایپ‌کافه، شما با
+        <span className="add-project-rules"> قوانین ثبت پروژه </span>
+        موافقت می‌نمایید.
+      </div>
     </div>
   );
 };

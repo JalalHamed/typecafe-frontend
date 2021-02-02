@@ -13,6 +13,18 @@
     height: 15px;
   }
 
+  &.icon-add-pic {
+    content: url("../svgs/add-pic.svg");
+    width: 50px;
+    height: 50px;
+  }
+
+  &.icon-next-step {
+    content: url("../svgs/next-step.svg");
+    width: 50px;
+    height: 50px;
+  }
+
   &.icon-typecafe {
     content: url("../svgs/typecafe-logo.svg");
     width: 24px;

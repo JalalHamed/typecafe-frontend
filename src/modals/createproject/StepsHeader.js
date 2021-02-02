@@ -12,7 +12,11 @@ const StepsHeader = () => {
       <div
         className={`progress-line ${step === "uploadpics" ? "blur" : "bold"}`}
       />
-      <p className="step-title blur">توضیحات</p>
+      <p
+        className={`step-title blur ${step === "uploadpics" ? "blur" : "bold"}`}
+      >
+        توضیحات
+      </p>
       <div className="progress-line blur" />
       <p className="step-title blur">بررسی و ثبت</p>
     </>
