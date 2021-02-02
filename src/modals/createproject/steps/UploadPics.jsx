@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Button from "components/buttons/Button";
+import Close from "components/buttons/Close";
 
 // Actions
 import { CreateProject } from "redux/actions";
@@ -21,7 +22,6 @@ const UploadFiles = () => {
   const [imagePrevUrls, setImagePrevUrls] = useState(
     useSelector(state => state.CreateProject.files)
   );
-  const [iconMouseOver, setIconMouseOver] = useState(false);
 
   const switchToInputFile = () => {
     uploadInput.current.click();
@@ -76,18 +76,11 @@ const UploadFiles = () => {
             {imagePrevUrls.map((url, index) => {
               return (
                 <div className="pics-uploaded" key={index}>
-                  <div
-                    className="delete-pic no-select"
+                  <Close
                     onClick={() => deletePic(url)}
-                    onMouseEnter={() => setIconMouseOver(true)}
-                    onMouseLeave={() => setIconMouseOver(false)}
-                  >
-                    <i
-                      className={`icon ${
-                        iconMouseOver ? "icon-close-red" : "icon-close"
-                      }`}
-                    />
-                  </div>
+                    className="delete-pic no-select"
+                    onMouseOver="icon-close-red"
+                  />
                   <div className="pics-index">{index + 1}</div>
                   <img
                     src={url}

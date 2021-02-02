@@ -38,7 +38,7 @@
   }
 }
 
-.back-button {
+.previous {
   position: relative;
   padding: 4px 20px;
   background-color: #fff;
@@ -80,12 +80,9 @@
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 20px;
-  color: #464646;
   z-index: 1;
 
   &:hover {
     background-color: #ddd;
-    color: rgb(30, 30, 30);
   }
 }

@@ -24,6 +24,7 @@ const CreateNewProject = () => {
         <p className="cp-header-title">ثبت پروژه</p>
         <Close
           onClick={() => dispatch(CreateProject({ isModalOpen: false }))}
+          className="close-modal"
         />
       </div>
       <div className="cp-steps no-select">

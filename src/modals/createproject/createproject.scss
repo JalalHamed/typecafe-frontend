@@ -16,17 +16,8 @@
     width: 100%;
 
     .close-modal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 1;
-      padding: 10px;
-
-      &:hover {
-        background-color: #ddd;
-      }
+      top: 12px;
+      left: 12px;
     }
 
     .cp-header-title {
