@@ -21,6 +21,7 @@ const UploadFiles = () => {
   const [imagePrevUrls, setImagePrevUrls] = useState(
     useSelector(state => state.CreateProject.files)
   );
+  const [iconMouseOver, setIconMouseOver] = useState(false);
 
   const switchToInputFile = () => {
     uploadInput.current.click();
@@ -78,8 +79,14 @@ const UploadFiles = () => {
                   <div
                     className="delete-pic no-select"
                     onClick={() => deletePic(url)}
+                    onMouseEnter={() => setIconMouseOver(true)}
+                    onMouseLeave={() => setIconMouseOver(false)}
                   >
-                    x
+                    <i
+                      className={`icon ${
+                        iconMouseOver ? "icon-close-red" : "icon-close"
+                      }`}
+                    />
                   </div>
                   <div className="pics-index">{index + 1}</div>
                   <img

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 // Components
 import RightSide from "./RightSide";
 import LeftSide from "./leftside/LeftSide";
+import Close from "components/buttons/Close";
 
 // Actions
 import { LR } from "redux/actions";
@@ -16,15 +17,9 @@ import "./loginregister.scss";
 const LoginRegister = () => {
   const dispath = useDispatch();
 
-  const handleClose = () => {
-    dispath(LR({ isModalOpen: false }));
-  };
-
   return (
     <div className="lr-wrapper">
-      <div className="close-modal no-select" onClick={handleClose}>
-        x
-      </div>
+      <Close onClick={() => dispath(LR({ isModalOpen: false }))} />
       <div className="lr-right">
         <i className="icon icon-typecafe-big no-select" />
         <RightSide />

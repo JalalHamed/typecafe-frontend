@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Steps
 import StepsHeader from "./StepsHeader";
 import UploadPics from "./steps/UploadPics";
+import Close from "components/buttons/Close";
 
 // Actions
 import { CreateProject } from "redux/actions";
@@ -21,12 +22,9 @@ const CreateNewProject = () => {
     <div className="cp-wrapper">
       <div className="cp-header">
         <p className="cp-header-title">ثبت پروژه</p>
-        <div
-          className="close-modal no-select"
+        <Close
           onClick={() => dispatch(CreateProject({ isModalOpen: false }))}
-        >
-          x
-        </div>
+        />
       </div>
       <div className="cp-steps no-select">
         <StepsHeader />

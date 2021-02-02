@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
-import BackButton from "components/buttons/BackButton";
+import Previous from "components/buttons/Previous";
 
 // Actions
 import { LR } from "redux/actions";
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
             loading={loading}
             type="submit"
           />
-          <BackButton
+          <Previous
             className="w-30"
             ref={backRippleRef}
             onClick={() => dispatch(LR({ page: "Login" }))}

@@ -66,17 +66,15 @@
         left: 5px;
         border-radius: 50%;
         cursor: pointer;
-        width: 24px;
-        height: 24px;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: rgb(70, 70, 70);
+        color: #464646;
         z-index: 1;
         font-size: 14px;
+        padding: 8px;
 
         &:hover {
-          color: #e93b3b;
           background-color: rgb(255, 219, 219);
         }
       }

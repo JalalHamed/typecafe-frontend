@@ -7,6 +7,24 @@
     margin-left: 24px !important;
   }
 
+  &.icon-close {
+    content: url("../svgs/close.svg");
+    width: 10px;
+    height: 10px;
+  }
+
+  &.icon-close-red {
+    content: url("../svgs/close-red.svg");
+    width: 10px;
+    height: 10px;
+  }
+
+  &.icon-close-black {
+    content: url("../svgs/close-black.svg");
+    width: 10px;
+    height: 10px;
+  }
+
   &.icon-create {
     content: url("../svgs/addnew-white.svg");
     width: 15px;

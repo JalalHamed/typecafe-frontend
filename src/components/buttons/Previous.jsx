@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 // Components
 import TouchRipple from "components/ripple/TouchRipple";
 
-const Button = forwardRef(({ className, onClick }, ref) => {
+const Previous = forwardRef(({ className, onClick }, ref) => {
   return (
     <button
       className={`back-button ${className && className}`}
@@ -25,4 +25,4 @@ const Button = forwardRef(({ className, onClick }, ref) => {
   );
 });
 
-export default Button;
+export default Previous;
