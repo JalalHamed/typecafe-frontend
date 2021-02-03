@@ -11,12 +11,9 @@ import Rules from "./pages/rules/Rules";
 // Components
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
-import Image from "components/images/Image";
 
 // Modals
-import ModalWrapper from "modals/ModalWrapper";
-import LoginRegister from "modals/loginregister/LoginRegister";
-import CreateProject from "modals/createproject/CreateProject";
+import Modals from "./Modals";
 
 // Design
 import "./app.scss";
@@ -26,23 +23,7 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      {/* MODALS */}
-      {state.LR.isModalOpen && (
-        <ModalWrapper>
-          <LoginRegister />
-        </ModalWrapper>
-      )}
-      {state.CreateProject.isModalOpen && (
-        <ModalWrapper>
-          <CreateProject />
-        </ModalWrapper>
-      )}
-      {state.CreateProject.isImageModalOpen && (
-        <ModalWrapper>
-          <Image />
-        </ModalWrapper>
-      )}
-      {/* END OF MODALS */}
+      <Modals />
 
       <TopBar />
       <div className="main">

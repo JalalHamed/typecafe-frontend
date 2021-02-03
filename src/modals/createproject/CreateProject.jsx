@@ -36,7 +36,7 @@ const CreateNewProject = () => {
       <div className="user-agreement">
         با ثبت پروژه خود در تایپ‌کافه، شما با
         <span className="add-project-rules"> قوانین ثبت پروژه </span>
-        موافقت می‌نمایید.
+        موافقت می‌کنید.
       </div>
     </div>
   );

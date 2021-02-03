@@ -22,26 +22,29 @@ const UploadFiles = () => {
   const files = useSelector(state => state.CreateProject.files);
   const [images, setImages] = useState(files);
 
-  const switchToInputFile = () => {
+  const openFileInput = () => {
     uploadInput.current.click();
   };
 
   const handleUploadImage = e => {
     setImages(prevState => [...prevState, ...Array.from(e.target.files)]);
+    // e.target.value = null;
   };
 
-  const deletePic = file => {
+  const deletePic = (e, file) => {
+    e.stopPropagation();
     setImages(images.filter(el => el !== file));
+  };
+
+  const handleImageClick = () => {
+    dispatch(CreateProject({ isImageModalOpen: true }));
   };
 
   useEffect(() => {
     dispatch(CreateProject({ files: images }));
+    console.log("images", images);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
-
-  useEffect(() => {
-    console.log(files);
-  }, [files]);
 
   return (
     <>
@@ -50,13 +53,16 @@ const UploadFiles = () => {
         name="projectpics"
         ref={uploadInput}
         onChange={e => handleUploadImage(e)}
+        onClick={e => {
+          e.target.value = null;
+        }}
         accept="image/*"
         multiple
         hidden
       />
       {!images.length ? (
         <div className="upload-pics-wrapper">
-          <div className="upload-icon-circle" onClick={switchToInputFile}>
+          <div className="upload-icon-circle" onClick={openFileInput}>
             <i className="icon icon-upload no-select" />
           </div>
           <p className="upload-title">عکس‌‌های پروژه‌ی خود را آپلود کنید.</p>
@@ -67,7 +73,7 @@ const UploadFiles = () => {
             ref={chooseFilesRippleRef}
             title="انتخاب فایل‌ها"
             className="upload-button"
-            onClick={switchToInputFile}
+            onClick={openFileInput}
           />
         </div>
       ) : (
@@ -78,12 +84,10 @@ const UploadFiles = () => {
                 <div
                   className="pics-uploaded"
                   key={index}
-                  onClick={() =>
-                    dispatch(CreateProject({ isImageModalOpen: true }))
-                  }
+                  onClick={handleImageClick}
                 >
                   <Close
-                    onClick={() => deletePic(file)}
+                    onClick={e => deletePic(e, file)}
                     className="delete-pic no-select"
                     onMouseOver="icon-close-red"
                   />
@@ -101,7 +105,7 @@ const UploadFiles = () => {
             <Button
               ref={addAnotherRippleRef}
               className="add-another icon icon-add-pic"
-              onClick={switchToInputFile}
+              onClick={openFileInput}
             />
             <Button
               ref={nextStepRippleRef}
