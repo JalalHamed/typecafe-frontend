@@ -21,6 +21,9 @@ const UploadFiles = () => {
   const nextStepRippleRef = useRef();
   const files = useSelector(state => state.CreateProject.files);
   const [images, setImages] = useState(files);
+  const [length, setLength] = useState(0);
+  const [carouselForward, setCarouselForward] = useState(false);
+  const [carouselBackward, setCarouselBackward] = useState(false);
 
   const openFileInput = () => {
     uploadInput.current.click();
@@ -35,14 +38,25 @@ const UploadFiles = () => {
     setImages(images.filter(el => el !== file));
   };
 
-  const handleImageClick = file => {
-    // console.log("whole file", file.target.value);
-    // console.log("file", file.target.src);
-    dispatch(SelectedImage({ image: file.target.src, isModalOpen: true }));
+  const handleImageClick = e => {
+    dispatch(SelectedImage({ image: e.target.src, isModalOpen: true }));
+    console.log("e", e);
   };
+
+  const handleCarouselBackward = () => {};
 
   useEffect(() => {
     dispatch(CreateProject({ files: images }));
+
+    setLength(images.length);
+
+    if (images.length > 3) {
+      setCarouselBackward(true);
+    } else {
+      setCarouselBackward(false);
+    }
+
+    // console.log("images", images);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
@@ -55,20 +69,20 @@ const UploadFiles = () => {
         ref={uploadInput}
         onChange={e => handleUploadImage(e)}
         onClick={e => {
-          e.target.value = null;
+          e.target.value = null; // allows uploading the same file over and over
         }}
         accept="image/*"
         multiple
         hidden
       />
-      {!images.length ? (
+      {!length ? (
         <div className="upload-pics-wrapper">
           <div className="upload-icon-circle" onClick={openFileInput}>
             <i className="icon icon-upload no-select" />
           </div>
           <p className="upload-title">عکس‌‌های پروژه‌ی خود را آپلود کنید.</p>
           <p className="upload-valid-formats">
-            فرمت‌های مجاز jpeg ،jpg و png می‌باشند.{" "}
+            فرمت‌های مجاز jpeg ،jpg و png می‌باشند.
           </p>
           <Button
             ref={chooseFilesRippleRef}
@@ -80,27 +94,29 @@ const UploadFiles = () => {
       ) : (
         <div className="pics-uploaded-parent">
           <div className="pics-uploaded-wrapper">
-            {images.map((file, index) => {
-              return (
-                <div
-                  className="pics-uploaded"
-                  key={index}
-                  onClick={file => handleImageClick(file)}
-                >
-                  <Close
-                    onClick={e => deletePic(e, file)}
-                    className="delete-pic no-select"
-                    onMouseOver="icon-close-red"
-                  />
-                  <div className="pics-index no-select">{index + 1}</div>
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt={`imagepreview${index}`}
-                    className="pic no-select"
-                  />
-                </div>
-              );
-            })}
+            {images
+              .slice(length > 2 ? length - 3 : length - 2, length)
+              .map((file, index) => {
+                return (
+                  <div
+                    className="pics-uploaded"
+                    key={index}
+                    onClick={e => handleImageClick(e)}
+                  >
+                    <Close
+                      onClick={e => deletePic(e, file)}
+                      className="delete-pic no-select"
+                      onMouseOver="icon-close-red"
+                    />
+                    <div className="pics-index no-select">{index + 1}</div>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`imagepreview${index}`}
+                      className="pic no-select"
+                    />
+                  </div>
+                );
+              })}
           </div>
           <div className="pics-uploaded-buttons-wrapper">
             <Button
@@ -114,6 +130,13 @@ const UploadFiles = () => {
               onClick={() => dispatch(CreateProject({ step: "next" }))}
             />
           </div>
+          {carouselBackward && (
+            <div
+              className="carousel-backward icon icon-previous-step-black no-select"
+              onClick={handleCarouselBackward}
+            />
+          )}
+          {carouselForward && <div className="carousel-forward"></div>}
         </div>
       )}
     </>
