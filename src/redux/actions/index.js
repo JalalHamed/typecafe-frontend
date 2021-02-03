@@ -25,3 +25,10 @@ export const CreateProject = payload => {
     payload,
   };
 };
+
+export const SelectedImage = payload => {
+  return {
+    type: "SELECTED_IMAGE",
+    payload,
+  };
+};

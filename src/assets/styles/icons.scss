@@ -13,6 +13,18 @@
     height: 10px;
   }
 
+  &.icon-close-image-modal {
+    content: url("../svgs/close-image-modal.svg");
+    width: 70px;
+    height: 70px;
+  }
+
+  &.icon-close-image-modal-red {
+    content: url("../svgs/close-image-modal-red.svg");
+    width: 70px;
+    height: 70px;
+  }
+
   &.icon-close-red {
     content: url("../svgs/close-red.svg");
     width: 10px;

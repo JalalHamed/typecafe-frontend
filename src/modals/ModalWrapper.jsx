@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { LR, CreateProject } from "redux/actions";
+import { LR, CreateProject, SelectedImage } from "redux/actions";
 
 const ModalWrapper = ({ children }) => {
   const dispatch = useDispatch();
@@ -12,46 +12,41 @@ const ModalWrapper = ({ children }) => {
   const createProjectModalIsOpen = useSelector(
     state => state.CreateProject.isModalOpen
   );
-  const ImageModalIsOpen = useSelector(
-    state => state.CreateProject.isImageModalOpen
+  const SelectedImageModalIsOpen = useSelector(
+    state => state.SelectedImage.isModalOpen
   );
-  const [expression, setExperssion] = useState(true);
 
-  const downHandler = ({ key }) => {
-    setExperssion(true);
+  const escapeHandler = ({ key }) => {
     if (key === "Escape") {
-      if (ImageModalIsOpen && expression) {
-        console.log("1");
-        setExperssion(false);
-        dispatch(CreateProject({ isImageModalOpen: false }));
-      }
-      if (LRModalIsOpen && expression) {
-        console.log("2");
-        setExperssion(false);
-        dispatch(LR({ isModalOpen: false }));
-      }
-      if (createProjectModalIsOpen && expression) {
-        console.log("3");
-        setExperssion(false);
-        dispatch(CreateProject({ isModalOpen: false }));
+      if (SelectedImageModalIsOpen) {
+        dispatch(SelectedImage({ isModalOpen: false }));
+      } else {
+        if (LRModalIsOpen) dispatch(LR({ isModalOpen: false }));
+        if (createProjectModalIsOpen)
+          dispatch(CreateProject({ isModalOpen: false }));
       }
     }
   };
 
-  useEffect(() => {
-    console.log("expr", expression);
-  }, [expression]);
+  const handleClick = () => {
+    if (SelectedImageModalIsOpen)
+      dispatch(SelectedImage({ isModalOpen: false }));
+  };
 
   useEffect(() => {
-    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keydown", escapeHandler);
     return () => {
-      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keydown", escapeHandler);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div className="modal-bg">{children}</div>;
+  return (
+    <div className="modal-bg" onClick={handleClick}>
+      {children}
+    </div>
+  );
 };
 
 export default ModalWrapper;

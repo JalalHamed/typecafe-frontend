@@ -3,13 +3,11 @@ import React from "react";
 // Libraries
 import { useSelector } from "react-redux";
 
-// Components
-import Image from "components/images/Image";
-
 // Modals
 import ModalWrapper from "modals/ModalWrapper";
 import LoginRegister from "modals/loginregister/LoginRegister";
 import CreateProject from "modals/createproject/CreateProject";
+import Image from "modals/image/Image";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -29,7 +27,7 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Image */}
-      {state.CreateProject.isImageModalOpen && (
+      {state.SelectedImage.isModalOpen && (
         <ModalWrapper>
           <Image />
         </ModalWrapper>

@@ -8,7 +8,7 @@ import Button from "components/buttons/Button";
 import Close from "components/buttons/Close";
 
 // Actions
-import { CreateProject } from "redux/actions";
+import { CreateProject, SelectedImage } from "redux/actions";
 
 // Designs
 import "./uploadpics.scss";
@@ -28,7 +28,6 @@ const UploadFiles = () => {
 
   const handleUploadImage = e => {
     setImages(prevState => [...prevState, ...Array.from(e.target.files)]);
-    // e.target.value = null;
   };
 
   const deletePic = (e, file) => {
@@ -36,13 +35,15 @@ const UploadFiles = () => {
     setImages(images.filter(el => el !== file));
   };
 
-  const handleImageClick = () => {
-    dispatch(CreateProject({ isImageModalOpen: true }));
+  const handleImageClick = file => {
+    // console.log("whole file", file.target.value);
+    // console.log("file", file.target.src);
+    dispatch(SelectedImage({ image: file.target.src, isModalOpen: true }));
   };
 
   useEffect(() => {
     dispatch(CreateProject({ files: images }));
-    console.log("images", images);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
 
@@ -84,7 +85,7 @@ const UploadFiles = () => {
                 <div
                   className="pics-uploaded"
                   key={index}
-                  onClick={handleImageClick}
+                  onClick={file => handleImageClick(file)}
                 >
                   <Close
                     onClick={e => deletePic(e, file)}
@@ -94,7 +95,7 @@ const UploadFiles = () => {
                   <div className="pics-index no-select">{index + 1}</div>
                   <img
                     src={URL.createObjectURL(file)}
-                    alt={`imagePrevUrl${index}`}
+                    alt={`imagepreview${index}`}
                     className="pic no-select"
                   />
                 </div>

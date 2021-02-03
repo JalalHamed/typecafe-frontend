@@ -21,7 +21,7 @@ const CreateNewProject = () => {
   return (
     <div className="cp-wrapper">
       <div className="cp-header">
-        <p className="cp-header-title">ثبت پروژه</p>
+        <p className="cp-header-title no-select">ثبت پروژه</p>
         <Close
           onClick={() => dispatch(CreateProject({ isModalOpen: false }))}
           className="close-modal"

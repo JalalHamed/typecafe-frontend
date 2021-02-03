@@ -1,6 +1,5 @@
 let initialState = {
   isModalOpen: false,
-  isImageModalOpen: false,
   step: "uploadpics",
   files: [],
   description: "",
