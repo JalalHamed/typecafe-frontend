@@ -38,25 +38,40 @@ const UploadFiles = () => {
     setImages(images.filter(el => el !== file));
   };
 
-  const handleImageClick = e => {
-    dispatch(SelectedImage({ image: e.target.src, isModalOpen: true }));
-    console.log("e", e);
+  const handleImageClick = file => {
+    dispatch(
+      SelectedImage({ image: URL.createObjectURL(file), isModalOpen: true })
+    );
   };
 
-  const handleCarouselBackward = () => {};
+  const handleCarouselBackward = () => {
+    if (length > 3) setLength(length - 1);
+  };
+
+  const handleCarouselForward = () => {
+    if (images.length > length) setLength(length + 1);
+  };
 
   useEffect(() => {
-    dispatch(CreateProject({ files: images }));
+    if (images.length > length) {
+      setCarouselForward(true);
+    } else {
+      setCarouselForward(false);
+    }
 
-    setLength(images.length);
-
-    if (images.length > 3) {
+    if (length > 3) {
       setCarouselBackward(true);
     } else {
       setCarouselBackward(false);
     }
 
-    // console.log("images", images);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [length]);
+
+  useEffect(() => {
+    dispatch(CreateProject({ files: images }));
+    setLength(images.length);
+    console.log("images", images);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
@@ -101,7 +116,7 @@ const UploadFiles = () => {
                   <div
                     className="pics-uploaded"
                     key={index}
-                    onClick={e => handleImageClick(e)}
+                    onClick={() => handleImageClick(file)}
                   >
                     <Close
                       onClick={e => deletePic(e, file)}
@@ -136,7 +151,12 @@ const UploadFiles = () => {
               onClick={handleCarouselBackward}
             />
           )}
-          {carouselForward && <div className="carousel-forward"></div>}
+          {carouselForward && (
+            <div
+              className="carousel-forward icon icon-next-step-black no-select"
+              onClick={handleCarouselForward}
+            ></div>
+          )}
         </div>
       )}
     </>

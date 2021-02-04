@@ -107,16 +107,27 @@
     }
   }
 
-  .carousel-backward {
+  .carousel-backward,
+  .carousel-forward {
     background-color: #ddd;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     padding: 10px;
-    border: 1px solid black;
     cursor: pointer;
     position: absolute;
-    right: 68px;
     top: 290px;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  .carousel-backward {
+    right: 68px;
+  }
+
+  .carousel-forward {
+    left: 68px;
   }
 }
