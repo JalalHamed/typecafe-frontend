@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 // Components
 import Button from "components/buttons/Button";
 import Close from "components/buttons/Close";
+import ArrowStem from "./ArrowStem";
+import ArrowCap from "./ArrowCap";
 
 // Actions
 import { CreateProject, SelectedImage } from "redux/actions";
@@ -19,8 +21,8 @@ const UploadFiles = () => {
   const chooseFilesRippleRef = useRef();
   const addAnotherRippleRef = useRef();
   const nextStepRippleRef = useRef();
-  const files = useSelector(state => state.CreateProject.files);
-  const [images, setImages] = useState(files);
+  const state = useSelector(state => state.CreateProject);
+  const [images, setImages] = useState(state.files);
   const [length, setLength] = useState(0);
   const [carouselForward, setCarouselForward] = useState(false);
   const [carouselBackward, setCarouselBackward] = useState(false);
@@ -67,6 +69,10 @@ const UploadFiles = () => {
 
   const handleCarouselForward = () => {
     if (images.length > length) setLength(length + 1);
+  };
+
+  const goToNextStep = () => {
+    dispatch(CreateProject({ step: "next", firstMount: true }));
   };
 
   useEffect(() => {
@@ -157,6 +163,24 @@ const UploadFiles = () => {
             )}
           </div>
           <div className="pics-uploaded-buttons-wrapper">
+            {!state.firstMount && (
+              <>
+                <div className="add-another-pic-tooltip">اضافه کردن عکس</div>
+                <div className="aap-arrow-stem">
+                  <ArrowStem />
+                </div>
+                <div className="aap-arrow-cap">
+                  <ArrowCap />
+                </div>
+                <div className="next-step-tooltip">قدم بعد</div>
+                <div className="ns-arrow-stem">
+                  <ArrowStem />
+                </div>
+                <div className="ns-arrow-cap">
+                  <ArrowCap />
+                </div>
+              </>
+            )}
             <Button
               ref={addAnotherRippleRef}
               className="add-another icon icon-add-pic"
@@ -165,7 +189,7 @@ const UploadFiles = () => {
             <Button
               ref={nextStepRippleRef}
               className="next-step icon icon-next-step"
-              onClick={() => dispatch(CreateProject({ step: "next" }))}
+              onClick={goToNextStep}
             />
           </div>
           {carouselBackward && (

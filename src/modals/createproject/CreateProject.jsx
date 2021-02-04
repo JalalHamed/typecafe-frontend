@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Steps
 import StepsHeader from "./StepsHeader";
-import UploadPics from "./steps/UploadPics";
+import UploadPics from "./steps/uploadpics/UploadPics";
 import Close from "components/buttons/Close";
 
 // Actions

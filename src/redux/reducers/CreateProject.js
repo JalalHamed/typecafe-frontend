@@ -3,6 +3,7 @@ let initialState = {
   step: "uploadpics",
   files: [],
   description: "",
+  firstMount: false,
 };
 
 const CreateProject = (state = initialState, action) => {
