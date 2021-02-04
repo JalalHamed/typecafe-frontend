@@ -4,27 +4,20 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import { LR, CreateProject, SelectedImage } from "redux/actions";
+import { LR, SelectedImage } from "redux/actions";
 
 const ModalWrapper = ({ children }) => {
   const dispatch = useDispatch();
   const LRModalIsOpen = useSelector(state => state.LR.isModalOpen);
-  const createProjectModalIsOpen = useSelector(
-    state => state.CreateProject.isModalOpen
-  );
   const SelectedImageModalIsOpen = useSelector(
     state => state.SelectedImage.isModalOpen
   );
 
   const escapeHandler = ({ key }) => {
     if (key === "Escape") {
-      if (SelectedImageModalIsOpen) {
+      if (SelectedImageModalIsOpen)
         dispatch(SelectedImage({ isModalOpen: false }));
-      } else {
-        if (LRModalIsOpen) dispatch(LR({ isModalOpen: false }));
-        if (createProjectModalIsOpen)
-          dispatch(CreateProject({ isModalOpen: false }));
-      }
+      if (LRModalIsOpen) dispatch(LR({ isModalOpen: false }));
     }
   };
 

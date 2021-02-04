@@ -19,13 +19,14 @@
     .sidebar-close {
       background-color: #29313b;
       color: #fff;
-      width: 65px;
-      min-width: 65px;
+      width: 75px;
+      min-width: 75px;
       transition: all 0.5s;
     }
 
     .content {
       width: 100%;
+      position: relative;
     }
   }
 }

@@ -44,6 +44,23 @@ const UploadFiles = () => {
     );
   };
 
+  const generateIndexNumbers = index => {
+    if (length < 3) {
+      return index + 1;
+    } else {
+      switch (index) {
+        case 2:
+          return length;
+        case 1:
+          return length - 1;
+        case 0:
+          return length - 2;
+        default:
+          return null;
+      }
+    }
+  };
+
   const handleCarouselBackward = () => {
     if (length > 3) setLength(length - 1);
   };
@@ -71,7 +88,6 @@ const UploadFiles = () => {
   useEffect(() => {
     dispatch(CreateProject({ files: images }));
     setLength(images.length);
-    console.log("images", images);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
@@ -118,12 +134,10 @@ const UploadFiles = () => {
                     key={index}
                     onClick={() => handleImageClick(file)}
                   >
-                    <Close
-                      onClick={e => deletePic(e, file)}
-                      className="delete-pic no-select"
-                      onMouseOver="icon-close-red"
-                    />
-                    <div className="pics-index no-select">{index + 1}</div>
+                    <Close red onClick={e => deletePic(e, file)} />
+                    <div className="pics-index no-select">
+                      {generateIndexNumbers(index)}
+                    </div>
                     <img
                       src={URL.createObjectURL(file)}
                       alt={`imagepreview${index}`}
@@ -132,6 +146,15 @@ const UploadFiles = () => {
                   </div>
                 );
               })}
+          </div>
+          <div className="uploaded-pics-range">
+            {length >= 3 ? (
+              <>
+                بازه {length - 2} تا {length} - تعداد کل {images.length}
+              </>
+            ) : (
+              <>تعداد کل {length}</>
+            )}
           </div>
           <div className="pics-uploaded-buttons-wrapper">
             <Button

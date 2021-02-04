@@ -66,7 +66,7 @@ export const handleErrors = (error, setMessage) => {
     } else setMessage("");
   } else if (error.request) {
     // The request was made but no response was received
-    setMessage("خطا در برقراری ارتباط با سرور.");
+    setMessage("خطا در برقراری ارتباط با سرور");
   } else {
     // Something happened in setting up the request that triggered an Error
     console.log(error.message);

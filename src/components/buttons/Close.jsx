@@ -3,12 +3,12 @@ import React, { useState } from "react";
 // Designs
 import "./buttons.scss";
 
-const Close = ({ onClick, className, onMouseOver }) => {
+const Close = ({ onClick, className, red }) => {
   const [iconMouseOver, setIconMouseOver] = useState(false);
 
   return (
     <div
-      className={`close no-select ${className && className}`}
+      className={`close ${red && "bg-red"} ${className && className} no-select`}
       onClick={onClick}
       onMouseEnter={() => setIconMouseOver(true)}
       onMouseLeave={() => setIconMouseOver(false)}
@@ -16,7 +16,7 @@ const Close = ({ onClick, className, onMouseOver }) => {
       <i
         className={`icon ${
           iconMouseOver
-            ? `${onMouseOver ? onMouseOver : "icon-close-black"}`
+            ? `${red ? "icon-close-red" : "icon-close-black"}`
             : "icon-close"
         }`}
       />

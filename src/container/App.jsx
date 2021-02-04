@@ -9,6 +9,7 @@ import Projects from "./pages/projects/Projects";
 import Rules from "./pages/rules/Rules";
 
 // Components
+import MinimizedCreateProject from "components/minimizes/MinimizedCreateProject";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
 
@@ -37,6 +38,9 @@ const App = () => {
         <div className="content">
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "rules" && <Rules />}
+
+          {!!state.CreateProject.files.length &&
+            !state.CreateProject.isModalOpen && <MinimizedCreateProject />}
         </div>
       </div>
 

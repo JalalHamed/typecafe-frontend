@@ -28,7 +28,7 @@ const Item = forwardRef(({ status, title }, ref) => {
     >
       <i
         className={`icon icon-margin-24 ${
-          page === status ? `icon-${status}-black` : `icon-${status}-white`
+          page === status ? `icon-${status}-dark` : `icon-${status}-white`
         }`}
       />
       <div

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Actions
-import { CreateProject, SelectedImage } from "redux/actions";
+import { SelectedImage } from "redux/actions";
 
 // Designs
 import "./image.scss";

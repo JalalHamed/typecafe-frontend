@@ -80,78 +80,64 @@
     height: 50px;
   }
 
-  &.icon-menu {
-    content: url("../svgs/menu.svg");
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    transition: transform 0.5s;
-  }
-
-  &.icon-projects-black {
-    content: url("../svgs/projects-black.svg");
-    width: 24px;
-    height: 24px;
+  &.icon-projects-dark {
+    content: url("../svgs/projects-dark.svg");
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-projects-white {
     content: url("../svgs/projects-white.svg");
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 
-  &.icon-tarrifs-black {
-    content: url("../svgs/calculator-black.svg");
-    width: 24px;
-    height: 24px;
+  &.icon-tarrifs-dark {
+    content: url("../svgs/percent-dark.svg");
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-tarrifs-white {
-    content: url("../svgs/calculator-white.svg");
-    width: 24px;
-    height: 24px;
+    content: url("../svgs/percent-white.svg");
+    width: 30px;
+    height: 30px;
   }
 
-  &.icon-financial-black {
-    content: url("../svgs/money-bag-black.svg");
-    width: 24px;
-    height: 24px;
+  &.icon-financial-dark {
+    content: url("../svgs/wallet-dark.svg");
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-financial-white {
-    content: url("../svgs/money-bag-white.svg");
-    width: 24px;
-    height: 24px;
+    content: url("../svgs/wallet-white.svg");
+    width: 30px;
+    height: 30px;
   }
 
-  &.icon-settings-black {
-    content: url("../svgs/settings-black.svg");
-    width: 24px;
-    height: 24px;
+  &.icon-rules-dark {
+    content: url("../svgs/rules-dark.svg");
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-rules-white {
     content: url("../svgs/rules-white.svg");
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 
-  &.icon-rules-black {
-    content: url("../svgs/rules-black.svg");
-    width: 24px;
-    height: 24px;
+  &.icon-settings-dark {
+    content: url("../svgs/settings-dark.svg");
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-settings-white {
     content: url("../svgs/settings-white.svg");
-    width: 24px;
-    height: 24px;
-  }
-
-  &.icon-logout-white {
-    content: url("../svgs/logout-white.svg");
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 
   &.icon-user-red-big {
@@ -163,8 +149,8 @@
 
   &.icon-user-red-regular {
     content: url("../svgs/user.svg");
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     transition: height 0.5s, width 0.5s;
   }
 
@@ -177,8 +163,8 @@
 
   &.icon-user-default-regular {
     content: url("../svgs/user-default.svg");
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     transition: height 0.5s, width 0.5s;
   }
 

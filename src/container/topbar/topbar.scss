@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 10px;
+  padding-right: 13px;
   padding-left: 20px;
 
   .topbar-right {
@@ -20,7 +20,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-left: 12px;
+      margin-left: 17px;
       cursor: pointer;
       position: relative;
       color: #fff;
@@ -28,7 +28,7 @@
       .line1,
       .line2,
       .line3 {
-        width: 24px;
+        width: 27px;
         height: 2px;
         background-color: #fff;
       }

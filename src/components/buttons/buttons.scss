@@ -86,3 +86,9 @@
     background-color: #ddd;
   }
 }
+
+.bg-red {
+  &:hover {
+    background-color: rgb(255, 219, 219);
+  }
+}

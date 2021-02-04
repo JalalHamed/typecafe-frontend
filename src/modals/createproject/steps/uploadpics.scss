@@ -40,8 +40,8 @@
 
     .pics-uploaded {
       position: relative;
-      width: 200px;
-      height: 300px;
+      width: 250px;
+      height: 350px;
       border: 1px solid #ddd;
       cursor: pointer;
       transition: border 0.2s;
@@ -62,17 +62,6 @@
       }
 
       .delete-pic {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #464646;
-        z-index: 1;
-        font-size: 14px;
         padding: 8px;
 
         &:hover {
@@ -91,10 +80,17 @@
     }
   }
 
+  .uploaded-pics-range {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+  }
+
   .pics-uploaded-buttons-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 17px;
 
     .add-another,
     .next-step {
@@ -110,13 +106,13 @@
   .carousel-backward,
   .carousel-forward {
     background-color: #ddd;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     padding: 10px;
     cursor: pointer;
     position: absolute;
-    top: 290px;
+    top: 318px;
 
     &:hover {
       background-color: #ccc;
@@ -124,10 +120,10 @@
   }
 
   .carousel-backward {
-    right: 68px;
+    right: 40px;
   }
 
   .carousel-forward {
-    left: 68px;
+    left: 40px;
   }
 }
