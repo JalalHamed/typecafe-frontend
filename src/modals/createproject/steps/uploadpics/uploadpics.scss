@@ -1,4 +1,5 @@
 .upload-pics-wrapper {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -30,13 +31,13 @@
   }
 }
 
-.pics-uploaded-parent {
+.pics-uploaded-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 
-  .pics-uploaded-wrapper {
+  .images-wrapper {
     display: flex;
     margin-top: 40px;
 
@@ -82,12 +83,21 @@
     }
   }
 
+  .uploaded-pics-range {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+  }
+
   .pics-uploaded-buttons-wrapper {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    margin-top: 17px;
+    align-items: center;
     width: 500px;
+    height: 50px;
+    bottom: 49px;
 
     .add-another,
     .next-step {
@@ -102,7 +112,7 @@
     .add-another-pic-tooltip {
       opacity: 0;
       position: absolute;
-      right: 42px;
+      right: 40px;
       bottom: 28px;
       font-size: 14px;
       transform: rotate(30deg);
@@ -168,13 +178,6 @@
         animation: cap 0.5s linear 1s forwards, fadeOut 1s ease 5s forwards;
       }
     }
-  }
-
-  .uploaded-pics-range {
-    font-size: 14px;
-    text-align: center;
-    margin-top: 15px;
-    color: #666;
   }
 
   .carousel-backward,

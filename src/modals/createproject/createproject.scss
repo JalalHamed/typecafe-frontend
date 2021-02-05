@@ -59,6 +59,10 @@
         background-color: #1c3987;
       }
     }
+
+    .progress-line-signal {
+      animation: signalIn 3s ease-in-out infinite;
+    }
   }
 
   .cp-content {
@@ -85,5 +89,17 @@
         border-bottom: 1px solid #1c3987;
       }
     }
+  }
+}
+
+@keyframes signalIn {
+  0% {
+    background-color: #bbbdbf;
+  }
+  50% {
+    background-color: #1c3987;
+  }
+  100% {
+    background-color: #bbbdbf;
   }
 }

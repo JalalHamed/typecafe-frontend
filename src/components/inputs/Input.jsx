@@ -48,7 +48,7 @@ const Input = forwardRef(
         >
           {label}
         </label>
-        <div className="input-error-wrapper">
+        <div className="input-container">
           {error && (
             <i
               className={`icon icon-error ${

@@ -72,7 +72,7 @@ const UploadFiles = () => {
   };
 
   const goToNextStep = () => {
-    dispatch(CreateProject({ step: "next", firstMount: true }));
+    dispatch(CreateProject({ step: "details", firstMount: true }));
   };
 
   useEffect(() => {
@@ -129,8 +129,8 @@ const UploadFiles = () => {
           />
         </div>
       ) : (
-        <div className="pics-uploaded-parent">
-          <div className="pics-uploaded-wrapper">
+        <div className="pics-uploaded-wrapper">
+          <div className="images-wrapper">
             {images
               .slice(length > 2 ? length - 3 : length - 2, length)
               .map((file, index) => {

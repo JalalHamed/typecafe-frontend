@@ -1,11 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 const ArrowCap = () => {
-  const path = useRef();
-
-  useEffect(() => {
-    console.log("path length", path.current.getTotalLength());
-  }, []);
   return (
     <svg
       width="10"
@@ -15,7 +10,6 @@ const ArrowCap = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        ref={path}
         id="arrowCap"
         d="M1 2.5L9 1.5L6.5 9"
         stroke="#29313B"

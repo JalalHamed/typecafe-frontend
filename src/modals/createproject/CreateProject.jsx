@@ -3,10 +3,14 @@ import React from "react";
 // Librares
 import { useSelector, useDispatch } from "react-redux";
 
+// Components
+import Close from "components/buttons/Close";
+
 // Steps
 import StepsHeader from "./StepsHeader";
 import UploadPics from "./steps/uploadpics/UploadPics";
-import Close from "components/buttons/Close";
+import Details from "./steps/details/Details";
+import ReviewAndSubmit from "./steps/reviewandsubmit/ReviewAndSubmit";
 
 // Actions
 import { CreateProject } from "redux/actions";
@@ -32,6 +36,8 @@ const CreateNewProject = () => {
       </div>
       <div className="cp-content">
         {step === "uploadpics" && <UploadPics />}
+        {step === "details" && <Details />}
+        {step === "reviewandsubmit" && <ReviewAndSubmit />}
       </div>
       <div className="user-agreement">
         با ثبت پروژه خود در تایپ‌کافه، شما با

@@ -1,16 +1,16 @@
-.input-wrapper {
-  .label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #152b69;
+.label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #152b69;
 
-    &.label-error {
-      color: #ff2d2d;
-    }
+  &.label-error {
+    color: #ff2d2d;
   }
+}
 
-  .input-error-wrapper {
+.input-wrapper {
+  .input-container {
     position: relative;
 
     .input {
@@ -47,5 +47,21 @@
 
   .input-break {
     margin-bottom: 10px;
+  }
+}
+
+.textarea-wrapper {
+  .textarea {
+    font-family: "typecafe";
+    width: 400px;
+    height: 150px;
+    padding: 12px 20px;
+    border: 1px solid #1c3987;
+    border-radius: 5px;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
