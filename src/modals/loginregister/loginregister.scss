@@ -1,0 +1,172 @@
+.lr-wrapper {
+  background-color: #fff;
+  height: 430px;
+  min-width: 700px;
+  max-width: 700px;
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+
+  .lr-left {
+    padding: 30px 50px;
+    height: 100%;
+    width: 65%;
+    position: relative;
+
+    .usage-agreement {
+      font-size: 12px;
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      left: 0;
+      color: #29313b;
+      text-align: center;
+
+      .rules {
+        color: #1c3987;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 1px solid #1c3987;
+        }
+      }
+    }
+
+    .lr-title {
+      text-align: center;
+      font-size: 25px;
+      color: #1c3987;
+      margin: 20px 0 0;
+      font-weight: 600;
+    }
+
+    .lr-email {
+      text-align: center;
+      direction: ltr;
+
+      .inner {
+        color: #1c3887;
+        font-size: 14px;
+        display: inline-block;
+        background-color: #1c388728;
+        border-radius: 50px;
+        padding: 3px 10px 0;
+        text-transform: lowercase;
+      }
+    }
+
+    .lr-sub-title {
+      font-size: 13px;
+      margin: 20px 0;
+      color: #29313b;
+
+      &.confirm-email {
+        margin: 15px 0;
+      }
+    }
+
+    .login-forgot-password {
+      font-size: 12px;
+      display: inline-block;
+      color: #1c3987;
+      cursor: pointer;
+      padding: 0 2px;
+
+      &:hover {
+        border-bottom: 1px solid #1c3987;
+      }
+    }
+
+    .login-title-content-break-line {
+      margin-top: 60px;
+    }
+
+    .error-message {
+      margin-top: 15px;
+      padding: 5px 10px;
+      font-size: 14px;
+      color: #d8000c;
+      border-radius: 2px;
+      text-align: center;
+      background-color: #ffe3e5;
+      position: relative;
+
+      &.confirm {
+        margin-top: 10px;
+
+        .close-error {
+          display: inline-block;
+          position: absolute;
+          right: 5px;
+          background-color: #fb6b75;
+          width: 21px;
+          height: 21px;
+          border-radius: 50px;
+          font-size: 16px;
+          line-height: 22px;
+          color: #ffe3e5;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #ff3846;
+          }
+        }
+      }
+
+      &.email-taking-too-long {
+        font-size: 13px;
+      }
+    }
+
+    .register-error-message {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 13px;
+      color: #d8000c;
+      border-radius: 2px;
+      text-align: center;
+    }
+
+    .login-send-confirm-code-again {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #29313b;
+      text-align: center;
+    }
+  }
+
+  .lr-right {
+    background-color: #29313b;
+    height: 100%;
+    width: 35%;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    padding-top: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .register-options-wrapper {
+      margin-top: 15px;
+
+      .register-option {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

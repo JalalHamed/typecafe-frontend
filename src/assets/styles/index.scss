@@ -1,0 +1,38 @@
+@import "./icons.scss";
+@import "./toast.scss";
+
+@font-face {
+  font-family: "typecafe";
+  src: local("typecafe"), url(../fonts/IRANSansWeb.woff) format("woff");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  &::selection {
+    background-color: #df4933;
+    color: #fff;
+  }
+}
+
+body {
+  font-family: "typecafe";
+  background-color: #fff;
+  color: #29313b;
+  height: 100vh;
+}
+
+button {
+  user-select: none;
+  font-family: "typecafe";
+}
+
+.no-select {
+  user-select: none;
+
+  &::-webkit-user-select {
+    user-select: none;
+  }
+}

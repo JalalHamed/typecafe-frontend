@@ -1,0 +1,67 @@
+.label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #152b69;
+
+  &.label-error {
+    color: #ff2d2d;
+  }
+}
+
+.input-wrapper {
+  .input-container {
+    position: relative;
+
+    .input {
+      padding: 5px 10px;
+      border: 1px solid #1c3987;
+      border-radius: 3px;
+      width: 100%;
+      font-size: 18px;
+      font-family: "typecafe";
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        text-align: right;
+        font-family: "typecafe";
+        padding-right: 15px;
+        color: #d8000ba1;
+        font-size: 13px;
+      }
+
+      &.input-error {
+        border-color: #ff2d2d;
+
+        &.confirm-email {
+          &::placeholder {
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .input-break {
+    margin-bottom: 10px;
+  }
+}
+
+.textarea-wrapper {
+  .textarea {
+    font-family: "typecafe";
+    width: 400px;
+    height: 150px;
+    padding: 12px 20px;
+    border: 1px solid #1c3987;
+    border-radius: 5px;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

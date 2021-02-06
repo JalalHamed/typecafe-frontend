@@ -1,0 +1,207 @@
+.icon {
+  &.icon-margin-18 {
+    margin-left: 18px !important;
+  }
+
+  &.icon-margin-24 {
+    margin-left: 24px !important;
+  }
+
+  &.icon-close {
+    content: url("../svgs/close.svg");
+    width: 10px;
+    height: 10px;
+  }
+
+  &.icon-close-image-modal {
+    content: url("../svgs/close-image-modal.svg");
+    width: 70px;
+    height: 70px;
+  }
+
+  &.icon-close-image-modal-red {
+    content: url("../svgs/close-image-modal-red.svg");
+    width: 70px;
+    height: 70px;
+  }
+
+  &.icon-close-red {
+    content: url("../svgs/close-red.svg");
+    width: 10px;
+    height: 10px;
+  }
+
+  &.icon-close-black {
+    content: url("../svgs/close-black.svg");
+    width: 10px;
+    height: 10px;
+  }
+
+  &.icon-create {
+    content: url("../svgs/addnew-white.svg");
+    width: 15px;
+    height: 15px;
+  }
+
+  &.icon-add-pic {
+    content: url("../svgs/add-pic.svg");
+    width: 50px;
+    height: 50px;
+  }
+
+  &.icon-next-step {
+    content: url("../svgs/next-step.svg");
+    width: 50px;
+    height: 50px;
+  }
+
+  &.icon-next-step-black {
+    content: url("../svgs/next-step-black.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-previous-step {
+    content: url("../svgs/previous-step.svg");
+    width: 50px;
+    height: 50px;
+  }
+
+  &.icon-previous-step-black {
+    content: url("../svgs/previous-step-black.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-typecafe {
+    content: url("../svgs/typecafe-logo.svg");
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  &.icon-typecafe-big {
+    content: url("../svgs/typecafe-logo.svg");
+    width: 50px;
+    height: 50px;
+  }
+
+  &.icon-projects-dark {
+    content: url("../svgs/projects-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-projects-white {
+    content: url("../svgs/projects-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-tarrifs-dark {
+    content: url("../svgs/percent-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-tarrifs-white {
+    content: url("../svgs/percent-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-financial-dark {
+    content: url("../svgs/wallet-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-financial-white {
+    content: url("../svgs/wallet-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-rules-dark {
+    content: url("../svgs/rules-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-rules-white {
+    content: url("../svgs/rules-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-settings-dark {
+    content: url("../svgs/settings-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-settings-white {
+    content: url("../svgs/settings-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-user-red-big {
+    content: url("../svgs/user.svg");
+    width: 70px;
+    height: 70px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-user-red-regular {
+    content: url("../svgs/user.svg");
+    width: 24px;
+    height: 24px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-user-default-big {
+    content: url("../svgs/user-default.svg");
+    width: 70px;
+    height: 70px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-user-default-regular {
+    content: url("../svgs/user-default.svg");
+    width: 30px;
+    height: 30px;
+    transition: height 0.5s, width 0.5s;
+  }
+
+  &.icon-check {
+    content: url("../svgs/check.svg");
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+  }
+
+  &.icon-error {
+    content: url("../svgs/error.svg");
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 7px;
+    width: 13px;
+    height: 13px;
+
+    &.confirm-email {
+      right: 30px;
+    }
+  }
+
+  &.icon-upload {
+    content: url("../svgs/upload.svg");
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

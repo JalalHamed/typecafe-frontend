@@ -1,0 +1,94 @@
+.button {
+  position: relative;
+  padding: 4px 20px;
+  background-color: #1c3987;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 33px;
+  width: 100%;
+
+  &.w-49 {
+    width: 49%;
+  }
+
+  &.w-68 {
+    width: 68%;
+  }
+
+  &.send-again {
+    display: block;
+    margin: 25px auto 0;
+    font-size: 13px;
+    width: 100px;
+    padding: 3px;
+    height: 30px;
+    background-color: #29313b;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.previous {
+  position: relative;
+  padding: 4px 20px;
+  background-color: #fff;
+  color: #1c3987;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 33px;
+  width: 100%;
+
+  &.w-49 {
+    width: 49%;
+  }
+
+  &.w-30 {
+    width: 30%;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    background-color: #f7f7f7;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+.bg-red {
+  &:hover {
+    background-color: rgb(255, 219, 219);
+  }
+}

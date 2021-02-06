@@ -1,0 +1,17 @@
+.selected-image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.close-selected-image {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+
+  &:hover {
+    background-color: rgba(221, 221, 221, 0.116);
+  }
+}
