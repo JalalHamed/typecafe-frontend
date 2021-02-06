@@ -1,9 +1,17 @@
 .project-wrapper {
-  background-color: #fff;
+  background-color: #1c388705;
+  display: flex;
   width: 49%;
   height: 250px;
-  padding: 10px;
   border-radius: 5px;
+  margin: 5px;
+  border: 3px solid #1c3987;
+
+  .project-image {
+    background-color: #1c398709;
+    width: 35%;
+    height: 100%;
+  }
 
   .picture {
     width: 30%;

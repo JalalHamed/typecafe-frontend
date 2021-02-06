@@ -14,17 +14,27 @@ import "./minimizedcreateproject.scss";
 
 const MinimizedCreateProject = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const files = useSelector(state => state.CreateProject.files.length);
+
+  const handleClose = e => {
+    e.stopPropagation();
+    dispatch(
+      CreateProject({
+        isModalOpen: false,
+        step: "uploadpics",
+        files: [],
+        description: "",
+      })
+    );
+  };
 
   return (
     <div
       className="minimized-create-project"
       onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
     >
-      <Close className="minimized-cp-close" red />
-      <div className="minimized-cp-details">
-        تعداد عکس‌ها: {state.CreateProject.files.length}
-      </div>
+      <Close red className="minimized-cp-close" onClick={e => handleClose(e)} />
+      <div className="minimized-cp-details">تعداد عکس‌ها: {files}</div>
     </div>
   );
 };

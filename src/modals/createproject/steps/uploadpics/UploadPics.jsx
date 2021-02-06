@@ -98,10 +98,6 @@ const UploadFiles = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
 
-  useEffect(() => {
-    console.log("files", state.files);
-  }, [state.files]);
-
   return (
     <>
       <input
@@ -112,7 +108,7 @@ const UploadFiles = () => {
         onClick={e => {
           e.target.value = null; // allows uploading the same file over and over
         }}
-        accept="image/*"
+        accept="image/png, image/jpg, image/jpeg"
         multiple
         hidden
       />

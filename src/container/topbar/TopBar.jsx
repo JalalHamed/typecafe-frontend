@@ -42,7 +42,7 @@ const TopBar = () => {
             onClick={() => dispatch(LR({ isModalOpen: true }))}
             ref={signUpRippleRef}
           >
-            <i className="icon icon-user-red-regular" />
+            <i className="icon icon-user-red-topbar" />
             <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
           </RippleWrapper>
         )}

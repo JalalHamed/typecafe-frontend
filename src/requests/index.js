@@ -26,7 +26,11 @@ export const GetProjects = () => {
 };
 
 export const CreateProjectReq = body => {
-  return axios.post("createproject/", body).then(res => res.data);
+  return axios
+    .post("createproject/", body, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then(res => res.data);
 };
 
 // Handle Errors

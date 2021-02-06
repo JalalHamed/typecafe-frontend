@@ -6,6 +6,7 @@ const AxiosInstance = axios.create({
   headers: {
     Authorization: null,
     "Content-Type": "application/json",
+    accept: "application/json",
   },
   origin: "http://127.0.0.1:8000/",
 });

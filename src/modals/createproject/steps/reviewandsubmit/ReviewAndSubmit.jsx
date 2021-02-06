@@ -23,13 +23,21 @@ const ReviewAndSubmit = () => {
   const [error, setError] = useState("");
 
   const onSubmit = () => {
-    let body = {
-      files: state.files,
-      description: state.description,
-    };
+    let body = new FormData();
+    body.append("description", state.description);
+    body.append("files", state.files[0]);
 
     CreateProjectReq(body)
-      .then(res => console.log(res))
+      .then(() =>
+        dispatch(
+          CreateProject({
+            isModalOpen: false,
+            step: "uploadpics",
+            files: [],
+            description: "",
+          })
+        )
+      )
       .catch(err => handleErrors(err, setError));
   };
 
