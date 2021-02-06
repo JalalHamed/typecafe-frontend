@@ -21,8 +21,14 @@ const Projects = () => {
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
-        projects.map(project => {
-          return <Project description={project.description} />;
+        projects.map((project, index) => {
+          return (
+            <Project
+              key={index}
+              description={project.description}
+              image={project.files}
+            />
+          );
         })}
     </div>
   );

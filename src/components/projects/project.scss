@@ -7,15 +7,25 @@
   margin: 5px;
   border: 3px solid #1c3987;
 
-  .project-image {
-    background-color: #1c398709;
-    width: 35%;
+  .project-image-wrapper {
+    min-width: 250px;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .project-image {
+      width: 160px;
+      height: 210px;
+    }
   }
 
-  .picture {
-    width: 30%;
-    height: 220px;
-    cursor: pointer;
+  .project-details-wrapper {
+    margin-top: 20px;
+
+    .project-description-title {
+      font-size: 14px;
+      color: #666;
+    }
   }
 }
