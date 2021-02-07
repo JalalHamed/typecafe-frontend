@@ -61,6 +61,13 @@ export const handleErrors = (error, setMessage) => {
         "نام نمایشی فقط می‌تواند شامل حروف، کارکترهای عددی، فاصله (space) و خط ربط (hyphen) باشد."
       );
     } else if (
+      err?.displayname &&
+      err?.displayname.length &&
+      err?.displayname[0] ===
+        "Ensure this field has no more than 20 characters."
+    ) {
+      setMessage("نام نمایشی نمی‌تواند بیشتر از ۲۰ کاراکتر داشته باشد.");
+    } else if (
       err?.password &&
       err?.password.length &&
       err?.password[0] === "passwords don't match."

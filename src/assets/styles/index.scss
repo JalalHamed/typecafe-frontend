@@ -15,6 +15,26 @@
     background-color: #df4933;
     color: #fff;
   }
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #29313b;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #7c7c7c;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+  }
 }
 
 body {

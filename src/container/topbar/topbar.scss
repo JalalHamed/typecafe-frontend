@@ -61,21 +61,47 @@
       cursor: pointer;
     }
 
-    .create-project {
-      position: relative;
+    .topbar-left-user-logged-in {
       display: flex;
       align-items: center;
-      padding: 4px 10px;
-      border: 1px solid #ddd;
-      border-radius: 2px;
-      cursor: pointer;
-      color: #fff;
 
-      .create-project-title {
-        color: #fff;
-        display: inline-block;
+      .notif-wrapper,
+      .user-wrapper {
+        position: relative;
+        height: 40px;
+        width: 40px;
         margin-right: 10px;
-        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #212730;
+        }
+      }
+
+      .user-wrapper {
+        margin-right: 5px;
+      }
+
+      .create-project {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 4px 10px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        cursor: pointer;
+        color: #fff;
+
+        .create-project-title {
+          color: #fff;
+          display: inline-block;
+          margin-right: 10px;
+          font-size: 14px;
+        }
       }
     }
   }

@@ -34,11 +34,13 @@ const SideBar = () => {
           title="پروژه ها"
           ref={projectsRippleRef}
         />
-        <SideBarItem
-          status="financial"
-          title="کیف پول"
-          ref={financialRippleRef}
-        />
+        {isLoggedIn && (
+          <SideBarItem
+            status="financial"
+            title="کیف پول"
+            ref={financialRippleRef}
+          />
+        )}
         <SideBarItem status="tarrifs" title="تعرفه ها" ref={tarrifsRippleRef} />
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
         <SideBarItem

@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
@@ -46,6 +47,7 @@ const Register = () => {
           dispatch(
             LR({ isModalOpen: false, page: "Email", email: "", timeleft: 0 })
           );
+          toast.success(res.displayname + " عزیز، به تایپ کافه خوش آمدید.");
         })
         .catch(err => {
           setLoading(false);

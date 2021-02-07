@@ -7,6 +7,12 @@
     margin-left: 24px !important;
   }
 
+  &.icon-notification {
+    content: url("../svgs/notification.svg");
+    width: 24px;
+    height: 24px;
+  }
+
   &.icon-close {
     content: url("../svgs/close.svg");
     width: 10px;

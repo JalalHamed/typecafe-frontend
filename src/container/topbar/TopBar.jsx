@@ -17,6 +17,8 @@ const TopBar = () => {
   const menuIconRippleRef = useRef();
   const signUpRippleRef = useRef();
   const createProjectRippleRef = useRef();
+  const notifRippleRef = useRef();
+  const userRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
@@ -47,14 +49,22 @@ const TopBar = () => {
           </RippleWrapper>
         )}
         {isLoggedIn && (
-          <RippleWrapper
-            className="create-project"
-            onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
-            ref={createProjectRippleRef}
-          >
-            <i className="icon icon-create" />
-            <p className="create-project-title">ثبت پروژه</p>
-          </RippleWrapper>
+          <div className="topbar-left-user-logged-in">
+            <RippleWrapper
+              className="create-project"
+              onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
+              ref={createProjectRippleRef}
+            >
+              <i className="icon icon-create" />
+              <p className="create-project-title">ثبت پروژه</p>
+            </RippleWrapper>
+            <RippleWrapper className="notif-wrapper" ref={notifRippleRef}>
+              <i className="icon icon-notification" />
+            </RippleWrapper>
+            <RippleWrapper ref={userRippleRef} className="user-wrapper">
+              <i className="icon icon-user-default-regular" />
+            </RippleWrapper>
+          </div>
         )}
       </div>
     </div>

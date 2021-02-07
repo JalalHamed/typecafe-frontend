@@ -1,13 +1,12 @@
 .minimized-create-project {
-  position: absolute;
+  position: fixed;
   width: 250px;
   height: 100px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-  bottom: 80px;
-  left: 50%;
-  transform: translate(-50%, 0);
+  bottom: 10px;
+  right: 270px;
   cursor: pointer;
   transition: border-color 0.2s;
 

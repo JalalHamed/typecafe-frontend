@@ -20,16 +20,20 @@ const Projects = () => {
 
   return (
     <div className="projects-wrapper">
-      {!!projects.length &&
+      {!!projects.length ? (
         projects.map((project, index) => {
           return (
             <Project
               key={index}
+              client={project.client}
               description={project.description}
               image={project.files}
             />
           );
-        })}
+        })
+      ) : (
+        <div>هنوز پروژه ای ثبت نشده</div>
+      )}
     </div>
   );
 };

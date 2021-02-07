@@ -3,7 +3,7 @@ import React from "react";
 // Designs
 import "./project.scss";
 
-const Project = ({ index, description, image }) => {
+const Project = ({ index, description, image, client }) => {
   return (
     <div className="project-wrapper" key={index}>
       <div className="project-image-wrapper">
@@ -14,6 +14,8 @@ const Project = ({ index, description, image }) => {
         />
       </div>
       <div className="project-details-wrapper">
+        <div className="project-description-title">مشتری</div>
+        <div>{client}</div>
         <div className="project-description-title">توضیحات</div>
         <div className="project-description">{description}</div>
       </div>
