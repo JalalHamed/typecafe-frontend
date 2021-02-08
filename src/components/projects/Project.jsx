@@ -3,7 +3,8 @@ import React from "react";
 // Designs
 import "./project.scss";
 
-const Project = ({ index, description, image, client, profilePicture }) => {
+const Project = ({ index, description, image, client, clientPicture }) => {
+  console.log("clientpic", clientPicture);
   return (
     <div className="project-wrapper" key={index}>
       <div className="project-image-wrapper">
@@ -15,9 +16,9 @@ const Project = ({ index, description, image, client, profilePicture }) => {
       </div>
       <div className="project-details-wrapper">
         <div className="client-wrapper">
-          {!!profilePicture ? (
+          {!!clientPicture ? (
             <img
-              src={`http:127.0.0.1:8000${profilePicture}`}
+              src={`http://127.0.0.1:8000${clientPicture}`}
               alt="User Profile"
               className="client-image"
             />

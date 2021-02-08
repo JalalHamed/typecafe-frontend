@@ -29,7 +29,7 @@ const Projects = () => {
               client={project.client}
               description={project.description}
               image={project.files}
-              profilePicture={project.profile_picture}
+              clientPicture={project.client_picture}
             />
           );
         })
