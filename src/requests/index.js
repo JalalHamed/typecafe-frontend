@@ -2,7 +2,10 @@ import axios from "./Api";
 
 // Register and Login
 export const UserRegister = body => {
-  return axios.post("auth/register/", body).then(res => res.data);
+  return axios.post("auth/register/", body).then(res => {
+    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
+    return res.data;
+  });
 };
 
 export const UserLogin = body => {

@@ -18,6 +18,22 @@
       padding: 15px 20px;
     }
 
+    .user-picture {
+      border-radius: 50%;
+      transition: height 0.5s, width 0.5s;
+      margin-left: 18px;
+
+      &.user-picture-wide {
+        height: 80px;
+        width: 80px;
+      }
+
+      &.user-picture-short {
+        height: 30px;
+        width: 30px;
+      }
+    }
+
     .sidebar-profile-text {
       opacity: 1;
       transition: opacity 0.5s, visibility 0.5s;

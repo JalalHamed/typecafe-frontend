@@ -25,9 +25,11 @@ const Projects = () => {
           return (
             <Project
               key={index}
+              createAt={project.created_at}
               client={project.client}
               description={project.description}
               image={project.files}
+              profilePicture={project.profile_picture}
             />
           );
         })

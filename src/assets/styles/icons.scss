@@ -8,9 +8,15 @@
   }
 
   &.profile-pic-default {
-    content: url("../svgs/profile-pic-default.svg");
+    content: url("../svgs/profile-pic.svg");
     width: 200px;
     height: 200px;
+  }
+
+  &.post-profile-pic {
+    content: url("../svgs/profile-pic.svg");
+    width: 50px;
+    height: 50px;
   }
 
   &.icon-notification {

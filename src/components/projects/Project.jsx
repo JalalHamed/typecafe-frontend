@@ -3,7 +3,7 @@ import React from "react";
 // Designs
 import "./project.scss";
 
-const Project = ({ index, description, image, client }) => {
+const Project = ({ index, description, image, client, profilePicture }) => {
   return (
     <div className="project-wrapper" key={index}>
       <div className="project-image-wrapper">
@@ -14,8 +14,18 @@ const Project = ({ index, description, image, client }) => {
         />
       </div>
       <div className="project-details-wrapper">
-        <div className="project-description-title">مشتری</div>
-        <div>{client}</div>
+        <div className="client-wrapper">
+          {!!profilePicture ? (
+            <img
+              src={`http:127.0.0.1:8000${profilePicture}`}
+              alt="User Profile"
+              className="client-image"
+            />
+          ) : (
+            <i className="icon post-profile-pic" />
+          )}
+          <div className="client-name">{client}</div>
+        </div>
         <div className="project-description-title">توضیحات</div>
         <div className="project-description">{description}</div>
       </div>

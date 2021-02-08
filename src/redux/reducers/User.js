@@ -6,6 +6,7 @@ let initialState = {
   displayname: "",
   email: "",
   credit: 0,
+  picture: "",
 };
 
 const User = (state = initialState, action) => {

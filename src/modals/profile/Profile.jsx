@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Libraries
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Components
 import Close from "components/buttons/Close";
-import Input from "components/inputs/Input";
-
-// Functions
-import { PriceFormat } from "components/helper";
 
 // Actions
 import { User } from "redux/actions";
@@ -18,7 +14,7 @@ import "./profile.scss";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state.User);
+  const inputFileRef = useRef();
 
   return (
     <div className="profile-wrapper">
@@ -31,11 +27,13 @@ const Profile = () => {
       </div>
       <div className="profile-content">
         <div className="profile-content-right">
-          <i className="icon profile-pic-default" />
+          <i
+            className="icon profile-pic-default profile-pic"
+            onClick={() => inputFileRef.current.click()}
+          />
+          <input type="file" ref={inputFileRef} hidden />
         </div>
-        <div className="profile-content-left">
-          <div>نام نمایشی</div>
-        </div>
+        <div className="profile-content-left"></div>
       </div>
     </div>
   );
