@@ -5,7 +5,19 @@ import "./inputs.scss";
 
 const Input = forwardRef(
   (
-    { label, name, noBreak, type, id, style, wrapperStyle, error, autoFocus },
+    {
+      label,
+      name,
+      noBreak,
+      type,
+      id,
+      style,
+      wrapperStyle,
+      error,
+      autoFocus,
+      defaultValue,
+      disabled,
+    },
     ref
   ) => {
     const errorMessageProducer = () => {
@@ -69,6 +81,8 @@ const Input = forwardRef(
             autoFocus={autoFocus}
             max={maxProducer()}
             dir="auto"
+            defaultValue={defaultValue}
+            disabled={disabled}
           />
         </div>
         {!noBreak && <div className="input-break" />}

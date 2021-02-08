@@ -49,10 +49,7 @@ const App = () => {
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick
         rtl
-        pauseOnFocusLoss
-        draggable
         pauseOnHover
       />
     </div>

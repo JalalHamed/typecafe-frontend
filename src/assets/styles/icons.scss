@@ -7,6 +7,12 @@
     margin-left: 24px !important;
   }
 
+  &.profile-pic-default {
+    content: url("../svgs/profile-pic-default.svg");
+    width: 200px;
+    height: 200px;
+  }
+
   &.icon-notification {
     content: url("../svgs/notification.svg");
     width: 24px;

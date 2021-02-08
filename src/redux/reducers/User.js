@@ -1,5 +1,6 @@
 let initialState = {
   isLoggedIn: false,
+  isModalOpen: false,
   accessToken: "",
   refreshToken: "",
   displayname: "",

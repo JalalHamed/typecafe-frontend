@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Button from "components/buttons/Button";
@@ -28,7 +29,7 @@ const ReviewAndSubmit = () => {
     body.append("files", state.files[0]);
 
     CreateProjectReq(body)
-      .then(() =>
+      .then(() => {
         dispatch(
           CreateProject({
             isModalOpen: false,
@@ -36,8 +37,9 @@ const ReviewAndSubmit = () => {
             files: [],
             description: "",
           })
-        )
-      )
+        );
+        toast.success("پروژه‌ شما با موفقیت ثبت شد.");
+      })
       .catch(err => handleErrors(err, setError));
   };
 
