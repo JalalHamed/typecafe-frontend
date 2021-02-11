@@ -1,14 +1,16 @@
 import axios from "axios";
 
+import { baseURL } from "components/xhr";
+
 const AxiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/",
+  baseURL: baseURL,
   timeout: 10000,
   headers: {
     Authorization: null,
     "Content-Type": "application/json",
     accept: "application/json",
   },
-  origin: "http://127.0.0.1:8000/",
+  origin: baseURL,
 });
 
 export default AxiosInstance;

@@ -12,6 +12,9 @@ import { PriceFormat } from "components/helper";
 // Actions
 import { User } from "redux/actions";
 
+// XHR
+import { baseURL } from "components/xhr";
+
 const Profile = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
@@ -27,7 +30,7 @@ const Profile = forwardRef((props, ref) => {
     >
       {user.picture ? (
         <img
-          src={`http://127.0.0.1:8000${user.picture}`}
+          src={baseURL + user.picture}
           alt="User Profile"
           className={`user-picture ${
             isSidebarOpen ? "user-picture-wide" : "user-picture-short"

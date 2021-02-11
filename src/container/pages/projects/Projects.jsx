@@ -30,6 +30,7 @@ const Projects = () => {
               description={project.description}
               image={project.files}
               clientPicture={project.client_picture}
+              status={project.status}
             />
           );
         })

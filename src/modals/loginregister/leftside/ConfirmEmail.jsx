@@ -39,9 +39,10 @@ const ConfirmEmail = () => {
     ConfirmEmailReq({ code: data.confirm_email_code, email })
       .then(res => {
         setLoading(false);
-        if (res.codes_match) {
+        if (res.potato === "potato") {
           dispatch(LR({ page: "Register" }));
-        } else {
+        }
+        if (res.potato === "potahto") {
           setErrMsg("کد تایید وارد شده صحیح نمی‌باشد.");
         }
       })

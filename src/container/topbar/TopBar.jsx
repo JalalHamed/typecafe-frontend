@@ -9,6 +9,9 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 // Actions
 import { Sidebar, LR, CreateProject } from "redux/actions";
 
+// XHR
+import { baseURL } from "components/xhr";
+
 // Designs
 import "./topbar.scss";
 
@@ -19,7 +22,7 @@ const TopBar = () => {
   const createProjectRippleRef = useRef();
   const notifRippleRef = useRef();
   const userRippleRef = useRef();
-  const isLoggedIn = useSelector(state => state.User.isLoggedIn);
+  const user = useSelector(state => state.User);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
 
   return (
@@ -38,7 +41,7 @@ const TopBar = () => {
         <p className="site-title no-select">تایپ‌کافه</p>
       </div>
       <div className="topbar-left">
-        {!isLoggedIn && (
+        {!user.isLoggedIn && (
           <RippleWrapper
             className="topbar-sign-up"
             onClick={() => dispatch(LR({ isModalOpen: true }))}
@@ -48,7 +51,7 @@ const TopBar = () => {
             <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
           </RippleWrapper>
         )}
-        {isLoggedIn && (
+        {user.isLoggedIn && (
           <div className="topbar-left-user-logged-in">
             <RippleWrapper
               className="create-project"
@@ -62,7 +65,15 @@ const TopBar = () => {
               <i className="icon icon-notification" />
             </RippleWrapper>
             <RippleWrapper ref={userRippleRef} className="user-wrapper">
-              <i className="icon icon-user-default-regular" />
+              {!user.picture ? (
+                <i className="icon icon-user-default-regular" />
+              ) : (
+                <img
+                  src={baseURL + user.picture}
+                  alt="User Profile"
+                  className="user-profile"
+                />
+              )}
             </RippleWrapper>
           </div>
         )}
