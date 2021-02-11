@@ -32,3 +32,10 @@ export const SelectedImage = payload => {
     payload,
   };
 };
+
+export const Notifications = payload => {
+  return {
+    type: "NOTIFICATION",
+    payload,
+  };
+};

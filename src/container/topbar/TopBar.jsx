@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Actions
-import { Sidebar, LR, CreateProject } from "redux/actions";
+import { Sidebar, LR, CreateProject, User } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -64,7 +64,11 @@ const TopBar = () => {
             <RippleWrapper className="notif-wrapper" ref={notifRippleRef}>
               <i className="icon icon-notification" />
             </RippleWrapper>
-            <RippleWrapper ref={userRippleRef} className="user-wrapper">
+            <RippleWrapper
+              ref={userRippleRef}
+              className="user-wrapper"
+              onClick={() => dispatch(User({ isDropdownOpen: true }))}
+            >
               {!user.picture ? (
                 <i className="icon icon-user-default-regular" />
               ) : (

@@ -12,8 +12,9 @@ import Rules from "./pages/rules/Rules";
 import MinimizedCreateProject from "components/minimizes/MinimizedCreateProject";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
+import UserDropDown from "components/dropdowns/UserDropDown";
 
-// Modals
+// Modals & Clicks
 import Modals from "./Modals";
 
 // Design
@@ -36,6 +37,8 @@ const App = () => {
           <SideBar />
         </div>
         <div className="content">
+          {state.User.isDropdownOpen && <UserDropDown />}
+
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "rules" && <Rules />}
 
