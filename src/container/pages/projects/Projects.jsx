@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+// Libraries
+import { useSelector } from "react-redux";
+
 // Components
 import Project from "components/projects/Project";
 
@@ -10,13 +13,18 @@ import { GetProjects } from "requests";
 import "./projects.scss";
 
 const Projects = () => {
+  const getProjects = useSelector(state => state.Projects.getprojects);
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
+  const get = () => {
     GetProjects()
       .then(res => setProjects(res))
       .catch(err => console.log(err));
-  }, []);
+  };
+
+  useEffect(() => {
+    get();
+  }, [getProjects]);
 
   return (
     <div className="projects-wrapper">
