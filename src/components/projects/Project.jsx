@@ -38,6 +38,7 @@ const Project = ({
             <div className="project-description">{description}</div>
           </>
         )}
+        {status === "OP" && "وضعیت پروژه بازه"}
       </div>
     </div>
   );
