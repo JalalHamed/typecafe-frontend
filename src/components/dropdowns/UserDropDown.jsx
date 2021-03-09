@@ -18,15 +18,14 @@ const UserDropDown = () => {
 
   UseOnClickOutside(ref, () => dispatch(User({ isDropdownOpen: false })));
 
+  const handleLogout = () => {
+    dispatch(User({ isDropdownOpen: false, isLoggedIn: false }));
+  };
+
   return (
     <div className="user-dropdown-wrapper" ref={ref}>
       <div className="user-dropdown-item">تنظیمات</div>
-      <div
-        className="user-dropdown-item"
-        onClick={() =>
-          dispatch(User({ isLoggedIn: false, isDropdownOpen: false }))
-        }
-      >
+      <div className="user-dropdown-item" onClick={handleLogout}>
         خروج
       </div>
     </div>

@@ -41,7 +41,7 @@ const TopBar = () => {
         <p className="site-title no-select">تایپ‌کافه</p>
       </div>
       <div className="topbar-left">
-        {!user.isLoggedIn && (
+        {!user.isLoggedIn ? (
           <RippleWrapper
             className="topbar-sign-up"
             onClick={() => dispatch(LR({ isModalOpen: true }))}
@@ -50,8 +50,7 @@ const TopBar = () => {
             <i className="icon icon-user-red-topbar" />
             <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
           </RippleWrapper>
-        )}
-        {user.isLoggedIn && (
+        ) : (
           <div className="topbar-left-user-logged-in">
             <RippleWrapper
               className="create-project"

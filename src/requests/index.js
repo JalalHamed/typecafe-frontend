@@ -3,14 +3,14 @@ import axios from "./Api";
 // Register and Login
 export const UserRegister = body => {
   return axios.post("auth/register/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
+    axios.defaults.headers["Authorization"] = "Token " + res.data.token;
     return res.data;
   });
 };
 
 export const UserLogin = body => {
   return axios.post("auth/login/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
+    axios.defaults.headers["Authorization"] = "Token " + res.data.token;
     return res.data;
   });
 };
@@ -67,9 +67,9 @@ export const handleErrors = (error, setMessage) => {
       err?.displayname &&
       err?.displayname.length &&
       err?.displayname[0] ===
-        "Ensure this field has no more than 20 characters."
+        "Ensure this field has no more than 14 characters."
     ) {
-      setMessage("نام نمایشی نمی‌تواند بیشتر از ۲۰ کاراکتر داشته باشد.");
+      setMessage("نام نمایشی نمی‌تواند بیشتر از ۱۴ کاراکتر داشته باشد.");
     } else if (
       err?.password &&
       err?.password.length &&
