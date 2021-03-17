@@ -29,6 +29,9 @@ const Image = () => {
         alt="typeproject"
         className="selected-image no-select"
         onClick={e => StopPropagation(e)}
+        onMouseDown={
+          e => (e.preventDefault ? e.preventDefault() : (e.returnValue = false)) // disables dragging
+        }
       />
       <div
         className={`close-selected-image no-select icon ${
