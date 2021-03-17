@@ -68,6 +68,7 @@ const Login = () => {
           error={errors.password}
           autoFocus
           noBreak
+          disabled={loading}
         />
         <p
           className="login-forgot-password"

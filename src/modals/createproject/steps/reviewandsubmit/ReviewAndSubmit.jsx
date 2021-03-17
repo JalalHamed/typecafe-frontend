@@ -26,7 +26,9 @@ const ReviewAndSubmit = () => {
   const onSubmit = () => {
     let body = new FormData();
     body.append("description", state.description);
-    body.append("files", state.files[0]);
+    body.append("image", state.files[0]);
+
+    console.log(state.files);
 
     CreateProjectReq(body)
       .then(() => {

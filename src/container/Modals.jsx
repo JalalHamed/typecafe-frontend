@@ -33,6 +33,7 @@ const Modals = () => {
           <Image />
         </ModalWrapper>
       )}
+      {/* Profile */}
       {state.User.isModalOpen && (
         <ModalWrapper>
           <Profile />

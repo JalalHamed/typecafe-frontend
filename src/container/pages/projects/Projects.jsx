@@ -36,7 +36,7 @@ const Projects = () => {
               createAt={project.created_at}
               client={project.client}
               description={project.description}
-              image={project.files}
+              image={project.image}
               clientPicture={project.client_picture}
               status={project.status}
             />

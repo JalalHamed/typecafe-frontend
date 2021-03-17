@@ -78,6 +78,7 @@ const Email = () => {
           error={errors.email}
           autoFocus
           noBreak
+          disabled={loading}
         />
         <Button
           className="submit-button"

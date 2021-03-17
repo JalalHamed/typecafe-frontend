@@ -1,5 +1,11 @@
 import React from "react";
 
+// Libraries
+import { useDispatch } from "react-redux";
+
+// Actions
+import { SelectedImage } from "redux/actions";
+
 // XHR
 import { baseURL } from "components/xhr";
 
@@ -14,10 +20,20 @@ const Project = ({
   clientPicture,
   status,
 }) => {
+  const dispatch = useDispatch();
+  const handleImageClick = e => {
+    dispatch(SelectedImage({ image: e.target.src, isModalOpen: true }));
+  };
+
   return (
     <div className="project-wrapper" key={index}>
       <div className="project-image-wrapper">
-        <img src={baseURL + image} alt={image} className="project-image" />
+        <img
+          src={baseURL + image}
+          alt={image}
+          className="project-image"
+          onClick={e => handleImageClick(e)}
+        />
       </div>
       <div className="project-details-wrapper">
         <div className="client-wrapper">

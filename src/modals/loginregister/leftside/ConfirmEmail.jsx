@@ -104,6 +104,7 @@ const ConfirmEmail = () => {
           error={errors.confirm_email_code}
           autoFocus
           noBreak
+          disabled={loading}
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button

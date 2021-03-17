@@ -36,6 +36,7 @@ const ForgotPassword = () => {
           name="email"
           ref={register({ required: true })}
           error={errors.email}
+          disabled={loading}
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button

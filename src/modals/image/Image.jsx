@@ -18,11 +18,20 @@ const Image = () => {
     dispatch(SelectedImage({ image: "", isModalOpen: false }));
   };
 
+  const StopPropagation = e => {
+    e.stopPropagation();
+  };
+
   return (
     <>
-      <img src={image} alt="typeproject" className="selected-image" />
+      <img
+        src={image}
+        alt="typeproject"
+        className="selected-image no-select"
+        onClick={e => StopPropagation(e)}
+      />
       <div
-        className={`close-selected-image icon ${
+        className={`close-selected-image no-select icon ${
           iconMouseOver
             ? "icon-close-image-modal-red"
             : "icon-close-image-modal"

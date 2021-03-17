@@ -71,6 +71,7 @@ const Register = () => {
           ref={register({ required: true })}
           error={errors.displayname}
           autoFocus
+          disabled={loading}
         />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Input
@@ -81,6 +82,7 @@ const Register = () => {
             ref={register({ required: true })}
             error={errors.password}
             wrapperStyle={{ width: "49%" }}
+            disabled={loading}
           />
           <Input
             label="تایید رمز عبور"
@@ -91,6 +93,7 @@ const Register = () => {
             error={errors.confirm_password}
             noBreak
             wrapperStyle={{ width: "49%" }}
+            disabled={loading}
           />
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
