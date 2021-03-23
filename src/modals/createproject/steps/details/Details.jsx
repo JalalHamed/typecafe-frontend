@@ -26,13 +26,13 @@ const Details = () => {
   };
 
   const handlePrevStep = () => {
-    dispatch(CreateProject({ description, step: "uploadpics" }));
+    dispatch(CreateProject({ description, step: "uploadfile" }));
   };
 
   return (
     <div className="details-wrapper">
       <TextArea
-        label="توضیح (اختیاری)"
+        label="توضیحات"
         id="description"
         name="description"
         value={description}

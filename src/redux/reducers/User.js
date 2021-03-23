@@ -1,5 +1,5 @@
 let initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   isModalOpen: false,
   isDropdownOpen: false,
   displayname: "",

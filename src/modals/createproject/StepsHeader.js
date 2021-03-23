@@ -5,19 +5,14 @@ import { useSelector } from "react-redux";
 
 const StepsHeader = () => {
   const step = useSelector(state => state.CreateProject.step);
-  const image = useSelector(state => state.CreateProject.files.length);
 
   return (
     <>
-      <p className="step-title bold">آپلود عکس</p>
+      <p className="step-title bold">آپلود فایل</p>
       <div
-        className={`progress-line ${
-          image && step === "uploadpics" && "progress-line-signal"
-        } ${step === "uploadpics" ? "blur" : "bold"}`}
+        className={`progress-line ${step === "uploadfile" ? "blur" : "bold"}`}
       />
-      <p
-        className={`step-title blur ${step === "uploadpics" ? "blur" : "bold"}`}
-      >
+      <p className={`step-title ${step === "uploadfile" ? "blur" : "bold"}`}>
         جزئیات
       </p>
       <div

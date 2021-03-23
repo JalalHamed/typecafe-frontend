@@ -14,7 +14,7 @@ import "./minimizedcreateproject.scss";
 
 const MinimizedCreateProject = () => {
   const dispatch = useDispatch();
-  const files = useSelector(state => state.CreateProject.files.length);
+  const files = useSelector(state => state.CreateProject.file);
 
   const handleClose = e => {
     e.stopPropagation();

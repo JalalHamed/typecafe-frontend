@@ -1,0 +1,61 @@
+.upload-pics-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .upload-icon-circle {
+    position: relative;
+    width: 135px;
+    height: 135px;
+    background-color: #ebebeb;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .upload-title {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+
+  .upload-valid-formats {
+    margin-top: 3px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+
+    .badformat {
+      color: #d8000c;
+    }
+  }
+
+  .upload-button {
+    margin-top: 20px;
+    width: initial;
+  }
+
+  .error {
+    position: absolute;
+    bottom: 90px;
+  }
+
+  .file-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 235px;
+
+    .file-detials {
+      text-align: right;
+      direction: ltr;
+      font-size: 20px;
+
+      .label {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

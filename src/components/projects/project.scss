@@ -4,27 +4,6 @@
   height: 250px;
   margin: 15px;
 
-  .project-image-wrapper {
-    width: 200px;
-    min-width: 200px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: border 0.2s;
-    cursor: zoom-in;
-
-    &:hover {
-      border: 2px solid #1c3987;
-    }
-
-    .project-image {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
   .project-details-wrapper {
     margin-right: 20px;
 

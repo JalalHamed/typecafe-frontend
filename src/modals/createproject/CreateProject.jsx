@@ -8,7 +8,7 @@ import Close from "components/buttons/Close";
 
 // Steps
 import StepsHeader from "./StepsHeader";
-import UploadPics from "./steps/uploadpics/UploadPics";
+import UploadFile from "./steps/uploadfile/UploadFile";
 import Details from "./steps/details/Details";
 import ReviewAndSubmit from "./steps/reviewandsubmit/ReviewAndSubmit";
 
@@ -35,7 +35,7 @@ const CreateNewProject = () => {
         <StepsHeader />
       </div>
       <div className="cp-content">
-        {step === "uploadpics" && <UploadPics />}
+        {step === "uploadfile" && <UploadFile />}
         {step === "details" && <Details />}
         {step === "reviewandsubmit" && <ReviewAndSubmit />}
       </div>

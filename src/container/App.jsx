@@ -42,8 +42,9 @@ const App = () => {
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "rules" && <Rules />}
 
-          {!!state.CreateProject.files.length &&
-            !state.CreateProject.isModalOpen && <MinimizedCreateProject />}
+          {!!state.CreateProject.files && !state.CreateProject.isModalOpen && (
+            <MinimizedCreateProject />
+          )}
         </div>
       </div>
 
