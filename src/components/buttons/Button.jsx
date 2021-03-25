@@ -17,11 +17,13 @@ const override = css`
 `;
 
 const Button = forwardRef(
-  ({ className, title, loading, onClick, type }, ref) => {
+  ({ className, title, loading, onClick, type, disabled }, ref) => {
     return (
       <button
-        className={`button ${className && className}`}
-        disabled={loading}
+        className={`button ${className ? className : ""} ${
+          disabled ? "disabled" : ""
+        }`}
+        disabled={loading || disabled}
         onClick={onClick}
         type={type && type}
         onMouseDown={e => {

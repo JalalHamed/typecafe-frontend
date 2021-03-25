@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import UseOnClickOutside from "hooks/UseOnClickOutside";
 
 // Actions
-import { User } from "redux/actions";
+import { User, CreateProject } from "redux/actions";
 
 // Designs
 import "./userdropdown.scss";
@@ -20,6 +20,16 @@ const UserDropDown = () => {
 
   const handleLogout = () => {
     dispatch(User({ isDropdownOpen: false, isLoggedIn: false }));
+    dispatch(
+      CreateProject({
+        description: "",
+        numberOfPages: "",
+        deliveryDeadline: "",
+        languages: [],
+        file: "",
+        step: "uploadfile",
+      })
+    );
   };
 
   return (

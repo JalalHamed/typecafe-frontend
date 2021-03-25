@@ -29,6 +29,15 @@
     background-color: #29313b;
   }
 
+  &.disabled {
+    background-color: #29313b;
+    cursor: auto;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   &:hover {
     opacity: 0.9;
   }

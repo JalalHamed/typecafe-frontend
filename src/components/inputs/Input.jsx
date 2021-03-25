@@ -17,6 +17,10 @@ const Input = forwardRef(
       autoFocus,
       defaultValue,
       disabled,
+      min,
+      max,
+      value,
+      onChange,
     },
     ref
   ) => {
@@ -34,21 +38,6 @@ const Input = forwardRef(
           return ".کد تایید ایمیل را وارد کنید";
         default:
           return "";
-      }
-    };
-
-    const maxProducer = () => {
-      switch (name) {
-        case "email":
-          return 256;
-        case "password":
-          return 100;
-        case "confirm_password":
-          return 100;
-        case "displayname":
-          return 20;
-        default:
-          return undefined;
       }
     };
 
@@ -79,10 +68,13 @@ const Input = forwardRef(
             }`}
             style={style && style}
             autoFocus={autoFocus}
-            max={maxProducer()}
             dir="auto"
             defaultValue={defaultValue}
             disabled={disabled}
+            min={min}
+            max={max}
+            value={value}
+            onChange={onChange}
           />
         </div>
         {!noBreak && <div className="input-break" />}

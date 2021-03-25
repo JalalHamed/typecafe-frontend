@@ -1,21 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Actions
-// import { CreateProject } from "redux/actions";
+import { CreateProject } from "redux/actions";
 
 // Components
 import Button from "components/buttons/Button";
+import Close from "components/buttons/Close";
 
 // Designs
 import "./uploadfile.scss";
 
 const UploadFiles = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const uploadInput = useRef();
   const chooseFilesRippleRef = useRef();
+  const nextStepRippleRef = useRef();
   const [file, setFile] = useState(
     useSelector(state => state.CreateProject.file)
   );
@@ -25,12 +27,20 @@ const UploadFiles = () => {
     uploadInput.current.click();
   };
 
+  const goToNextStep = () => {
+    dispatch(CreateProject({ step: "details", firstMount: true }));
+  };
+
+  const closeFile = () => {
+    dispatch(CreateProject({ file: "" }));
+    setFile("");
+  };
+
   useEffect(() => {
-    console.log(file);
     setBadFormat(false);
     if (file.name)
       if (file.type === "application/zip") {
-        // dispatch(CreateProject({ file, step: "details" }));
+        dispatch(CreateProject({ file }));
       } else {
         setBadFormat(true);
       }
@@ -42,13 +52,16 @@ const UploadFiles = () => {
     <>
       <input
         type="file"
-        name="projectpics"
+        name="projectfile"
         ref={uploadInput}
         onChange={e => setFile(e.target.files[0])}
+        onClick={e => {
+          e.target.value = null; // allows uploading the same file over and over
+        }}
         accept=".zip"
         hidden
       />
-      <div className="upload-pics-wrapper">
+      <div className="upload-file-wrapper">
         {!file.name ? (
           <>
             <div className="upload-icon-circle" onClick={openFileInput}>
@@ -74,17 +87,27 @@ const UploadFiles = () => {
             )}
           </>
         ) : (
-          <div className="file-wrapper">
-            <i className="icon icon-zip" style={{ textAlign: "center" }} />
-            <div className="file-detials">
-              <p className="label">نام فایل</p>
-              <p>{file.name}&nbsp;&nbsp;</p>
-              <p className="label">حجم فایل</p>
-              <p style={{ direction: "rtl" }}>
-                &nbsp;&nbsp;{Number(file.size / 1000).toFixed(0)} کیلوبایت
-              </p>
+          <>
+            <div className="file-wrapper">
+              <Close className="cancel-file" red onClick={closeFile} />
+              <i className="icon icon-zip" style={{ textAlign: "center" }} />
+              <div className="file-detials">
+                <p className="label">نام فایل</p>
+                <p>{file.name}&nbsp;&nbsp;</p>
+                <p className="label">حجم فایل</p>
+                <p style={{ direction: "rtl" }}>
+                  &nbsp;&nbsp;{Number(file.size / 1000).toFixed(0)} کیلوبایت
+                </p>
+              </div>
             </div>
-          </div>
+            <div className="file-uploaded-buttons-wrapper">
+              <Button
+                ref={nextStepRippleRef}
+                className="next-step icon icon-next-step"
+                onClick={goToNextStep}
+              />
+            </div>
+          </>
         )}
       </div>
     </>

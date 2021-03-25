@@ -20,7 +20,7 @@ import "./createproject.scss";
 
 const CreateNewProject = () => {
   const dispatch = useDispatch();
-  const step = useSelector(state => state.CreateProject.step);
+  const state = useSelector(state => state.CreateProject);
 
   return (
     <div className="cp-wrapper">
@@ -35,9 +35,9 @@ const CreateNewProject = () => {
         <StepsHeader />
       </div>
       <div className="cp-content">
-        {step === "uploadfile" && <UploadFile />}
-        {step === "details" && <Details />}
-        {step === "reviewandsubmit" && <ReviewAndSubmit />}
+        {state.step === "uploadfile" && <UploadFile />}
+        {state.step === "details" && <Details />}
+        {state.step === "reviewandsubmit" && <ReviewAndSubmit />}
       </div>
       <div className="user-agreement">
         با ثبت پروژه خود در تایپ‌کافه، شما با

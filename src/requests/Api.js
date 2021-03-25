@@ -31,7 +31,7 @@ AxiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      error.response.status === 401 &&
+      error.response?.status === 401 &&
       originalRequest.url === baseURL + "token/refresh/"
     ) {
       window.location.href = "/login/";
@@ -39,9 +39,9 @@ AxiosInstance.interceptors.response.use(
     }
 
     if (
-      error.response.data.code === "token_not_valid" &&
-      error.response.status === 401 &&
-      error.response.statusText === "Unauthorized"
+      error.response?.data.code === "token_not_valid" &&
+      error.response?.status === 401 &&
+      error.response?.statusText === "Unauthorized"
     ) {
       const refreshToken = localStorage.getItem("refresh_token");
 
@@ -57,13 +57,13 @@ AxiosInstance.interceptors.response.use(
             refresh: refreshToken,
           })
             .then(response => {
-              localStorage.setItem("access_token", response.data.access);
-              localStorage.setItem("refresh_token", response.data.refresh);
+              localStorage.setItem("access_token", response?.data.access);
+              localStorage.setItem("refresh_token", response?.data.refresh);
 
               AxiosInstance.defaults.headers["Authorization"] =
-                "JWT " + response.data.access;
+                "JWT " + response?.data.access;
               originalRequest.headers["Authorization"] =
-                "JWT " + response.data.access;
+                "JWT " + response?.data.access;
 
               return AxiosInstance(originalRequest);
             })

@@ -1,8 +1,13 @@
 let initialState = {
   isModalOpen: true,
-  step: "uploadfile",
-  file: [],
+  firstMount: false,
+  step: "details",
+  file: "",
+  languages: [],
+  numberOfPages: "",
+  deliveryDeadline: "",
   description: "",
+  detailsComplete: false,
 };
 
 const CreateProject = (state = initialState, action) => {

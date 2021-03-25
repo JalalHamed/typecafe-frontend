@@ -25,12 +25,6 @@
     height: 24px;
   }
 
-  &.icon-close {
-    content: url("../svgs/close.svg");
-    width: 10px;
-    height: 10px;
-  }
-
   &.icon-close-image-modal {
     content: url("../svgs/close-image-modal.svg");
     width: 70px;
@@ -41,6 +35,12 @@
     content: url("../svgs/close-image-modal-red.svg");
     width: 70px;
     height: 70px;
+  }
+
+  &.icon-close {
+    content: url("../svgs/close.svg");
+    width: 10px;
+    height: 10px;
   }
 
   &.icon-close-red {
