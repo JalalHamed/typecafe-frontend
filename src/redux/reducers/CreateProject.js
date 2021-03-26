@@ -1,5 +1,5 @@
 let initialState = {
-  isModalOpen: true,
+  isModalOpen: false,
   firstMount: true,
   step: "uploadfile",
   file: "",
