@@ -38,7 +38,7 @@
 
   .error {
     position: absolute;
-    bottom: 90px;
+    bottom: 80px;
   }
 
   .file-wrapper {
@@ -81,5 +81,67 @@
       margin: 5px;
       padding: 14px;
     }
+
+    .next-step-tooltip {
+      opacity: 0;
+      position: absolute;
+      left: 95px;
+      bottom: 28px;
+      font-size: 14px;
+      transform: rotate(330deg);
+      animation: fadeIn 0.8s ease 1.5s forwards, fadeOut 1s ease 5s forwards;
+    }
+
+    .ns-arrow-stem {
+      position: absolute;
+      left: 135px;
+      bottom: 0;
+      transform: scaleX(-1);
+
+      #arrowStem {
+        stroke-dasharray: 78.89945983886719;
+        stroke-dashoffset: 78.89945983886719;
+        animation: stem 1s linear forwards, fadeOut 1s ease 5s forwards;
+      }
+    }
+
+    .ns-arrow-cap {
+      position: absolute;
+      left: 132px;
+      bottom: 10px;
+      transform: scaleX(-1);
+
+      #arrowCap {
+        stroke-dasharray: 15.967951774597168;
+        stroke-dashoffset: 15.967951774597168;
+        animation: cap 0.5s linear 1s forwards, fadeOut 1s ease 5s forwards;
+      }
+    }
+  }
+}
+
+// , fadeOut 1s ease 5s forwards
+
+@keyframes stem {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cap {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
   }
 }

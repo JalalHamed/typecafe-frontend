@@ -139,7 +139,7 @@ const Details = () => {
           disabled={!detailsComplete}
         />
         {!detailsComplete && (
-          <p className="complete-all-the-fields-to-continue">
+          <p className="complete-all-the-fields-to-continue no-select">
             برای ادامه دادن باید همه‌
             <br />
             فیلد های بالا را کامل کنید.

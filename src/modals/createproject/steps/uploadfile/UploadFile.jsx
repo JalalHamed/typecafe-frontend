@@ -9,6 +9,8 @@ import { CreateProject } from "redux/actions";
 // Components
 import Button from "components/buttons/Button";
 import Close from "components/buttons/Close";
+import ArrowStem from "./ArrowStem";
+import ArrowCap from "./ArrowCap";
 
 // Designs
 import "./uploadfile.scss";
@@ -18,6 +20,7 @@ const UploadFiles = () => {
   const uploadInput = useRef();
   const chooseFilesRippleRef = useRef();
   const nextStepRippleRef = useRef();
+  const firstMount = useSelector(state => state.CreateProject.firstMount);
   const [file, setFile] = useState(
     useSelector(state => state.CreateProject.file)
   );
@@ -28,7 +31,7 @@ const UploadFiles = () => {
   };
 
   const goToNextStep = () => {
-    dispatch(CreateProject({ step: "details", firstMount: true }));
+    dispatch(CreateProject({ step: "details", firstMount: false }));
   };
 
   const closeFile = () => {
@@ -41,12 +44,18 @@ const UploadFiles = () => {
     if (file.name)
       if (file.type === "application/zip") {
         dispatch(CreateProject({ file }));
+        console.log("first");
       } else {
         setBadFormat(true);
+        console.log("second");
       }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
+
+  useEffect(() => {
+    console.log("bad format", badFormat);
+  }, [badFormat]);
 
   return (
     <>
@@ -62,7 +71,7 @@ const UploadFiles = () => {
         hidden
       />
       <div className="upload-file-wrapper">
-        {!file.name ? (
+        {!file.name || badFormat ? (
           <>
             <div className="upload-icon-circle" onClick={openFileInput}>
               <i className="icon icon-upload no-select" />
@@ -101,6 +110,17 @@ const UploadFiles = () => {
               </div>
             </div>
             <div className="file-uploaded-buttons-wrapper">
+              {firstMount && (
+                <>
+                  <div className="next-step-tooltip">قدم بعد</div>
+                  <div className="ns-arrow-stem">
+                    <ArrowStem />
+                  </div>
+                  <div className="ns-arrow-cap">
+                    <ArrowCap />
+                  </div>
+                </>
+              )}
               <Button
                 ref={nextStepRippleRef}
                 className="next-step icon icon-next-step"

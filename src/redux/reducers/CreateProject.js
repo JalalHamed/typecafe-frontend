@@ -1,7 +1,7 @@
 let initialState = {
   isModalOpen: true,
-  firstMount: false,
-  step: "details",
+  firstMount: true,
+  step: "uploadfile",
   file: "",
   languages: [],
   numberOfPages: "",
