@@ -3,7 +3,7 @@ let initialState = {
   firstMount: true,
   step: "uploadfile",
   file: "",
-  languages: [],
+  languagesAndAdditions: [],
   numberOfPages: "",
   deliveryDeadline: "",
   description: "",

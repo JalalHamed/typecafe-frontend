@@ -36,8 +36,8 @@ const Details = () => {
   const dispatch = useDispatch();
   const nextStepRippleRef = useRef();
   const previousStepRippleRef = useRef();
-  const [languages, setLanguages] = useState(
-    useSelector(state => state.CreateProject.languages)
+  const [languagesAndAdditions, setLanguagesAndAdditions] = useState(
+    useSelector(state => state.CreateProject.languagesAndAdditions)
   );
   const [numberOfPages, setNumberOfPages] = useState(
     useSelector(state => state.CreateProject.numberOfPages)
@@ -56,7 +56,7 @@ const Details = () => {
         description,
         numberOfPages,
         deliveryDeadline,
-        languages,
+        languagesAndAdditions,
         step: "reviewandsubmit",
       })
     );
@@ -68,14 +68,19 @@ const Details = () => {
         description,
         numberOfPages,
         deliveryDeadline,
-        languages,
+        languagesAndAdditions,
         step: "uploadfile",
       })
     );
   };
 
   useEffect(() => {
-    if (description && numberOfPages && deliveryDeadline && languages) {
+    if (
+      description &&
+      numberOfPages &&
+      deliveryDeadline &&
+      languagesAndAdditions
+    ) {
       setDetailsComplete(true);
       dispatch(CreateProject({ detailsComplete: true }));
     } else {
@@ -84,7 +89,7 @@ const Details = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [description, numberOfPages, deliveryDeadline, languages]);
+  }, [description, numberOfPages, deliveryDeadline, languagesAndAdditions]);
 
   return (
     <div className="details-wrapper">
@@ -95,13 +100,15 @@ const Details = () => {
           IndicatorSeparator: () => null, // removes the seperator bar
         }}
         styles={customStyles}
-        name="languages"
+        name="languagesAndAdditions"
         label="زبان‌(ها) و پیوست‌ های پروژه"
-        id="languages"
+        id="languagesAndAdditions"
         options={languageOptions}
         placeholder=""
-        onChange={val => setLanguages(val)}
-        defaultValue={useSelector(state => state.CreateProject.languages)}
+        onChange={val => setLanguagesAndAdditions(val)}
+        defaultValue={useSelector(
+          state => state.CreateProject.languagesAndAdditions
+        )}
       />
       <div style={{ marginBottom: "14px" }} />
       <div className="in-a-row">

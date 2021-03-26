@@ -25,8 +25,11 @@ const ReviewAndSubmit = () => {
 
   const onSubmit = () => {
     let body = new FormData();
+    body.append("file", state.file);
     body.append("description", state.description);
-    body.append("image", state.files[0]);
+    body.append("delivery_deadline", state.deliveryDeadline);
+    body.append("number_of_pages", state.numberOfPages);
+    body.append("languagesAndAdditions", state.languagesAndAdditions);
 
     CreateProjectReq(body)
       .then(() => {
@@ -55,18 +58,18 @@ const ReviewAndSubmit = () => {
           <div className="file-detials inline">
             <div>
               <p className="label">حجم فایل</p>
-              <p style={{ direction: "rtl" }}>
-                &nbsp;&nbsp;{Number(state.file.size / 1000).toFixed(0)} کیلوبایت
+              <p className="margin-right-12" style={{ direction: "rtl" }}>
+                {Number(state.file.size / 1000).toFixed(0)} کیلوبایت
               </p>
             </div>
             <div>
               <p className="label">نام فایل</p>
-              <p>{state.file.name}&nbsp;&nbsp;</p>
+              <p className="margin-right-12">{state.file.name}</p>
             </div>
           </div>
           <p className="label margin-top-10">زبان(ها) و پیوست های پروژه</p>
           <p className="margin-right-12">
-            {state.languages.map(language => language.label + " ")}
+            {state.languagesAndAdditions.map(language => language.label + " ")}
           </p>
           <div className="inline margin-top-10">
             <div>

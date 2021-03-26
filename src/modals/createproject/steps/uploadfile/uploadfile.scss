@@ -44,6 +44,7 @@
   .file-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 50px;
 
     .file-detials {
       text-align: right;
@@ -58,8 +59,8 @@
     }
 
     .cancel-file {
-      top: 290px;
-      right: 287px;
+      top: 260px;
+      right: 250px;
     }
   }
 
