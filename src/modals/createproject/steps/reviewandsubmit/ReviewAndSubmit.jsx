@@ -28,8 +28,6 @@ const ReviewAndSubmit = () => {
     body.append("description", state.description);
     body.append("image", state.files[0]);
 
-    console.log(state.files);
-
     CreateProjectReq(body)
       .then(() => {
         dispatch(
@@ -38,6 +36,9 @@ const ReviewAndSubmit = () => {
             step: "uploadpics",
             files: [],
             description: "",
+            languages: "",
+            numberOfPages: "",
+            deliveryDeadline: "",
           })
         );
         dispatch(Projects({ getprojects: 1 }));
@@ -48,6 +49,44 @@ const ReviewAndSubmit = () => {
 
   return (
     <div className="ras-wrapper">
+      <div className="ras-review-wrapper">
+        <i className="icon icon-zip" />
+        <div>
+          <div className="file-detials inline">
+            <div>
+              <p className="label">حجم فایل</p>
+              <p style={{ direction: "rtl" }}>
+                &nbsp;&nbsp;{Number(state.file.size / 1000).toFixed(0)} کیلوبایت
+              </p>
+            </div>
+            <div>
+              <p className="label">نام فایل</p>
+              <p>{state.file.name}&nbsp;&nbsp;</p>
+            </div>
+          </div>
+          <p className="label margin-top-10">زبان(ها) و پیوست های پروژه</p>
+          <p className="margin-right-12">
+            {state.languages.map(language => language.label + " ")}
+          </p>
+          <div className="inline margin-top-10">
+            <div>
+              <p className="label">تعداد صفحات</p>
+              <p className="margin-right-12">{state.deliveryDeadline}</p>
+            </div>
+            <div>
+              <p className="label">مهلت انجام (ساعت)</p>
+              <p className="margin-right-12">{state.deliveryDeadline}</p>
+            </div>
+          </div>
+          <p className="label margin-top-7">توضیحات</p>
+          <p
+            className="margin-right-12"
+            style={{ overflow: "auto", maxHeight: "56px", width: "260px" }}
+          >
+            {state.description}
+          </p>
+        </div>
+      </div>
       {error && <p>{error}</p>}
       <div className="ras-buttons-wrapper">
         <Button

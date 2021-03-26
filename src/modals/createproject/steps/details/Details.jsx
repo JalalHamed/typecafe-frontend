@@ -51,7 +51,15 @@ const Details = () => {
   const [detailsComplete, setDetailsComplete] = useState(false);
 
   const onSubmit = () => {
-    dispatch(CreateProject({ description, step: "reviewandsubmit" }));
+    dispatch(
+      CreateProject({
+        description,
+        numberOfPages,
+        deliveryDeadline,
+        languages,
+        step: "reviewandsubmit",
+      })
+    );
   };
 
   const handlePrevStep = () => {
@@ -83,13 +91,12 @@ const Details = () => {
       <Select
         isMulti
         isSearchable={false}
-        closeMenuOnSelect={false}
         components={{
           IndicatorSeparator: () => null, // removes the seperator bar
         }}
         styles={customStyles}
         name="languages"
-        label="زبان"
+        label="زبان‌(ها) و پیوست‌ های پروژه"
         id="languages"
         options={languageOptions}
         placeholder=""

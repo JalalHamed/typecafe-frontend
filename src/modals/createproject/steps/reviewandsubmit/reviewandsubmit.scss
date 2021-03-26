@@ -6,6 +6,42 @@
   justify-content: center;
   align-items: center;
 
+  .ras-review-wrapper {
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 80px;
+    text-align: right;
+    max-width: 330px;
+
+    .file-detials {
+      direction: ltr;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 0;
+    }
+
+    .margin-top-10 {
+      margin-top: 10px;
+    }
+
+    .margin-top-7 {
+      margin-top: 7px;
+    }
+
+    .margin-right-12 {
+      margin-right: 12px;
+    }
+
+    .inline {
+      display: flex;
+      justify-content: space-between;
+      width: 210px;
+    }
+  }
+
   .ras-buttons-wrapper {
     position: absolute;
     display: flex;

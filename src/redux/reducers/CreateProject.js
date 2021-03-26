@@ -7,7 +7,6 @@ let initialState = {
   numberOfPages: "",
   deliveryDeadline: "",
   description: "",
-  detailsComplete: false,
 };
 
 const CreateProject = (state = initialState, action) => {
