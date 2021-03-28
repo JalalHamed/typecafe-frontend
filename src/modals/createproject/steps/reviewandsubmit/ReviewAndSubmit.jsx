@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 // Components
 import Button from "components/buttons/Button";
@@ -22,14 +23,16 @@ const ReviewAndSubmit = () => {
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
+  const [langs, setLangs] = useState([]);
+  const [time, setTime] = useState("");
 
   const onSubmit = () => {
     let body = new FormData();
     body.append("file", state.file);
-    body.append("description", state.description);
-    body.append("delivery_deadline", state.deliveryDeadline);
+    body.append("languages_and_additions", langs);
     body.append("number_of_pages", state.numberOfPages);
-    body.append("languagesAndAdditions", state.languagesAndAdditions);
+    body.append("delivery_deadline", time);
+    body.append("description", state.description);
 
     CreateProjectReq(body)
       .then(() => {
@@ -37,7 +40,7 @@ const ReviewAndSubmit = () => {
           CreateProject({
             isModalOpen: false,
             step: "uploadpics",
-            files: [],
+            file: [],
             description: "",
             languages: "",
             numberOfPages: "",
@@ -49,6 +52,16 @@ const ReviewAndSubmit = () => {
       })
       .catch(err => handleErrors(err, setError));
   };
+
+  useEffect(() => {
+    state.languagesAndAdditions.forEach(lang => {
+      setLangs(prevState => [...prevState, lang.label]);
+    });
+
+    let d = new Date();
+    d.setHours(d.getHours() + state.deliveryDeadline);
+    setTime(moment(d).format("YYYY-MM-DD HH:mm"));
+  }, [state.languagesAndAdditions, state.deliveryDeadline]);
 
   return (
     <div className="ras-wrapper">
@@ -74,7 +87,7 @@ const ReviewAndSubmit = () => {
           <div className="inline margin-top-10">
             <div>
               <p className="label">تعداد صفحات</p>
-              <p className="margin-right-12">{state.deliveryDeadline}</p>
+              <p className="margin-right-12">{state.numberOfPages}</p>
             </div>
             <div>
               <p className="label">مهلت انجام (ساعت)</p>
@@ -90,7 +103,7 @@ const ReviewAndSubmit = () => {
           </p>
         </div>
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className="cp-error-on-submit">{error}</p>}
       <div className="ras-buttons-wrapper">
         <Button
           ref={previousStepRippleRef}

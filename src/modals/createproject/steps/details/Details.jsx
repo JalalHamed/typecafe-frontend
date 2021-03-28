@@ -49,13 +49,20 @@ const Details = () => {
     useSelector(state => state.CreateProject.description)
   );
   const [detailsComplete, setDetailsComplete] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(
+    "برای ادامه دادن باید همه‌ فیلد های بالا را کامل کنید."
+  );
 
   const onSubmit = () => {
+    // numberize the numbers
+    let nof = Number(numberOfPages);
+    let ddl = Number(deliveryDeadline);
+
     dispatch(
       CreateProject({
         description,
-        numberOfPages,
-        deliveryDeadline,
+        numberOfPages: nof,
+        deliveryDeadline: ddl,
         languagesAndAdditions,
         step: "reviewandsubmit",
       })
@@ -74,18 +81,33 @@ const Details = () => {
     );
   };
 
+  // this whole thing handles errors
   useEffect(() => {
+    // numberize the numbers
+    let nof = Number(numberOfPages);
+    let ddl = Number(deliveryDeadline);
+
     if (
       description &&
-      numberOfPages &&
-      deliveryDeadline &&
-      languagesAndAdditions
+      nof > 0 &&
+      ddl > 0 &&
+      languagesAndAdditions &&
+      Number.isInteger(ddl)
     ) {
       setDetailsComplete(true);
-      dispatch(CreateProject({ detailsComplete: true }));
     } else {
       setDetailsComplete(false);
-      dispatch(CreateProject({ detailsComplete: false }));
+      if (nof && nof < 1) {
+        setErrorMsg("تعداد صفحات نمی‌تواند کوچکتر از 1 باشد.");
+      } else if (ddl && ddl < 1) {
+        setErrorMsg("مهلت تحویل نمی‌تواند کوچکتر از 1 باشد.");
+      } else if (nof && !Number.isInteger(nof)) {
+        setErrorMsg("تعداد صفحات نمی‌تواند یک عدد اعشاری باشد.");
+      } else if (ddl && !Number.isInteger(ddl)) {
+        setErrorMsg("مهلت تحویل نمی‌تواند یک عدد اعشاری باشد.");
+      } else {
+        setErrorMsg("برای ادامه دادن باید همه‌ فیلد های بالا را کامل کنید.");
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -154,9 +176,7 @@ const Details = () => {
         />
         {!detailsComplete && (
           <p className="complete-all-the-fields-to-continue no-select">
-            برای ادامه دادن باید همه‌
-            <br />
-            فیلد های بالا را کامل کنید.
+            {errorMsg}
           </p>
         )}
       </div>
