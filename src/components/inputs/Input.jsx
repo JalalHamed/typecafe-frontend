@@ -12,6 +12,7 @@ const Input = forwardRef(
       type,
       id,
       style,
+      labelStyle,
       wrapperStyle,
       error,
       autoFocus,
@@ -46,6 +47,7 @@ const Input = forwardRef(
         <label
           htmlFor={id}
           className={`label no-select ${error ? "label-error" : ""}`}
+          style={labelStyle && labelStyle}
         >
           {label}
         </label>

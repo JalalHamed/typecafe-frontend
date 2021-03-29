@@ -30,16 +30,7 @@ const Projects = () => {
     <div className="projects-wrapper">
       {!!projects.length ? (
         projects.map((project, index) => {
-          return (
-            <Project
-              key={index}
-              createAt={project.created_at}
-              client={project.client}
-              description={project.description}
-              clientPicture={project.client_picture}
-              status={project.status}
-            />
-          );
+          return <Project key={index} project={project} />;
         })
       ) : (
         <div>هنوز پروژه ای ثبت نشده</div>

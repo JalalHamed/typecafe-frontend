@@ -11,6 +11,10 @@
   height: 33px;
   width: 100%;
 
+  &.fit-width {
+    width: fit-content;
+  }
+
   &.w-49 {
     width: 49%;
   }
