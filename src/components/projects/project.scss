@@ -3,12 +3,12 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 290px;
-  max-height: 290px;
+  height: 265px;
+  max-height: 265px;
   margin: 15px 15px 15px 15px;
   padding: 20px;
   border-top: 3px solid #1c3987;
-  background-color: #1c388709;
+  background-color: #1c388707;
   border-radius: 5px;
 
   .right {
@@ -31,22 +31,26 @@
     }
 
     .title {
-      font-size: 13px;
+      font-size: 12px;
       margin-top: 15px;
       color: #555;
     }
 
+    .value {
+      margin-right: 15px;
+    }
+
     .description-value {
       max-width: 100%;
-      height: 50px;
-      max-height: 50px;
+      height: 25px;
+      max-height: 25px;
       overflow-y: auto;
     }
 
     .inline {
       display: flex;
       justify-content: space-between;
-      width: 100%;
+      width: 90%;
     }
 
     .download-file {
