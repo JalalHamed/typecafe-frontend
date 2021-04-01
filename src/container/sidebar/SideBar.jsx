@@ -15,9 +15,7 @@ const SideBar = () => {
   const loginRippleRef = useRef();
   const profileRippleRef = useRef();
   const projectsRippleRef = useRef();
-  const tarrifsRippleRef = useRef();
   const financialRippleRef = useRef();
-  const settingsRippleRef = useRef();
   const rulesRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
@@ -41,13 +39,10 @@ const SideBar = () => {
             ref={financialRippleRef}
           />
         )}
-        <SideBarItem status="tarrifs" title="تعرفه ها" ref={tarrifsRippleRef} />
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
-        <SideBarItem
-          status="settings"
-          title="تنظیمات"
-          ref={settingsRippleRef}
-        />
+        {/* to be added... */}
+        {/* <SideBarItem status="support" title="پشتیبانی" ref={rulesRippleRef} /> */}
+        {/* <SideBarItem status="learn" title="آموزش" ref={rulesRippleRef} /> */}
       </div>
     </div>
   );

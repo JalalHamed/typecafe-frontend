@@ -19,7 +19,7 @@ const UserDropDown = () => {
   UseOnClickOutside(ref, () => dispatch(User({ isDropdownOpen: false })));
 
   const handleLogout = () => {
-    dispatch(User({ isDropdownOpen: false, isLoggedIn: false }));
+    dispatch(User({ isDropdownOpen: false, isLoggedIn: false, picture: "" }));
     dispatch(
       CreateProject({
         description: "",

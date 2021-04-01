@@ -3,10 +3,12 @@ import React, { useRef, useState, useEffect } from "react";
 // Libraries
 import { useSelector } from "react-redux";
 import Moment from "react-moment";
+import "moment/locale/fa";
 
 // Components
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
+import { PriceFormat } from "components/helper";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -17,11 +19,11 @@ import "./project.scss";
 const Project = ({ index, project }) => {
   const submitReqeustRippleRef = useRef();
   const downloadFileRippleRef = useRef();
-  const isLoggedIn = useSelector(state => state.User.isLoggedIn);
+  const user = useSelector(state => state.User);
   const [downloaded, setDownloaded] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [price, setPrice] = useState(1555);
+  const [price, setPrice] = useState(1500);
   const [contractorEarning, setContractorEarning] = useState(
     Math.round(price - (price * 5) / 100)
   );
@@ -32,7 +34,7 @@ const Project = ({ index, project }) => {
   };
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!user.isLoggedIn) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
       setDisabled(true);
     } else if (!downloaded) {
@@ -42,7 +44,7 @@ const Project = ({ index, project }) => {
       setErrMsg("");
       setDisabled(false);
     }
-  }, [isLoggedIn, downloaded]);
+  }, [user.isLoggedIn, downloaded]);
 
   useEffect(() => {
     setContractorEarning(Math.round(price - (price * 5) / 100));
@@ -87,31 +89,41 @@ const Project = ({ index, project }) => {
         />
       </div>
       <div className="left">
-        <Input
-          label="قیمت پیشنهادی شما برای هر صفحه (تومان)"
-          name="request"
-          type="number"
-          id="request"
-          wrapperStyle={{ width: "70%", marginTop: "10px" }}
-          labelStyle={{ fontSize: "14px" }}
-          style={{ fontSize: "14px" }}
-          min="1100"
-          disabled={disabled}
-          value={price}
-          onChange={e => setPrice(e.target.value)}
-        />
-        <p>کارمزد: ۵٪</p>
-        <p>عایدی شما: {contractorEarning} تومان به ازای هر صفحه</p>
-        <Button
-          ref={submitReqeustRippleRef}
-          title="ثبت پیشنهاد"
-          className="fit-width"
-          disabled={disabled}
-        />
-        <p className="err-msg">{errMsg}</p>
+        {user.email === project.client_email ? (
+          <p>پروژه شما</p>
+        ) : (
+          <>
+            <Input
+              label="قیمت پیشنهادی شما برای هر صفحه (تومان)"
+              name="request"
+              type="number"
+              id="request"
+              wrapperStyle={{ width: "70%", marginTop: "10px" }}
+              labelStyle={{ fontSize: "14px" }}
+              style={{ fontSize: "14px" }}
+              min="1500"
+              disabled={disabled}
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+            />
+            <p>کارمزد: ۵٪</p>
+            <p>عایدی شما: {PriceFormat(contractorEarning)} به ازای هر صفحه</p>
+            <Button
+              ref={submitReqeustRippleRef}
+              title="ثبت پیشنهاد"
+              className="fit-width"
+              disabled={disabled}
+            />
+            <p className="err-msg">{errMsg}</p>
+          </>
+        )}
       </div>
       <div className="top-left">
-        {<Moment fromNow>{project.created_at}</Moment>}
+        {
+          <Moment fromNow locale="fa">
+            {project.created_at}
+          </Moment>
+        }
       </div>
     </div>
   );
