@@ -27,16 +27,17 @@ const Modals = () => {
           <CreateProject />
         </ModalWrapper>
       )}
-      {/* Image */}
-      {state.SelectedImage.isModalOpen && (
-        <ModalWrapper>
-          <Image />
-        </ModalWrapper>
-      )}
       {/* Profile */}
       {state.User.isModalOpen && (
         <ModalWrapper>
           <Profile />
+        </ModalWrapper>
+      )}
+      {/* Image */}
+      {/* NOTE: This has to be the last modal so it appers on top of everything else... */}
+      {state.SelectedImage.isModalOpen && (
+        <ModalWrapper>
+          <Image />
         </ModalWrapper>
       )}
     </>

@@ -32,9 +32,15 @@ const UserDropDown = () => {
     );
   };
 
+  const handleProfile = () => {
+    dispatch(User({ isDropdownOpen: false, isModalOpen: true }));
+  };
+
   return (
     <div className="user-dropdown-wrapper" ref={ref}>
-      <div className="user-dropdown-item">تنظیمات</div>
+      <div className="user-dropdown-item" onClick={handleProfile}>
+        پروفایل
+      </div>
       <div className="user-dropdown-item" onClick={handleLogout}>
         خروج
       </div>

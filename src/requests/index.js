@@ -23,6 +23,11 @@ export const ConfirmEmailReq = body => {
   return axios.post("auth/confirm-email/", body).then(res => res.data);
 };
 
+// Profile
+export const ChangeProfileImage = body => {
+  return axios.post("auth/profile-image/", body).then(res => res.data);
+};
+
 // Projects
 export const GetProjects = () => {
   return axios.get("projects/").then(res => res.data);

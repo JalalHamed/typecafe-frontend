@@ -40,22 +40,17 @@ const UploadFiles = () => {
   };
 
   useEffect(() => {
+    console.log(file);
     setBadFormat(false);
     if (file.name)
       if (file.type === "application/zip") {
         dispatch(CreateProject({ file }));
-        console.log("first");
       } else {
         setBadFormat(true);
-        console.log("second");
       }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
-
-  useEffect(() => {
-    console.log("bad format", badFormat);
-  }, [badFormat]);
 
   return (
     <>

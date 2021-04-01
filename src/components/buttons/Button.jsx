@@ -17,7 +17,7 @@ const override = css`
 `;
 
 const Button = forwardRef(
-  ({ className, title, loading, onClick, type, disabled, onHover }, ref) => {
+  ({ className, title, loading, onClick, type, disabled }, ref) => {
     return (
       <button
         className={`button ${className ? className : ""} ${
@@ -35,7 +35,6 @@ const Button = forwardRef(
         onMouseOut={() => {
           ref.current.stop();
         }}
-        onHover={onHover && onHover}
       >
         {loading ? (
           <PuffLoader

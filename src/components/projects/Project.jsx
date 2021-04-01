@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
@@ -17,13 +17,36 @@ import "./project.scss";
 const Project = ({ index, project }) => {
   const submitReqeustRippleRef = useRef();
   const downloadFileRippleRef = useRef();
-  const [downloaded, setDownloaded] = useState(false);
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
+  const [downloaded, setDownloaded] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [price, setPrice] = useState(1555);
+  const [contractorEarning, setContractorEarning] = useState(
+    Math.round(price - (price * 5) / 100)
+  );
 
   const handleDownloaded = () => {
     window.location.href = baseURL + project.file;
     setDownloaded(true);
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
+      setDisabled(true);
+    } else if (!downloaded) {
+      setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
+      setDisabled(true);
+    } else {
+      setErrMsg("");
+      setDisabled(false);
+    }
+  }, [isLoggedIn, downloaded]);
+
+  useEffect(() => {
+    setContractorEarning(Math.round(price - (price * 5) / 100));
+  }, [price]);
 
   return (
     <div className="project-wrapper" key={index}>
@@ -73,22 +96,19 @@ const Project = ({ index, project }) => {
           labelStyle={{ fontSize: "14px" }}
           style={{ fontSize: "14px" }}
           min="1100"
-          defaultValue="1100"
-          disabled={!downloaded}
+          disabled={disabled}
+          value={price}
+          onChange={e => setPrice(e.target.value)}
         />
         <p>کارمزد: ۵٪</p>
-        <p>عایدی شما: ۱۰۴۵ تومان به ازای هر صفحه</p>
+        <p>عایدی شما: {contractorEarning} تومان به ازای هر صفحه</p>
         <Button
           ref={submitReqeustRippleRef}
           title="ثبت پیشنهاد"
           className="fit-width"
-          disabled={!downloaded && isLoggedIn}
-          onHover={
-            isLoggedIn
-              ? "جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید."
-              : "جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید."
-          }
+          disabled={disabled}
         />
+        <p className="err-msg">{errMsg}</p>
       </div>
       <div className="top-left">
         {<Moment fromNow>{project.created_at}</Moment>}

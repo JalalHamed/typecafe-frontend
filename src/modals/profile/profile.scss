@@ -32,12 +32,20 @@
 
     .profile-content-right {
       margin: 20px 60px 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .profile-pic {
         cursor: pointer;
         width: 200px;
         height: 200px;
         border-radius: 50%;
+      }
+
+      .err-msg {
+        color: #d8000c;
+        margin-top: 10px;
       }
     }
 

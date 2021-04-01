@@ -1,13 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Close from "components/buttons/Close";
+import Button from "components/buttons/Button";
 
 // Actions
-import { User } from "redux/actions";
+import { User, SelectedImage } from "redux/actions";
+
+// Requests
+import { ChangeProfileImage } from "requests";
 
 // Designs
 import "./profile.scss";
@@ -18,14 +22,19 @@ import { baseURL } from "components/xhr";
 const Profile = () => {
   const dispatch = useDispatch();
   const inputFileRef = useRef();
+  const changePhotoRippleRef = useRef();
   const user = useSelector(state => state.User);
+  const [errMsg, setErrMsg] = useState("");
 
   const handleChangePic = pic => {
     console.log(pic);
     if (pic.type.includes("image")) {
-      console.log("ok");
+      setErrMsg("");
+      ChangeProfileImage({ image: pic })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     } else {
-      console.log("nah man");
+      setErrMsg("فرمت فایل انتخابی اشتباه است.");
     }
   };
 
@@ -45,13 +54,21 @@ const Profile = () => {
             ref={inputFileRef}
             hidden
             onChange={e => handleChangePic(e.target.files[0])}
+            accept="image/*"
           />
           {!!user.picture ? (
             <img
               src={baseURL + user.picture}
               alt="profile"
               className="profile-pic"
-              onClick={() => inputFileRef.current.click()}
+              onClick={() =>
+                dispatch(
+                  SelectedImage({
+                    isModalOpen: true,
+                    image: baseURL + user.picture,
+                  })
+                )
+              }
             />
           ) : (
             <i
@@ -59,6 +76,13 @@ const Profile = () => {
               onClick={() => inputFileRef.current.click()}
             />
           )}
+          <Button
+            ref={changePhotoRippleRef}
+            title="تغییر عکس پروفایل"
+            className="fit-width"
+            onClick={() => inputFileRef.current.click()}
+          />
+          <p className="err-msg">{errMsg}</p>
         </div>
         <div className="profile-content-left"></div>
       </div>
