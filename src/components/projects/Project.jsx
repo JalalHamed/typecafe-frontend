@@ -8,7 +8,7 @@ import "moment/locale/fa";
 // Components
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
-import { PriceFormat } from "components/helper";
+import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -70,7 +70,9 @@ const Project = ({ index, project }) => {
         <div className="inline">
           <div>
             <div className="title">تعداد صفحات</div>
-            <div className="value">{project.number_of_pages}</div>
+            <div className="value">
+              {toFarsiNumber(project.number_of_pages)}
+            </div>
           </div>
           <div>
             <div className="title">زبان(ها) و پیوست‌ های پروژه</div>
@@ -78,7 +80,9 @@ const Project = ({ index, project }) => {
           </div>
           <div>
             <div className="title">مهلت تحویل</div>
-            <div className="value">{project.delivery_deadline} ساعت</div>
+            <div className="value">
+              {toFarsiNumber(project.delivery_deadline)} ساعت
+            </div>
           </div>
         </div>
         <Button
@@ -100,7 +104,7 @@ const Project = ({ index, project }) => {
               id="request"
               wrapperStyle={{ width: "70%", marginTop: "10px" }}
               labelStyle={{ fontSize: "14px" }}
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: "14px", width: "200px" }}
               min="1500"
               disabled={disabled}
               value={price}

@@ -9,5 +9,11 @@ export const EmailOverFlow = props => {
 };
 
 export const PriceFormat = price => {
-  return Number(price).toLocaleString() + " تومان";
+  return toFarsiNumber(Number(price).toLocaleString() + " تومان");
+};
+
+export const toFarsiNumber = n => {
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+
+  return n.toString().replace(/\d/g, x => farsiDigits[x]);
 };

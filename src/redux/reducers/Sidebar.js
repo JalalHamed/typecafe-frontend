@@ -3,7 +3,7 @@ let initialState = {
   page: "projects",
 };
 
-const SideBar = (state = initialState, action) => {
+const Sidebar = (state = initialState, action) => {
   switch (action.type) {
     case "SIDEBAR":
       return {
@@ -15,4 +15,4 @@ const SideBar = (state = initialState, action) => {
   }
 };
 
-export default SideBar;
+export default Sidebar;

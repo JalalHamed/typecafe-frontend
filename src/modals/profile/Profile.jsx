@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 // Components
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
+import Input from "components/inputs/Input";
+import { PriceFormat } from "components/helper";
 
 // Actions
-import { User, SelectedImage } from "redux/actions";
+import { User, SelectedImage, Sidebar } from "redux/actions";
 
 // Requests
 import { ChangeProfileImage } from "requests";
@@ -25,6 +27,7 @@ const Profile = () => {
   const changePhotoRippleRef = useRef();
   const user = useSelector(state => state.User);
   const [errMsg, setErrMsg] = useState("");
+  const [editMode, setEditMode] = useState(false);
 
   const handleChangePic = pic => {
     console.log(pic);
@@ -36,6 +39,19 @@ const Profile = () => {
     } else {
       setErrMsg("فرمت فایل انتخابی اشتباه است.");
     }
+  };
+
+  const handleEditDisplayname = () => {
+    if (editMode === false) {
+      setEditMode(true);
+    } else {
+      setEditMode(false);
+    }
+  };
+
+  const handleCredit = () => {
+    dispatch(User({ isModalOpen: false }));
+    dispatch(Sidebar({ page: "financial" }));
   };
 
   return (
@@ -55,6 +71,7 @@ const Profile = () => {
             hidden
             onChange={e => handleChangePic(e.target.files[0])}
             accept="image/*"
+            enctype="multipart/form-data"
           />
           {!!user.picture ? (
             <img
@@ -84,7 +101,28 @@ const Profile = () => {
           />
           <p className="err-msg">{errMsg}</p>
         </div>
-        <div className="profile-content-left"></div>
+        <div className="profile-content-left">
+          <p className="title">
+            نام نمایشی{" "}
+            <span className="edit no-select" onClick={handleEditDisplayname}>
+              {!editMode ? "ویرایش" : "ثبت"}
+            </span>
+          </p>
+          {!editMode ? (
+            <p className="value">{user.displayname}</p>
+          ) : (
+            <Input defaultValue={user.displayname} />
+          )}
+          <p className="title">ایمیل</p>
+          <p className="value">{user.email}</p>
+          <p className="title">
+            اعتبار{" "}
+            <span className="edit no-select" onClick={handleCredit}>
+              افزایش/برداشت
+            </span>
+          </p>
+          <p className="value">{PriceFormat(user.credit)}</p>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 .profile-wrapper {
   background-color: #fff;
-  height: 550px;
-  width: 800px;
+  height: 460px;
+  width: 700px;
   max-height: 100%;
   max-width: 100%;
   align-items: center;
@@ -28,10 +28,11 @@
   .profile-content {
     width: 100%;
     display: flex;
-    margin-top: 30px;
+    align-items: center;
+    margin-top: 70px;
 
     .profile-content-right {
-      margin: 20px 60px 20px 0;
+      margin-right: 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -50,7 +51,27 @@
     }
 
     .profile-content-left {
-      margin-right: 50px;
+      margin-right: 100px;
+
+      .title {
+        margin-top: 10px;
+        color: #666;
+      }
+
+      .value {
+        margin-right: 15px;
+        font-size: 20px;
+      }
+
+      .edit {
+        color: #1c3987;
+        font-size: 12px;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 1px solid #1c3987;
+        }
+      }
     }
   }
 }

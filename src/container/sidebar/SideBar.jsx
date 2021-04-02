@@ -35,7 +35,7 @@ const SideBar = () => {
         {isLoggedIn && (
           <SideBarItem
             status="financial"
-            title="کیف پول"
+            title="مدیریت مالی"
             ref={financialRippleRef}
           />
         )}
