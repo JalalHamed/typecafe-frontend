@@ -30,7 +30,6 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
 
   const handleChangePic = pic => {
-    console.log(pic);
     if (pic.type.includes("image")) {
       setErrMsg("");
       ChangeProfileImage({ image: pic })

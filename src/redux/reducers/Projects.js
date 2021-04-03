@@ -1,5 +1,5 @@
 let initialState = {
-  getprojects: 0,
+  getProjects: 0,
 };
 
 const Projects = (state = initialState, action) => {

@@ -10,6 +10,9 @@ import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
+// Requests
+import { CreateOffer } from "requests";
+
 // XHR
 import { baseURL } from "components/xhr";
 
@@ -31,6 +34,17 @@ const Project = ({ index, project }) => {
   const handleDownloaded = () => {
     window.location.href = baseURL + project.file;
     setDownloaded(true);
+  };
+
+  const handleOffer = () => {
+    let body = {
+      project_id: project.id,
+      offered_price: Number(price),
+    };
+
+    CreateOffer(body)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -117,6 +131,7 @@ const Project = ({ index, project }) => {
               title="ثبت پیشنهاد"
               className="fit-width"
               disabled={disabled}
+              onClick={handleOffer}
             />
             <p className="err-msg">{errMsg}</p>
           </>

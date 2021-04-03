@@ -40,7 +40,6 @@ const UploadFiles = () => {
   };
 
   useEffect(() => {
-    console.log(file);
     setBadFormat(false);
     if (file.name)
       if (file.type === "application/zip") {

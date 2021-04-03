@@ -41,6 +41,10 @@ export const CreateProjectReq = body => {
     .then(res => res.data);
 };
 
+export const CreateOffer = body => {
+  return axios.post("createoffer/", body).then(res => res.data);
+};
+
 // Handle Errors
 export const handleErrors = (error, setMessage) => {
   if (error.response) {

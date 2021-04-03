@@ -19,6 +19,7 @@ import "./reviewandsubmit.scss";
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
+  const getProjects = useSelector(state => state.Projects.getProjects);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
@@ -45,7 +46,7 @@ const ReviewAndSubmit = () => {
             deliveryDeadline: "",
           })
         );
-        dispatch(Projects({ getprojects: 1 }));
+        dispatch(Projects({ getProjects: getProjects + 1 }));
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
       .catch(err => handleErrors(err, setError));
