@@ -13,17 +13,13 @@ import { GetProjects } from "requests";
 import "./projects.scss";
 
 const Projects = () => {
-  const getProjects = useSelector(state => state.Projects.getprojects);
+  const getProjects = useSelector(state => state.Projects.getProjects);
   const [projects, setProjects] = useState([]);
 
-  const get = () => {
+  useEffect(() => {
     GetProjects()
       .then(res => setProjects(res))
       .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    get();
   }, [getProjects]);
 
   return (

@@ -20,15 +20,27 @@ const UserDropDown = () => {
   UseOnClickOutside(ref, () => dispatch(User({ isDropdownOpen: false })));
 
   const handleLogout = () => {
-    dispatch(User({ isDropdownOpen: false, isLoggedIn: false, picture: "" }));
+    dispatch(
+      User({
+        isLoggedIn: false,
+        isModalOpen: false,
+        isDropdownOpen: false,
+        displayname: "",
+        email: "",
+        credit: 0,
+        picture: "",
+      })
+    );
     dispatch(
       CreateProject({
-        description: "",
+        isModalOpen: false,
+        firstMount: true,
+        step: "uploadfile",
+        file: "",
+        languagesAndAdditions: [],
         numberOfPages: "",
         deliveryDeadline: "",
-        languages: [],
-        file: "",
-        step: "uploadfile",
+        description: "",
       })
     );
     dispatch(Projects({ getProjects: getProjects + 1 }));
