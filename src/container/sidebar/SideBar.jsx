@@ -34,6 +34,13 @@ const SideBar = () => {
         />
         {isLoggedIn && (
           <SideBarItem
+            status="my-projects"
+            title="پروژه های من"
+            ref={rulesRippleRef}
+          />
+        )}
+        {isLoggedIn && (
+          <SideBarItem
             status="financial"
             title="مدیریت مالی"
             ref={financialRippleRef}
@@ -41,7 +48,7 @@ const SideBar = () => {
         )}
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
         {/* to be added... */}
-        {/* <SideBarItem status="my-projects" title="پروژه های من" ref={rulesRippleRef} /> */}
+
         {/* <SideBarItem status="support" title="پشتیبانی" ref={rulesRippleRef} /> */}
         {/* <SideBarItem status="learn" title="آموزش" ref={rulesRippleRef} /> */}
         {/* <SideBarItem status="sponsor" title="حمایت" ref={rulesRippleRef} /> */}

@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 // Pages
 import Projects from "./pages/projects/Projects";
 import Rules from "./pages/rules/Rules";
+import MyProjects from "./pages/myprojects/MyProjects";
 
 // Components
 import MinimizedCreateProject from "components/minimizes/MinimizedCreateProject";
@@ -40,6 +41,7 @@ const App = () => {
           {state.User.isDropdownOpen && <UserDropDown />}
 
           {state.Sidebar.page === "projects" && <Projects />}
+          {state.Sidebar.page === "my-projects" && <MyProjects />}
           {state.Sidebar.page === "rules" && <Rules />}
 
           {!!state.CreateProject.files && !state.CreateProject.isModalOpen && (

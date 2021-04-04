@@ -116,6 +116,18 @@
     height: 30px;
   }
 
+  &.icon-my-projects-dark {
+    content: url("../svgs/target-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-my-projects-white {
+    content: url("../svgs/target-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
   &.icon-financial-dark {
     content: url("../svgs/wallet-dark.svg");
     width: 30px;
@@ -211,5 +223,11 @@
     width: 100px;
     height: 100px;
     margin-left: 10px;
+  }
+
+  &.icon-leafless-tree {
+    content: url("../svgs/leafless-tree.svg");
+    width: 150px;
+    height: 150px;
   }
 }

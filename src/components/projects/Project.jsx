@@ -144,6 +144,12 @@ const Project = ({ index, project }) => {
           </Moment>
         }
       </div>
+      <div className="bottom-left">
+        <p className="project-status">وضعیت پروژه: باز</p>
+      </div>
+      <div className="project-id">
+        شناسه پروژه <span className="project-id-value">[ {project.id}# ]</span>
+      </div>
     </div>
   );
 };
