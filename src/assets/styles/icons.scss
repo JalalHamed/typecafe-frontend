@@ -278,4 +278,10 @@
     width: 150px;
     height: 150px;
   }
+
+  &.icon-arrow-down {
+    content: url("../svgs/arrow-down.svg");
+    width: 10px;
+    height: 10px;
+  }
 }
