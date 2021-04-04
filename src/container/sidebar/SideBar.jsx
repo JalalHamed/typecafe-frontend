@@ -17,6 +17,11 @@ const SideBar = () => {
   const projectsRippleRef = useRef();
   const financialRippleRef = useRef();
   const rulesRippleRef = useRef();
+  const tutorialRippleRef = useRef();
+  const myProjectsRippleRef = useRef();
+  const supportRippleRef = useRef();
+  const donateRippleRef = useRef();
+  const faqRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
 
   return (
@@ -36,7 +41,7 @@ const SideBar = () => {
           <SideBarItem
             status="my-projects"
             title="پروژه های من"
-            ref={rulesRippleRef}
+            ref={myProjectsRippleRef}
           />
         )}
         {isLoggedIn && (
@@ -47,12 +52,10 @@ const SideBar = () => {
           />
         )}
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
-        {/* to be added... */}
-
-        {/* <SideBarItem status="support" title="پشتیبانی" ref={rulesRippleRef} /> */}
-        {/* <SideBarItem status="learn" title="آموزش" ref={rulesRippleRef} /> */}
-        {/* <SideBarItem status="sponsor" title="حمایت" ref={rulesRippleRef} /> */}
-        {/* <SideBarItem status="about" title="درباره تایپ کافه" ref={rulesRippleRef} /> */}
+        <SideBarItem status="tutorial" title="آموزش" ref={tutorialRippleRef} />
+        <SideBarItem status="support" title="پشتیبانی" ref={supportRippleRef} />
+        <SideBarItem status="donate" title="حمایت" ref={donateRippleRef} />
+        <SideBarItem status="faq" title="سوالات متداول" ref={faqRippleRef} />
       </div>
     </div>
   );

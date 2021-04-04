@@ -25,6 +25,7 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     GetProjects()
       .then(res => {
         setLoading(false);

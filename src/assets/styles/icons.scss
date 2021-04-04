@@ -152,6 +152,54 @@
     height: 30px;
   }
 
+  &.icon-tutorial-dark {
+    content: url("../svgs/tutorial-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-tutorial-white {
+    content: url("../svgs/tutorial-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-donate-dark {
+    content: url("../svgs/cheers-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-donate-white {
+    content: url("../svgs/cheers-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-faq-dark {
+    content: url("../svgs/question-mark-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-faq-white {
+    content: url("../svgs/question-mark-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-support-dark {
+    content: url("../svgs/support-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-support-white {
+    content: url("../svgs/support-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
   &.icon-user-red-big {
     content: url("../svgs/user.svg");
     width: 70px;
