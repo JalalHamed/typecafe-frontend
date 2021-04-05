@@ -13,7 +13,6 @@ import Donate from "./pages/donate/Donate";
 import Faq from "./pages/faq/Faq";
 
 // Components
-import MinimizedCreateProject from "components/minimizes/MinimizedCreateProject";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
 import UserDropDown from "components/dropdowns/UserDropDown";
@@ -49,10 +48,6 @@ const App = () => {
           {state.Sidebar.page === "support" && <Support />}
           {state.Sidebar.page === "donate" && <Donate />}
           {state.Sidebar.page === "faq" && <Faq />}
-
-          {!!state.CreateProject.files && !state.CreateProject.isModalOpen && (
-            <MinimizedCreateProject />
-          )}
         </div>
       </div>
 

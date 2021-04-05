@@ -124,8 +124,15 @@ const Project = ({ index, project }) => {
               value={price}
               onChange={e => setPrice(e.target.value)}
             />
-            <p>کارمزد: ۵٪</p>
-            <p>عایدی شما: {PriceFormat(contractorEarning)} به ازای هر صفحه</p>
+            <p className="left-title">
+              کارمزد<span className="left-value">٪۵</span>
+            </p>
+            <p className="left-title">
+              عایدی شما
+              <spam className="left-value">
+                {PriceFormat(contractorEarning)} به ازای هر صفحه
+              </spam>
+            </p>
             <Button
               ref={submitReqeustRippleRef}
               title="ثبت پیشنهاد"

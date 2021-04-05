@@ -53,9 +53,17 @@ const SideBar = () => {
         )}
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
         <SideBarItem status="tutorial" title="آموزش" ref={tutorialRippleRef} />
-        <SideBarItem status="support" title="پشتیبانی" ref={supportRippleRef} />
-        <SideBarItem status="donate" title="حمایت" ref={donateRippleRef} />
-        <SideBarItem status="faq" title="سوالات متداول" ref={faqRippleRef} />
+        <SideBarItem status="faq" title="سؤالات متداول" ref={faqRippleRef} />
+        {isLoggedIn && (
+          <SideBarItem
+            status="support"
+            title="پشتیبانی"
+            ref={supportRippleRef}
+          />
+        )}
+        {isLoggedIn && (
+          <SideBarItem status="donate" title="حمایت" ref={donateRippleRef} />
+        )}
       </div>
     </div>
   );

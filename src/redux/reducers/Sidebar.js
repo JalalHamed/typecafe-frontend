@@ -1,6 +1,6 @@
 let initialState = {
   isSidebarOpen: true,
-  page: "faq",
+  page: "projects",
 };
 
 const Sidebar = (state = initialState, action) => {

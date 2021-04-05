@@ -2,30 +2,30 @@ import axios from "./Api";
 
 // Register and Login
 export const UserRegister = body => {
-  return axios.post("auth/register/", body).then(res => {
+  return axios.post("account/register/", body).then(res => {
     axios.defaults.headers["Authorization"] = "Token " + res.data.token;
     return res.data;
   });
 };
 
 export const UserLogin = body => {
-  return axios.post("auth/login/", body).then(res => {
+  return axios.post("account/login/", body).then(res => {
     axios.defaults.headers["Authorization"] = "Token " + res.data.token;
     return res.data;
   });
 };
 
 export const CheckEmail = body => {
-  return axios.post("auth/check-email/", body).then(res => res.data);
+  return axios.post("account/check-email/", body).then(res => res.data);
 };
 
 export const ConfirmEmailReq = body => {
-  return axios.post("auth/confirm-email/", body).then(res => res.data);
+  return axios.post("account/confirm-email/", body).then(res => res.data);
 };
 
 // Profile
 export const ChangeProfileImage = body => {
-  return axios.post("auth/profile-image/", body).then(res => res.data);
+  return axios.post("account/profile-image/", body).then(res => res.data);
 };
 
 // Projects
@@ -43,6 +43,15 @@ export const CreateProjectReq = body => {
 
 export const CreateOffer = body => {
   return axios.post("createoffer/", body).then(res => res.data);
+};
+
+// Support
+export const CreateSupportTicket = body => {
+  return axios.post("account/support-ticket/", body).then(res => res.data);
+};
+
+export const CreateSupportMessage = body => {
+  return axios.post("account/support-message/", body).then(res => res.data);
 };
 
 // Handle Errors

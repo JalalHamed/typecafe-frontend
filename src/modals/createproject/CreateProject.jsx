@@ -13,7 +13,7 @@ import Details from "./steps/details/Details";
 import ReviewAndSubmit from "./steps/reviewandsubmit/ReviewAndSubmit";
 
 // Actions
-import { CreateProject } from "redux/actions";
+import { CreateProject, Sidebar } from "redux/actions";
 
 // Design
 import "./createproject.scss";
@@ -21,6 +21,11 @@ import "./createproject.scss";
 const CreateNewProject = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
+
+  const handleRulesClick = () => {
+    dispatch(CreateProject({ isModalOpen: false }));
+    dispatch(Sidebar({ page: "rules" }));
+  };
 
   return (
     <div className="cp-wrapper">
@@ -41,7 +46,10 @@ const CreateNewProject = () => {
       </div>
       <div className="user-agreement">
         با ثبت پروژه خود در تایپ‌کافه، شما با
-        <span className="add-project-rules"> قوانین ثبت پروژه </span>
+        <span className="add-project-rules" onClick={handleRulesClick}>
+          {" "}
+          قوانین ثبت پروژه{" "}
+        </span>
         موافقت می‌کنید.
       </div>
     </div>
