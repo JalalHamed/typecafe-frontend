@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Button from "components/buttons/Button";
 
 // Actions
-import { CreateProject, Projects } from "redux/actions";
+import { CreateProject, Project } from "redux/actions";
 
 // Requests
 import { handleErrors, CreateProjectReq } from "requests";
@@ -46,7 +46,7 @@ const ReviewAndSubmit = () => {
             deliveryDeadline: "",
           })
         );
-        dispatch(Projects({ getProjects: getProjects + 1 }));
+        dispatch(Project({ getProjects: getProjects + 1 }));
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
       .catch(err => handleErrors(err, setError));

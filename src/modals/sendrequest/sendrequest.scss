@@ -1,0 +1,14 @@
+.sendrequest-wrapper {
+  background-color: #fff;
+  width: 400px;
+  height: 300px;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+  position: relative;
+
+  .close-modal {
+    top: 12px;
+    left: 12px;
+  }
+}

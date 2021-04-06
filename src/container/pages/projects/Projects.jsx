@@ -20,7 +20,7 @@ const override = css`
 `;
 
 const Projects = () => {
-  const getProjects = useSelector(state => state.Projects.getProjects);
+  const getProjects = useSelector(state => state.Project.getProjects);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 

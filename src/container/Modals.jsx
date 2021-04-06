@@ -9,6 +9,7 @@ import LoginRegister from "modals/loginregister/LoginRegister";
 import CreateProject from "modals/createproject/CreateProject";
 import Image from "modals/image/Image";
 import Profile from "modals/profile/Profile";
+import SendRequest from "modals/sendrequest/SendReqeust";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -31,6 +32,12 @@ const Modals = () => {
       {state.User.isModalOpen && (
         <ModalWrapper>
           <Profile />
+        </ModalWrapper>
+      )}
+      {/* Send Request */}
+      {state.Project.isModalOpen && (
+        <ModalWrapper>
+          <SendRequest />
         </ModalWrapper>
       )}
       {/* Image */}

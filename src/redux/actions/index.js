@@ -40,9 +40,9 @@ export const Notifications = payload => {
   };
 };
 
-export const Projects = payload => {
+export const Project = payload => {
   return {
-    type: "PROJECTS",
+    type: "PROJECT",
     payload,
   };
 };

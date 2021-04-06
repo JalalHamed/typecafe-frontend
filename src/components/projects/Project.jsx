@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import "moment/locale/fa";
 
@@ -10,8 +10,8 @@ import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
-// Requests
-import { CreateOffer } from "requests";
+// Actions
+import { Project } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -19,7 +19,8 @@ import { baseURL } from "components/xhr";
 // Designs
 import "./project.scss";
 
-const Project = ({ index, project }) => {
+const TheProject = ({ index, project }) => {
+  const dispatch = useDispatch();
   const submitReqeustRippleRef = useRef();
   const downloadFileRippleRef = useRef();
   const user = useSelector(state => state.User);
@@ -34,17 +35,6 @@ const Project = ({ index, project }) => {
   const handleDownloaded = () => {
     window.location.href = baseURL + project.file;
     setDownloaded(true);
-  };
-
-  const handleOffer = () => {
-    let body = {
-      project_id: project.id,
-      offered_price: Number(price),
-    };
-
-    CreateOffer(body)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -138,7 +128,15 @@ const Project = ({ index, project }) => {
               title="ثبت پیشنهاد"
               className="fit-width"
               disabled={disabled}
-              onClick={handleOffer}
+              onClick={() =>
+                dispatch(
+                  Project({
+                    isModalOpen: true,
+                    selectedPageCount: project.number_of_pages,
+                    selectedPricePerPage: price,
+                  })
+                )
+              }
             />
             <p className="err-msg">{errMsg}</p>
           </>
@@ -161,4 +159,4 @@ const Project = ({ index, project }) => {
   );
 };
 
-export default Project;
+export default TheProject;

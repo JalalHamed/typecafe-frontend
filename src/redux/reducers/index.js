@@ -8,7 +8,7 @@ import User from "./User";
 import CreateProject from "./CreateProject";
 import SelectedImage from "./SelectedImage";
 import Notifications from "./Notifications";
-import Projects from "./Projects";
+import Project from "./Project";
 
 const allReducers = combineReducers({
   LR,
@@ -17,7 +17,7 @@ const allReducers = combineReducers({
   CreateProject,
   SelectedImage,
   Notifications,
-  Projects,
+  Project,
 });
 
 export default allReducers;
