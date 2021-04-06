@@ -9,7 +9,7 @@ const Close = ({ onClick, className, red }) => {
   return (
     <div
       className={`close ${red ? "bg-red" : ""} ${
-        className && className
+        className ? className : ""
       } no-select`}
       onClick={onClick}
       onMouseEnter={() => setIconMouseOver(true)}

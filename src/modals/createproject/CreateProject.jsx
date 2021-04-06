@@ -2,6 +2,7 @@ import React from "react";
 
 // Librares
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 // Components
 import Close from "components/buttons/Close";
@@ -28,7 +29,11 @@ const CreateNewProject = () => {
   };
 
   return (
-    <div className="cp-wrapper">
+    <motion.div
+      className="cp-wrapper"
+      initial={{ scale: 0.5 }}
+      animate={{ scale: 1 }}
+    >
       <div className="cp-header">
         <p className="cp-header-title no-select">ثبت پروژه</p>
         <Close
@@ -52,7 +57,7 @@ const CreateNewProject = () => {
         </span>
         موافقت می‌کنید.
       </div>
-    </div>
+    </motion.div>
   );
 };
 

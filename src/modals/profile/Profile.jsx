@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 // Components
 import Close from "components/buttons/Close";
@@ -54,7 +55,11 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-wrapper">
+    <motion.div
+      className="profile-wrapper"
+      initial={{ scale: 0.5 }}
+      animate={{ scale: 1 }}
+    >
       <div className="profile-header">
         <p className="profile-header-title">پروفایل</p>
         <Close
@@ -123,7 +128,7 @@ const Profile = () => {
           <p className="value">{PriceFormat(user.credit)}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

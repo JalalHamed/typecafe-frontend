@@ -2,6 +2,7 @@ import React from "react";
 
 // Libraries
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 // Components
 import RightSide from "./RightSide";
@@ -18,7 +19,11 @@ const LoginRegister = () => {
   const dispath = useDispatch();
 
   return (
-    <div className="lr-wrapper">
+    <motion.div
+      className="lr-wrapper"
+      initial={{ scale: 0.5 }}
+      animate={{ scale: 1 }}
+    >
       <Close onClick={() => dispath(LR({ isModalOpen: false }))} />
       <div className="lr-right">
         <i className="icon icon-typecafe-big no-select" />
@@ -27,7 +32,7 @@ const LoginRegister = () => {
       <div className="lr-left">
         <LeftSide />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

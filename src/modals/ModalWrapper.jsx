@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 // Actions
 import { LR, SelectedImage } from "redux/actions";
@@ -36,9 +37,15 @@ const ModalWrapper = ({ children }) => {
   }, []);
 
   return (
-    <div className="modal-bg" onClick={handleClick}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.1 }}
+      className="modal-bg"
+      onClick={handleClick}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
