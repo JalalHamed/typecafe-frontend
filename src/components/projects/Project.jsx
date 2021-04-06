@@ -37,6 +37,19 @@ const TheProject = ({ index, project }) => {
     setDownloaded(true);
   };
 
+  const handleOffer = () => {
+    if (price < 1500) {
+    } else {
+      dispatch(
+        Project({
+          isModalOpen: true,
+          selectedPageCount: project.number_of_pages,
+          selectedPricePerPage: price,
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     if (!user.isLoggedIn) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
@@ -128,15 +141,7 @@ const TheProject = ({ index, project }) => {
               title="ثبت پیشنهاد"
               className="fit-width"
               disabled={disabled}
-              onClick={() =>
-                dispatch(
-                  Project({
-                    isModalOpen: true,
-                    selectedPageCount: project.number_of_pages,
-                    selectedPricePerPage: price,
-                  })
-                )
-              }
+              onClick={handleOffer}
             />
             <p className="err-msg">{errMsg}</p>
           </>

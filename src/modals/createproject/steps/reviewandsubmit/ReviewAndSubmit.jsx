@@ -19,7 +19,7 @@ import "./reviewandsubmit.scss";
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
-  const getProjects = useSelector(state => state.Projects.getProjects);
+  const getProjects = useSelector(state => state.Project.getProjects);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
