@@ -38,16 +38,13 @@ const TheProject = ({ index, project }) => {
   };
 
   const handleOffer = () => {
-    if (price < 1500) {
-    } else {
-      dispatch(
-        Project({
-          isModalOpen: true,
-          selectedPageCount: project.number_of_pages,
-          selectedPricePerPage: price,
-        })
-      );
-    }
+    dispatch(
+      Project({
+        isModalOpen: true,
+        selectedPageCount: project.number_of_pages,
+        selectedPricePerPage: price,
+      })
+    );
   };
 
   useEffect(() => {

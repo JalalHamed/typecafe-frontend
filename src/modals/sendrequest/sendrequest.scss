@@ -7,8 +7,24 @@
   border-radius: 5px;
   position: relative;
 
+  .price-cant-be-lower {
+    color: #ff2d2d;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+  }
+
   .close-modal {
     top: 12px;
     left: 12px;
+  }
+
+  .submit-button {
+    position: absolute;
+    bottom: 20px;
+    right: 50%;
   }
 }
