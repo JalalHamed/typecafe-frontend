@@ -4,7 +4,9 @@ import { baseURL } from "components/xhr";
 const AxiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
-    Authorization: null,
+    Authorization: localStorage.getItem("draft")
+      ? "Bearer " + localStorage.getItem("draft")
+      : null,
     "Content-Type": "application/json",
     accept: "application/json",
   },

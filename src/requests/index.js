@@ -3,14 +3,14 @@ import axios from "./Api";
 // Register and Login
 export const UserRegister = body => {
   return axios.post("account/register/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Token " + res.data.token;
+    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
     return res.data;
   });
 };
 
 export const UserLogin = body => {
   return axios.post("account/login/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Token " + res.data.token;
+    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
     return res.data;
   });
 };
@@ -24,6 +24,10 @@ export const ConfirmEmailReq = body => {
 };
 
 // Profile
+export const UserData = () => {
+  return axios.get("account/user-data/").then(res => res.data);
+};
+
 export const ChangeProfileImage = body => {
   return axios.post("account/profile-image/", body).then(res => res.data);
 };

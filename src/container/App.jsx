@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 // Pages
@@ -20,11 +20,36 @@ import UserDropDown from "components/dropdowns/UserDropDown";
 // Modals & Clicks
 import Modals from "./Modals";
 
+// Actions
+import { User } from "redux/actions";
+
+// Requests
+import { UserData } from "requests";
+
 // Design
 import "./app.scss";
 
 const App = () => {
+  const dispatch = useDispatch();
   const state = useSelector(state => state);
+
+  useEffect(() => {
+    if (localStorage.getItem("draft")) {
+      UserData().then(res => {
+        dispatch(
+          User({
+            isLoggedIn: true,
+            displayname: res.displayname,
+            email: res.email,
+            credit: res.credit,
+            picture: res.picture,
+          })
+        );
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="wrapper">

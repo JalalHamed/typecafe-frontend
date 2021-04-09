@@ -29,6 +29,7 @@ const Profile = () => {
   const user = useSelector(state => state.User);
   const [errMsg, setErrMsg] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [displayName, setDisplayName] = useState(user.displayname);
 
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
@@ -113,9 +114,12 @@ const Profile = () => {
             </span>
           </p>
           {!editMode ? (
-            <p className="value">{user.displayname}</p>
+            <p className="value">{displayName}</p>
           ) : (
-            <Input defaultValue={user.displayname} />
+            <Input
+              value={displayName}
+              onChange={e => setDisplayName(e.target.value)}
+            />
           )}
           <p className="title">ایمیل</p>
           <p className="value">{user.email}</p>
