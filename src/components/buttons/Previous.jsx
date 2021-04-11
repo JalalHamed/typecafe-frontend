@@ -3,10 +3,10 @@ import React, { forwardRef } from "react";
 // Components
 import TouchRipple from "components/ripple/TouchRipple";
 
-const Previous = forwardRef(({ className, onClick }, ref) => {
+const Previous = forwardRef(({ className, onClick, title }, ref) => {
   return (
     <button
-      className={`previous ${className && className}`}
+      className={`previous ${className ? className : ""}`}
       onClick={onClick}
       type="button"
       onMouseDown={e => {
@@ -19,7 +19,7 @@ const Previous = forwardRef(({ className, onClick }, ref) => {
         ref.current.stop();
       }}
     >
-      بازگشت
+      {title ? title : "بازگشت"}
       <TouchRipple ref={ref} />
     </button>
   );

@@ -14,7 +14,7 @@ import { PriceFormat } from "components/helper";
 import { User, SelectedImage, Sidebar } from "redux/actions";
 
 // Requests
-import { ChangeProfileImage } from "requests";
+import { ChangeProfileImage, ChangeDisplayName } from "requests";
 
 // Designs
 import "./profile.scss";
@@ -46,13 +46,18 @@ const Profile = () => {
     if (editMode === false) {
       setEditMode(true);
     } else {
+      ChangeDisplayName({ displayName })
+        .then(res => {
+          dispatch(User({ displayname: res }));
+        })
+        .catch(err => console.log(err));
       setEditMode(false);
     }
   };
 
   const handleCredit = () => {
     dispatch(User({ isModalOpen: false }));
-    dispatch(Sidebar({ page: "financial" }));
+    dispatch(Sidebar({ page: "financials" }));
   };
 
   return (

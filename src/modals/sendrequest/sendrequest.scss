@@ -1,30 +1,69 @@
 .sendrequest-wrapper {
   background-color: #fff;
-  width: 400px;
-  height: 300px;
+  width: 465px;
+  height: 330px;
   max-height: 100%;
   max-width: 100%;
   border-radius: 5px;
   position: relative;
+  font-size: 18px;
 
-  .price-cant-be-lower {
-    color: #ff2d2d;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    text-align: center;
+  &.h-200 {
+    height: 200px;
+    width: 350px;
+  }
+
+  .sendrequest-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .not-enough-credit {
+      margin-top: 80px;
+    }
+
+    .increase-credit-button {
+      margin-top: 40px;
+    }
+
+    .highlight {
+      color: #fff;
+      background-color: #29313b;
+      border-radius: 5px;
+      padding: 0 5px;
+    }
+
+    .sendrequest-note {
+      padding: 0 50px;
+      text-align: justify;
+      line-height: 33px;
+      margin-top: 55px;
+    }
+
+    .go-to-rules {
+      color: #1c3987;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      margin: 3px;
+
+      &:hover {
+        border-bottom: 1px solid #1c3987;
+      }
+    }
+
+    .button-wrapper {
+      position: absolute;
+      bottom: 25px;
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .close-modal {
     top: 12px;
     left: 12px;
-  }
-
-  .submit-button {
-    position: absolute;
-    bottom: 20px;
-    right: 50%;
   }
 }

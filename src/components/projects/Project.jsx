@@ -26,7 +26,8 @@ const TheProject = ({ index, project }) => {
   const user = useSelector(state => state.User);
   const [downloaded, setDownloaded] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [disabled, setDisabled] = useState(true);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [inputDisabled, setInputDisabled] = useState(true);
   const [price, setPrice] = useState(1500);
   const [contractorEarning, setContractorEarning] = useState(
     Math.round(price - (price * 5) / 100)
@@ -43,6 +44,8 @@ const TheProject = ({ index, project }) => {
         isModalOpen: true,
         selectedPageCount: project.number_of_pages,
         selectedPricePerPage: price,
+        selectedDeadline: project.delivery_deadline,
+        selectedId: project.id,
       })
     );
   };
@@ -50,15 +53,22 @@ const TheProject = ({ index, project }) => {
   useEffect(() => {
     if (!user.isLoggedIn) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
-      setDisabled(true);
+      setButtonDisabled(true);
+      setInputDisabled(true);
     } else if (!downloaded) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
-      setDisabled(true);
+      setButtonDisabled(true);
+      setInputDisabled(true);
+    } else if (price < 1500) {
+      setErrMsg("قیمت پیشنهادی نمی‌تواند کمتر از ۱,۵۰۰ تومان باشد.");
+      setButtonDisabled(true);
+      setInputDisabled(false);
     } else {
       setErrMsg("");
-      setDisabled(false);
+      setButtonDisabled(false);
+      setInputDisabled(false);
     }
-  }, [user.isLoggedIn, downloaded]);
+  }, [user.isLoggedIn, downloaded, price]);
 
   useEffect(() => {
     setContractorEarning(Math.round(price - (price * 5) / 100));
@@ -120,7 +130,7 @@ const TheProject = ({ index, project }) => {
               labelStyle={{ fontSize: "14px" }}
               style={{ fontSize: "14px", width: "200px" }}
               min="1500"
-              disabled={disabled}
+              disabled={inputDisabled}
               value={price}
               onChange={e => setPrice(e.target.value)}
             />
@@ -137,7 +147,7 @@ const TheProject = ({ index, project }) => {
               ref={submitReqeustRippleRef}
               title="ثبت پیشنهاد"
               className="fit-width"
-              disabled={disabled}
+              disabled={buttonDisabled}
               onClick={handleOffer}
             />
             <p className="err-msg">{errMsg}</p>

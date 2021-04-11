@@ -32,6 +32,10 @@ export const ChangeProfileImage = body => {
   return axios.post("account/profile-image/", body).then(res => res.data);
 };
 
+export const ChangeDisplayName = body => {
+  return axios.patch("account/update-displayname/", body).then(res => res.data);
+};
+
 // Projects
 export const GetProjects = () => {
   return axios.get("projects/").then(res => res.data);
