@@ -29,7 +29,7 @@ export const UserData = () => {
 };
 
 export const ChangeProfileImage = body => {
-  return axios.post("account/profile-image/", body).then(res => res.data);
+  return axios.post("account/update-image/", body).then(res => res.data);
 };
 
 export const ChangeDisplayName = body => {

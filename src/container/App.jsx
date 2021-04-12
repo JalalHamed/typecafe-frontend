@@ -35,17 +35,23 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("draft")) {
-      UserData().then(res => {
-        dispatch(
-          User({
-            isLoggedIn: true,
-            displayname: res.displayname,
-            email: res.email,
-            credit: res.credit,
-            picture: res.picture,
-          })
-        );
-      });
+      UserData()
+        .then(res => {
+          dispatch(
+            User({
+              isLoggedIn: true,
+              displayname: res.displayname,
+              email: res.email,
+              credit: res.credit,
+              image: res.image,
+            })
+          );
+        })
+        .catch(err => {
+          if (err.response.data?.detail === "User not found") {
+            localStorage.removeItem("draft");
+          }
+        });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

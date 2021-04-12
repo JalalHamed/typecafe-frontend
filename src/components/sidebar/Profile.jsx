@@ -28,12 +28,12 @@ const Profile = forwardRef((props, ref) => {
       onClick={() => dispatch(User({ isModalOpen: true }))}
       ref={ref}
     >
-      {user.picture ? (
+      {user.image ? (
         <img
-          src={baseURL + user.picture}
+          src={baseURL + user.image}
           alt="User Profile"
-          className={`user-picture ${
-            isSidebarOpen ? "user-picture-wide" : "user-picture-short"
+          className={`user-image ${
+            isSidebarOpen ? "user-image-wide" : "user-image-short"
           }`}
         />
       ) : (

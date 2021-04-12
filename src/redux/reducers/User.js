@@ -5,7 +5,7 @@ let initialState = {
   displayname: "",
   email: "",
   credit: 0,
-  picture: "",
+  image: "",
 };
 
 const User = (state = initialState, action) => {

@@ -78,9 +78,9 @@ const TheProject = ({ index, project }) => {
     <div className="project-wrapper" key={index}>
       <div className="right">
         <div className="client-wrapper">
-          {!!project.client_picture ? (
+          {!!project.client_image ? (
             <img
-              src={baseURL + project.client_picture}
+              src={baseURL + project.client_image}
               alt="User Profile"
               className="client-image"
             />

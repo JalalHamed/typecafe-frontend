@@ -29,7 +29,7 @@ const UserDropDown = () => {
         displayname: "",
         email: "",
         credit: 0,
-        picture: "",
+        image: "",
       })
     );
     dispatch(

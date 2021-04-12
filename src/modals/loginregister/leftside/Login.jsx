@@ -38,7 +38,7 @@ const Login = () => {
             email: res.email,
             displayname: res.displayname,
             credit: res.credit,
-            picture: res.picture,
+            image: res.image,
           })
         );
         dispatch(

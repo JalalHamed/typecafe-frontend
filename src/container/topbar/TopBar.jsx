@@ -68,11 +68,11 @@ const TopBar = () => {
               className="user-wrapper"
               onClick={() => dispatch(User({ isDropdownOpen: true }))}
             >
-              {!user.picture ? (
+              {!user.image ? (
                 <i className="icon icon-user-default-regular" />
               ) : (
                 <img
-                  src={baseURL + user.picture}
+                  src={baseURL + user.image}
                   alt="User Profile"
                   className="user-profile"
                 />

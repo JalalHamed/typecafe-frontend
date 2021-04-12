@@ -36,6 +36,7 @@ const Profile = () => {
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
       setErrMsg("");
+      console.log(pic);
       ChangeProfileImage({ image: pic })
         .then(res => console.log(res))
         .catch(err => console.log(err));
@@ -90,16 +91,16 @@ const Profile = () => {
             accept="image/*"
             enctype="multipart/form-data"
           />
-          {!!user.picture ? (
+          {!!user.image ? (
             <img
-              src={baseURL + user.picture}
+              src={baseURL + user.image}
               alt="profile"
               className="profile-pic"
               onClick={() =>
                 dispatch(
                   SelectedImage({
                     isModalOpen: true,
-                    image: baseURL + user.picture,
+                    image: baseURL + user.image,
                   })
                 )
               }
