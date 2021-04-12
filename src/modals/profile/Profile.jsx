@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 // Components
 import Close from "components/buttons/Close";
@@ -14,7 +15,7 @@ import { PriceFormat } from "components/helper";
 import { User, SelectedImage, Sidebar } from "redux/actions";
 
 // Requests
-import { ChangeProfileImage, ChangeDisplayName } from "requests";
+import { ChangeProfileImage, ChangeDisplayName, handleErrors } from "requests";
 
 // Designs
 import "./profile.scss";
@@ -30,6 +31,7 @@ const Profile = () => {
   const [errMsg, setErrMsg] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [displayName, setDisplayName] = useState(user.displayname);
+  const [displayNameErrMsg, setDisplayNameErrMsg] = useState("");
 
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
@@ -46,11 +48,16 @@ const Profile = () => {
     if (editMode === false) {
       setEditMode(true);
     } else {
-      ChangeDisplayName({ displayName })
+      ChangeDisplayName({ displayname: displayName })
         .then(res => {
-          dispatch(User({ displayname: res }));
+          dispatch(User({ displayname: res.displayname }));
+          setDisplayNameErrMsg("");
+          toast.success("نام نمایشی با موفیت بروزرسانی شد.");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          setDisplayName(user.displayname);
+          handleErrors(err, setDisplayNameErrMsg);
+        });
       setEditMode(false);
     }
   };
@@ -124,6 +131,7 @@ const Profile = () => {
             <Input
               value={displayName}
               onChange={e => setDisplayName(e.target.value)}
+              autoFocus
             />
           )}
           <p className="title">ایمیل</p>
@@ -135,6 +143,7 @@ const Profile = () => {
             </span>
           </p>
           <p className="value">{PriceFormat(user.credit)}</p>
+          <p className="displayname-err-msg">{displayNameErrMsg}</p>
         </div>
       </div>
     </motion.div>
