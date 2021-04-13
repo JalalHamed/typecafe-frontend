@@ -29,7 +29,7 @@ export const UserData = () => {
 };
 
 export const ChangeProfileImage = body => {
-  return axios.post("account/update-image/", body).then(res => res.data);
+  return axios.patch("account/update-image/", body).then(res => res.data);
 };
 
 export const ChangeDisplayName = body => {
@@ -112,6 +112,13 @@ export const handleErrors = (error, setMessage) => {
       err?.password[0] === "Ensure this field has at least 8 characters."
     ) {
       setMessage("رمز عبور صحیح نمی‌باشد.");
+    } else if (
+      err?.image &&
+      err?.image.length &&
+      err?.image[0] ===
+        "File extension “svg” is not allowed. Allowed extensions are: bmp, dib, gif, tif, tiff, jfif, jpe, jpg, jpeg, pbm, pgm, ppm, pnm, png, apng, blp, bufr, cur, pcx, dcx, dds, ps, eps, fit, fits, fli, flc, ftc, ftu, gbr, grib, h5, hdf, jp2, j2k, jpc, jpf, jpx, j2c, icns, ico, im, iim, mpg, mpeg, mpo, msp, palm, pcd, pdf, pxr, psd, bw, rgb, rgba, sgi, ras, tga, icb, vda, vst, webp, wmf, emf, xbm, xpm."
+    ) {
+      setMessage("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
     } else if (error.response.status === 500) {
       setMessage("خطای سرور");
     } else setMessage("");

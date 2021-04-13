@@ -36,12 +36,16 @@ const Profile = () => {
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
       setErrMsg("");
-      console.log(pic);
-      ChangeProfileImage({ image: pic })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+      let body = new FormData();
+      body.append("image", pic);
+      ChangeProfileImage(body)
+        .then(res => {
+          dispatch(User({ image: res.image }));
+          toast.success("عکس پروفایل با موفقیت بروزرسانی شد.");
+        })
+        .catch(err => handleErrors(err, setErrMsg));
     } else {
-      setErrMsg("فرمت فایل انتخابی اشتباه است.");
+      setErrMsg("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
     }
   };
 
