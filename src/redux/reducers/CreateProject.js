@@ -6,6 +6,7 @@ let initialState = {
   languagesAndAdditions: [],
   numberOfPages: "",
   deliveryDeadline: "",
+  type: "",
   description: "",
 };
 

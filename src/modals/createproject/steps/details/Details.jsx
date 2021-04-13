@@ -23,11 +23,25 @@ const languageOptions = [
   { value: "formula", label: "فرمول" },
 ];
 
-const customStyles = {
+const typeOptions = [
+  { value: "handwritten", label: "دست‌نویس" },
+  { value: "typographic", label: "چاپی" },
+];
+
+const selectLangStyles = {
   control: styles => {
     return {
       ...styles,
-      width: "434px",
+      width: "550px",
+    };
+  },
+};
+
+const selectTypeStyles = {
+  control: styles => {
+    return {
+      ...styles,
+      width: "165px",
     };
   },
 };
@@ -44,6 +58,9 @@ const Details = () => {
   );
   const [deliveryDeadline, setDeliveryDeadline] = useState(
     useSelector(state => state.CreateProject.deliveryDeadline)
+  );
+  const [type, setType] = useState(
+    useSelector(state => state.CreateProject.type)
   );
   const [description, setDescription] = useState(
     useSelector(state => state.CreateProject.description)
@@ -64,6 +81,7 @@ const Details = () => {
         numberOfPages: nof,
         deliveryDeadline: ddl,
         languagesAndAdditions,
+        type,
         step: "reviewandsubmit",
       })
     );
@@ -76,6 +94,7 @@ const Details = () => {
         numberOfPages,
         deliveryDeadline,
         languagesAndAdditions,
+        type,
         step: "uploadfile",
       })
     );
@@ -92,6 +111,7 @@ const Details = () => {
       nof > 0 &&
       ddl > 0 &&
       languagesAndAdditions &&
+      type &&
       Number.isInteger(ddl)
     ) {
       setDetailsComplete(true);
@@ -111,7 +131,13 @@ const Details = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [description, numberOfPages, deliveryDeadline, languagesAndAdditions]);
+  }, [
+    description,
+    numberOfPages,
+    deliveryDeadline,
+    languagesAndAdditions,
+    type,
+  ]);
 
   return (
     <div className="details-wrapper">
@@ -121,7 +147,7 @@ const Details = () => {
         components={{
           IndicatorSeparator: () => null, // removes the seperator bar
         }}
-        styles={customStyles}
+        styles={selectLangStyles}
         name="languagesAndAdditions"
         label="زبان‌(ها) و پیوست‌ های پروژه"
         id="languagesAndAdditions"
@@ -139,7 +165,7 @@ const Details = () => {
           name="number_of_pages"
           id="number_of_pages"
           type="number"
-          wrapperStyle={{ width: "48%" }}
+          wrapperStyle={{ width: "30%" }}
           min="1"
           value={numberOfPages}
           onChange={e => setNumberOfPages(e.target.value)}
@@ -149,10 +175,21 @@ const Details = () => {
           name="delivery_deadline"
           id="delivery_deadline"
           type="number"
-          wrapperStyle={{ width: "48%" }}
+          wrapperStyle={{ width: "30%" }}
           min="1"
           value={deliveryDeadline}
           onChange={e => setDeliveryDeadline(e.target.value)}
+        />
+        <Select
+          isSearchable={false}
+          styles={selectTypeStyles}
+          name="type"
+          label="چاپی یا دست‌نویس"
+          id="type"
+          options={typeOptions}
+          placeholder=""
+          onChange={val => setType(val)}
+          defaultValue={useSelector(state => state.CreateProject.type)}
         />
       </div>
       <TextArea

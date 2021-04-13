@@ -24,6 +24,7 @@ const ReviewAndSubmit = () => {
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
   const [langs, setLangs] = useState([]);
+  const [type, setType] = useState("");
 
   const onSubmit = () => {
     let body = new FormData();
@@ -32,18 +33,20 @@ const ReviewAndSubmit = () => {
     body.append("number_of_pages", state.numberOfPages);
     body.append("delivery_deadline", state.deliveryDeadline);
     body.append("description", state.description);
+    body.append("type", type);
 
     CreateProjectReq(body)
       .then(() => {
         dispatch(
           CreateProject({
             isModalOpen: false,
-            step: "uploadpics",
+            step: "uploadfile",
             file: [],
             description: "",
             languages: "",
             numberOfPages: "",
             deliveryDeadline: "",
+            type: "",
           })
         );
         dispatch(Project({ getProjects: getProjects + 1 }));
@@ -57,6 +60,10 @@ const ReviewAndSubmit = () => {
       setLangs(prevState => [...prevState, lang.label]);
     });
   }, [state.languagesAndAdditions]);
+
+  useEffect(() => {
+    setType(state.type.label);
+  }, [state.type]);
 
   return (
     <div className="ras-wrapper">

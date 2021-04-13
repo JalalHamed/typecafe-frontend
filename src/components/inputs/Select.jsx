@@ -18,7 +18,7 @@ const CustomSelect = ({
   defaultValue,
 }) => {
   return (
-    <div className="select-wrapper">
+    <div>
       <label
         htmlFor={id}
         className={`label no-select ${error ? "label-error" : ""}`}

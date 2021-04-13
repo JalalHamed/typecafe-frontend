@@ -103,6 +103,10 @@ const TheProject = ({ index, project }) => {
             <div className="value">{project.languages_and_additions}</div>
           </div>
           <div>
+            <div className="title">نوع پروژه</div>
+            <div className="value">{project.type}</div>
+          </div>
+          <div>
             <div className="title">مهلت تحویل</div>
             <div className="value">
               {toFarsiNumber(project.delivery_deadline)} ساعت
