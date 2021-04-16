@@ -86,7 +86,7 @@ const UploadFiles = () => {
               onClick={openFileInput}
             />
             {badFormat && (
-              <p className="error">فرمت فایل انتخاب شده اشتباه است.</p>
+              <p className="error">فرمت فایل انتخاب شده صحیح نمی‌باشد.</p>
             )}
           </>
         ) : (
