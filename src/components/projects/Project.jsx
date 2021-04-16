@@ -23,6 +23,7 @@ const TheProject = ({ index, project }) => {
   const dispatch = useDispatch();
   const submitReqeustRippleRef = useRef();
   const downloadFileRippleRef = useRef();
+  const deleteProjectRippleRef = useRef();
   const user = useSelector(state => state.User);
   const [downloaded, setDownloaded] = useState(false);
   const [errMsg, setErrMsg] = useState("");
@@ -119,6 +120,13 @@ const TheProject = ({ index, project }) => {
           className="fit-width"
           onClick={handleDownloaded}
         />
+        {user.email === project.client_email && (
+          <Button
+            ref={deleteProjectRippleRef}
+            title="حذف پروژه"
+            className="fit-width delete-project"
+          />
+        )}
       </div>
       <div className="left">
         {user.email === project.client_email ? (

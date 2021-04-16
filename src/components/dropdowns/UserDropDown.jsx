@@ -20,7 +20,7 @@ const UserDropDown = () => {
   UseOnClickOutside(ref, () => dispatch(User({ isDropdownOpen: false })));
 
   const handleLogout = () => {
-    localStorage.removeItem("draft");
+    localStorage.removeItem("ac_t");
     dispatch(
       User({
         isLoggedIn: false,

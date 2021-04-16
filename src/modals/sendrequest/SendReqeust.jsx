@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 // Components
 import Close from "components/buttons/Close";
@@ -14,7 +15,7 @@ import { PriceFormat, toFarsiNumber } from "components/helper";
 import { Project, Sidebar } from "redux/actions";
 
 // Request
-import { CreateOffer } from "requests";
+import { CreateOffer, handleErrors } from "requests";
 
 // Design
 import "./sendrequest.scss";
@@ -43,13 +44,19 @@ const SendRequest = () => {
 
   const handleSubmitRequest = () => {
     let body = {
+      project: state.Project.selectedId,
       offered_price: pricePerPage,
-      project: state.selectedId,
     };
 
     CreateOffer(body)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .then(() => {
+        dispatch(Project({ isModalOpen: false }));
+        toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
+      })
+      .catch(err => {
+        dispatch(Project({ isModalOpen: false }));
+        handleErrors(err, toast.error);
+      });
   };
 
   return (
@@ -71,10 +78,11 @@ const SendRequest = () => {
               عنوان مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت
               عدم تحویل پروژه تا قبل از مهلت تعیین شده{" "}
               <span className="highlight">{toFarsiNumber(deadline)} ساعت</span>{" "}
-              به حساب کارفرما انتقال داده خواهد شد.
+              به ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما
+              انتقال داده خواهد شد.
             </p>
             <p className="go-to-rules" onClick={handleMoreAboutThis}>
-              اطلاعات بیشتر در این باره
+              اطلاعات بیشتر درباره نحوه عملکرد وبسایت
             </p>
             <div className="button-wrapper">
               <Button

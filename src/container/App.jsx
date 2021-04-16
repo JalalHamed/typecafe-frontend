@@ -34,7 +34,7 @@ const App = () => {
   const state = useSelector(state => state);
 
   useEffect(() => {
-    if (localStorage.getItem("draft")) {
+    if (localStorage.getItem("ac_t")) {
       UserData()
         .then(res => {
           dispatch(
@@ -48,8 +48,8 @@ const App = () => {
           );
         })
         .catch(err => {
-          if (err.response.data?.detail === "User not found") {
-            localStorage.removeItem("draft");
+          if (err.response?.data?.detail === "User not found") {
+            localStorage.removeItem("ac_t");
           }
         });
     }

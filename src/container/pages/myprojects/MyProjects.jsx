@@ -13,7 +13,7 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import { CreateProject } from "redux/actions";
 
 // Requests
-import { GetMyProjects } from "requests";
+import { GetMyProjects, GetOffers } from "requests";
 
 // Design
 import "./myprojects.scss";
@@ -42,6 +42,21 @@ const Projects = () => {
         console.log(err);
       });
   }, [getProjects]);
+
+  useEffect(() => {
+    console.log(projects);
+    if (projects.length) {
+      projects.forEach(project => {
+        GetOffers({ project_id: project.id })
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
+    }
+  }, [projects]);
 
   return (
     <div className="projects-wrapper">

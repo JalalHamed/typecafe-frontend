@@ -57,6 +57,10 @@ export const CreateOffer = body => {
   return axios.post("createoffer/", body).then(res => res.data);
 };
 
+export const GetOffers = body => {
+  return axios.post("offers/", body).then(res => res.data);
+};
+
 // Support
 export const CreateSupportTicket = body => {
   return axios.post("account/support-ticket/", body).then(res => res.data);
@@ -119,6 +123,11 @@ export const handleErrors = (error, setMessage) => {
         "File extension “svg” is not allowed. Allowed extensions are: bmp, dib, gif, tif, tiff, jfif, jpe, jpg, jpeg, pbm, pgm, ppm, pnm, png, apng, blp, bufr, cur, pcx, dcx, dds, ps, eps, fit, fits, fli, flc, ftc, ftu, gbr, grib, h5, hdf, jp2, j2k, jpc, jpf, jpx, j2c, icns, ico, im, iim, mpg, mpeg, mpo, msp, palm, pcd, pdf, pxr, psd, bw, rgb, rgba, sgi, ras, tga, icb, vda, vst, webp, wmf, emf, xbm, xpm."
     ) {
       setMessage("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
+    } else if (
+      err?.error &&
+      err?.error === "You have already made a request for this project."
+    ) {
+      setMessage("شما قبلا برای این پروژه پیشنهاد ثبت کرده‌اید.");
     } else if (error.response.status === 500) {
       setMessage("خطای سرور");
     } else setMessage("");

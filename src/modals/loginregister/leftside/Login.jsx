@@ -31,7 +31,7 @@ const Login = () => {
     UserLogin({ email, ...data })
       .then(res => {
         setLoading(false);
-        localStorage.setItem("draft", res.access);
+        localStorage.setItem("ac_t", res.access);
         dispatch(
           User({
             isLoggedIn: true,
