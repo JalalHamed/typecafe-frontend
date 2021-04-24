@@ -40,8 +40,13 @@ const ReviewAndSubmit = () => {
       .then(() => {
         Socket.send(
           JSON.stringify({
-            type: "message",
-            message: body,
+            status: "newProject",
+            file: state.file,
+            languages_and_additions: langs,
+            number_of_pages: state.numberOfPages,
+            delivery_deadline: state.deliveryDeadline,
+            description: state.description,
+            type: type,
           })
         );
 

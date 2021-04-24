@@ -60,7 +60,7 @@ const App = () => {
     };
 
     Socket.onmessage = message => {
-      console.log("received message", message);
+      console.log("received", JSON.parse(message.data));
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
