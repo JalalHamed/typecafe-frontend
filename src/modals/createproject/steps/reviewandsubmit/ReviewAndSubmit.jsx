@@ -3,16 +3,15 @@ import React, { useRef, useState, useEffect } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // Components
 import Button from "components/buttons/Button";
-import { baseWS } from "components/xhr";
 
 // Actions
 import { CreateProject, Project } from "redux/actions";
 
 // Requests
+import Socket from "requests/Socket";
 import { handleErrors, CreateProjectReq } from "requests";
 
 // Designs
@@ -27,7 +26,6 @@ const ReviewAndSubmit = () => {
   const [error, setError] = useState("");
   const [langs, setLangs] = useState([]);
   const [type, setType] = useState("");
-  const projectWsClient = new W3CWebSocket(baseWS + "/project/");
 
   const onSubmit = () => {
     let body = new FormData();
@@ -40,7 +38,7 @@ const ReviewAndSubmit = () => {
 
     CreateProjectReq(body)
       .then(() => {
-        projectWsClient.send(
+        Socket.send(
           JSON.stringify({
             type: "message",
             message: body,

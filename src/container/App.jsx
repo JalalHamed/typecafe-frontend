@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // Pages
 import Projects from "./pages/projects/Projects";
@@ -17,7 +16,6 @@ import Faq from "./pages/faq/Faq";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
 import UserDropDown from "components/dropdowns/UserDropDown";
-import { baseWS } from "components/xhr";
 
 // Modals & Clicks
 import Modals from "./Modals";
@@ -26,6 +24,7 @@ import Modals from "./Modals";
 import { User } from "redux/actions";
 
 // Requests
+import Socket from "requests/Socket";
 import { UserData } from "requests";
 
 // Design
@@ -34,7 +33,6 @@ import "./app.scss";
 const App = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  const projectWsClient = new W3CWebSocket(baseWS + "/project/");
 
   useEffect(() => {
     if (localStorage.getItem("ac_t")) {
@@ -57,11 +55,11 @@ const App = () => {
         });
     }
 
-    projectWsClient.onopen = () => {
+    Socket.onopen = () => {
       console.log("websocket client has connected");
     };
 
-    projectWsClient.onmessage = message => {
+    Socket.onmessage = message => {
       console.log("received message", message);
     };
 
