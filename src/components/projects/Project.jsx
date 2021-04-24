@@ -151,9 +151,9 @@ const TheProject = ({ index, project }) => {
             </p>
             <p className="left-title">
               عایدی شما
-              <spam className="left-value">
+              <span className="left-value">
                 {PriceFormat(contractorEarning)} به ازای هر صفحه
-              </spam>
+              </span>
             </p>
             <Button
               ref={submitReqeustRippleRef}
