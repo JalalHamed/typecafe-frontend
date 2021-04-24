@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 
 // Libraries
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // hooks
 import UseOnClickOutside from "hooks/UseOnClickOutside";
 
 // Actions
-import { User, CreateProject, Project } from "redux/actions";
+import { User, CreateProject } from "redux/actions";
 
 // Designs
 import "./userdropdown.scss";
@@ -15,7 +15,6 @@ import "./userdropdown.scss";
 const UserDropDown = () => {
   const dispatch = useDispatch();
   const ref = useRef();
-  const getProjects = useSelector(state => state.Project.getProjects);
 
   UseOnClickOutside(ref, () => dispatch(User({ isDropdownOpen: false })));
 
@@ -44,7 +43,6 @@ const UserDropDown = () => {
         description: "",
       })
     );
-    dispatch(Project({ getProjects: getProjects + 1 }));
   };
 
   const handleProfile = () => {

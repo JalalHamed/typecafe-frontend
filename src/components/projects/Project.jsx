@@ -75,7 +75,7 @@ const TheProject = ({ index, project }) => {
   }, [user.isLoggedIn, downloaded, price]);
 
   const handleTimeClick = () => {
-    Socket.send(JSON.stringify({ title: "haji" }));
+    Socket.send(JSON.stringify({ title: "haji", status: "time" }));
   };
 
   useEffect(() => {

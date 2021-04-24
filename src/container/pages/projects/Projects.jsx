@@ -9,6 +9,7 @@ import { css } from "@emotion/react";
 import Project from "components/projects/Project";
 
 // Requests
+import Socket from "requests/Socket";
 import { GetProjects } from "requests";
 
 // Design
@@ -36,6 +37,11 @@ const Projects = () => {
         console.log(err);
       });
   }, [getProjects]);
+
+  Socket.onmessage = e => {
+    if (JSON.parse(e.data).data.type === "time")
+      console.log("got message", JSON.parse(e.data));
+  };
 
   return (
     <div className="projects-wrapper">

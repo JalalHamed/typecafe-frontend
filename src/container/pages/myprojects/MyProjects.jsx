@@ -44,7 +44,6 @@ const Projects = () => {
   }, [getProjects]);
 
   useEffect(() => {
-    console.log(projects);
     if (projects.length) {
       projects.forEach(project => {
         GetOffers({ project_id: project.id })

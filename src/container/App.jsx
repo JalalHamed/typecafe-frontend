@@ -24,7 +24,6 @@ import Modals from "./Modals";
 import { User } from "redux/actions";
 
 // Requests
-import Socket from "requests/Socket";
 import { UserData } from "requests";
 
 // Design
@@ -54,14 +53,6 @@ const App = () => {
           }
         });
     }
-
-    Socket.onopen = () => {
-      console.log("websocket client has connected");
-    };
-
-    Socket.onmessage = message => {
-      console.log("received", JSON.parse(message.data));
-    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
