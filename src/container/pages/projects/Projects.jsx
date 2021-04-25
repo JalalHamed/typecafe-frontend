@@ -43,6 +43,14 @@ const Projects = () => {
       console.log("got message", JSON.parse(e.data));
   };
 
+  Socket.onopen = () => {
+    console.log("socket open");
+  };
+
+  Socket.onclose = () => {
+    console.log("socket close");
+  };
+
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
