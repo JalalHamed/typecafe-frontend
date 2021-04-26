@@ -93,7 +93,7 @@ const Profile = () => {
             hidden
             onChange={e => handleChangePic(e.target.files[0])}
             accept="image/*"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
           />
           {!!user.image ? (
             <img

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/react";
 
@@ -21,7 +20,6 @@ const override = css`
 `;
 
 const Projects = () => {
-  const getProjects = useSelector(state => state.Project.getProjects);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,11 +34,12 @@ const Projects = () => {
         setLoading(false);
         console.log(err);
       });
-  }, [getProjects]);
+  }, []);
 
   Socket.onmessage = e => {
-    if (JSON.parse(e.data).data.type === "time")
-      console.log("got message", JSON.parse(e.data));
+    let project = JSON.parse(e.data);
+    setProjects(prevState => [project, ...prevState]);
+    console.log("new project", project);
   };
 
   Socket.onopen = () => {

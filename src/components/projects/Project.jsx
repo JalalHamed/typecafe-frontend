@@ -75,7 +75,13 @@ const TheProject = ({ index, project }) => {
   }, [user.isLoggedIn, downloaded, price]);
 
   const handleTimeClick = () => {
-    Socket.send(JSON.stringify({ title: "haji", status: "time" }));
+    Socket.send(
+      JSON.stringify({
+        status: "new-project",
+        id: 28,
+        email: "sara@gmail.com",
+      })
+    );
   };
 
   useEffect(() => {

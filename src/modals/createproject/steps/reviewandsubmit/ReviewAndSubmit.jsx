@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Button from "components/buttons/Button";
 
 // Actions
-import { CreateProject, Project } from "redux/actions";
+import { CreateProject } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
@@ -20,7 +20,7 @@ import "./reviewandsubmit.scss";
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
-  const getProjects = useSelector(state => state.Project.getProjects);
+  const email = useSelector(state => state.User.email);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
@@ -37,32 +37,27 @@ const ReviewAndSubmit = () => {
     body.append("type", type);
 
     CreateProjectReq(body)
-      .then(() => {
+      .then(res => {
+        console.log(res);
         Socket.send(
           JSON.stringify({
-            status: "newProject",
-            file: state.file,
-            languages_and_additions: langs,
-            number_of_pages: state.numberOfPages,
-            delivery_deadline: state.deliveryDeadline,
-            description: state.description,
-            type: type,
+            status: "new-project",
+            id: res.id,
+            email: email,
           })
         );
-
         dispatch(
           CreateProject({
             isModalOpen: false,
             step: "uploadfile",
             file: [],
             description: "",
-            languages: "",
+            languagesAndAdditions: "",
             numberOfPages: "",
             deliveryDeadline: "",
             type: "",
           })
         );
-        dispatch(Project({ getProjects: getProjects + 1 }));
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
       .catch(err => handleErrors(err, setError));

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 // Libraries
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/react";
 
@@ -26,7 +26,6 @@ const override = css`
 const Projects = () => {
   const dispatch = useDispatch();
   const AddProjectRippleRef = useRef();
-  const getProjects = useSelector(state => state.Project.getProjects);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +40,7 @@ const Projects = () => {
         setLoading(false);
         console.log(err);
       });
-  }, [getProjects]);
+  }, []);
 
   useEffect(() => {
     if (projects.length) {

@@ -1,5 +1,4 @@
 let initialState = {
-  getProjects: 0,
   isModalOpen: false,
   selectedPagesCount: 0,
   selectedPricePerPage: 0,
