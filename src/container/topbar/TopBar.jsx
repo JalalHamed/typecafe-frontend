@@ -8,6 +8,8 @@ import UseOnClickOutside from "hooks/UseOnClickOutside";
 
 // Components
 import RippleWrapper from "components/ripple/RippleWrapper";
+import UserDropDown from "components/dropdowns/UserDropDown";
+import NotificationDropDown from "components/dropdowns/NotificationDropDown";
 
 // Actions
 import { Sidebar, LR, CreateProject, User, Notifications } from "redux/actions";
@@ -23,20 +25,20 @@ const TopBar = () => {
   const menuIconRippleRef = useRef();
   const signUpRippleRef = useRef();
   const createProjectRippleRef = useRef();
-  const notifRippleRef = useRef();
-  const userRippleRef = useRef();
+  const notifDropDownRef = useRef();
+  const userDropDownRef = useRef();
   const user = useSelector(state => state.User);
-  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
-  const userDropDown = useSelector(state => state.User.isDropdownOpen);
   const notifDropDown = useSelector(
     state => state.Notifications.isDropdownOpen
   );
+  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const userDropDown = useSelector(state => state.User.isDropdownOpen);
 
-  UseOnClickOutside(userRippleRef, () =>
+  UseOnClickOutside(userDropDownRef, () =>
     dispatch(User({ isDropdownOpen: false }))
   );
 
-  UseOnClickOutside(notifRippleRef, () =>
+  UseOnClickOutside(notifDropDownRef, () =>
     dispatch(Notifications({ isDropdownOpen: false }))
   );
 
@@ -77,18 +79,21 @@ const TopBar = () => {
             </RippleWrapper>
             <div
               className="notif-wrapper"
-              ref={notifRippleRef}
+              ref={notifDropDownRef}
               onClick={() =>
                 dispatch(Notifications({ isDropdownOpen: !notifDropDown }))
               }
             >
+              {notifDropDown && <NotificationDropDown />}
+
               <i className="icon icon-notification" />
             </div>
             <div
-              ref={userRippleRef}
+              ref={userDropDownRef}
               className="user-wrapper"
               onClick={() => dispatch(User({ isDropdownOpen: !userDropDown }))}
             >
+              {user.isDropdownOpen && <UserDropDown />}
               {!user.image ? (
                 <i className="icon icon-user-default-regular" />
               ) : (
