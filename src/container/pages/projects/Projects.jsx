@@ -37,9 +37,12 @@ const Projects = () => {
   }, []);
 
   Socket.onmessage = e => {
-    let project = JSON.parse(e.data);
-    setProjects(prevState => [project, ...prevState]);
-    console.log("new project", project);
+    let data = JSON.parse(e.data);
+    if (data.ws_type === "new-project")
+      setProjects(prevState => [data, ...prevState]);
+    if (data.ws_type === "delete_project")
+      setProjects(projects.filter(x => x.id !== data.id));
+    console.log("message recieved", data);
   };
 
   Socket.onopen = () => {

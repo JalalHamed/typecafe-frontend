@@ -13,6 +13,10 @@ import { PriceFormat, toFarsiNumber } from "components/helper";
 // Actions
 import { Project } from "redux/actions";
 
+// Requests
+import Socket from "requests/Socket";
+import { DeleteProject } from "requests";
+
 // XHR
 import { baseURL } from "components/xhr";
 
@@ -49,6 +53,16 @@ const TheProject = ({ index, project }) => {
         selectedId: project.id,
       })
     );
+  };
+
+  const handleDelete = () => {
+    DeleteProject({ id: project.id })
+      .then(() => {
+        Socket.send(
+          JSON.stringify({ status: "delete-project", id: project.id })
+        );
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -125,6 +139,7 @@ const TheProject = ({ index, project }) => {
             ref={deleteProjectRippleRef}
             title="حذف پروژه"
             className="fit-width delete-project"
+            onClick={handleDelete}
           />
         )}
       </div>
