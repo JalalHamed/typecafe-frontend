@@ -3,6 +3,9 @@ import React, { useRef } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 
+// hooks
+import UseOnClickOutside from "hooks/UseOnClickOutside";
+
 // Components
 import RippleWrapper from "components/ripple/RippleWrapper";
 
@@ -24,6 +27,11 @@ const TopBar = () => {
   const userRippleRef = useRef();
   const user = useSelector(state => state.User);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isDropdownOpen = useSelector(state => state.User.isDropdownOpen);
+
+  UseOnClickOutside(userRippleRef, () =>
+    dispatch(User({ isDropdownOpen: false }))
+  );
 
   return (
     <div className="topbar-wrapper no-select">
@@ -60,13 +68,15 @@ const TopBar = () => {
               <i className="icon icon-create" />
               <p className="create-project-title">ثبت پروژه</p>
             </RippleWrapper>
-            <RippleWrapper className="notif-wrapper" ref={notifRippleRef}>
+            <div className="notif-wrapper" ref={notifRippleRef}>
               <i className="icon icon-notification" />
-            </RippleWrapper>
-            <RippleWrapper
+            </div>
+            <div
               ref={userRippleRef}
               className="user-wrapper"
-              onClick={() => dispatch(User({ isDropdownOpen: true }))}
+              onClick={() =>
+                dispatch(User({ isDropdownOpen: !isDropdownOpen }))
+              }
             >
               {!user.image ? (
                 <i className="icon icon-user-default-regular" />
@@ -77,7 +87,7 @@ const TopBar = () => {
                   className="user-profile"
                 />
               )}
-            </RippleWrapper>
+            </div>
           </div>
         )}
       </div>
