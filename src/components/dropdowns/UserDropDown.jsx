@@ -44,7 +44,7 @@ const UserDropDown = () => {
   };
 
   return (
-    <div className="user-dropdown-wrapper">
+    <div className="user-dropdown-wrapper no-select">
       <div className="user-dropdown-item" onClick={handleProfile}>
         پروفایل
       </div>

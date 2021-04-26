@@ -22,7 +22,7 @@
 .notification-dropdown-wrapper {
   position: fixed;
   top: 65px;
-  left: 75px;
+  left: 70px;
   background-color: #29313be1;
   border-radius: 5px;
   width: 300px;
@@ -30,4 +30,5 @@
   z-index: 99;
   color: #fff;
   padding: 15px;
+  overflow-y: auto;
 }

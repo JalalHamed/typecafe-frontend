@@ -43,7 +43,7 @@ const TopBar = () => {
   );
 
   return (
-    <div className="topbar-wrapper no-select">
+    <div className="topbar-wrapper">
       <div className="topbar-right">
         <RippleWrapper
           className="hamburger-menu-icon no-select"
@@ -60,7 +60,7 @@ const TopBar = () => {
       <div className="topbar-left">
         {!user.isLoggedIn ? (
           <RippleWrapper
-            className="topbar-sign-up"
+            className="topbar-sign-up no-select"
             onClick={() => dispatch(LR({ isModalOpen: true }))}
             ref={signUpRippleRef}
           >
@@ -70,39 +70,42 @@ const TopBar = () => {
         ) : (
           <div className="topbar-left-user-logged-in">
             <RippleWrapper
-              className="create-project"
+              className="create-project no-select"
               onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
               ref={createProjectRippleRef}
             >
               <i className="icon icon-create" />
               <p className="create-project-title">ثبت پروژه</p>
             </RippleWrapper>
-            <div
-              className="notif-wrapper"
-              ref={notifDropDownRef}
-              onClick={() =>
-                dispatch(Notifications({ isDropdownOpen: !notifDropDown }))
-              }
-            >
+            <div ref={notifDropDownRef}>
               {notifDropDown && <NotificationDropDown />}
-
-              <i className="icon icon-notification" />
+              <div
+                className="notif-wrapper no-select"
+                onClick={() =>
+                  dispatch(Notifications({ isDropdownOpen: !notifDropDown }))
+                }
+              >
+                <i className="icon icon-notification" />
+              </div>
             </div>
-            <div
-              ref={userDropDownRef}
-              className="user-wrapper"
-              onClick={() => dispatch(User({ isDropdownOpen: !userDropDown }))}
-            >
+            <div ref={userDropDownRef}>
               {user.isDropdownOpen && <UserDropDown />}
-              {!user.image ? (
-                <i className="icon icon-user-default-regular" />
-              ) : (
-                <img
-                  src={baseURL + user.image}
-                  alt="User Profile"
-                  className="user-profile"
-                />
-              )}
+              <div
+                className="user-wrapper no-select"
+                onClick={() =>
+                  dispatch(User({ isDropdownOpen: !userDropDown }))
+                }
+              >
+                {!user.image ? (
+                  <i className="icon icon-user-default-regular" />
+                ) : (
+                  <img
+                    src={baseURL + user.image}
+                    alt="User Profile"
+                    className="user-profile"
+                  />
+                )}
+              </div>
             </div>
           </div>
         )}
