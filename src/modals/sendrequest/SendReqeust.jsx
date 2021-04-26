@@ -26,11 +26,11 @@ const SendRequest = () => {
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
   const state = useSelector(state => state);
-  const pageCount = Number(state.Project.selectedPageCount);
-  const pricePerPage = Number(state.Project.selectedPricePerPage);
+  const pageCount = Number(state.Offer.selectedPageCount);
+  const pricePerPage = Number(state.Offer.selectedPricePerPage);
   const wholePrice = pageCount * pricePerPage;
   const credit = Number(state.User.credit);
-  const deadline = Number(state.Project.selectedDeadline);
+  const deadline = Number(state.Offer.selectedDeadline);
 
   const handleIncreaseCredit = () => {
     dispatch(Offer({ isModalOpen: false }));

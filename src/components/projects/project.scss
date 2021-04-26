@@ -56,7 +56,14 @@
 
   .left {
     margin-top: 15px;
-    width: 40%;
+    width: 35%;
+
+    .request-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
     .err-msg {
       font-size: 12px;

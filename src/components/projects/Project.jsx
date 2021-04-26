@@ -11,7 +11,7 @@ import Input from "components/inputs/Input";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Offer, DeleteProject } from "redux/actions";
+import { Offer, DeleteProject, Downloaded } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -25,7 +25,7 @@ const TheProject = ({ index, project }) => {
   const downloadFileRippleRef = useRef();
   const deleteProjectRippleRef = useRef();
   const user = useSelector(state => state.User);
-  const [downloaded, setDownloaded] = useState(false);
+  const downloaded = useSelector(state => state.Downloaded.ids);
   const [errMsg, setErrMsg] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [inputDisabled, setInputDisabled] = useState(true);
@@ -36,7 +36,7 @@ const TheProject = ({ index, project }) => {
 
   const handleDownloaded = () => {
     window.location.href = baseURL + project.file;
-    setDownloaded(true);
+    dispatch(Downloaded({ ids: [...downloaded, project.id] }));
   };
 
   const handleOffer = () => {
@@ -56,7 +56,7 @@ const TheProject = ({ index, project }) => {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
       setButtonDisabled(true);
       setInputDisabled(true);
-    } else if (!downloaded) {
+    } else if (!downloaded.includes(project.id)) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
       setButtonDisabled(true);
       setInputDisabled(true);
@@ -69,7 +69,7 @@ const TheProject = ({ index, project }) => {
       setButtonDisabled(false);
       setInputDisabled(false);
     }
-  }, [user.isLoggedIn, downloaded, price]);
+  }, [user.isLoggedIn, downloaded, price, project.id]);
 
   useEffect(() => {
     setContractorEarning(Math.round(price - (price * 5) / 100));
@@ -133,7 +133,10 @@ const TheProject = ({ index, project }) => {
       </div>
       <div className="left">
         {user.email === project.client_email ? (
-          <p>پروژه شما</p>
+          <div className="request-wrapper">
+            <i className="icon icon-leafless-tree" />
+            <p>هنوز هیچ پیشنهادی ندارید.</p>
+          </div>
         ) : (
           <>
             <Input

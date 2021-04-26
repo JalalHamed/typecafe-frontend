@@ -53,3 +53,10 @@ export const Offer = payload => {
     payload,
   };
 };
+
+export const Downloaded = payload => {
+  return {
+    type: "DOWNLOADED",
+    payload,
+  };
+};
