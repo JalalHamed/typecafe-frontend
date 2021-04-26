@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { User, CreateProject } from "redux/actions";
 
 // Designs
-import "./userdropdown.scss";
+import "./dropdowns.scss";
 
 const UserDropDown = () => {
   const dispatch = useDispatch();

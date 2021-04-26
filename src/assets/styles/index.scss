@@ -23,17 +23,18 @@
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background: #29313b;
+    background: #fff;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #7c7c7c;
+    background: #29313b;
+    border-radius: 5px;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #999999;
+    background: #29313be1;
   }
 }
 

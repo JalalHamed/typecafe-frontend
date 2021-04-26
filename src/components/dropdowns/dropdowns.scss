@@ -2,7 +2,7 @@
   position: fixed;
   top: 65px;
   left: 20px;
-  background-color: #29313b;
+  background-color: #29313be1;
   border-radius: 5px;
   width: 200px;
   z-index: 99;
@@ -17,4 +17,17 @@
       background-color: #39434e;
     }
   }
+}
+
+.notification-dropdown-wrapper {
+  position: fixed;
+  top: 65px;
+  left: 75px;
+  background-color: #29313be1;
+  border-radius: 5px;
+  width: 300px;
+  height: 200px;
+  z-index: 99;
+  color: #fff;
+  padding: 15px;
 }

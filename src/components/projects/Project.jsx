@@ -16,9 +16,6 @@ import { Project } from "redux/actions";
 // XHR
 import { baseURL } from "components/xhr";
 
-// Requests
-import Socket from "requests/Socket";
-
 // Designs
 import "./project.scss";
 
@@ -73,16 +70,6 @@ const TheProject = ({ index, project }) => {
       setInputDisabled(false);
     }
   }, [user.isLoggedIn, downloaded, price]);
-
-  const handleTimeClick = () => {
-    Socket.send(
-      JSON.stringify({
-        status: "new-project",
-        id: 28,
-        email: "sara@gmail.com",
-      })
-    );
-  };
 
   useEffect(() => {
     setContractorEarning(Math.round(price - (price * 5) / 100));
@@ -179,7 +166,7 @@ const TheProject = ({ index, project }) => {
           </>
         )}
       </div>
-      <div className="top-left" onClick={handleTimeClick}>
+      <div className="top-left">
         {
           <Moment fromNow locale="fa">
             {project.created_at}

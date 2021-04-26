@@ -16,6 +16,7 @@ import Faq from "./pages/faq/Faq";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
 import UserDropDown from "components/dropdowns/UserDropDown";
+import NotificationDropDown from "components/dropdowns/NotificationDropDown";
 
 // Modals & Clicks
 import Modals from "./Modals";
@@ -72,6 +73,7 @@ const App = () => {
         </div>
         <div className="content">
           {state.User.isDropdownOpen && <UserDropDown />}
+          {state.Notifications.isDropdownOpen && <NotificationDropDown />}
 
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "my-projects" && <MyProjects />}

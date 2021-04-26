@@ -10,7 +10,7 @@ import UseOnClickOutside from "hooks/UseOnClickOutside";
 import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Actions
-import { Sidebar, LR, CreateProject, User } from "redux/actions";
+import { Sidebar, LR, CreateProject, User, Notifications } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -27,10 +27,17 @@ const TopBar = () => {
   const userRippleRef = useRef();
   const user = useSelector(state => state.User);
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
-  const isDropdownOpen = useSelector(state => state.User.isDropdownOpen);
+  const userDropDown = useSelector(state => state.User.isDropdownOpen);
+  const notifDropDown = useSelector(
+    state => state.Notifications.isDropdownOpen
+  );
 
   UseOnClickOutside(userRippleRef, () =>
     dispatch(User({ isDropdownOpen: false }))
+  );
+
+  UseOnClickOutside(notifRippleRef, () =>
+    dispatch(Notifications({ isDropdownOpen: false }))
   );
 
   return (
@@ -68,15 +75,19 @@ const TopBar = () => {
               <i className="icon icon-create" />
               <p className="create-project-title">ثبت پروژه</p>
             </RippleWrapper>
-            <div className="notif-wrapper" ref={notifRippleRef}>
+            <div
+              className="notif-wrapper"
+              ref={notifRippleRef}
+              onClick={() =>
+                dispatch(Notifications({ isDropdownOpen: !notifDropDown }))
+              }
+            >
               <i className="icon icon-notification" />
             </div>
             <div
               ref={userRippleRef}
               className="user-wrapper"
-              onClick={() =>
-                dispatch(User({ isDropdownOpen: !isDropdownOpen }))
-              }
+              onClick={() => dispatch(User({ isDropdownOpen: !userDropDown }))}
             >
               {!user.image ? (
                 <i className="icon icon-user-default-regular" />
