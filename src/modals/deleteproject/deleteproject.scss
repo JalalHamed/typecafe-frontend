@@ -1,0 +1,34 @@
+.deleteproject-wrapper {
+  background-color: #fff;
+  width: 420px;
+  height: 200px;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+  position: relative;
+  font-size: 18px;
+
+  .deleteproject-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .deleteproject-note {
+      margin-top: 75px;
+    }
+
+    .button-wrapper {
+      position: absolute;
+      bottom: 25px;
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .close-modal {
+    top: 12px;
+    left: 12px;
+  }
+}

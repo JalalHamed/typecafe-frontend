@@ -6,13 +6,13 @@ let initialState = {
   selectedId: "",
 };
 
-const Projects = (state = initialState, action) => {
+const Offer = (state = initialState, action) => {
   switch (action.type) {
-    case "PROJECT":
+    case "OFFER":
       return { ...state, ...action.payload };
     default:
       return state;
   }
 };
 
-export default Projects;
+export default Offer;

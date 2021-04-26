@@ -26,6 +26,13 @@ export const CreateProject = payload => {
   };
 };
 
+export const DeleteProject = payload => {
+  return {
+    type: "DELETE_PROJECT",
+    payload,
+  };
+};
+
 export const SelectedImage = payload => {
   return {
     type: "SELECTED_IMAGE",
@@ -40,9 +47,9 @@ export const Notifications = payload => {
   };
 };
 
-export const Project = payload => {
+export const Offer = payload => {
   return {
-    type: "PROJECT",
+    type: "OFFER",
     payload,
   };
 };

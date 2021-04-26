@@ -10,6 +10,7 @@ import CreateProject from "modals/createproject/CreateProject";
 import Image from "modals/image/Image";
 import Profile from "modals/profile/Profile";
 import SendRequest from "modals/sendrequest/SendReqeust";
+import DeleteProject from "modals/deleteproject/DeleteProject";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -35,9 +36,15 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Send Request */}
-      {state.Project.isModalOpen && (
+      {state.Offer.isModalOpen && (
         <ModalWrapper>
           <SendRequest />
+        </ModalWrapper>
+      )}
+      {/* Delete Project */}
+      {state.DeleteProject.isModalOpen && (
+        <ModalWrapper>
+          <DeleteProject />
         </ModalWrapper>
       )}
       {/* Image */}

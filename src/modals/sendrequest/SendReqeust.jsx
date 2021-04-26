@@ -12,7 +12,7 @@ import Previous from "components/buttons/Previous";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Project, Sidebar } from "redux/actions";
+import { Offer, Sidebar } from "redux/actions";
 
 // Request
 import { CreateOffer, handleErrors } from "requests";
@@ -33,28 +33,28 @@ const SendRequest = () => {
   const deadline = Number(state.Project.selectedDeadline);
 
   const handleIncreaseCredit = () => {
-    dispatch(Project({ isModalOpen: false }));
+    dispatch(Offer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "financials" }));
   };
 
   const handleMoreAboutThis = () => {
-    dispatch(Project({ isModalOpen: false }));
+    dispatch(Offer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };
 
   const handleSubmitRequest = () => {
     let body = {
-      project: state.Project.selectedId,
+      project: state.Offer.selectedId,
       offered_price: pricePerPage,
     };
 
     CreateOffer(body)
       .then(() => {
-        dispatch(Project({ isModalOpen: false }));
+        dispatch(Offer({ isModalOpen: false }));
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
       })
       .catch(err => {
-        dispatch(Project({ isModalOpen: false }));
+        dispatch(Offer({ isModalOpen: false }));
         handleErrors(err, toast.error);
       });
   };
@@ -67,7 +67,7 @@ const SendRequest = () => {
     >
       <Close
         className="close-modal"
-        onClick={() => dispatch(Project({ isModalOpen: false }))}
+        onClick={() => dispatch(Offer({ isModalOpen: false }))}
       />
       <div className="sendrequest-content">
         {credit >= wholePrice ? (
@@ -95,7 +95,7 @@ const SendRequest = () => {
                 ref={previousButtonRippleRef}
                 title="انصراف"
                 className="w-30"
-                onClick={() => dispatch(Project({ isModalOpen: false }))}
+                onClick={() => dispatch(Offer({ isModalOpen: false }))}
               />
             </div>
           </>

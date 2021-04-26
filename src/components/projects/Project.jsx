@@ -11,11 +11,7 @@ import Input from "components/inputs/Input";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Project } from "redux/actions";
-
-// Requests
-import Socket from "requests/Socket";
-import { DeleteProject } from "requests";
+import { Offer, DeleteProject } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -45,7 +41,7 @@ const TheProject = ({ index, project }) => {
 
   const handleOffer = () => {
     dispatch(
-      Project({
+      Offer({
         isModalOpen: true,
         selectedPageCount: project.number_of_pages,
         selectedPricePerPage: price,
@@ -53,16 +49,6 @@ const TheProject = ({ index, project }) => {
         selectedId: project.id,
       })
     );
-  };
-
-  const handleDelete = () => {
-    DeleteProject({ id: project.id })
-      .then(() => {
-        Socket.send(
-          JSON.stringify({ status: "delete-project", id: project.id })
-        );
-      })
-      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -138,8 +124,10 @@ const TheProject = ({ index, project }) => {
           <Button
             ref={deleteProjectRippleRef}
             title="حذف پروژه"
-            className="fit-width delete-project"
-            onClick={handleDelete}
+            className="fit-width delete-project red"
+            onClick={() =>
+              dispatch(DeleteProject({ isModalOpen: true, id: project.id }))
+            }
           />
         )}
       </div>
@@ -192,7 +180,10 @@ const TheProject = ({ index, project }) => {
         <p className="project-status">وضعیت پروژه: باز</p>
       </div>
       <div className="project-id">
-        شناسه پروژه <span className="project-id-value">[ {project.id}# ]</span>
+        شناسه پروژه{" "}
+        <span className="project-id-value">
+          [ {toFarsiNumber(project.id)}# ]
+        </span>
       </div>
     </div>
   );

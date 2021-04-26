@@ -53,7 +53,7 @@ export const GetMyProjects = () => {
   return axios.get("myprojects/").then(res => res.data);
 };
 
-export const DeleteProject = id => {
+export const DeleteProjectReq = id => {
   return axios.post("deleteproject/", id).then(res => res.data);
 };
 

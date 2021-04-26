@@ -49,6 +49,10 @@
   &:focus {
     outline: none;
   }
+
+  &.red {
+    background-color: #d8000c;
+  }
 }
 
 .previous {
