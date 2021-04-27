@@ -3,7 +3,8 @@ import React from "react";
 const NotificationDropDown = () => {
   return (
     <div className="notification-dropdown-wrapper">
-      <p>سارا حامد یک پروژه جدید ثبت کرد.</p>
+      <i className="icon icon-leafless-tree-white" />
+      <p>هنوز هیچ اعلانی ندارید.</p>
     </div>
   );
 };

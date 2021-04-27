@@ -32,7 +32,9 @@ const DeleteProjectComp = () => {
       .then(() => {
         Socket.send(JSON.stringify({ status: "delete-project", id: state.id }));
         dispatch(DeleteProject({ isModalOpen: false, id: "" }));
-        toast.success("پروژه با موفقیت حذف شد.");
+        toast.success(
+          "پروژه شما با شناسه " + toFarsiNumber(state.id) + " با موفقیت حذف شد."
+        );
       })
       .catch(err => console.log(err));
   };
