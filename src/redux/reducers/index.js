@@ -11,6 +11,7 @@ import Notifications from "./Notifications";
 import Offer from "./Offer";
 import DeleteProject from "./DeleteProject";
 import Downloaded from "./Downloaded";
+import Requested from "./Requested";
 
 const allReducers = combineReducers({
   LR,
@@ -22,6 +23,7 @@ const allReducers = combineReducers({
   Offer,
   DeleteProject,
   Downloaded,
+  Requested,
 });
 
 export default allReducers;

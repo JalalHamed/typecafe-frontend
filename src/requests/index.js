@@ -41,6 +41,10 @@ export const GetProjects = () => {
   return axios.get("projects/").then(res => res.data);
 };
 
+export const GetMoreProjects = url => {
+  return axios.get(url).then(res => res.data);
+};
+
 export const CreateProjectReq = body => {
   return axios
     .post("createproject/", body, {

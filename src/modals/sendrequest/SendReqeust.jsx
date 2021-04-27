@@ -12,7 +12,7 @@ import Previous from "components/buttons/Previous";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Offer, Sidebar } from "redux/actions";
+import { Offer, Sidebar, Requested } from "redux/actions";
 
 // Request
 import { CreateOffer, handleErrors } from "requests";
@@ -43,14 +43,17 @@ const SendRequest = () => {
   };
 
   const handleSubmitRequest = () => {
+    let project_id = state.Offer.selectedId;
+
     let body = {
-      project: state.Offer.selectedId,
+      project: project_id,
       offered_price: pricePerPage,
     };
 
     CreateOffer(body)
       .then(() => {
         dispatch(Offer({ isModalOpen: false }));
+        dispatch(Requested({ ids: [...state.Requested.ids, project_id] }));
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
       })
       .catch(err => {

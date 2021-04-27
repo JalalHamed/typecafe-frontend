@@ -33,6 +33,7 @@ const App = () => {
   const state = useSelector(state => state);
 
   useEffect(() => {
+    // Check if user is logged in
     if (localStorage.getItem("ac_t")) {
       UserData()
         .then(res => {

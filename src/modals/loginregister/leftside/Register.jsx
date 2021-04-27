@@ -36,6 +36,7 @@ const Register = () => {
       UserRegister({ email, ...data })
         .then(res => {
           setLoading(false);
+          localStorage.setItem("ac_t", res.access);
           dispatch(
             User({
               isLoggedIn: true,

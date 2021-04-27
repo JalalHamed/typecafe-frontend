@@ -60,3 +60,10 @@ export const Downloaded = payload => {
     payload,
   };
 };
+
+export const Requested = payload => {
+  return {
+    type: "REQUESTED",
+    payload,
+  };
+};

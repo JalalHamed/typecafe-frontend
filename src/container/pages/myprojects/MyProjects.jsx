@@ -13,6 +13,7 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import { CreateProject } from "redux/actions";
 
 // Requests
+import Socket from "requests/Socket";
 import { GetMyProjects, GetOffers } from "requests";
 
 // Design
@@ -55,6 +56,14 @@ const Projects = () => {
       });
     }
   }, [projects]);
+
+  Socket.onmessage = e => {
+    let data = JSON.parse(e.data);
+    if (data.ws_type === "new-project")
+      setProjects(prevState => [data, ...prevState]);
+    if (data.ws_type === "delete_project")
+      setProjects(projects.filter(x => x.id !== data.id));
+  };
 
   return (
     <div className="projects-wrapper">

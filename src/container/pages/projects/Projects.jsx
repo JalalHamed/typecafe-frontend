@@ -9,7 +9,7 @@ import Project from "components/projects/Project";
 
 // Requests
 import Socket from "requests/Socket";
-import { GetProjects } from "requests";
+import { GetProjects, GetMoreProjects } from "requests";
 
 // Design
 import "./projects.scss";
@@ -22,13 +22,40 @@ const override = css`
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nextPage, setNextPage] = useState("");
+  const [loadMoreloading, setLoadMoreLoading] = useState(false);
+
+  const handleMoreProjects = () => {
+    setLoadMoreLoading(true);
+    setTimeout(() => {
+      GetMoreProjects(nextPage)
+        .then(res => {
+          setLoadMoreLoading(false);
+          setProjects(prevState => [...prevState, ...res.results]);
+          if (res.next) {
+            setNextPage(res.next);
+          } else {
+            setNextPage("");
+          }
+        })
+        .catch(err => {
+          setLoadMoreLoading(false);
+          console.log(err);
+        });
+    }, 3000);
+  };
 
   useEffect(() => {
     setLoading(true);
     GetProjects()
       .then(res => {
         setLoading(false);
-        setProjects(res);
+        setProjects(res.results);
+        if (res.next) {
+          setNextPage(res.next);
+        } else {
+          setNextPage("");
+        }
       })
       .catch(err => {
         setLoading(false);
@@ -74,6 +101,19 @@ const Projects = () => {
           <i className="icon icon-leafless-tree" />
           <p className="no-project-note">هنوز پروژه ای ثبت نشده است.</p>
         </div>
+      )}
+      {!!projects.length && nextPage && !loadMoreloading && (
+        <div className="load-more-projects" onClick={handleMoreProjects}>
+          بارگذاری موارد بیشتر
+        </div>
+      )}
+      {loadMoreloading && (
+        <PuffLoader
+          color={"#1c3987"}
+          loading={loadMoreloading}
+          css={override}
+          size={100}
+        />
       )}
     </div>
   );
