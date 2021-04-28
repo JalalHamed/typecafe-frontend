@@ -55,15 +55,19 @@
   }
 
   .left {
-    margin-top: 25px;
     margin-right: 50px;
     width: 43%;
 
     .no-offer-wrapper {
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+
+    .offers-title {
+      margin-right: 10px;
     }
 
     .request-wrapper {
@@ -84,6 +88,7 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 5px;
+        position: relative;
 
         .typist-wrapper {
           display: flex;
@@ -118,25 +123,51 @@
         }
 
         .accept-reject-wrapper {
-          .check {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+
+          .accept,
+          .reject {
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #aaeca1;
             border-radius: 50%;
             height: 27px;
             width: 27px;
+          }
+
+          .accept {
+            background-color: #aaeca1;
 
             &:hover {
               background-color: #7cde6f;
             }
           }
+
+          .reject {
+            background-color: #ffc7c7;
+            margin-right: 5px;
+
+            &:hover {
+              background-color: #ff9999;
+            }
+          }
+        }
+
+        .offer-created-at {
+          font-size: 10px;
+          color: #777;
+          position: absolute;
+          left: 5px;
+          top: 0;
         }
       }
     }
 
     .err-msg {
+      margin-top: 5px;
       font-size: 12px;
     }
 

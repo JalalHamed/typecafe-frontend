@@ -69,7 +69,6 @@ const Projects = () => {
       setProjects(prevState => [data, ...prevState]);
     if (data.ws_type === "delete_project")
       setProjects(projects.filter(x => x.id !== data.id));
-    console.log("message recieved", data);
   };
 
   Socket.onopen = () => {
@@ -83,8 +82,8 @@ const Projects = () => {
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
-        projects.map((project, index) => {
-          return <Project key={index} project={project} />;
+        projects.map(project => {
+          return <Project key={project.id} project={project} />;
         })}
       {loading && (
         <div className="middle-of-the-page">

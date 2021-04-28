@@ -55,6 +55,12 @@
     height: 10px;
   }
 
+  &.icon-close-red {
+    content: url("../svgs/close-red.svg");
+    width: 12px;
+    height: 12px;
+  }
+
   &.icon-close-black {
     content: url("../svgs/close-black.svg");
     width: 10px;

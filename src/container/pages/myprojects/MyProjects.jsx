@@ -54,8 +54,8 @@ const Projects = () => {
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
-        projects.map((project, index) => {
-          return <Project key={index} project={project} />;
+        projects.map(project => {
+          return <Project key={project.id} project={project} />;
         })}
       {loading && (
         <div className="middle-of-the-page">

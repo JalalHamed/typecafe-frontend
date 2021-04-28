@@ -38,7 +38,6 @@ const ReviewAndSubmit = () => {
 
     CreateProjectReq(body)
       .then(res => {
-        console.log(res);
         Socket.send(
           JSON.stringify({
             status: "new-project",

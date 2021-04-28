@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
-
+import Moment from "react-moment";
+import "moment/locale/fa";
 // Components
 import { PriceFormat } from "components/helper";
 
@@ -18,8 +19,6 @@ const OwnProject = ({ project }) => {
       allOffers.forEach(offer => {
         if (offer.project === project.id) {
           setOffers(prevState => [...prevState, offer]);
-        } else {
-          setOffers([]);
         }
       });
     }
@@ -30,43 +29,60 @@ const OwnProject = ({ project }) => {
   return (
     <>
       {!!offers.length ? (
-        <div className="request-wrapper">
-          {offers.map((offer, index) => {
-            return (
-              <div key={index} className="offer">
-                <div className="typist-wrapper">
-                  {offer.typist_image ? (
-                    <img
-                      src={baseURL + offer.typist_image}
-                      alt="typist_image"
-                      className="typist-image"
-                    />
-                  ) : (
-                    <i className="icon offer-typist-default-pic" />
-                  )}
-                  <span className="typist-displayname">{offer.typist}</span>
-                </div>
-                <div className="offered-price-wrapper">
-                  <span className="offered-price-title">قیمت پیشنهادی</span>
-                  <span className="offered-price">
-                    {PriceFormat(offer.offered_price)}
-                  </span>
-                </div>
-                <div className="offered-price-wrapper">
-                  <span className="offered-price-title">مبلغ کل</span>
-                  <span className="offered-price">
-                    {PriceFormat(offer.offered_price)}
-                  </span>
-                </div>
-                <div className="accept-reject-wrapper">
-                  <div className="check">
-                    <i className="icon icon-check-green" />
+        <>
+          <p className="offers-title">پیشنهادها</p>
+          <div className="request-wrapper">
+            {offers.map(offer => {
+              return (
+                <div key={offer.id} className="offer">
+                  <div className="typist-wrapper">
+                    {offer.typist_image ? (
+                      <img
+                        src={baseURL + offer.typist_image}
+                        alt="typist_image"
+                        className="typist-image"
+                      />
+                    ) : (
+                      <i className="icon offer-typist-default-pic" />
+                    )}
+                    <span className="typist-displayname">{offer.typist}</span>
+                  </div>
+                  <div className="offered-price-wrapper">
+                    <span className="offered-price-title">قیمت پیشنهادی</span>
+                    <span className="offered-price">
+                      {PriceFormat(offer.offered_price)}
+                    </span>
+                  </div>
+                  <div className="offered-price-wrapper">
+                    <span className="offered-price-title">مبلغ کل</span>
+                    <span className="offered-price">
+                      {PriceFormat(
+                        offer.offered_price * project.number_of_pages +
+                          offer.offered_price *
+                            project.number_of_pages *
+                            0.01 *
+                            5
+                      )}
+                    </span>
+                  </div>
+                  <div className="accept-reject-wrapper">
+                    <div className="accept">
+                      <i className="icon icon-check-green" />
+                    </div>
+                    <div className="reject">
+                      <i className="icon icon-close-red" />
+                    </div>
+                  </div>
+                  <div className="offer-created-at">
+                    <Moment fromNow locale="fa">
+                      {offer.created_at}
+                    </Moment>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
         <div className="no-offer-wrapper">
           <i className="icon icon-leafless-tree" />

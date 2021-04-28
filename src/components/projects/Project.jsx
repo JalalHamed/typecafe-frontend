@@ -20,7 +20,7 @@ import { baseURL } from "components/xhr";
 // Designs
 import "./project.scss";
 
-const TheProject = ({ index, project }) => {
+const TheProject = ({ project }) => {
   const dispatch = useDispatch();
   const downloadFileRippleRef = useRef();
   const deleteProjectRippleRef = useRef();
@@ -33,7 +33,7 @@ const TheProject = ({ index, project }) => {
   };
 
   return (
-    <div className="project-wrapper" key={index}>
+    <div className="project-wrapper">
       <div className="right">
         <div className="client-wrapper">
           {!!project.client_image ? (
