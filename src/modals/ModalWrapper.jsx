@@ -33,7 +33,7 @@ const ModalWrapper = ({ children }) => {
       window.removeEventListener("keydown", escapeHandler);
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   return (
