@@ -61,12 +61,12 @@ export const DeleteProjectReq = id => {
   return axios.post("deleteproject/", id).then(res => res.data);
 };
 
-export const CreateOffer = body => {
+export const CreateOfferReq = body => {
   return axios.post("createoffer/", body).then(res => res.data);
 };
 
-export const GetOffers = body => {
-  return axios.post("offers/", body).then(res => res.data);
+export const GetOffers = () => {
+  return axios.get("offers/").then(res => res.data);
 };
 
 // Support

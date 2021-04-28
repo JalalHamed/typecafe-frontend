@@ -14,7 +14,7 @@ import { CreateProject } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
-import { GetMyProjects, GetOffers } from "requests";
+import { GetMyProjects } from "requests";
 
 // Design
 import "./myprojects.scss";
@@ -42,20 +42,6 @@ const Projects = () => {
         console.log(err);
       });
   }, []);
-
-  useEffect(() => {
-    if (projects.length) {
-      projects.forEach(project => {
-        GetOffers({ project_id: project.id })
-          .then(res => {
-            // console.log(res);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
-    }
-  }, [projects]);
 
   Socket.onmessage = e => {
     let data = JSON.parse(e.data);

@@ -11,7 +11,7 @@ import Input from "components/inputs/Input";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Offer, DeleteProject, Downloaded } from "redux/actions";
+import { CreateOffer, DeleteProject, Downloaded } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -35,13 +35,13 @@ const TheProject = ({ index, project }) => {
   );
 
   const handleDownloaded = () => {
-    window.location.href = baseURL + project.file;
+    window.location.href = project.file;
     dispatch(Downloaded({ ids: [...downloaded, project.id] }));
   };
 
   const handleOffer = () => {
     dispatch(
-      Offer({
+      CreateOffer({
         isModalOpen: true,
         selectedPageCount: project.number_of_pages,
         selectedPricePerPage: price,

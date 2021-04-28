@@ -12,10 +12,10 @@ import Previous from "components/buttons/Previous";
 import { PriceFormat, toFarsiNumber } from "components/helper";
 
 // Actions
-import { Offer, Sidebar, Requested } from "redux/actions";
+import { CreateOffer, Sidebar, Requested } from "redux/actions";
 
 // Request
-import { CreateOffer, handleErrors } from "requests";
+import { CreateOfferReq, handleErrors } from "requests";
 
 // Design
 import "./sendrequest.scss";
@@ -26,38 +26,38 @@ const SendRequest = () => {
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
   const state = useSelector(state => state);
-  const pageCount = Number(state.Offer.selectedPageCount);
-  const pricePerPage = Number(state.Offer.selectedPricePerPage);
+  const pageCount = Number(state.CreateOffer.selectedPageCount);
+  const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
   const wholePrice = pageCount * pricePerPage;
   const credit = Number(state.User.credit);
-  const deadline = Number(state.Offer.selectedDeadline);
+  const deadline = Number(state.CreateOffer.selectedDeadline);
 
   const handleIncreaseCredit = () => {
-    dispatch(Offer({ isModalOpen: false }));
+    dispatch(CreateOffer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "financials" }));
   };
 
   const handleMoreAboutThis = () => {
-    dispatch(Offer({ isModalOpen: false }));
+    dispatch(CreateOffer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };
 
   const handleSubmitRequest = () => {
-    let project_id = state.Offer.selectedId;
+    let project_id = state.CreateOffer.selectedId;
 
     let body = {
       project: project_id,
       offered_price: pricePerPage,
     };
 
-    CreateOffer(body)
+    CreateOfferReq(body)
       .then(() => {
-        dispatch(Offer({ isModalOpen: false }));
+        dispatch(CreateOffer({ isModalOpen: false }));
         dispatch(Requested({ ids: [...state.Requested.ids, project_id] }));
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
       })
       .catch(err => {
-        dispatch(Offer({ isModalOpen: false }));
+        dispatch(CreateOffer({ isModalOpen: false }));
         handleErrors(err, toast.error);
       });
   };
@@ -70,7 +70,7 @@ const SendRequest = () => {
     >
       <Close
         className="close-modal"
-        onClick={() => dispatch(Offer({ isModalOpen: false }))}
+        onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
       />
       <div className="sendrequest-content">
         {credit >= wholePrice ? (
@@ -98,7 +98,7 @@ const SendRequest = () => {
                 ref={previousButtonRippleRef}
                 title="انصراف"
                 className="w-30"
-                onClick={() => dispatch(Offer({ isModalOpen: false }))}
+                onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
               />
             </div>
           </>

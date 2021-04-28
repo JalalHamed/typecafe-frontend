@@ -20,10 +20,10 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 
 // Actions
-import { User } from "redux/actions";
+import { User, Offers } from "redux/actions";
 
 // Requests
-import { UserData } from "requests";
+import { UserData, GetOffers } from "requests";
 
 // Design
 import "./app.scss";
@@ -53,6 +53,11 @@ const App = () => {
           }
         });
     }
+
+    // Get Offers
+    GetOffers().then(res => {
+      dispatch(Offers({ offers: res }));
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

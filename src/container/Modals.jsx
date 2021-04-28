@@ -36,7 +36,7 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Send Request */}
-      {state.Offer.isModalOpen && (
+      {state.CreateOffer.isModalOpen && (
         <ModalWrapper>
           <SendRequest />
         </ModalWrapper>

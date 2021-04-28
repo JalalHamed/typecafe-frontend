@@ -47,9 +47,9 @@ export const Notifications = payload => {
   };
 };
 
-export const Offer = payload => {
+export const CreateOffer = payload => {
   return {
-    type: "OFFER",
+    type: "CREATE_OFFER",
     payload,
   };
 };
@@ -64,6 +64,13 @@ export const Downloaded = payload => {
 export const Requested = payload => {
   return {
     type: "REQUESTED",
+    payload,
+  };
+};
+
+export const Offers = payload => {
+  return {
+    type: "OFFERS",
     payload,
   };
 };
