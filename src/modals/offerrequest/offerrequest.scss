@@ -1,4 +1,4 @@
-.sendrequest-wrapper {
+.offerrequest-wrapper {
   background-color: #fff;
   width: 465px;
   height: 360px;
@@ -13,7 +13,7 @@
     width: 350px;
   }
 
-  .sendrequest-content {
+  .offerrequest-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +34,7 @@
       padding: 0 5px;
     }
 
-    .sendrequest-note {
+    .offerrequest-note {
       font-size: 17px;
       padding: 0 50px;
       text-align: justify;

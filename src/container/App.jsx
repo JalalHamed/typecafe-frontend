@@ -24,6 +24,7 @@ import Modals from "./Modals";
 import { User, Offers } from "redux/actions";
 
 // Requests
+import Socket from "requests/Socket";
 import { UserData, GetOffers } from "requests";
 
 // Design
@@ -62,6 +63,23 @@ const App = () => {
 
     // eslint-disable-next-line
   }, []);
+
+  Socket.onopen = () => {
+    console.log("socket open");
+  };
+
+  Socket.onclose = () => {
+    console.log("socket close");
+  };
+
+  Socket.onmessage = e => {
+    console.log("haji");
+    let data = JSON.parse(e.data);
+    if (data.ws_type === "new-offer") {
+      console.log("in");
+      dispatch(Offers({ offers: data }));
+    }
+  };
 
   return (
     <div className="wrapper">

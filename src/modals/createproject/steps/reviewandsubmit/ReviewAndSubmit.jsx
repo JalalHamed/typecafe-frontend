@@ -26,8 +26,11 @@ const ReviewAndSubmit = () => {
   const [error, setError] = useState("");
   const [langs, setLangs] = useState([]);
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
+    setLoading(true);
+
     let body = new FormData();
     body.append("file", state.file);
     body.append("languages_and_additions", langs);
@@ -38,6 +41,7 @@ const ReviewAndSubmit = () => {
 
     CreateProjectReq(body)
       .then(res => {
+        setLoading(false);
         Socket.send(
           JSON.stringify({
             status: "new-project",
@@ -59,7 +63,10 @@ const ReviewAndSubmit = () => {
         );
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
-      .catch(err => handleErrors(err, setError));
+      .catch(err => {
+        setLoading(false);
+        handleErrors(err, setError);
+      });
   };
 
   useEffect(() => {
@@ -124,6 +131,7 @@ const ReviewAndSubmit = () => {
           onClick={onSubmit}
           className="next-step"
           title="ثبت"
+          loading={loading}
         />
       </div>
     </div>

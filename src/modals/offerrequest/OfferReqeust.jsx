@@ -15,12 +15,13 @@ import { priceFormat, farsiNumber } from "components/helper";
 import { CreateOffer, Sidebar, Requested } from "redux/actions";
 
 // Request
+import Socket from "requests/Socket";
 import { CreateOfferReq, handleErrors } from "requests";
 
 // Design
-import "./sendrequest.scss";
+import "./offerrequest.scss";
 
-const SendRequest = () => {
+const OfferRequest = () => {
   const dispatch = useDispatch();
   const increaseButtonRippleRef = useRef();
   const submitButtonRippleRef = useRef();
@@ -51,7 +52,13 @@ const SendRequest = () => {
     };
 
     CreateOfferReq(body)
-      .then(() => {
+      .then(res => {
+        Socket.send(
+          JSON.stringify({
+            status: "new-offer",
+            id: res.id,
+          })
+        );
         dispatch(CreateOffer({ isModalOpen: false }));
         dispatch(Requested({ ids: [...state.Requested.ids, project_id] }));
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
@@ -66,16 +73,16 @@ const SendRequest = () => {
     <motion.div
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
-      className={`sendrequest-wrapper ${credit >= wholePrice ? "" : "h-200"}`}
+      className={`offerrequest-wrapper ${credit >= wholePrice ? "" : "h-200"}`}
     >
       <Close
         className="close-modal"
         onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
       />
-      <div className="sendrequest-content">
+      <div className="offerrequest-content">
         {credit >= wholePrice ? (
           <>
-            <p className="sendrequest-note">
+            <p className="offerrequest-note">
               در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه{" "}
               <span className="highlight">{priceFormat(wholePrice)}</span> به
               عنوان مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت
@@ -118,4 +125,4 @@ const SendRequest = () => {
   );
 };
 
-export default SendRequest;
+export default OfferRequest;

@@ -71,14 +71,6 @@ const Projects = () => {
       setProjects(projects.filter(x => x.id !== data.id));
   };
 
-  Socket.onopen = () => {
-    console.log("socket open");
-  };
-
-  Socket.onclose = () => {
-    console.log("socket close");
-  };
-
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
