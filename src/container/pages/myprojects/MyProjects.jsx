@@ -47,7 +47,7 @@ const Projects = () => {
     let data = JSON.parse(e.data);
     if (data.ws_type === "new-project")
       setProjects(prevState => [data, ...prevState]);
-    if (data.ws_type === "delete_project")
+    if (data.ws_type === "delete-project")
       setProjects(projects.filter(x => x.id !== data.id));
   };
 

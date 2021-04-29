@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { toFarsiNumber } from "components/helper";
+import { farsiNumber } from "components/helper";
 
 // Actions
 import { DeleteProject } from "redux/actions";
@@ -33,7 +33,7 @@ const DeleteProjectComp = () => {
         Socket.send(JSON.stringify({ status: "delete-project", id: state.id }));
         dispatch(DeleteProject({ isModalOpen: false, id: "" }));
         toast.success(
-          "پروژه شما با شناسه " + toFarsiNumber(state.id) + " با موفقیت حذف شد."
+          "پروژه شما با شناسه " + farsiNumber(state.id) + " با موفقیت حذف شد."
         );
       })
       .catch(err => console.log(err));
@@ -51,7 +51,7 @@ const DeleteProjectComp = () => {
       />
       <div className="deleteproject-content">
         <p className="deleteproject-note">
-          آیا از حذف پروژه با شناسه {toFarsiNumber(state.id)} مطمئن هستید؟
+          آیا از حذف پروژه با شناسه {farsiNumber(state.id)} مطمئن هستید؟
         </p>
         <div className="button-wrapper">
           <Button

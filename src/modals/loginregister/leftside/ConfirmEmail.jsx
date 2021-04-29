@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { EmailOverFlow } from "components/helper";
+import { emailOverFlow } from "components/helper";
 
 // Actions
 import { LR } from "redux/actions";
@@ -87,7 +87,7 @@ const ConfirmEmail = () => {
     <>
       <p className="lr-title no-select">تایید آدرس ایمیل</p>
       <div className="lr-email">
-        <div className="inner">{EmailOverFlow({ email })}</div>
+        <div className="inner">{emailOverFlow({ email })}</div>
       </div>
       <p className="lr-sub-title confirm-email">
         حساب کاربری با این ایمیل وجود ندارد.

@@ -77,6 +77,7 @@ const Input = forwardRef(
             max={max}
             value={value}
             onChange={onChange}
+            aria-invalid={false}
           />
         </div>
         {!noBreak && <div className="input-break" />}

@@ -1,0 +1,79 @@
+.financials-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .tab {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    .tab-options {
+      margin-left: 20px;
+      width: 120px;
+      height: 85px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .tab-option {
+        font-size: 18px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          border: 1px solid #ddd;
+        }
+
+        &.active {
+          border: 1px solid #999;
+        }
+      }
+    }
+
+    .tab-content {
+      width: 350px;
+      height: 250px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      padding: 20px;
+      overflow-y: auto;
+
+      .addcredit-wrapper {
+        margin-top: 20px;
+
+        .price-format-display {
+          text-align: center;
+          margin-top: 5px;
+        }
+
+        .error {
+          margin-top: 5px;
+          text-align: center;
+          color: #d8000c;
+        }
+      }
+    }
+  }
+
+  .transaction-history-wrapper {
+    margin-top: 66px;
+    width: 90%;
+
+    .transaction-history-title {
+      font-size: 18px;
+      padding: 0 10px 7px 0;
+      border-bottom: solid 1px #29313b48;
+    }
+
+    .transaction-history-tickets {
+      margin-top: 20px;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

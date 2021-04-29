@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
-import { PriceFormat } from "components/helper";
+import { priceFormat } from "components/helper";
 
 // Actions
 import { User, SelectedImage, Sidebar } from "redux/actions";
@@ -147,7 +147,7 @@ const Profile = () => {
               افزایش/برداشت
             </span>
           </p>
-          <p className="value">{PriceFormat(user.credit)}</p>
+          <p className="value">{priceFormat(user.credit)}</p>
           <p className="displayname-err-msg">{displayNameErrMsg}</p>
         </div>
       </div>

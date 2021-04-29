@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Moment from "react-moment";
 import "moment/locale/fa";
+
 // Components
-import { PriceFormat } from "components/helper";
+import { priceFormat, addCommission } from "components/helper";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -50,18 +51,16 @@ const OwnProject = ({ project }) => {
                   <div className="offered-price-wrapper">
                     <span className="offered-price-title">قیمت پیشنهادی</span>
                     <span className="offered-price">
-                      {PriceFormat(offer.offered_price)}
+                      {priceFormat(offer.offered_price)}
                     </span>
                   </div>
                   <div className="offered-price-wrapper">
                     <span className="offered-price-title">مبلغ کل</span>
                     <span className="offered-price">
-                      {PriceFormat(
-                        offer.offered_price * project.number_of_pages +
-                          offer.offered_price *
-                            project.number_of_pages *
-                            0.01 *
-                            5
+                      {priceFormat(
+                        addCommission(
+                          offer.offered_price * project.number_of_pages
+                        )
                       )}
                     </span>
                   </div>

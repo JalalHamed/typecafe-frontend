@@ -9,7 +9,7 @@ import "moment/locale/fa";
 import Button from "components/buttons/Button";
 import OwnProject from "./OwnProject";
 import OthersProject from "./OthersProject";
-import { toFarsiNumber } from "components/helper";
+import { farsiNumber } from "components/helper";
 
 // Actions
 import { DeleteProject, Downloaded } from "redux/actions";
@@ -52,9 +52,7 @@ const TheProject = ({ project }) => {
         <div className="inline">
           <div>
             <div className="title">تعداد صفحات</div>
-            <div className="value">
-              {toFarsiNumber(project.number_of_pages)}
-            </div>
+            <div className="value">{farsiNumber(project.number_of_pages)}</div>
           </div>
           <div>
             <div className="title">زبان(ها) و پیوست‌ های پروژه</div>
@@ -67,7 +65,7 @@ const TheProject = ({ project }) => {
           <div>
             <div className="title">مهلت تحویل</div>
             <div className="value">
-              {toFarsiNumber(project.delivery_deadline)} ساعت
+              {farsiNumber(project.delivery_deadline)} ساعت
             </div>
           </div>
         </div>
@@ -107,9 +105,7 @@ const TheProject = ({ project }) => {
       </div>
       <div className="project-id">
         شناسه پروژه{" "}
-        <span className="project-id-value">
-          [ {toFarsiNumber(project.id)}# ]
-        </span>
+        <span className="project-id-value">[ {farsiNumber(project.id)}# ]</span>
       </div>
     </div>
   );

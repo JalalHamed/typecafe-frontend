@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Functions
-import { PriceFormat } from "components/helper";
+import { priceFormat } from "components/helper";
 
 // Actions
 import { User } from "redux/actions";
@@ -52,7 +52,7 @@ const Profile = forwardRef((props, ref) => {
       >
         {user.displayname}
         <p className="sidebar-profile-credit">
-          اعتبار: {PriceFormat(user.credit)}
+          اعتبار: {priceFormat(user.credit)}
         </p>
       </div>
     </RippleWrapper>

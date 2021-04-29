@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { PriceFormat, toFarsiNumber } from "components/helper";
+import { priceFormat, farsiNumber } from "components/helper";
 
 // Actions
 import { CreateOffer, Sidebar, Requested } from "redux/actions";
@@ -77,11 +77,11 @@ const SendRequest = () => {
           <>
             <p className="sendrequest-note">
               در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه{" "}
-              <span className="highlight">{PriceFormat(wholePrice)}</span> به
+              <span className="highlight">{priceFormat(wholePrice)}</span> به
               عنوان مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت
               عدم تحویل پروژه تا قبل از مهلت تعیین شده{" "}
-              <span className="highlight">{toFarsiNumber(deadline)} ساعت</span>{" "}
-              به ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما
+              <span className="highlight">{farsiNumber(deadline)} ساعت</span> به
+              ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما
               انتقال داده خواهد شد.
             </p>
             <p className="go-to-rules" onClick={handleMoreAboutThis}>

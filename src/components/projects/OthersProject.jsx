@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
-import { PriceFormat } from "components/helper";
+import { priceFormat } from "components/helper";
 
 // Actions
 import { CreateOffer } from "redux/actions";
@@ -80,7 +80,7 @@ const OthersProject = ({ project, downloaded }) => {
       <p className="left-title">
         عایدی شما
         <span className="left-value">
-          {PriceFormat(contractorEarning)} به ازای هر صفحه
+          {priceFormat(contractorEarning)} به ازای هر صفحه
         </span>
       </p>
       <Button
