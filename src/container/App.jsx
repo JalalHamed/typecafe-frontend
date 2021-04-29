@@ -21,11 +21,11 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 
 // Actions
-import { User, Offers } from "redux/actions";
+import { User, Offers, ProjectsAction } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
-import { UserData, GetOffers } from "requests";
+import { UserData, GetProjects, GetMyProjects, GetOffers } from "requests";
 
 // Design
 import "./app.scss";
@@ -55,6 +55,35 @@ const App = () => {
           }
         });
     }
+
+    // Get Projects
+    dispatch(ProjectsAction({ loading: true }));
+    GetProjects()
+      .then(res => {
+        dispatch(ProjectsAction({ loading: false }));
+        dispatch(ProjectsAction({ projects: res.results }));
+        if (res.next) {
+          dispatch(ProjectsAction({ next: res.next }));
+        } else {
+          dispatch(ProjectsAction({ next: "" }));
+        }
+      })
+      .catch(err => {
+        dispatch(ProjectsAction({ loading: false }));
+        console.log(err);
+      });
+
+    // Get My Projects
+    dispatch(ProjectsAction({ myprojectsloading: true }));
+    GetMyProjects()
+      .then(res => {
+        dispatch(ProjectsAction({ myprojectsloading: false }));
+        dispatch(ProjectsAction({ myprojects: res }));
+      })
+      .catch(err => {
+        dispatch(ProjectsAction({ myprojectsloading: false }));
+        console.log(err);
+      });
 
     // Get Offers
     GetOffers().then(res => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Libraries
+import { useSelector, useDispatch } from "react-redux";
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/react";
 
@@ -9,7 +10,10 @@ import Project from "components/projects/Project";
 
 // Requests
 import Socket from "requests/Socket";
-import { GetProjects, GetMoreProjects } from "requests";
+import { GetMoreProjects } from "requests";
+
+// Actions
+import { ProjectsAction } from "redux/actions";
 
 // Design
 import "./projects.scss";
@@ -20,48 +24,38 @@ const override = css`
 `;
 
 const Projects = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(state => state.Projects.projects);
+  const loading = useSelector(state => state.Projects.loading);
+  const nextPage = useSelector(state => state.Projects.next);
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [nextPage, setNextPage] = useState("");
   const [loadMoreloading, setLoadMoreLoading] = useState(false);
 
   const handleMoreProjects = () => {
     setLoadMoreLoading(true);
-    setTimeout(() => {
-      GetMoreProjects(nextPage)
-        .then(res => {
-          setLoadMoreLoading(false);
-          setProjects(prevState => [...prevState, ...res.results]);
-          if (res.next) {
-            setNextPage(res.next);
-          } else {
-            setNextPage("");
-          }
-        })
-        .catch(err => {
-          setLoadMoreLoading(false);
-          console.log(err);
-        });
-    }, 3000);
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    GetProjects()
+    GetMoreProjects(nextPage)
       .then(res => {
-        setLoading(false);
-        setProjects(res.results);
+        setLoadMoreLoading(false);
+        dispatch(
+          ProjectsAction({
+            projects: [...state, ...res.results],
+          })
+        );
         if (res.next) {
-          setNextPage(res.next);
+          dispatch(ProjectsAction({ next: res.next }));
         } else {
-          setNextPage("");
+          dispatch(ProjectsAction({ next: "" }));
         }
       })
       .catch(err => {
-        setLoading(false);
+        setLoadMoreLoading(false);
         console.log(err);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    setProjects(state);
+  }, [state]);
 
   Socket.onmessage = e => {
     let data = JSON.parse(e.data);

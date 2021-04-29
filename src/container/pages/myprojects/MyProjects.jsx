@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/react";
 
@@ -14,7 +14,6 @@ import { CreateProject } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
-import { GetMyProjects } from "requests";
 
 // Design
 import "./myprojects.scss";
@@ -26,22 +25,9 @@ const override = css`
 
 const Projects = () => {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.Projects.myprojectsloading);
   const AddProjectRippleRef = useRef();
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    GetMyProjects()
-      .then(res => {
-        setLoading(false);
-        setProjects(res);
-      })
-      .catch(err => {
-        setLoading(false);
-        console.log(err);
-      });
-  }, []);
 
   Socket.onmessage = e => {
     let data = JSON.parse(e.data);

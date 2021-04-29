@@ -28,19 +28,19 @@ const TopBar = () => {
   const notifDropDownRef = useRef();
   const userDropDownRef = useRef();
   const user = useSelector(state => state.User);
+  const userDropDown = useSelector(state => state.User.isDropdownOpen);
   const notifDropDown = useSelector(
     state => state.Notifications.isDropdownOpen
   );
   const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
-  const userDropDown = useSelector(state => state.User.isDropdownOpen);
 
-  UseOnClickOutside(userDropDownRef, () =>
-    dispatch(User({ isDropdownOpen: false }))
-  );
+  UseOnClickOutside(userDropDownRef, () => {
+    if (userDropDown) dispatch(User({ isDropdownOpen: false }));
+  });
 
-  UseOnClickOutside(notifDropDownRef, () =>
-    dispatch(Notifications({ isDropdownOpen: false }))
-  );
+  UseOnClickOutside(notifDropDownRef, () => {
+    if (notifDropDown) dispatch(Notifications({ isDropdownOpen: false }));
+  });
 
   return (
     <div className="topbar-wrapper">

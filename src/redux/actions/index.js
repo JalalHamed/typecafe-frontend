@@ -74,3 +74,10 @@ export const Offers = payload => {
     payload,
   };
 };
+
+export const ProjectsAction = payload => {
+  return {
+    type: "PROJECTS",
+    payload,
+  };
+};
