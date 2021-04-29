@@ -102,11 +102,36 @@ const App = () => {
   };
 
   Socket.onmessage = e => {
-    console.log("haji");
+    console.log("new message");
     let data = JSON.parse(e.data);
-    if (data.ws_type === "new-offer") {
-      console.log("in");
-      dispatch(Offers({ offers: data }));
+    switch (data.ws_type) {
+      case "new-project":
+        dispatch(
+          ProjectsAction({ projects: [data, ...state.Projects.projects] })
+        );
+        if (data.client_email === state.User.email) {
+          dispatch(
+            ProjectsAction({ myprojects: [data, ...state.Projects.myprojects] })
+          );
+        }
+        break;
+      case "delete-project":
+        dispatch(
+          ProjectsAction({
+            projects: state.Projects.projects.filter(x => x.id !== data.id),
+          })
+        );
+        dispatch(
+          ProjectsAction({
+            myprojects: state.Projects.myprojects.filter(x => x.id !== data.id),
+          })
+        );
+        break;
+      case "new-offer":
+        dispatch(Offers({ offers: [data, ...state.Offers.offers] }));
+        break;
+      default:
+        break;
     }
   };
 

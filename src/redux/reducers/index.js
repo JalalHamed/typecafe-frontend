@@ -10,7 +10,6 @@ import SelectedImage from "./SelectedImage";
 import Notifications from "./Notifications";
 import CreateOffer from "./CreateOffer";
 import DeleteProject from "./DeleteProject";
-import Downloaded from "./Downloaded";
 import Requested from "./Requested";
 import Offers from "./Offers";
 import Projects from "./Projects";
@@ -24,7 +23,6 @@ const allReducers = combineReducers({
   Notifications,
   CreateOffer,
   DeleteProject,
-  Downloaded,
   Requested,
   Offers,
   Projects,

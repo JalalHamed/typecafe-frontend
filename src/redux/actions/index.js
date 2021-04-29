@@ -54,13 +54,6 @@ export const CreateOffer = payload => {
   };
 };
 
-export const Downloaded = payload => {
-  return {
-    type: "DOWNLOADED",
-    payload,
-  };
-};
-
 export const Requested = payload => {
   return {
     type: "REQUESTED",

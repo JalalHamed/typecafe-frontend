@@ -12,7 +12,7 @@ import OthersProject from "./OthersProject";
 import { farsiNumber } from "components/helper";
 
 // Actions
-import { DeleteProject, Downloaded } from "redux/actions";
+import { DeleteProject, ProjectsAction } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -25,11 +25,11 @@ const TheProject = ({ project }) => {
   const downloadFileRippleRef = useRef();
   const deleteProjectRippleRef = useRef();
   const user = useSelector(state => state.User);
-  const downloaded = useSelector(state => state.Downloaded.ids);
+  const downloaded = useSelector(state => state.Projects.downloaded);
 
   const handleDownloaded = () => {
     window.location.href = project.file;
-    dispatch(Downloaded({ ids: [...downloaded, project.id] }));
+    dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
   };
 
   return (

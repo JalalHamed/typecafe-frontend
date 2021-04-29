@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,6 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 // Actions
 import { CreateProject } from "redux/actions";
 
-// Requests
-import Socket from "requests/Socket";
-
 // Design
 import "./myprojects.scss";
 
@@ -25,17 +22,9 @@ const override = css`
 
 const Projects = () => {
   const dispatch = useDispatch();
+  const projects = useSelector(state => state.Projects.myprojects);
   const loading = useSelector(state => state.Projects.myprojectsloading);
   const AddProjectRippleRef = useRef();
-  const [projects, setProjects] = useState([]);
-
-  Socket.onmessage = e => {
-    let data = JSON.parse(e.data);
-    if (data.ws_type === "new-project")
-      setProjects(prevState => [data, ...prevState]);
-    if (data.ws_type === "delete-project")
-      setProjects(projects.filter(x => x.id !== data.id));
-  };
 
   return (
     <div className="projects-wrapper">

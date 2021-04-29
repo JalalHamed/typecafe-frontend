@@ -17,6 +17,7 @@ const OwnProject = ({ project }) => {
 
   useEffect(() => {
     if (allOffers.length) {
+      setOffers([]);
       allOffers.forEach(offer => {
         if (offer.project === project.id) {
           setOffers(prevState => [...prevState, offer]);

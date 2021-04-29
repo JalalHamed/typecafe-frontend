@@ -57,6 +57,7 @@ const OfferRequest = () => {
           JSON.stringify({
             status: "new-offer",
             id: res.id,
+            email: state.User.email,
           })
         );
         dispatch(CreateOffer({ isModalOpen: false }));

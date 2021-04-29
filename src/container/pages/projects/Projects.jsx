@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +9,6 @@ import { css } from "@emotion/react";
 import Project from "components/projects/Project";
 
 // Requests
-import Socket from "requests/Socket";
 import { GetMoreProjects } from "requests";
 
 // Actions
@@ -25,10 +24,9 @@ const override = css`
 
 const Projects = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state.Projects.projects);
+  const projects = useSelector(state => state.Projects.projects);
   const loading = useSelector(state => state.Projects.loading);
   const nextPage = useSelector(state => state.Projects.next);
-  const [projects, setProjects] = useState([]);
   const [loadMoreloading, setLoadMoreLoading] = useState(false);
 
   const handleMoreProjects = () => {
@@ -38,7 +36,7 @@ const Projects = () => {
         setLoadMoreLoading(false);
         dispatch(
           ProjectsAction({
-            projects: [...state, ...res.results],
+            projects: [...projects, ...res.results],
           })
         );
         if (res.next) {
@@ -51,18 +49,6 @@ const Projects = () => {
         setLoadMoreLoading(false);
         console.log(err);
       });
-  };
-
-  useEffect(() => {
-    setProjects(state);
-  }, [state]);
-
-  Socket.onmessage = e => {
-    let data = JSON.parse(e.data);
-    if (data.ws_type === "new-project")
-      setProjects(prevState => [data, ...prevState]);
-    if (data.ws_type === "delete-project")
-      setProjects(projects.filter(x => x.id !== data.id));
   };
 
   return (

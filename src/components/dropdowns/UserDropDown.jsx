@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 // Actions
-import { User, CreateProject } from "redux/actions";
+import { User } from "redux/actions";
 
 // Designs
 import "./dropdowns.scss";
@@ -14,29 +14,7 @@ const UserDropDown = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("ac_t");
-    dispatch(
-      User({
-        isLoggedIn: false,
-        isModalOpen: false,
-        isDropdownOpen: false,
-        displayname: "",
-        email: "",
-        credit: 0,
-        image: "",
-      })
-    );
-    dispatch(
-      CreateProject({
-        isModalOpen: false,
-        firstMount: true,
-        step: "uploadfile",
-        file: "",
-        languagesAndAdditions: [],
-        numberOfPages: "",
-        deliveryDeadline: "",
-        description: "",
-      })
-    );
+    window.location.reload();
   };
 
   const handleProfile = () => {

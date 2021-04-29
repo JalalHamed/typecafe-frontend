@@ -4,6 +4,7 @@ let initialState = {
   projects: [],
   myprojects: [],
   next: "",
+  downloaded: [],
 };
 
 const Projects = (state = initialState, action) => {
