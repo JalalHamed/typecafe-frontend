@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 // Componenets
 import Input from "components/inputs/Input";
@@ -11,7 +10,7 @@ import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
 
 // Actions
-import { LR, User } from "redux/actions";
+import { LR } from "redux/actions";
 
 // Requests
 import { handleErrors, UserLogin } from "requests";
@@ -30,21 +29,8 @@ const Login = () => {
 
     UserLogin({ email, ...data })
       .then(res => {
-        setLoading(false);
         localStorage.setItem("ac_t", res.access);
-        dispatch(
-          User({
-            isLoggedIn: true,
-            email: res.email,
-            displayname: res.displayname,
-            credit: res.credit,
-            image: res.image,
-          })
-        );
-        dispatch(
-          LR({ page: "Email", timeleft: 0, isModalOpen: false, email: "" })
-        );
-        toast.success(res.displayname + " عزیز، شما با موفقیت وارد شدید.");
+        window.location.reload();
       })
       .catch(err => {
         setLoading(false);

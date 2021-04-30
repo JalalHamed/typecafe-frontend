@@ -15,7 +15,12 @@ import { priceFormat } from "components/helper";
 import { User, SelectedImage, Sidebar } from "redux/actions";
 
 // Requests
-import { ChangeProfileImage, ChangeDisplayName, handleErrors } from "requests";
+import {
+  ChangeProfileImage,
+  ChangeDisplayName,
+  DeleteProfileImage,
+  handleErrors,
+} from "requests";
 
 // Designs
 import "./profile.scss";
@@ -73,7 +78,11 @@ const Profile = () => {
   };
 
   const handleDeletePhoto = () => {
-    console.log("haji");
+    DeleteProfileImage()
+      .then(() => {
+        dispatch(User({ image: "" }));
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -94,10 +103,13 @@ const Profile = () => {
           <input
             type="file"
             ref={inputFileRef}
-            hidden
             onChange={e => handleChangePic(e.target.files[0])}
-            accept="image/*"
+            onClick={e => {
+              e.target.value = null; // allows uploading the same file over and over
+            }}
             encType="multipart/form-data"
+            accept="image/*"
+            hidden
           />
           {!!user.image ? (
             <img

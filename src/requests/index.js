@@ -36,6 +36,10 @@ export const ChangeDisplayName = body => {
   return axios.patch("account/update-displayname/", body).then(res => res.data);
 };
 
+export const DeleteProfileImage = () => {
+  return axios.get("account/delete-image/").then(res => res.data);
+};
+
 // Projects
 export const GetProjects = () => {
   return axios.get("projects/").then(res => res.data);

@@ -36,27 +36,6 @@ const App = () => {
   const state = useSelector(state => state);
 
   useEffect(() => {
-    // Check if user is logged in
-    if (localStorage.getItem("ac_t")) {
-      UserData()
-        .then(res => {
-          dispatch(
-            User({
-              isLoggedIn: true,
-              displayname: res.displayname,
-              email: res.email,
-              credit: res.credit,
-              image: res.image,
-            })
-          );
-        })
-        .catch(err => {
-          if (err.response?.data?.detail === "User not found") {
-            localStorage.removeItem("ac_t");
-          }
-        });
-    }
-
     // Get Projects
     dispatch(ProjectsAction({ loading: true }));
     GetProjects()
@@ -74,67 +53,95 @@ const App = () => {
         console.log(err);
       });
 
-    // Get My Projects
-    dispatch(ProjectsAction({ myprojectsloading: true }));
-    GetMyProjects()
-      .then(res => {
-        dispatch(ProjectsAction({ myprojectsloading: false }));
-        dispatch(ProjectsAction({ myprojects: res }));
-      })
-      .catch(err => {
-        dispatch(ProjectsAction({ myprojectsloading: false }));
-        console.log(err);
-      });
+    // Check if user is logged in
+    if (localStorage.getItem("ac_t")) {
+      // Get User Data
+      UserData()
+        .then(res => {
+          dispatch(
+            User({
+              isLoggedIn: true,
+              displayname: res.displayname,
+              email: res.email,
+              credit: res.credit,
+              image: res.image,
+            })
+          );
+        })
+        .catch(err => {
+          if (err.response?.data?.detail === "User not found") {
+            localStorage.removeItem("ac_t");
+          }
+        });
 
-    // Get Offers
-    GetOffers().then(res => {
-      dispatch(Offers({ offers: res }));
-    });
+      // Get My Projects
+      dispatch(ProjectsAction({ myprojectsloading: true }));
+      GetMyProjects()
+        .then(res => {
+          dispatch(ProjectsAction({ myprojectsloading: false }));
+          dispatch(ProjectsAction({ myprojects: res }));
+        })
+        .catch(err => {
+          dispatch(ProjectsAction({ myprojectsloading: false }));
+          console.log(err);
+        });
+
+      // Get Offers
+      GetOffers().then(res => {
+        dispatch(Offers({ offers: res }));
+      });
+    }
 
     // eslint-disable-next-line
   }, []);
 
-  Socket.onopen = () => {
-    console.log("socket open");
-  };
+  if (Socket) {
+    Socket.onopen = () => {
+      console.log("socket open");
+    };
 
-  Socket.onclose = () => {
-    console.log("socket close");
-  };
+    Socket.onclose = () => {
+      console.log("socket close");
+    };
 
-  Socket.onmessage = e => {
-    console.log("new message");
-    let data = JSON.parse(e.data);
-    switch (data.ws_type) {
-      case "new-project":
-        dispatch(
-          ProjectsAction({ projects: [data, ...state.Projects.projects] })
-        );
-        if (data.client_email === state.User.email) {
+    Socket.onmessage = e => {
+      console.log("new message");
+      let data = JSON.parse(e.data);
+      switch (data.ws_type) {
+        case "new-project":
           dispatch(
-            ProjectsAction({ myprojects: [data, ...state.Projects.myprojects] })
+            ProjectsAction({ projects: [data, ...state.Projects.projects] })
           );
-        }
-        break;
-      case "delete-project":
-        dispatch(
-          ProjectsAction({
-            projects: state.Projects.projects.filter(x => x.id !== data.id),
-          })
-        );
-        dispatch(
-          ProjectsAction({
-            myprojects: state.Projects.myprojects.filter(x => x.id !== data.id),
-          })
-        );
-        break;
-      case "new-offer":
-        dispatch(Offers({ offers: [data, ...state.Offers.offers] }));
-        break;
-      default:
-        break;
-    }
-  };
+          if (data.client_email === state.User.email) {
+            dispatch(
+              ProjectsAction({
+                myprojects: [data, ...state.Projects.myprojects],
+              })
+            );
+          }
+          break;
+        case "delete-project":
+          dispatch(
+            ProjectsAction({
+              projects: state.Projects.projects.filter(x => x.id !== data.id),
+            })
+          );
+          dispatch(
+            ProjectsAction({
+              myprojects: state.Projects.myprojects.filter(
+                x => x.id !== data.id
+              ),
+            })
+          );
+          break;
+        case "new-offer":
+          dispatch(Offers({ offers: [data, ...state.Offers.offers] }));
+          break;
+        default:
+          break;
+      }
+    };
+  }
 
   return (
     <div className="wrapper">

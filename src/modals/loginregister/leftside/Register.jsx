@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
@@ -11,7 +10,7 @@ import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
 
 // Actions
-import { LR, User } from "redux/actions";
+import { LR } from "redux/actions";
 
 // Requests
 import { handleErrors, UserRegister } from "requests";
@@ -35,20 +34,8 @@ const Register = () => {
     } else {
       UserRegister({ email, ...data })
         .then(res => {
-          setLoading(false);
           localStorage.setItem("ac_t", res.access);
-          dispatch(
-            User({
-              isLoggedIn: true,
-              email: res.email,
-              displayname: res.displayname,
-              credit: 0,
-            })
-          );
-          dispatch(
-            LR({ isModalOpen: false, page: "Email", email: "", timeleft: 0 })
-          );
-          toast.success(res.displayname + " عزیز، به تایپ کافه خوش آمدید.");
+          window.location.reload();
         })
         .catch(err => {
           setLoading(false);
