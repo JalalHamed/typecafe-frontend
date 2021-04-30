@@ -10,9 +10,9 @@ import SelectedImage from "./SelectedImage";
 import Notifications from "./Notifications";
 import CreateOffer from "./CreateOffer";
 import DeleteProject from "./DeleteProject";
-import Requested from "./Requested";
 import Offers from "./Offers";
 import Projects from "./Projects";
+import AoROffer from "./AoROffer";
 
 const allReducers = combineReducers({
   LR,
@@ -23,9 +23,9 @@ const allReducers = combineReducers({
   Notifications,
   CreateOffer,
   DeleteProject,
-  Requested,
   Offers,
   Projects,
+  AoROffer,
 });
 
 export default allReducers;

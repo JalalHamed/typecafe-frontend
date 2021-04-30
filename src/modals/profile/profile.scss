@@ -36,6 +36,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+
+      .delete-photo {
+        position: absolute;
+        right: 28px;
+        top: 10px;
+        cursor: pointer;
+      }
 
       .profile-pic {
         cursor: pointer;

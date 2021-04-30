@@ -25,6 +25,12 @@
     height: 40px;
   }
 
+  &.aofoffer-typist-default-pic {
+    content: url("../svgs/profile-pic.svg");
+    width: 100px;
+    height: 100px;
+  }
+
   &.icon-notification {
     content: url("../svgs/notification.svg");
     width: 24px;
@@ -136,6 +142,18 @@
 
   &.icon-my-projects-white {
     content: url("../svgs/target-white.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-messages-dark {
+    content: url("../svgs/messages-dark.svg");
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-messages-white {
+    content: url("../svgs/messages-white.svg");
     width: 30px;
     height: 30px;
   }
@@ -308,5 +326,19 @@
     content: url("../svgs/arrow-down.svg");
     width: 10px;
     height: 10px;
+  }
+
+  &.icon-info {
+    content: url("../svgs/info.svg");
+    width: 10px;
+    height: 10px;
+    margin-right: 1px;
+    cursor: pointer;
+  }
+
+  &.icon-close-background-red {
+    content: url("../svgs/close-background-red.svg");
+    width: 20px;
+    height: 20px;
   }
 }

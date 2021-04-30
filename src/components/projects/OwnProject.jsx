@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import "moment/locale/fa";
 
 // Components
-import { priceFormat, addCommission } from "components/helper";
+import { priceFormat, addCommission, farsiNumber } from "components/helper";
+
+// Actions
+import { AoROfferAction } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
+  const dispatch = useDispatch();
   const allOffers = useSelector(state => state.Offers.offers);
   const [offers, setOffers] = useState([]);
 
@@ -19,7 +23,7 @@ const OwnProject = ({ project }) => {
     if (allOffers.length) {
       setOffers([]);
       allOffers.forEach(offer => {
-        if (offer.project === project.id) {
+        if (offer.project === project.id && offer.status === "A") {
           setOffers(prevState => [...prevState, offer]);
         }
       });
@@ -32,7 +36,10 @@ const OwnProject = ({ project }) => {
     <>
       {!!offers.length ? (
         <>
-          <p className="offers-title">پیشنهادها</p>
+          <div className="offers-title-wrapper">
+            <p className="offers-title">پیشنهادها</p>
+            <p className="number-of-offers">({farsiNumber(offers.length)})</p>
+          </div>
           <div className="request-wrapper">
             {offers.map(offer => {
               return (
@@ -65,11 +72,37 @@ const OwnProject = ({ project }) => {
                       )}
                     </span>
                   </div>
-                  <div className="accept-reject-wrapper">
-                    <div className="accept">
+                  <div className="accept-reject-wrapper no-select">
+                    <div
+                      className="accept"
+                      onClick={() =>
+                        dispatch(
+                          AoROfferAction({
+                            isModalOpen: true,
+                            typist: offer.typist,
+                            typistImage: offer.typist_image,
+                            offeredPrice: offer.offered_price,
+                            wholePrice: addCommission(
+                              offer.offered_price * project.number_of_pages
+                            ),
+                          })
+                        )
+                      }
+                    >
                       <i className="icon icon-check-green" />
                     </div>
-                    <div className="reject">
+                    <div
+                      className="reject"
+                      onClick={() =>
+                        dispatch(
+                          AoROfferAction({
+                            isModalOpen: true,
+                            typist: offer.typist,
+                            typistImage: offer.typist_image,
+                          })
+                        )
+                      }
+                    >
                       <i className="icon icon-close-red" />
                     </div>
                   </div>

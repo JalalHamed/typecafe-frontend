@@ -72,6 +72,10 @@ const Profile = () => {
     dispatch(Sidebar({ page: "financials" }));
   };
 
+  const handleDeletePhoto = () => {
+    console.log("haji");
+  };
+
   return (
     <motion.div
       className="profile-wrapper"
@@ -121,6 +125,11 @@ const Profile = () => {
             className="fit-width"
             onClick={() => inputFileRef.current.click()}
           />
+          {user.image && (
+            <div className="delete-photo" onClick={handleDeletePhoto}>
+              <i className="icon icon-close-background-red" />
+            </div>
+          )}
           <p className="err-msg">{errMsg}</p>
         </div>
         <div className="profile-content-left">

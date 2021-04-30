@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 // Pages
 import Projects from "./pages/projects/Projects";
 import MyProjects from "./pages/myprojects/MyProjects";
+import Messages from "./pages/messages/Messages";
 import Financials from "./pages/financials/Financials";
 import Rules from "./pages/rules/Rules";
 import Support from "./pages/support/Support";
@@ -151,6 +152,7 @@ const App = () => {
         <div className="content">
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "my-projects" && <MyProjects />}
+          {state.Sidebar.page === "messages" && <Messages />}
           {state.Sidebar.page === "financials" && <Financials />}
           {state.Sidebar.page === "rules" && <Rules />}
           {state.Sidebar.page === "support" && <Support />}

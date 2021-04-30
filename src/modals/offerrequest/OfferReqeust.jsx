@@ -9,10 +9,10 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { priceFormat, farsiNumber } from "components/helper";
+import { priceFormat, farsiNumber, addCommission } from "components/helper";
 
 // Actions
-import { CreateOffer, Sidebar, Requested } from "redux/actions";
+import { CreateOffer, Sidebar, ProjectsAction } from "redux/actions";
 
 // Request
 import Socket from "requests/Socket";
@@ -29,7 +29,7 @@ const OfferRequest = () => {
   const state = useSelector(state => state);
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
-  const wholePrice = pageCount * pricePerPage;
+  const wholePrice = addCommission(pageCount * pricePerPage);
   const credit = Number(state.User.credit);
   const deadline = Number(state.CreateOffer.selectedDeadline);
 
@@ -61,7 +61,9 @@ const OfferRequest = () => {
           })
         );
         dispatch(CreateOffer({ isModalOpen: false }));
-        dispatch(Requested({ ids: [...state.Requested.ids, project_id] }));
+        dispatch(
+          ProjectsAction({ requested: [...state.Requested.ids, project_id] })
+        );
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
       })
       .catch(err => {

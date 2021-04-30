@@ -11,6 +11,7 @@ import Image from "modals/image/Image";
 import Profile from "modals/profile/Profile";
 import OfferRequest from "modals/offerrequest/OfferReqeust";
 import DeleteProject from "modals/deleteproject/DeleteProject";
+import AoROffer from "modals/aoroffer/AoROffer";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -45,6 +46,12 @@ const Modals = () => {
       {state.DeleteProject.isModalOpen && (
         <ModalWrapper>
           <DeleteProject />
+        </ModalWrapper>
+      )}
+      {/* Accept or Reject Offer */}
+      {state.AoROffer.isModalOpen && (
+        <ModalWrapper>
+          <AoROffer />
         </ModalWrapper>
       )}
       {/* Image */}

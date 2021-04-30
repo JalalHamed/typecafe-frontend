@@ -54,13 +54,6 @@ export const CreateOffer = payload => {
   };
 };
 
-export const Requested = payload => {
-  return {
-    type: "REQUESTED",
-    payload,
-  };
-};
-
 export const Offers = payload => {
   return {
     type: "OFFERS",
@@ -71,6 +64,13 @@ export const Offers = payload => {
 export const ProjectsAction = payload => {
   return {
     type: "PROJECTS",
+    payload,
+  };
+};
+
+export const AoROfferAction = payload => {
+  return {
+    type: "AOROFFER",
     payload,
   };
 };

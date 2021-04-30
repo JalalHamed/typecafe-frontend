@@ -19,5 +19,5 @@ export const farsiNumber = n => {
 };
 
 export const addCommission = price => {
-  return price + price * 0.01 * 5;
+  return Math.round(price + price * 0.01 * 5);
 };

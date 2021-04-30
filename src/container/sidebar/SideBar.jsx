@@ -15,6 +15,7 @@ const SideBar = () => {
   const loginRippleRef = useRef();
   const profileRippleRef = useRef();
   const projectsRippleRef = useRef();
+  const messagesRippleRef = useRef();
   const financialRippleRef = useRef();
   const rulesRippleRef = useRef();
   const tutorialRippleRef = useRef();
@@ -40,8 +41,15 @@ const SideBar = () => {
         {isLoggedIn && (
           <SideBarItem
             status="my-projects"
-            title="پروژه های من"
+            title="کارهای من"
             ref={myProjectsRippleRef}
+          />
+        )}
+        {isLoggedIn && (
+          <SideBarItem
+            status="messages"
+            title="پیام ها"
+            ref={messagesRippleRef}
           />
         )}
         {isLoggedIn && (
