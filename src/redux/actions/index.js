@@ -1,3 +1,10 @@
+export const Loading = payload => {
+  return {
+    type: "LOADING",
+    payload,
+  };
+};
+
 export const LR = payload => {
   return {
     type: "LOGIN_REGISTER",

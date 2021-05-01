@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 // Modals
 import ModalWrapper from "modals/ModalWrapper";
+import Loading from "modals/loading/Loading";
 import LoginRegister from "modals/loginregister/LoginRegister";
 import CreateProject from "modals/createproject/CreateProject";
 import Image from "modals/image/Image";
@@ -55,10 +56,17 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Image */}
-      {/* NOTE: This has to be the last modal so it appers on top of everything else... */}
+      {/* NOTE: This has to be the second last modal so it appers on top of everything else except Loading... */}
       {state.SelectedImage.isModalOpen && (
         <ModalWrapper>
           <Image />
+        </ModalWrapper>
+      )}
+      {/* Loading */}
+      {/* NOTE: This has to be the last modal so it appers on top of everything else... */}
+      {state.Loading.isLoading && (
+        <ModalWrapper>
+          <Loading />
         </ModalWrapper>
       )}
     </>

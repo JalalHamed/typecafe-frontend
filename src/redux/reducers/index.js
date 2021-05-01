@@ -2,6 +2,7 @@
 import { combineReducers } from "redux";
 
 // Components
+import Loading from "./Loading";
 import LR from "./LR";
 import Sidebar from "./Sidebar";
 import User from "./User";
@@ -15,6 +16,7 @@ import Projects from "./Projects";
 import AoROffer from "./AoROffer";
 
 const allReducers = combineReducers({
+  Loading,
   LR,
   Sidebar,
   User,

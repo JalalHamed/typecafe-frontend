@@ -22,7 +22,7 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 
 // Actions
-import { User, Offers, ProjectsAction, Sidebar } from "redux/actions";
+import { User, Offers, ProjectsAction, Sidebar, Loading } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
@@ -111,13 +111,13 @@ const App = () => {
     // eslint-disable-next-line
   }, [width]);
 
-  if (Socket) {
+  if (localStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
-      console.log("socket open");
+      dispatch(Loading({ isLoading: false }));
     };
 
     Socket.onclose = () => {
-      console.log("socket close");
+      dispatch(Loading({ isLoading: true }));
     };
 
     Socket.onmessage = e => {
