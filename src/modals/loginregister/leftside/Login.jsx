@@ -29,7 +29,7 @@ const Login = () => {
 
     UserLogin({ email, ...data })
       .then(res => {
-        localStorage.setItem("ac_t", res.access);
+        sessionStorage.setItem("ac_t", res.access);
         window.location.reload();
       })
       .catch(err => {

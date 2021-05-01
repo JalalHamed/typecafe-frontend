@@ -36,7 +36,7 @@ const App = () => {
   const state = useSelector(state => state);
   const [width, setWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
+  const getInitials = () => {
     // Get Projects
     dispatch(ProjectsAction({ loading: true }));
     GetProjects()
@@ -55,7 +55,7 @@ const App = () => {
       });
 
     // Check if user is logged in
-    if (localStorage.getItem("ac_t")) {
+    if (sessionStorage.getItem("ac_t")) {
       // Get User Data
       UserData()
         .then(res => {
@@ -71,7 +71,7 @@ const App = () => {
         })
         .catch(err => {
           if (err.response?.data?.detail === "User not found") {
-            localStorage.removeItem("ac_t");
+            sessionStorage.removeItem("ac_t");
           }
         });
 
@@ -92,7 +92,10 @@ const App = () => {
         dispatch(Offers({ offers: res }));
       });
     }
+  };
 
+  useEffect(() => {
+    getInitials();
     // eslint-disable-next-line
   }, []);
 
@@ -111,7 +114,7 @@ const App = () => {
     // eslint-disable-next-line
   }, [width]);
 
-  if (localStorage.getItem("ac_t") && Socket) {
+  if (sessionStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
       dispatch(Loading({ isLoading: false }));
     };

@@ -2,17 +2,11 @@ import axios from "./Api";
 
 // Register and Login
 export const UserRegister = body => {
-  return axios.post("account/register/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
-    return res.data;
-  });
+  return axios.post("account/register/", body).then(res => res.data);
 };
 
 export const UserLogin = body => {
-  return axios.post("account/login/", body).then(res => {
-    axios.defaults.headers["Authorization"] = "Bearer " + res.data.access;
-    return res.data;
-  });
+  return axios.post("account/login/", body).then(res => res.data);
 };
 
 export const CheckEmail = body => {

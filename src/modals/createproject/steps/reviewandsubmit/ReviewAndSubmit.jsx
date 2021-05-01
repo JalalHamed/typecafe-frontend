@@ -20,6 +20,7 @@ import "./reviewandsubmit.scss";
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
+  const email = useSelector(state => state.User.email);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
@@ -45,6 +46,7 @@ const ReviewAndSubmit = () => {
           JSON.stringify({
             status: "new-project",
             id: res.id,
+            user_email: email,
           })
         );
         dispatch(

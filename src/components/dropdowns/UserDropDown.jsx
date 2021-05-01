@@ -13,7 +13,7 @@ const UserDropDown = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem("ac_t");
+    sessionStorage.removeItem("ac_t");
     window.location.reload();
   };
 
