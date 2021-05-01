@@ -58,11 +58,14 @@ const OfferRequest = () => {
             status: "new-offer",
             id: res.id,
             email: state.User.email,
+            project_id: project_id,
           })
         );
         dispatch(CreateOffer({ isModalOpen: false }));
         dispatch(
-          ProjectsAction({ requested: [...state.Requested.ids, project_id] })
+          ProjectsAction({
+            requested: [...state.Projects.requested, project_id],
+          })
         );
         toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
       })

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 
 // Actions
-import { User, Offers, ProjectsAction } from "redux/actions";
+import { User, Offers, ProjectsAction, Sidebar } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
@@ -34,6 +34,7 @@ import "./app.scss";
 const App = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     // Get Projects
@@ -94,6 +95,21 @@ const App = () => {
 
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (width < 1350) {
+      dispatch(Sidebar({ isSidebarOpen: false }));
+    } else {
+      dispatch(Sidebar({ isSidebarOpen: true }));
+    }
+
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    return () => {
+      window.removeEventListener("resize", () => setWidth(window.innerWidth));
+    };
+
+    // eslint-disable-next-line
+  }, [width]);
 
   if (Socket) {
     Socket.onopen = () => {
