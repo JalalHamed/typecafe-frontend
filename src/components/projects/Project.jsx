@@ -75,7 +75,7 @@ const TheProject = ({ project }) => {
           className="fit-width"
           onClick={handleDownloaded}
         />
-        {user.email === project.client_email && (
+        {user.id === project.client_id && (
           <Button
             ref={deleteProjectRippleRef}
             title="حذف پروژه"
@@ -87,7 +87,7 @@ const TheProject = ({ project }) => {
         )}
       </div>
       <div className="left">
-        {user.email === project.client_email ? (
+        {user.id === project.client_id ? (
           <OwnProject project={project} />
         ) : (
           <OthersProject project={project} downloaded={downloaded} />

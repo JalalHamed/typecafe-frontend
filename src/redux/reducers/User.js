@@ -3,6 +3,7 @@ let initialState = {
   isModalOpen: false,
   isDropdownOpen: false,
   displayname: "",
+  id: null,
   email: "",
   credit: 0,
   image: "",

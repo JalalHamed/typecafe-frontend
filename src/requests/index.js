@@ -1,5 +1,10 @@
 import axios from "./Api";
 
+// New Acc Token
+export const NewAccToken = body => {
+  return axios.post("account/token/refresh/", body).then(res => res.data);
+};
+
 // Register and Login
 export const UserRegister = body => {
   return axios.post("account/register/", body).then(res => res.data);

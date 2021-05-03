@@ -26,7 +26,13 @@ import { User, Offers, ProjectsAction, Sidebar, Loading } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
-import { UserData, GetProjects, GetMyProjects, GetOffers } from "requests";
+import {
+  UserData,
+  GetProjects,
+  GetMyProjects,
+  GetOffers,
+  NewAccToken,
+} from "requests";
 
 // Design
 import "./app.scss";
@@ -55,7 +61,7 @@ const App = () => {
       });
 
     // Check if user is logged in
-    if (sessionStorage.getItem("ac_t")) {
+    if (localStorage.getItem("ac_t")) {
       // Get User Data
       UserData()
         .then(res => {
@@ -63,6 +69,7 @@ const App = () => {
             User({
               isLoggedIn: true,
               displayname: res.displayname,
+              id: res.id,
               email: res.email,
               credit: res.credit,
               image: res.image,
@@ -71,7 +78,7 @@ const App = () => {
         })
         .catch(err => {
           if (err.response?.data?.detail === "User not found") {
-            sessionStorage.removeItem("ac_t");
+            localStorage.removeItem("ac_t");
           }
         });
 
@@ -96,17 +103,19 @@ const App = () => {
 
   useEffect(() => {
     getInitials();
+
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+
     if (width < 1350) {
       dispatch(Sidebar({ isSidebarOpen: false }));
     } else {
       dispatch(Sidebar({ isSidebarOpen: true }));
     }
 
-    window.addEventListener("resize", () => setWidth(window.innerWidth));
     return () => {
       window.removeEventListener("resize", () => setWidth(window.innerWidth));
     };
@@ -114,17 +123,55 @@ const App = () => {
     // eslint-disable-next-line
   }, [width]);
 
-  if (sessionStorage.getItem("ac_t") && Socket) {
+  useEffect(() => {
+    if (state.User.id)
+      Socket.send(
+        JSON.stringify({
+          status: "user-online",
+          user_id: state.User.id,
+        })
+      );
+  }, [state.User.id]);
+
+  useEffect(() => {
+    window.addEventListener("onbeforeunload", () => {
+      Socket.send(
+        JSON.stringify({
+          status: "user-offline",
+          user_id: state.User.id,
+        })
+      );
+    });
+
+    return () => {
+      window.removeEventListener("onbeforeunload", () => {
+        Socket.send(
+          JSON.stringify({
+            status: "user-offline",
+            user_id: state.User.id,
+          })
+        );
+      });
+    };
+  });
+
+  if (localStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
       dispatch(Loading({ isLoading: false }));
     };
 
     Socket.onclose = () => {
       dispatch(Loading({ isLoading: true }));
+      if (localStorage.getItem("re_t")) {
+        NewAccToken({ refresh: localStorage.getItem("re_t") }).then(res => {
+          localStorage.setItem("ac_t", res.access);
+        });
+      } else {
+        localStorage.removeItem("ac_t");
+      }
     };
 
     Socket.onmessage = e => {
-      console.log("new message");
       let data = JSON.parse(e.data);
       switch (data.ws_type) {
         case "new-project":
