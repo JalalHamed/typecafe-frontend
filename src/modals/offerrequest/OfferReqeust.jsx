@@ -79,7 +79,7 @@ const OfferRequest = () => {
     <motion.div
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
-      className={`offerrequest-wrapper ${credit >= wholePrice ? "" : "h-200"}`}
+      className={`offerrequest-wrapper ${credit >= wholePrice ? "" : "w-320"}`}
     >
       <Close
         className="close-modal"
@@ -117,11 +117,10 @@ const OfferRequest = () => {
           </>
         ) : (
           <>
-            <p className="not-enough-credit">اعتبار کافی نیست.</p>
+            <p>اعتبار کافی نیست.</p>
             <Button
               ref={increaseButtonRippleRef}
               title="افزایش اعتبار"
-              className="increase-credit-button w-68"
               onClick={handleIncreaseCredit}
             />
           </>

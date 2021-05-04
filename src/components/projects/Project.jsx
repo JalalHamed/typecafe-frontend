@@ -73,15 +73,19 @@ const TheProject = ({ project }) => {
               ) : (
                 <span>
                   آخرین بازدید حدود{" "}
-                  <Moment fromNow locale="fa">
-                    {!onlineUsers.disconnects.includes(project.client_id)
-                      ? project.client_last_login
-                      : onlineUsers.lastLogins.forEach(x => {
-                          if (x.id === project.client_id) {
-                            return x.lastLogin;
-                          }
-                        })}
-                  </Moment>
+                  {!onlineUsers.disconnects.includes(project.client_id) ? (
+                    <Moment fromNow locale="fa">
+                      {project.client_last_login}
+                    </Moment>
+                  ) : (
+                    <Moment fromNow locale="fa">
+                      {
+                        onlineUsers.lastLogins.find(
+                          x => x.id === project.client_id
+                        ).lastLogin
+                      }
+                    </Moment>
+                  )}
                 </span>
               )}
             </div>

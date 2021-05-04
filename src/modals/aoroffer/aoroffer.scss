@@ -1,11 +1,11 @@
 .aoroffer-wrapper {
   background-color: #fff;
-  width: 420px;
+  width: 465px;
   max-height: 100%;
   max-width: 100%;
   border-radius: 5px;
   position: relative;
-  padding: 40px 20px 20px;
+  padding: 45px 50px 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,5 +52,26 @@
   .aoroffer-note {
     margin-top: 10px;
     text-align: justify;
+    line-height: 33px;
+    font-size: 17px;
+  }
+
+  .go-to-rules {
+    height: 25px;
+    color: #1c3987;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin: 3px;
+
+    &:hover {
+      border-bottom: 1px solid #1c3987;
+    }
+  }
+
+  .button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }

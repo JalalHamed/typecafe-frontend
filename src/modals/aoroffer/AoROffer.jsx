@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 
 // Components
 import Close from "components/buttons/Close";
+import Button from "components/buttons/Button";
+import Previous from "components/buttons/Previous";
 import { priceFormat } from "components/helper";
 
 // Actions
@@ -19,6 +21,8 @@ import { baseURL } from "components/xhr";
 import "./aoroffer.scss";
 
 const AoROffer = () => {
+  const submitButtonRippleRef = useRef();
+  const previousButtonRippleRef = useRef();
   const dispatch = useDispatch();
   const offer = useSelector(state => state.AoROffer);
 
@@ -56,10 +60,25 @@ const AoROffer = () => {
       </div>
       <p className="aoroffer-note">
         پس از تایید درخواست، مبلغ کل از حساب شما کسر و در حساب سایت بلوکه خواهد
-        شد. در صورت نپرداختن دستمزد تایپیست به مدت ۲۴ ساعت پس از آپلود شدن پروژه
-        تایپ شده توسط تایپیست برای شما، این مبلغ به طور خودکار به حساب تایپیست
+        شد. در صورت نپرداختن دستمزد تایپیست به مدت ۲۴ ساعت پس از آپلود شدن فایل
+        نهایی توسط تایپیست برای شما، این مبلغ به طور خودکار به حساب تایپیست
         واریز خواهد شد.
       </p>
+      <p className="go-to-rules">اطلاعات بیشتر درباره نحوه عملکرد وبسایت</p>
+      <div className="button-wrapper">
+        <Button
+          ref={submitButtonRippleRef}
+          title="تایید پیشنهاد"
+          className="w-68"
+          // onClick={handleSubmitRequest}
+        />
+        <Previous
+          ref={previousButtonRippleRef}
+          title="انصراف"
+          className="w-30"
+          // onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
+        />
+      </div>
     </motion.div>
   );
 };

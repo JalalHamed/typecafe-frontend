@@ -1,16 +1,15 @@
 .offerrequest-wrapper {
   background-color: #fff;
   width: 465px;
-  height: 360px;
   max-height: 100%;
   max-width: 100%;
   border-radius: 5px;
   position: relative;
+  padding: 45px 50px 25px;
   font-size: 18px;
 
-  &.h-200 {
-    height: 200px;
-    width: 350px;
+  &.w-320 {
+    width: 320px;
   }
 
   .offerrequest-content {
@@ -18,14 +17,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    .not-enough-credit {
-      margin-top: 80px;
-    }
-
-    .increase-credit-button {
-      margin-top: 40px;
-    }
 
     .highlight {
       color: #fff;
@@ -36,13 +27,12 @@
 
     .offerrequest-note {
       font-size: 17px;
-      padding: 0 50px;
       text-align: justify;
       line-height: 33px;
-      margin-top: 55px;
     }
 
     .go-to-rules {
+      height: 25px;
       color: #1c3987;
       font-size: 15px;
       text-align: center;
@@ -55,9 +45,7 @@
     }
 
     .button-wrapper {
-      position: absolute;
-      bottom: 25px;
-      width: 70%;
+      width: 100%;
       display: flex;
       justify-content: space-between;
     }
