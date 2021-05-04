@@ -22,7 +22,14 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 
 // Actions
-import { User, Offers, ProjectsAction, Sidebar, Loading } from "redux/actions";
+import {
+  User,
+  Offers,
+  ProjectsAction,
+  Sidebar,
+  Loading,
+  OnlineUsers,
+} from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
@@ -31,7 +38,7 @@ import {
   GetProjects,
   GetMyProjects,
   GetOffers,
-  NewAccToken,
+  UserDisconnect,
 } from "requests";
 
 // Design
@@ -43,23 +50,6 @@ const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   const getInitials = () => {
-    // Get Projects
-    dispatch(ProjectsAction({ loading: true }));
-    GetProjects()
-      .then(res => {
-        dispatch(ProjectsAction({ loading: false }));
-        dispatch(ProjectsAction({ projects: res.results }));
-        if (res.next) {
-          dispatch(ProjectsAction({ next: res.next }));
-        } else {
-          dispatch(ProjectsAction({ next: "" }));
-        }
-      })
-      .catch(err => {
-        dispatch(ProjectsAction({ loading: false }));
-        console.log(err);
-      });
-
     // Check if user is logged in
     if (localStorage.getItem("ac_t")) {
       // Get User Data
@@ -99,10 +89,27 @@ const App = () => {
         dispatch(Offers({ offers: res }));
       });
     }
+
+    // Get Projects
+    dispatch(ProjectsAction({ loading: true }));
+    GetProjects()
+      .then(res => {
+        dispatch(ProjectsAction({ loading: false }));
+        dispatch(ProjectsAction({ projects: res.results }));
+        if (res.next) {
+          dispatch(ProjectsAction({ next: res.next }));
+        } else {
+          dispatch(ProjectsAction({ next: "" }));
+        }
+      })
+      .catch(err => {
+        dispatch(ProjectsAction({ loading: false }));
+        console.log(err);
+      });
   };
 
   useEffect(() => {
-    getInitials();
+    if (!localStorage.getItem("ac_t")) getInitials();
 
     // eslint-disable-next-line
   }, []);
@@ -133,47 +140,53 @@ const App = () => {
       );
   }, [state.User.id]);
 
-  useEffect(() => {
-    window.addEventListener("onbeforeunload", () => {
-      Socket.send(
-        JSON.stringify({
-          status: "user-offline",
-          user_id: state.User.id,
-        })
-      );
-    });
-
-    return () => {
-      window.removeEventListener("onbeforeunload", () => {
-        Socket.send(
-          JSON.stringify({
-            status: "user-offline",
-            user_id: state.User.id,
-          })
-        );
-      });
-    };
-  });
+  window.onbeforeunload = () => {
+    UserDisconnect()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    Socket.send(
+      JSON.stringify({
+        status: "user-offline",
+        user_id: state.User.id,
+      })
+    );
+  };
 
   if (localStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
       dispatch(Loading({ isLoading: false }));
+      getInitials();
     };
 
     Socket.onclose = () => {
       dispatch(Loading({ isLoading: true }));
-      if (localStorage.getItem("re_t")) {
-        NewAccToken({ refresh: localStorage.getItem("re_t") }).then(res => {
-          localStorage.setItem("ac_t", res.access);
-        });
-      } else {
-        localStorage.removeItem("ac_t");
-      }
     };
 
     Socket.onmessage = e => {
       let data = JSON.parse(e.data);
       switch (data.ws_type) {
+        case "user-online":
+          if (!state.OnlineUsers.ids.includes(data.user_id))
+            dispatch(
+              OnlineUsers({ ids: [...state.OnlineUsers.ids, data.user_id] })
+            );
+          if (state.OnlineUsers.disconnects.includes(data.user_id))
+            dispatch(
+              OnlineUsers({
+                disconnects: state.OnlineUsers.disconnects.filter(
+                  x => x !== data.user_id
+                ),
+              })
+            );
+          break;
+        case "user-offline":
+          dispatch(
+            OnlineUsers({
+              ids: state.OnlineUsers.ids.filter(x => x !== data.user_id),
+              disconnects: [...state.OnlineUsers.disconnects, data.user_id],
+            })
+          );
+          break;
         case "new-project":
           dispatch(
             ProjectsAction({ projects: [data, ...state.Projects.projects] })

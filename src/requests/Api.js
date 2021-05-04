@@ -33,14 +33,18 @@ AxiosInstance.interceptors.response.use(
   },
   error => {
     const originalRequest = error.config;
-    console.log("error", error.response.data);
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error?.response?.status === 401 &&
+      !originalRequest._retry &&
+      localStorage.getItem("re_t")
+    ) {
       originalRequest._retry = true;
       return NewAccToken({
         refresh: localStorage.getItem("re_t"),
       })
         .then(res => {
           localStorage.setItem("ac_t", res.access);
+          localStorage.setItem("re_t", res.refresh);
           AxiosInstance.defaults.headers["Authorization"] =
             "Bearer " + res.access;
           return AxiosInstance(originalRequest);

@@ -25,11 +25,23 @@ const TheProject = ({ project }) => {
   const downloadFileRippleRef = useRef();
   const deleteProjectRippleRef = useRef();
   const user = useSelector(state => state.User);
+  const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
 
   const handleDownloaded = () => {
     window.location.href = project.file;
     dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
+  };
+
+  const getUserTimeStatus = () => {
+    if (
+      !onlineUsers.disconnects.includes(project.client_id) &&
+      (project.client_is_online || onlineUsers.ids.includes(project.client_id))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -40,12 +52,30 @@ const TheProject = ({ project }) => {
             <img
               src={baseURL + project.client_image}
               alt="User Profile"
-              className="client-image"
+              className={`client-image ${
+                getUserTimeStatus() ? "is-online" : ""
+              }`}
             />
           ) : (
             <i className="icon project-client-default-pic" />
           )}
-          <div className="client-name">{project.client}</div>
+          <div className="client-status-wrapper">
+            <div className="client-name">{project.client}</div>
+            <div
+              className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
+            >
+              {getUserTimeStatus() ? (
+                <span>آنلاین</span>
+              ) : (
+                <span>
+                  آخرین بازدید حدود{" "}
+                  <Moment fromNow locale="fa">
+                    {project.client_last_login}
+                  </Moment>
+                </span>
+              )}
+            </div>
+          </div>
         </div>
         <div className="title">توضیحات</div>
         <div className="description-value value">{project.description}</div>

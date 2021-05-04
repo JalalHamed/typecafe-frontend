@@ -81,3 +81,10 @@ export const AoROfferAction = payload => {
     payload,
   };
 };
+
+export const OnlineUsers = payload => {
+  return {
+    type: "ONLINE_USERS",
+    payload,
+  };
+};

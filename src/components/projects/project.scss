@@ -20,11 +20,23 @@
         height: 50px;
         border-radius: 50%;
         border: 2px solid #ddd;
+
+        &.is-online {
+          border-color: #1c3987;
+        }
       }
 
-      .client-name {
+      .client-status-wrapper {
         margin-right: 10px;
-        color: #1c3987;
+
+        .last-login {
+          font-size: 10px;
+          color: #555;
+
+          &.is-online {
+            color: #1c3987;
+          }
+        }
       }
     }
 

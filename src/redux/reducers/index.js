@@ -14,6 +14,7 @@ import DeleteProject from "./DeleteProject";
 import Offers from "./Offers";
 import Projects from "./Projects";
 import AoROffer from "./AoROffer";
+import OnlineUsers from "./OnlineUsers";
 
 const allReducers = combineReducers({
   Loading,
@@ -28,6 +29,7 @@ const allReducers = combineReducers({
   Offers,
   Projects,
   AoROffer,
+  OnlineUsers,
 });
 
 export default allReducers;
