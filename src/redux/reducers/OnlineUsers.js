@@ -1,6 +1,7 @@
 let initialState = {
   ids: [],
   disconnects: [],
+  lastLogins: [],
 };
 
 const OnlineUsers = (state = initialState, action) => {

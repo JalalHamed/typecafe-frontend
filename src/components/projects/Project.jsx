@@ -57,7 +57,11 @@ const TheProject = ({ project }) => {
               }`}
             />
           ) : (
-            <i className="icon project-client-default-pic" />
+            <i
+              className={`icon project-client-default-pic client-image ${
+                getUserTimeStatus() ? "is-online" : ""
+              }`}
+            />
           )}
           <div className="client-status-wrapper">
             <div className="client-name">{project.client}</div>
@@ -70,7 +74,13 @@ const TheProject = ({ project }) => {
                 <span>
                   آخرین بازدید حدود{" "}
                   <Moment fromNow locale="fa">
-                    {project.client_last_login}
+                    {!onlineUsers.disconnects.includes(project.client_id)
+                      ? project.client_last_login
+                      : onlineUsers.lastLogins.forEach(x => {
+                          if (x.id === project.client_id) {
+                            return x.lastLogin;
+                          }
+                        })}
                   </Moment>
                 </span>
               )}

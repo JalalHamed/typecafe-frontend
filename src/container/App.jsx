@@ -45,6 +45,7 @@ import {
 import "./app.scss";
 
 const App = () => {
+  const now = new Date();
   const dispatch = useDispatch();
   const state = useSelector(state => state);
   const [width, setWidth] = useState(window.innerWidth);
@@ -176,6 +177,9 @@ const App = () => {
                 disconnects: state.OnlineUsers.disconnects.filter(
                   x => x !== data.user_id
                 ),
+                lastLogins: state.OnlineUsers.lastLogins.filter(
+                  x => x.id !== data.user_id
+                ),
               })
             );
           break;
@@ -184,6 +188,10 @@ const App = () => {
             OnlineUsers({
               ids: state.OnlineUsers.ids.filter(x => x !== data.user_id),
               disconnects: [...state.OnlineUsers.disconnects, data.user_id],
+              lastLogins: [
+                ...state.OnlineUsers.lastLogins,
+                { id: data.user_id, lastLogin: now },
+              ],
             })
           );
           break;
