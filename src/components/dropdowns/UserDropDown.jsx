@@ -3,6 +3,9 @@ import React from "react";
 // Libraries
 import { useDispatch } from "react-redux";
 
+// Requests
+import { UserDisconnect } from "requests";
+
 // Actions
 import { User } from "redux/actions";
 
@@ -13,8 +16,12 @@ const UserDropDown = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem("ac_t");
-    window.location.reload();
+    UserDisconnect()
+      .then(() => {
+        localStorage.removeItem("ac_t");
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
   };
 
   const handleProfile = () => {
