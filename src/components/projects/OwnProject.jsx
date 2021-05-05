@@ -85,6 +85,7 @@ const OwnProject = ({ project }) => {
                             wholePrice: addCommission(
                               offer.offered_price * project.number_of_pages
                             ),
+                            status: "accept",
                           })
                         )
                       }
@@ -99,6 +100,11 @@ const OwnProject = ({ project }) => {
                             isModalOpen: true,
                             typist: offer.typist,
                             typistImage: offer.typist_image,
+                            offeredPrice: offer.offered_price,
+                            wholePrice: addCommission(
+                              offer.offered_price * project.number_of_pages
+                            ),
+                            status: "reject",
                           })
                         )
                       }

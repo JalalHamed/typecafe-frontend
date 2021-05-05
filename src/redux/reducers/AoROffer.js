@@ -4,6 +4,7 @@ let initialState = {
   typistImage: "",
   offeredPrice: 0,
   wholePrice: 0,
+  status: "",
 };
 
 const AoROffer = (state = initialState, action) => {

@@ -5,7 +5,7 @@
   background-color: #29313be1;
   border-radius: 5px;
   width: 200px;
-  z-index: 99;
+  z-index: 1;
 
   .user-dropdown-item {
     cursor: pointer;
@@ -27,7 +27,7 @@
   border-radius: 5px;
   width: 300px;
   height: 200px;
-  z-index: 99;
+  z-index: 1;
   color: #fff;
   padding: 15px;
   overflow-y: auto;

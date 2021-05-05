@@ -138,7 +138,8 @@ const Profile = () => {
             onClick={() => inputFileRef.current.click()}
           />
           {user.image && (
-            <div className="delete-photo" onClick={handleDeletePhoto}>
+            <div className="delete-photo tooltip" onClick={handleDeletePhoto}>
+              <span className="tooltiptext">حذف عکس</span>
               <i className="icon icon-close-background-red" />
             </div>
           )}

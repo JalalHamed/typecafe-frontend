@@ -12,7 +12,7 @@ import Previous from "components/buttons/Previous";
 import { priceFormat } from "components/helper";
 
 // Actions
-import { AoROfferAction } from "redux/actions";
+import { AoROfferAction, Sidebar } from "redux/actions";
 
 // xhr
 import { baseURL } from "components/xhr";
@@ -25,6 +25,11 @@ const AoROffer = () => {
   const previousButtonRippleRef = useRef();
   const dispatch = useDispatch();
   const offer = useSelector(state => state.AoROffer);
+
+  const handleGoToRules = () => {
+    dispatch(AoROfferAction({ isModalOpen: false }));
+    dispatch(Sidebar({ page: "rules" }));
+  };
 
   return (
     <motion.div
@@ -58,27 +63,49 @@ const AoROffer = () => {
           <p className="value">{priceFormat(offer.wholePrice)}</p>
         </div>
       </div>
-      <p className="aoroffer-note">
-        پس از تایید درخواست، مبلغ کل از حساب شما کسر و در حساب سایت بلوکه خواهد
-        شد. در صورت نپرداختن دستمزد تایپیست به مدت ۲۴ ساعت پس از آپلود شدن فایل
-        نهایی توسط تایپیست برای شما، این مبلغ به طور خودکار به حساب تایپیست
-        واریز خواهد شد.
-      </p>
-      <p className="go-to-rules">اطلاعات بیشتر درباره نحوه عملکرد وبسایت</p>
-      <div className="button-wrapper">
-        <Button
-          ref={submitButtonRippleRef}
-          title="تایید پیشنهاد"
-          className="w-68"
-          // onClick={handleSubmitRequest}
-        />
-        <Previous
-          ref={previousButtonRippleRef}
-          title="انصراف"
-          className="w-30"
-          // onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
-        />
-      </div>
+      {offer.status === "accept" && (
+        <>
+          <p className="aoroffer-note">
+            پس از تایید درخواست، مبلغ کل از حساب شما کسر و در حساب سایت بلوکه
+            خواهد شد. در صورت نپرداختن دستمزد تایپیست به مدت ۲۴ ساعت پس از آپلود
+            شدن فایل نهایی توسط تایپیست برای شما، این مبلغ به طور خودکار به حساب
+            تایپیست واریز خواهد شد.
+          </p>
+          <p className="go-to-rules" onClick={handleGoToRules}>
+            اطلاعات بیشتر درباره نحوه عملکرد وبسایت
+          </p>
+          <div className="button-wrapper">
+            <Button
+              ref={submitButtonRippleRef}
+              title="تایید پیشنهاد"
+              className="w-68 green"
+              // onClick={handleAccept}
+            />
+            <Previous
+              ref={previousButtonRippleRef}
+              title="انصراف"
+              className="w-30"
+              onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}
+            />
+          </div>
+        </>
+      )}
+      {offer.status === "reject" && (
+        <div className="button-wrapper">
+          <Button
+            ref={submitButtonRippleRef}
+            title="رد پیشنهاد"
+            className="w-68 red"
+            // onClick={handleReject}
+          />
+          <Previous
+            ref={previousButtonRippleRef}
+            title="انصراف"
+            className="w-30"
+            onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}
+          />
+        </div>
+      )}
     </motion.div>
   );
 };
