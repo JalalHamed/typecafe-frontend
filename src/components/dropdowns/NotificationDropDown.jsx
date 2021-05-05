@@ -3,7 +3,7 @@ import React from "react";
 const NotificationDropDown = () => {
   return (
     <div className="notification-dropdown-wrapper">
-      <i className="icon icon-leafless-tree-white" />
+      <i className="icon icon-empty-box" />
       <p>هنوز هیچ اعلانی ندارید.</p>
     </div>
   );

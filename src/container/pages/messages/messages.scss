@@ -1,0 +1,39 @@
+.messages-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .left-wrapper {
+    border: 1px solid #777;
+    border-radius: 5px;
+    width: 25%;
+  }
+
+  .right-wrapper {
+    width: 74%;
+    display: flex;
+    flex-direction: column;
+
+    .message-screen {
+      border: 1px solid #777;
+      height: 100%;
+    }
+
+    .message-input {
+      margin-top: 10px;
+      padding: 5px 10px;
+      border: 1px solid #777;
+      border-radius: 3px;
+      width: 100%;
+      font-size: 18px;
+      font-family: "typecafe";
+
+      &::placeholder {
+        text-align: right;
+        font-family: "typecafe";
+        padding-right: 5px;
+        font-size: 15px;
+      }
+    }
+  }
+}

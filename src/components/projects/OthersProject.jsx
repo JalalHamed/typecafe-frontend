@@ -61,36 +61,39 @@ const OthersProject = ({ project, downloaded }) => {
 
   return (
     <>
-      <Input
-        label="قیمت پیشنهادی شما برای هر صفحه (تومان)"
-        name="request"
-        type="number"
-        id="request"
-        wrapperStyle={{ width: "70%", marginTop: "10px" }}
-        labelStyle={{ fontSize: "14px" }}
-        style={{ fontSize: "14px", width: "200px" }}
-        min="1500"
-        disabled={inputDisabled}
-        value={price}
-        onChange={e => setPrice(e.target.value)}
-      />
-      <p className="left-title">
-        کارمزد<span className="left-value">٪۵</span>
-      </p>
-      <p className="left-title">
-        عایدی شما
-        <span className="left-value">
-          {priceFormat(contractorEarning)} به ازای هر صفحه
-        </span>
-      </p>
-      <Button
-        ref={submitReqeustRippleRef}
-        title="ثبت پیشنهاد"
-        className="fit-width"
-        disabled={buttonDisabled}
-        onClick={handleOffer}
-      />
-      <p className="err-msg">{errMsg}</p>
+      <div className="request-offer-wrapper">
+        <div className="request-offer-form-wrapper">
+          <Input
+            label="قیمت پیشنهادی (هر صفحه)"
+            name="request"
+            type="number"
+            id="request"
+            wrapperStyle={{ width: "100%" }}
+            labelStyle={{ fontSize: "14px" }}
+            style={{ fontSize: "14px", width: "200px" }}
+            min="1500"
+            disabled={inputDisabled}
+            value={price}
+            onChange={e => setPrice(e.target.value)}
+          />
+          <Button
+            ref={submitReqeustRippleRef}
+            title="ثبت پیشنهاد"
+            className="fit-width no-break"
+            disabled={buttonDisabled}
+            onClick={handleOffer}
+          />
+          <p className="err-msg">{errMsg}</p>
+        </div>
+        <div className="calculate-price-wrapper">
+          <p className="left-title">کارمزد</p>
+          <span className="left-value">٪۵</span>
+          <p className="left-title">عایدی شما</p>
+          <span className="left-value">
+            {priceFormat(contractorEarning)} به ازای هر صفحه
+          </span>
+        </div>
+      </div>
     </>
   );
 };

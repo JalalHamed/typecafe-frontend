@@ -44,7 +44,7 @@ const Projects = () => {
       )}
       {!loading && !projects.length && (
         <div className="middle-of-the-page">
-          <i className="icon icon-leafless-tree" />
+          <i className="icon icon-empty-box" />
           <p className="no-project-note">هنوز پروژه ای ثبت نکرده اید.</p>
           <RippleWrapper
             ref={AddProjectRippleRef}

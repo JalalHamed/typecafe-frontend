@@ -5,8 +5,16 @@ import "./messages.scss";
 
 const Messages = () => {
   return (
-    <div>
-      <p>messages</p>
+    <div className="messages-wrapper">
+      <div className="left-wrapper"></div>
+      <div className="right-wrapper">
+        <div className="message-screen"></div>
+        <input
+          className="message-input"
+          noBreak
+          placeholder="پیام خود را تایپ کنید و Enter بزنید..."
+        />
+      </div>
     </div>
   );
 };

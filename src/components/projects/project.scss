@@ -71,6 +71,39 @@
     margin-right: 50px;
     width: 43%;
 
+    .request-offer-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+
+      .request-offer-form-wrapper {
+        width: 220px;
+
+        .err-msg {
+          margin-top: 5px;
+          font-size: 12px;
+          width: 300px;
+        }
+      }
+
+      .calculate-price-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+
+        .left-title {
+          font-size: 14px;
+          color: #555;
+        }
+
+        .left-value {
+          font-size: 16px;
+          color: #29313b;
+          margin-right: 10px;
+        }
+      }
+    }
+
     .no-offer-wrapper {
       margin-top: 20px;
       display: flex;
@@ -193,22 +226,6 @@
           top: 0;
         }
       }
-    }
-
-    .err-msg {
-      margin-top: 5px;
-      font-size: 12px;
-    }
-
-    .left-title {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .left-value {
-      font-size: 16px;
-      color: #29313b;
-      margin-right: 7px;
     }
   }
 

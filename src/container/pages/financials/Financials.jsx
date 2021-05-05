@@ -91,7 +91,7 @@ const Financials = () => {
       <div className="transaction-history-wrapper">
         <div className="transaction-history-title">تاریخچه تراکنش‌ها</div>
         <div className="transaction-history-tickets">
-          <i className="icon icon-leafless-tree" />
+          <i className="icon icon-empty-box" />
           <p style={{ marginTop: "10px" }}>هنوز هیچ تراکنشی انجام نشده است.</p>
         </div>
       </div>

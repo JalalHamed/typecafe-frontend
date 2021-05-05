@@ -310,16 +310,10 @@
     margin-left: 10px;
   }
 
-  &.icon-leafless-tree {
-    content: url("../svgs/leafless-tree.svg");
-    width: 150px;
-    height: 150px;
-  }
-
-  &.icon-leafless-tree-white {
-    content: url("../svgs/leafless-tree-whtie.svg");
-    width: 120px;
-    height: 120px;
+  &.icon-empty-box {
+    content: url("../svgs/empty-box.svg");
+    width: 140px;
+    height: 140px;
   }
 
   &.icon-arrow-down {

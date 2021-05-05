@@ -11,6 +11,14 @@
   height: 33px;
   width: 100%;
 
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
   &.fit-width {
     width: fit-content;
   }
@@ -42,20 +50,16 @@
     }
   }
 
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
   &.red {
     background-color: #d8000c;
   }
 
   &.green {
     background-color: #2d8e38;
+  }
+
+  &.no-break {
+    margin-top: 0;
   }
 }
 

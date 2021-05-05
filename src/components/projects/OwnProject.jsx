@@ -124,7 +124,7 @@ const OwnProject = ({ project }) => {
         </>
       ) : (
         <div className="no-offer-wrapper">
-          <i className="icon icon-leafless-tree" />
+          <i className="icon icon-empty-box" />
           <p>هنوز هیچ پیشنهادی ندارید.</p>
         </div>
       )}
