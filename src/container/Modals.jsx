@@ -64,7 +64,7 @@ const Modals = () => {
       )}
       {/* Loading */}
       {/* NOTE: This has to be the last modal so it appers on top of everything else... */}
-      {state.Loading.isLoading && (
+      {state.Loading && (
         <ModalWrapper>
           <Loading />
         </ModalWrapper>

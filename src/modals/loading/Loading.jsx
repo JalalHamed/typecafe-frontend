@@ -2,16 +2,12 @@ import React from "react";
 
 // Libraries
 import { motion } from "framer-motion";
-import PuffLoader from "react-spinners/PuffLoader";
-import { css } from "@emotion/react";
+
+// Componenets
+import { Puffloader } from "components/loader";
 
 // Designs
 import "./loading.scss";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-`;
 
 const Loading = () => {
   return (
@@ -20,7 +16,7 @@ const Loading = () => {
       animate={{ scale: 1 }}
       className="loading-wrapper"
     >
-      <PuffLoader color={"#1c3987"} loading={true} css={override} size={100} />
+      <Puffloader color={"#1c3987"} loading={true} size={100} />
       <p className="loading-note">لطفا صبر کنید...</p>
     </motion.div>
   );

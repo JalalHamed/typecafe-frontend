@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
-import PuffLoader from "react-spinners/PuffLoader";
-import { css } from "@emotion/react";
 
 // Components
 import Project from "components/projects/Project";
+import { Puffloader } from "components/loader";
 
 // Requests
 import { GetMoreProjects } from "requests";
@@ -16,11 +15,6 @@ import { ProjectsAction } from "redux/actions";
 
 // Design
 import "./projects.scss";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-`;
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -59,12 +53,7 @@ const Projects = () => {
         })}
       {loading && (
         <div className="middle-of-the-page">
-          <PuffLoader
-            color={"#1c3987"}
-            loading={loading}
-            css={override}
-            size={100}
-          />
+          <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
       )}
       {!loading && !projects.length && (
@@ -78,12 +67,7 @@ const Projects = () => {
         </div>
       )}
       {loadMoreloading && (
-        <PuffLoader
-          color={"#1c3987"}
-          loading={loadMoreloading}
-          css={override}
-          size={100}
-        />
+        <Puffloader color="#1c3987" loading={loadMoreloading} size={100} />
       )}
     </div>
   );

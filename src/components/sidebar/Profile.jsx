@@ -17,7 +17,7 @@ import { baseURL } from "components/xhr";
 
 const Profile = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
   const user = useSelector(state => state.User);
 
   return (

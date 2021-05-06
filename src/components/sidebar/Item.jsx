@@ -11,7 +11,7 @@ import { Sidebar } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
   const page = useSelector(state => state.Sidebar.page);
-  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
   const dispatch = useDispatch();
 
   const handleClick = () => {

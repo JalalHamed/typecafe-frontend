@@ -24,6 +24,7 @@ const SideBar = () => {
   const donateRippleRef = useRef();
   const faqRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
+  // const isLoading = useSelector(state => state.Sidebar.isLoading);
 
   return (
     <div className="sidebar-wrapper">

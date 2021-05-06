@@ -7,6 +7,9 @@ let initialState = {
   email: "",
   credit: 0,
   image: "",
+  successfulProjects: 0,
+  unsuccessfulProjects: 0,
+  ontimeDelivery: 0,
 };
 
 const User = (state = initialState, action) => {

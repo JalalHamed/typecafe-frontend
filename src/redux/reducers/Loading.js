@@ -1,11 +1,7 @@
-let initialState = {
-  isLoading: false,
-};
-
-const Loading = (state = initialState, action) => {
+const Loading = (state = false, action) => {
   switch (action.type) {
     case "LOADING":
-      return { ...state, ...action.payload };
+      return action.payload;
     default:
       return state;
   }

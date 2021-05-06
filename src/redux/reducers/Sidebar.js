@@ -1,5 +1,6 @@
 let initialState = {
-  isSidebarOpen: true,
+  isOpen: true,
+  isLoading: true,
   page: "projects",
 };
 

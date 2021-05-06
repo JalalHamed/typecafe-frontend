@@ -64,6 +64,9 @@ const App = () => {
               email: res.email,
               credit: res.credit,
               image: res.image,
+              ontimeDelivery: res.ontime_delivery,
+              successfulProjects: res.successful_projects,
+              unsuccessfulProjects: res.unsuccessful_projects,
             })
           );
         })
@@ -110,7 +113,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("ac_t")) getInitials();
+    if (!localStorage.getItem("ac_t")) {
+      getInitials();
+    }
 
     // eslint-disable-next-line
   }, []);
@@ -119,9 +124,9 @@ const App = () => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
 
     if (width < 1350) {
-      dispatch(Sidebar({ isSidebarOpen: false }));
+      dispatch(Sidebar({ isOpen: false }));
     } else {
-      dispatch(Sidebar({ isSidebarOpen: true }));
+      dispatch(Sidebar({ isOpen: true }));
     }
 
     return () => {
@@ -155,13 +160,13 @@ const App = () => {
 
   if (localStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
-      dispatch(Loading({ isLoading: false }));
+      dispatch(Loading(false));
       getInitials();
       console.log("socket open");
     };
 
     Socket.onclose = () => {
-      dispatch(Loading({ isLoading: true }));
+      dispatch(Loading(true));
       console.log("socket close");
     };
 
@@ -239,9 +244,7 @@ const App = () => {
       <TopBar />
       <div className="main">
         <div
-          className={
-            state.Sidebar.isSidebarOpen ? "sidebar-open" : "sidebar-close"
-          }
+          className={state.Sidebar.isOpen ? "sidebar-open" : "sidebar-close"}
         >
           <SideBar />
         </div>

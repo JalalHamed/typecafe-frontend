@@ -32,7 +32,7 @@ const TopBar = () => {
   const notifDropDown = useSelector(
     state => state.Notifications.isDropdownOpen
   );
-  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
 
   UseOnClickOutside(userDropDownRef, () => {
     if (userDropDown) dispatch(User({ isDropdownOpen: false }));
@@ -47,7 +47,7 @@ const TopBar = () => {
       <div className="topbar-right">
         <RippleWrapper
           className="hamburger-menu-icon no-select"
-          onClick={() => dispatch(Sidebar({ isSidebarOpen: !isSidebarOpen }))}
+          onClick={() => dispatch(Sidebar({ isOpen: !isSidebarOpen }))}
           ref={menuIconRippleRef}
         >
           <div className="line1"></div>

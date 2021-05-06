@@ -11,7 +11,7 @@ import { LR } from "redux/actions";
 
 const Login = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const isSidebarOpen = useSelector(state => state.Sidebar.isSidebarOpen);
+  const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
 
   return (
     <RippleWrapper
