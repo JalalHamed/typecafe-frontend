@@ -18,7 +18,7 @@ const SideBar = () => {
   const messagesRippleRef = useRef();
   const financialRippleRef = useRef();
   const rulesRippleRef = useRef();
-  const tutorialRippleRef = useRef();
+  // const tutorialRippleRef = useRef();
   const myProjectsRippleRef = useRef();
   const supportRippleRef = useRef();
   const donateRippleRef = useRef();
@@ -60,7 +60,7 @@ const SideBar = () => {
           />
         )}
         <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
-        <SideBarItem status="tutorial" title="آموزش" ref={tutorialRippleRef} />
+        {/* <SideBarItem status="tutorial" title="آموزش" ref={tutorialRippleRef} /> */}
         <SideBarItem status="faq" title="سؤالات متداول" ref={faqRippleRef} />
         {isLoggedIn && (
           <SideBarItem

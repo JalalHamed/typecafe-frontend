@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { priceFormat, farsiNumber, addCommission } from "components/helper";
+import { priceFormat, farsiNumber, extractCommission } from "components/helper";
 
 // Actions
 import { CreateOffer, Sidebar, ProjectsAction } from "redux/actions";
@@ -29,7 +29,7 @@ const OfferRequest = () => {
   const state = useSelector(state => state);
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
-  const wholePrice = addCommission(pageCount * pricePerPage);
+  const wholePrice = extractCommission(pageCount * pricePerPage);
   const credit = Number(state.User.credit);
   const deadline = Number(state.CreateOffer.selectedDeadline);
 

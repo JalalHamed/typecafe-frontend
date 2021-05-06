@@ -58,7 +58,7 @@ const AoROffer = () => {
           <p className="title">قیمت پیشنهادی به ازای هرصفحه</p>
           <p className="value">{priceFormat(offer.offeredPrice)}</p>
           <p className="title" style={{ marginTop: "7px" }}>
-            مبلغ کل با احتساب ٪۵ کارمزد سایت
+            جمع کل با احتساب ٪۵ کارمزد سایت
           </p>
           <p className="value">{priceFormat(offer.wholePrice)}</p>
         </div>

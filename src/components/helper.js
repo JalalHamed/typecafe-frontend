@@ -1,3 +1,5 @@
+let typecafe_commission = 5;
+
 export const emailOverFlow = props => {
   const email = props.email;
 
@@ -19,5 +21,9 @@ export const farsiNumber = n => {
 };
 
 export const addCommission = price => {
-  return Math.round(price + price * 0.01 * 5);
+  return Math.round(price + price * 0.01 * typecafe_commission);
+};
+
+export const extractCommission = price => {
+  return Math.round(price - price * 0.01 * typecafe_commission);
 };

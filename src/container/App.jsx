@@ -87,7 +87,7 @@ const App = () => {
 
       // Get Offers
       GetOffers().then(res => {
-        dispatch(Offers({ offers: res }));
+        dispatch(Offers(res));
       });
     }
 
@@ -222,7 +222,7 @@ const App = () => {
           );
           break;
         case "new-offer":
-          dispatch(Offers({ offers: [data, ...state.Offers.offers] }));
+          dispatch(Offers({ offers: [data, ...state.Offers] }));
           break;
         default:
           break;

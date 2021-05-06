@@ -314,6 +314,11 @@
     content: url("../svgs/empty-box.svg");
     width: 140px;
     height: 140px;
+
+    &.smaller {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &.icon-arrow-down {

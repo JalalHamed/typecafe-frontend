@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
-import { priceFormat } from "components/helper";
+import { priceFormat, extractCommission } from "components/helper";
 
 // Actions
 import { CreateOffer } from "redux/actions";
@@ -19,9 +19,7 @@ const OthersProject = ({ project, downloaded }) => {
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [price, setPrice] = useState(1500);
-  const [contractorEarning, setContractorEarning] = useState(
-    Math.round(price - (price * 5) / 100)
-  );
+  const [typistEarning, setTypistEarning] = useState(extractCommission(price));
 
   const handleOffer = () => {
     dispatch(
@@ -56,7 +54,7 @@ const OthersProject = ({ project, downloaded }) => {
   }, [user.isLoggedIn, downloaded, price, project.id]);
 
   useEffect(() => {
-    setContractorEarning(Math.round(price - (price * 5) / 100));
+    setTypistEarning(extractCommission(price));
   }, [price]);
 
   return (
@@ -88,10 +86,18 @@ const OthersProject = ({ project, downloaded }) => {
         <div className="calculate-price-wrapper">
           <p className="left-title">کارمزد</p>
           <span className="left-value">٪۵</span>
-          <p className="left-title">عایدی شما</p>
-          <span className="left-value">
-            {priceFormat(contractorEarning)} به ازای هر صفحه
-          </span>
+          <p className="left-title">عایدی شما به ازای هر صفحه</p>
+          <span className="left-value">{priceFormat(typistEarning)}</span>
+          {downloaded.includes(project.id) && (
+            <>
+              <p className="left-title">جمع کل</p>
+              <p className="left-value">
+                {priceFormat(
+                  extractCommission(price * project.number_of_pages)
+                )}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </>

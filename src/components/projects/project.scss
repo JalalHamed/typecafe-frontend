@@ -94,6 +94,11 @@
         .left-title {
           font-size: 14px;
           color: #555;
+          margin-top: 5px;
+
+          &:first-child {
+            margin-top: 0;
+          }
         }
 
         .left-value {

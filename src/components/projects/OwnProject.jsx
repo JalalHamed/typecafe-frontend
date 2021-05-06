@@ -16,12 +16,13 @@ import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
   const dispatch = useDispatch();
-  const allOffers = useSelector(state => state.Offers.offers);
+  const allOffers = useSelector(state => state.Offers);
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
     if (allOffers.length) {
       setOffers([]);
+      console.log("ok");
       allOffers.forEach(offer => {
         if (offer.project === project.id && offer.status === "A") {
           setOffers(prevState => [...prevState, offer]);
@@ -63,7 +64,7 @@ const OwnProject = ({ project }) => {
                     </span>
                   </div>
                   <div className="offered-price-wrapper">
-                    <span className="offered-price-title">مبلغ کل</span>
+                    <span className="offered-price-title">جمع کل</span>
                     <span className="offered-price">
                       {priceFormat(
                         addCommission(

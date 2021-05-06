@@ -58,16 +58,18 @@ const Profile = () => {
     if (editMode === false) {
       setEditMode(true);
     } else {
-      ChangeDisplayName({ displayname: displayName })
-        .then(res => {
-          dispatch(User({ displayname: res.displayname }));
-          setDisplayNameErrMsg("");
-          toast.success("نام نمایشی با موفیت بروزرسانی شد.");
-        })
-        .catch(err => {
-          setDisplayName(user.displayname);
-          handleErrors(err, setDisplayNameErrMsg);
-        });
+      if (displayName !== user.displayname) {
+        ChangeDisplayName({ displayname: displayName })
+          .then(res => {
+            dispatch(User({ displayname: res.displayname }));
+            setDisplayNameErrMsg("");
+            toast.success("نام نمایشی با موفیت بروزرسانی شد.");
+          })
+          .catch(err => {
+            setDisplayName(user.displayname);
+            handleErrors(err, setDisplayNameErrMsg);
+          });
+      }
       setEditMode(false);
     }
   };
