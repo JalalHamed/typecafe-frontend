@@ -32,7 +32,6 @@ const Support = () => {
       <div className="support-ticket-history-wrapper">
         <div className="support-ticket-history-title">تاریخچه تیکت‌ها</div>
         <div className="support-ticket-history-tickets">
-          <i className="icon icon-empty-box" />
           <p style={{ marginTop: "10px" }}>
             هنوز هیچ تیکت پشتیبانی ای ارسال نکرده اید.
           </p>

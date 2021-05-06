@@ -18,7 +18,7 @@ const UserDropDown = () => {
   const handleLogout = () => {
     UserDisconnect()
       .then(() => {
-        localStorage.removeItem("ac_t");
+        localStorage.clear();
         window.location.reload();
       })
       .catch(err => console.log(err));

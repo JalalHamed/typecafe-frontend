@@ -157,10 +157,12 @@ const App = () => {
     Socket.onopen = () => {
       dispatch(Loading({ isLoading: false }));
       getInitials();
+      console.log("socket open");
     };
 
     Socket.onclose = () => {
       dispatch(Loading({ isLoading: true }));
+      console.log("socket close");
     };
 
     Socket.onmessage = e => {

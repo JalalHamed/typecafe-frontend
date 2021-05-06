@@ -79,6 +79,7 @@
       .err-msg {
         margin-top: 65px;
         font-size: 13px;
+        color: #777;
       }
 
       .request-offer-form-wrapper {
@@ -109,11 +110,8 @@
     }
 
     .no-offer-wrapper {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      margin-top: 100px;
+      text-align: center;
     }
 
     .offers-title-wrapper {

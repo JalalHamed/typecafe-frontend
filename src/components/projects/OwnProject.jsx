@@ -22,7 +22,6 @@ const OwnProject = ({ project }) => {
   useEffect(() => {
     if (allOffers.length) {
       setOffers([]);
-      console.log("ok");
       allOffers.forEach(offer => {
         if (offer.project === project.id && offer.status === "A") {
           setOffers(prevState => [...prevState, offer]);
@@ -125,7 +124,6 @@ const OwnProject = ({ project }) => {
         </>
       ) : (
         <div className="no-offer-wrapper">
-          <i className="icon icon-empty-box" />
           <p>هنوز هیچ پیشنهادی ندارید.</p>
         </div>
       )}
