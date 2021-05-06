@@ -76,14 +76,13 @@
       justify-content: center;
       margin-top: 30px;
 
+      .err-msg {
+        margin-top: 65px;
+        font-size: 13px;
+      }
+
       .request-offer-form-wrapper {
         width: 220px;
-
-        .err-msg {
-          margin-top: 5px;
-          font-size: 12px;
-          width: 300px;
-        }
       }
 
       .calculate-price-wrapper {

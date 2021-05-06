@@ -29,7 +29,7 @@ const TheProject = ({ project }) => {
   const downloaded = useSelector(state => state.Projects.downloaded);
 
   const handleDownloaded = () => {
-    window.location.href = project.file;
+    window.open(project.file, "_blank");
     dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
   };
 

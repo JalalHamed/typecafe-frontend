@@ -222,7 +222,7 @@ const App = () => {
           );
           break;
         case "new-offer":
-          dispatch(Offers({ offers: [data, ...state.Offers] }));
+          dispatch(Offers([data, ...state.Offers]));
           break;
         default:
           break;

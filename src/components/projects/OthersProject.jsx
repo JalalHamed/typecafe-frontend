@@ -58,37 +58,36 @@ const OthersProject = ({ project, downloaded }) => {
   }, [price]);
 
   return (
-    <>
-      <div className="request-offer-wrapper">
-        <div className="request-offer-form-wrapper">
-          <Input
-            label="قیمت پیشنهادی (هر صفحه)"
-            name="request"
-            type="number"
-            id="request"
-            wrapperStyle={{ width: "100%" }}
-            labelStyle={{ fontSize: "14px" }}
-            style={{ fontSize: "14px", width: "200px" }}
-            min="1500"
-            disabled={inputDisabled}
-            value={price}
-            onChange={e => setPrice(e.target.value)}
-          />
-          <Button
-            ref={submitReqeustRippleRef}
-            title="ثبت پیشنهاد"
-            className="fit-width no-break"
-            disabled={buttonDisabled}
-            onClick={handleOffer}
-          />
-          <p className="err-msg">{errMsg}</p>
-        </div>
-        <div className="calculate-price-wrapper">
-          <p className="left-title">کارمزد</p>
-          <span className="left-value">٪۵</span>
-          <p className="left-title">عایدی شما به ازای هر صفحه</p>
-          <span className="left-value">{priceFormat(typistEarning)}</span>
-          {downloaded.includes(project.id) && (
+    <div className="request-offer-wrapper">
+      {downloaded.includes(project.id) ? (
+        <>
+          <div className="request-offer-form-wrapper">
+            <Input
+              label="قیمت پیشنهادی (هر صفحه)"
+              name="request"
+              type="number"
+              id="request"
+              wrapperStyle={{ width: "100%" }}
+              labelStyle={{ fontSize: "14px" }}
+              style={{ fontSize: "14px", width: "200px" }}
+              min="1500"
+              disabled={inputDisabled}
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+            />
+            <Button
+              ref={submitReqeustRippleRef}
+              title="ثبت پیشنهاد"
+              className="fit-width no-break"
+              disabled={buttonDisabled}
+              onClick={handleOffer}
+            />
+          </div>
+          <div className="calculate-price-wrapper">
+            <p className="left-title">کارمزد</p>
+            <span className="left-value">٪۵</span>
+            <p className="left-title">عایدی شما به ازای هر صفحه</p>
+            <span className="left-value">{priceFormat(typistEarning)}</span>
             <>
               <p className="left-title">جمع کل</p>
               <p className="left-value">
@@ -97,10 +96,12 @@ const OthersProject = ({ project, downloaded }) => {
                 )}
               </p>
             </>
-          )}
-        </div>
-      </div>
-    </>
+          </div>
+        </>
+      ) : (
+        <p className="err-msg">{errMsg}</p>
+      )}
+    </div>
   );
 };
 
