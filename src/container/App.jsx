@@ -51,31 +51,35 @@ const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   const getInitials = () => {
+    // Get User Data
+    UserData()
+      .then(res => {
+        dispatch(
+          User({
+            isLoggedIn: true,
+            displayname: res.displayname,
+            id: res.id,
+            email: res.email,
+            credit: res.credit,
+            image: res.image,
+            ontimeDelivery: res.ontime_delivery,
+            successfulProjects: res.successful_projects,
+            unsuccessfulProjects: res.unsuccessful_projects,
+          })
+        );
+        dispatch(Sidebar({ isLoading: false }));
+        dispatch(User({ isTopbarLoading: false }));
+      })
+      .catch(err => {
+        if (err.response?.data?.detail === "User not found") {
+          localStorage.removeItem("ac_t");
+        }
+        dispatch(Sidebar({ isLoading: false }));
+        dispatch(User({ isTopbarLoading: false }));
+      });
+
     // Check if user is logged in
     if (localStorage.getItem("ac_t")) {
-      // Get User Data
-      UserData()
-        .then(res => {
-          dispatch(
-            User({
-              isLoggedIn: true,
-              displayname: res.displayname,
-              id: res.id,
-              email: res.email,
-              credit: res.credit,
-              image: res.image,
-              ontimeDelivery: res.ontime_delivery,
-              successfulProjects: res.successful_projects,
-              unsuccessfulProjects: res.unsuccessful_projects,
-            })
-          );
-        })
-        .catch(err => {
-          if (err.response?.data?.detail === "User not found") {
-            localStorage.removeItem("ac_t");
-          }
-        });
-
       // Get My Projects
       dispatch(ProjectsAction({ myprojectsloading: true }));
       GetMyProjects()
@@ -113,6 +117,8 @@ const App = () => {
   };
 
   useEffect(() => {
+    dispatch(Sidebar({ isLoading: true }));
+    dispatch(User({ isTopbarLoading: true }));
     if (!localStorage.getItem("ac_t")) {
       getInitials();
     }

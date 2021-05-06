@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UseOnClickOutside from "hooks/UseOnClickOutside";
 
 // Components
+import { Puffloader } from "components/loader/";
 import RippleWrapper from "components/ripple/RippleWrapper";
 import UserDropDown from "components/dropdowns/UserDropDown";
 import NotificationDropDown from "components/dropdowns/NotificationDropDown";
@@ -58,56 +59,64 @@ const TopBar = () => {
         <p className="site-title no-select">تایپ‌کافه</p>
       </div>
       <div className="topbar-left">
-        {!user.isLoggedIn ? (
-          <RippleWrapper
-            className="topbar-sign-up no-select"
-            onClick={() => dispatch(LR({ isModalOpen: true }))}
-            ref={signUpRippleRef}
-          >
-            <i className="icon icon-user-red-topbar" />
-            <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
-          </RippleWrapper>
+        {!user.isTopbarLoading ? (
+          <>
+            {!user.isLoggedIn ? (
+              <RippleWrapper
+                className="topbar-sign-up no-select"
+                onClick={() => dispatch(LR({ isModalOpen: true }))}
+                ref={signUpRippleRef}
+              >
+                <i className="icon icon-user-red-topbar" />
+                <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
+              </RippleWrapper>
+            ) : (
+              <div className="topbar-left-user-logged-in">
+                <RippleWrapper
+                  className="create-project no-select"
+                  onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
+                  ref={createProjectRippleRef}
+                >
+                  <i className="icon icon-create" />
+                  <p className="create-project-title">ثبت پروژه</p>
+                </RippleWrapper>
+                <div ref={notifDropDownRef}>
+                  {notifDropDown && <NotificationDropDown />}
+                  <div
+                    className="notif-wrapper no-select"
+                    onClick={() =>
+                      dispatch(
+                        Notifications({ isDropdownOpen: !notifDropDown })
+                      )
+                    }
+                  >
+                    <i className="icon icon-notification" />
+                  </div>
+                </div>
+                <div ref={userDropDownRef}>
+                  {user.isDropdownOpen && <UserDropDown />}
+                  <div
+                    className="user-wrapper no-select"
+                    onClick={() =>
+                      dispatch(User({ isDropdownOpen: !userDropDown }))
+                    }
+                  >
+                    {!user.image ? (
+                      <i className="icon icon-user-default-regular" />
+                    ) : (
+                      <img
+                        src={baseURL + user.image}
+                        alt="User Profile"
+                        className="user-profile"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         ) : (
-          <div className="topbar-left-user-logged-in">
-            <RippleWrapper
-              className="create-project no-select"
-              onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
-              ref={createProjectRippleRef}
-            >
-              <i className="icon icon-create" />
-              <p className="create-project-title">ثبت پروژه</p>
-            </RippleWrapper>
-            <div ref={notifDropDownRef}>
-              {notifDropDown && <NotificationDropDown />}
-              <div
-                className="notif-wrapper no-select"
-                onClick={() =>
-                  dispatch(Notifications({ isDropdownOpen: !notifDropDown }))
-                }
-              >
-                <i className="icon icon-notification" />
-              </div>
-            </div>
-            <div ref={userDropDownRef}>
-              {user.isDropdownOpen && <UserDropDown />}
-              <div
-                className="user-wrapper no-select"
-                onClick={() =>
-                  dispatch(User({ isDropdownOpen: !userDropDown }))
-                }
-              >
-                {!user.image ? (
-                  <i className="icon icon-user-default-regular" />
-                ) : (
-                  <img
-                    src={baseURL + user.image}
-                    alt="User Profile"
-                    className="user-profile"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
+          <Puffloader color="#fff" loading={user.isTopbarLoading} size={40} />
         )}
       </div>
     </div>
