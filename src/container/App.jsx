@@ -39,6 +39,7 @@ import {
   GetMyProjects,
   GetOffers,
   UserDisconnect,
+  GetDownloads,
 } from "requests";
 
 // Design
@@ -51,6 +52,23 @@ const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   const getInitials = () => {
+    // Get Projects
+    dispatch(ProjectsAction({ loading: true }));
+    GetProjects()
+      .then(res => {
+        dispatch(ProjectsAction({ loading: false }));
+        dispatch(ProjectsAction({ projects: res.results }));
+        if (res.next) {
+          dispatch(ProjectsAction({ next: res.next }));
+        } else {
+          dispatch(ProjectsAction({ next: "" }));
+        }
+      })
+      .catch(err => {
+        dispatch(ProjectsAction({ loading: false }));
+        console.log(err);
+      });
+
     // Get User Data
     UserData()
       .then(res => {
@@ -69,6 +87,28 @@ const App = () => {
         );
         dispatch(Sidebar({ isLoading: false }));
         dispatch(User({ isTopbarLoading: false }));
+
+        // Get My Projects
+        dispatch(ProjectsAction({ myprojectsloading: true }));
+        GetMyProjects()
+          .then(res => {
+            dispatch(ProjectsAction({ myprojectsloading: false }));
+            dispatch(ProjectsAction({ myprojects: res }));
+          })
+          .catch(err => {
+            dispatch(ProjectsAction({ myprojectsloading: false }));
+            console.log(err);
+          });
+
+        // Get Offers
+        GetOffers().then(res => {
+          dispatch(Offers(res));
+        });
+
+        // Get Downloads
+        GetDownloads().then(res => {
+          dispatch(ProjectsAction({ downloaded: res }));
+        });
       })
       .catch(err => {
         if (err.response?.data?.detail === "User not found") {
@@ -76,43 +116,6 @@ const App = () => {
         }
         dispatch(Sidebar({ isLoading: false }));
         dispatch(User({ isTopbarLoading: false }));
-      });
-
-    // Check if user is logged in
-    if (localStorage.getItem("ac_t")) {
-      // Get My Projects
-      dispatch(ProjectsAction({ myprojectsloading: true }));
-      GetMyProjects()
-        .then(res => {
-          dispatch(ProjectsAction({ myprojectsloading: false }));
-          dispatch(ProjectsAction({ myprojects: res }));
-        })
-        .catch(err => {
-          dispatch(ProjectsAction({ myprojectsloading: false }));
-          console.log(err);
-        });
-
-      // Get Offers
-      GetOffers().then(res => {
-        dispatch(Offers(res));
-      });
-    }
-
-    // Get Projects
-    dispatch(ProjectsAction({ loading: true }));
-    GetProjects()
-      .then(res => {
-        dispatch(ProjectsAction({ loading: false }));
-        dispatch(ProjectsAction({ projects: res.results }));
-        if (res.next) {
-          dispatch(ProjectsAction({ next: res.next }));
-        } else {
-          dispatch(ProjectsAction({ next: "" }));
-        }
-      })
-      .catch(err => {
-        dispatch(ProjectsAction({ loading: false }));
-        console.log(err);
       });
   };
 
