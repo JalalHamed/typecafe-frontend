@@ -1,7 +1,7 @@
 const Offers = (state = [], action) => {
   switch (action.type) {
     case "OFFERS":
-      return [...state, ...action.payload];
+      return [...action.payload, ...state];
     default:
       return state;
   }

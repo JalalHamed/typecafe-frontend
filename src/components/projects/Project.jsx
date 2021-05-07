@@ -11,6 +11,9 @@ import OwnProject from "./OwnProject";
 import OthersProject from "./OthersProject";
 import { farsiNumber } from "components/helper";
 
+// Requests
+import { Downloaded } from "requests";
+
 // Actions
 import { DeleteProject, ProjectsAction } from "redux/actions";
 
@@ -31,6 +34,9 @@ const TheProject = ({ project }) => {
   const handleDownloaded = () => {
     window.open(project.file, "_blank");
     dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
+    Downloaded({ project: project.id })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
   };
 
   const getUserTimeStatus = () => {

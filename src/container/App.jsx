@@ -129,9 +129,10 @@ const App = () => {
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
 
-    if (width < 1350) {
+    if (width < 1350 && state.Sidebar.isOpen === true) {
       dispatch(Sidebar({ isOpen: false }));
-    } else {
+    }
+    if (width >= 1350 && state.Sidebar.isOpen === false) {
       dispatch(Sidebar({ isOpen: true }));
     }
 
@@ -235,7 +236,7 @@ const App = () => {
           );
           break;
         case "new-offer":
-          dispatch(Offers([data, ...state.Offers]));
+          dispatch(Offers([data]));
           break;
         default:
           break;

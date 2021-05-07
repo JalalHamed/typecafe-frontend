@@ -16,13 +16,13 @@ import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
   const dispatch = useDispatch();
-  const allOffers = useSelector(state => state.Offers);
+  const Offers = useSelector(state => state.Offers);
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    if (allOffers.length) {
+    if (Offers.length && Offers.find(offer => offer.project === project.id)) {
       setOffers([]);
-      allOffers.forEach(offer => {
+      Offers.forEach(offer => {
         if (offer.project === project.id && offer.status === "A") {
           setOffers(prevState => [...prevState, offer]);
         }
@@ -30,7 +30,7 @@ const OwnProject = ({ project }) => {
     }
 
     // eslint-disable-next-line
-  }, [allOffers]);
+  }, [Offers]);
 
   return (
     <>
