@@ -1,11 +1,14 @@
 let initialState = {
-  loading: false,
-  myprojectsloading: false,
+  loading: true,
+  myprojectsloading: true,
+  offersLoading: true,
+  downloadsLoading: true,
   projects: [],
   myprojects: [],
-  next: "",
+  offers: [],
   downloaded: [],
   requested: [],
+  next: "",
 };
 
 const Projects = (state = initialState, action) => {

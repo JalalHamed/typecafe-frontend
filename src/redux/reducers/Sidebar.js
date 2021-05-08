@@ -1,6 +1,6 @@
 let initialState = {
   isOpen: true,
-  isLoading: false,
+  isLoading: true,
   page: "projects",
 };
 

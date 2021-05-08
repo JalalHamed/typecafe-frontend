@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 // Components
 import Button from "components/buttons/Button";
+import { fileNameFilter } from "components/helper";
 
 // Actions
 import { CreateProject } from "redux/actions";
@@ -19,8 +20,8 @@ import "./reviewandsubmit.scss";
 
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state.CreateProject);
-  const email = useSelector(state => state.User.email);
+  const state = useSelector((state) => state.CreateProject);
+  const email = useSelector((state) => state.User.email);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
@@ -40,7 +41,7 @@ const ReviewAndSubmit = () => {
     body.append("type", type);
 
     CreateProjectReq(body)
-      .then(res => {
+      .then((res) => {
         setLoading(false);
         Socket.send(
           JSON.stringify({
@@ -63,15 +64,15 @@ const ReviewAndSubmit = () => {
         );
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
         handleErrors(err, setError);
       });
   };
 
   useEffect(() => {
-    state.languagesAndAdditions.forEach(lang => {
-      setLangs(prevState => [...prevState, lang.label]);
+    state.languagesAndAdditions.forEach((lang) => {
+      setLangs((prevState) => [...prevState, lang.label]);
     });
   }, [state.languagesAndAdditions]);
 
@@ -84,35 +85,36 @@ const ReviewAndSubmit = () => {
       <div className="ras-review-wrapper">
         <i className="icon icon-zip" />
         <div>
-          <div className="file-detials inline">
-            <div>
-              <p className="label">حجم فایل</p>
-              <p className="margin-right-12" style={{ direction: "rtl" }}>
-                {Number(state.file.size / 1000).toFixed(0)} کیلوبایت
-              </p>
-            </div>
-            <div>
-              <p className="label">نام فایل</p>
-              <p className="margin-right-12">{state.file.name}</p>
-            </div>
-          </div>
-          <p className="label margin-top-10">زبان(ها) و پیوست های پروژه</p>
-          <p className="margin-right-12">
-            {state.languagesAndAdditions.map(language => language.label + " ")}
+          <p className="label">نام فایل</p>
+          <p
+            className="mr-12 ltr"
+            style={{ overflow: "auto", maxHeight: "56px", width: "260px" }}
+          >
+            {fileNameFilter(state.file.name)}
           </p>
-          <div className="inline margin-top-10">
+          <p className="label mt-10">حجم فایل</p>
+          <p className="mr-12 ltr" style={{ direction: "rtl" }}>
+            {Number(state.file.size / 1000).toFixed(0)} کیلوبایت
+          </p>
+          <p className="label mt-10">زبان(ها) و پیوست های پروژه</p>
+          <p className="mr-12">
+            {state.languagesAndAdditions.map(
+              (language) => language.label + " "
+            )}
+          </p>
+          <div className="inline mt-10">
             <div>
               <p className="label">تعداد صفحات</p>
-              <p className="margin-right-12">{state.numberOfPages}</p>
+              <p className="mr-12">{state.numberOfPages}</p>
             </div>
             <div>
               <p className="label">مهلت انجام (ساعت)</p>
-              <p className="margin-right-12">{state.deliveryDeadline}</p>
+              <p className="mr-12">{state.deliveryDeadline}</p>
             </div>
           </div>
           <p className="label margin-top-7">توضیحات</p>
           <p
-            className="margin-right-12"
+            className="mr-12"
             style={{ overflow: "auto", maxHeight: "56px", width: "260px" }}
           >
             {state.description}

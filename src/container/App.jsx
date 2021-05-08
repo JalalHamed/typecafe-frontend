@@ -24,7 +24,6 @@ import Modals from "./Modals";
 // Actions
 import {
   User,
-  Offers,
   ProjectsAction,
   Sidebar,
   Loading,
@@ -53,11 +52,9 @@ const App = () => {
 
   const getInitials = () => {
     // Get Projects
-    dispatch(ProjectsAction({ loading: true }));
     GetProjects()
       .then(res => {
-        dispatch(ProjectsAction({ loading: false }));
-        dispatch(ProjectsAction({ projects: res.results }));
+        dispatch(ProjectsAction({ loading: false, projects: res.results }));
         if (res.next) {
           dispatch(ProjectsAction({ next: res.next }));
         } else {
@@ -89,11 +86,11 @@ const App = () => {
         dispatch(User({ isTopbarLoading: false }));
 
         // Get My Projects
-        dispatch(ProjectsAction({ myprojectsloading: true }));
         GetMyProjects()
           .then(res => {
-            dispatch(ProjectsAction({ myprojectsloading: false }));
-            dispatch(ProjectsAction({ myprojects: res }));
+            dispatch(
+              ProjectsAction({ myprojectsloading: false, myprojects: res })
+            );
           })
           .catch(err => {
             dispatch(ProjectsAction({ myprojectsloading: false }));
@@ -101,14 +98,26 @@ const App = () => {
           });
 
         // Get Offers
-        GetOffers().then(res => {
-          dispatch(Offers(res));
-        });
+        GetOffers()
+          .then(res => {
+            dispatch(ProjectsAction({ offers: res, offersLoading: false }));
+          })
+          .catch(err => {
+            dispatch(ProjectsAction({ offersLoading: false }));
+            console.log(err);
+          });
 
         // Get Downloads
-        GetDownloads().then(res => {
-          dispatch(ProjectsAction({ downloaded: res }));
-        });
+        GetDownloads()
+          .then(res => {
+            dispatch(
+              ProjectsAction({ downloaded: res, downloadsLoading: false })
+            );
+          })
+          .catch(err => {
+            dispatch(ProjectsAction({ downloadsLoading: false }));
+            console.log(err);
+          });
       })
       .catch(err => {
         if (err.response?.data?.detail === "User not found") {
@@ -116,29 +125,31 @@ const App = () => {
         }
         dispatch(Sidebar({ isLoading: false }));
         dispatch(User({ isTopbarLoading: false }));
+        dispatch(
+          ProjectsAction({
+            loading: false,
+            myprojectsloading: false,
+            offersLoading: false,
+            downloadsLoading: false,
+          })
+        );
       });
   };
 
   useEffect(() => {
-    dispatch(Sidebar({ isLoading: true }));
-    dispatch(User({ isTopbarLoading: true }));
-    if (!localStorage.getItem("ac_t")) {
-      getInitials();
-    }
+    getInitials();
 
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
-
     if (width < 1350 && state.Sidebar.isOpen === true) {
       dispatch(Sidebar({ isOpen: false }));
     }
     if (width >= 1350 && state.Sidebar.isOpen === false) {
       dispatch(Sidebar({ isOpen: true }));
     }
-
     return () => {
       window.removeEventListener("resize", () => setWidth(window.innerWidth));
     };
@@ -239,7 +250,9 @@ const App = () => {
           );
           break;
         case "new-offer":
-          dispatch(Offers([data]));
+          dispatch(
+            ProjectsAction({ offers: [data, ...state.Projects.offers] })
+          );
           break;
         default:
           break;

@@ -16,7 +16,7 @@ import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
   const dispatch = useDispatch();
-  const Offers = useSelector(state => state.Offers);
+  const Offers = useSelector(state => state.Project.offers);
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {

@@ -11,6 +11,7 @@ import Button from "components/buttons/Button";
 import Close from "components/buttons/Close";
 import ArrowStem from "./ArrowStem";
 import ArrowCap from "./ArrowCap";
+import { fileNameFilter } from "components/helper";
 
 // Designs
 import "./uploadfile.scss";
@@ -96,7 +97,7 @@ const UploadFiles = () => {
               <i className="icon icon-zip" style={{ textAlign: "center" }} />
               <div className="file-detials">
                 <p className="label">نام فایل</p>
-                <p>{file.name}&nbsp;&nbsp;</p>
+                <p>{fileNameFilter(file.name)}&nbsp;&nbsp;</p>
                 <p className="label">حجم فایل</p>
                 <p style={{ direction: "rtl" }}>
                   &nbsp;&nbsp;{Number(file.size / 1000).toFixed(0)} کیلوبایت
