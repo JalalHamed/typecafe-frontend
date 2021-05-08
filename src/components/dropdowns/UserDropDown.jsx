@@ -1,19 +1,20 @@
 import React from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Requests
 import { UserDisconnect } from "requests";
 
 // Actions
-import { User } from "redux/actions";
+import { User, Profile } from "redux/actions";
 
 // Designs
 import "./dropdowns.scss";
 
 const UserDropDown = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.User);
 
   const handleLogout = () => {
     UserDisconnect()
@@ -25,7 +26,13 @@ const UserDropDown = () => {
   };
 
   const handleProfile = () => {
-    dispatch(User({ isDropdownOpen: false, isModalOpen: true }));
+    dispatch(User({ isDropdownOpen: false }));
+    dispatch(
+      Profile({
+        isModalOpen: true,
+        id: user.id,
+      })
+    );
   };
 
   return (

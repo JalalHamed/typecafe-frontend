@@ -10,12 +10,12 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import { priceFormat } from "components/helper";
 
 // Actions
-import { User } from "redux/actions";
+import { Profile } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
 
-const Profile = forwardRef((props, ref) => {
+const TheProfile = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
   const user = useSelector(state => state.User);
@@ -25,7 +25,14 @@ const Profile = forwardRef((props, ref) => {
       className={`user-profile ${
         isSidebarOpen ? "sidebar-profile-wide" : "sidebar-profile-short"
       } no-select`}
-      onClick={() => dispatch(User({ isModalOpen: true }))}
+      onClick={() =>
+        dispatch(
+          Profile({
+            isModalOpen: true,
+            id: user.id,
+          })
+        )
+      }
       ref={ref}
     >
       {user.image ? (
@@ -59,4 +66,4 @@ const Profile = forwardRef((props, ref) => {
   );
 });
 
-export default Profile;
+export default TheProfile;

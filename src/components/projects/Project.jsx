@@ -15,7 +15,7 @@ import { farsiNumber } from "components/helper";
 import { Downloaded } from "requests";
 
 // Actions
-import { DeleteProject, ProjectsAction } from "redux/actions";
+import { DeleteProject, ProjectsAction, Profile } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -61,12 +61,18 @@ const TheProject = ({ project }) => {
               className={`client-image ${
                 getUserTimeStatus() ? "is-online" : ""
               }`}
+              onClick={() =>
+                dispatch(Profile({ isModalOpen: true, id: project.client_id }))
+              }
             />
           ) : (
             <i
               className={`icon project-client-default-pic client-image ${
                 getUserTimeStatus() ? "is-online" : ""
               }`}
+              onClick={() =>
+                dispatch(Profile({ isModalOpen: true, id: project.client_id }))
+              }
             />
           )}
           <div className="client-name-and-status-wrapper">

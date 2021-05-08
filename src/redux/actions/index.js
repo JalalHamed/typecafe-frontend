@@ -81,3 +81,10 @@ export const OnlineUsers = payload => {
     payload,
   };
 };
+
+export const Profile = payload => {
+  return {
+    type: "PROFILE",
+    payload,
+  };
+};

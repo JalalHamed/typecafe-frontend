@@ -1,91 +1,24 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
 
 // Components
 import Close from "components/buttons/Close";
-import Button from "components/buttons/Button";
-import Input from "components/inputs/Input";
-import { priceFormat } from "components/helper";
+import SelfProfile from "./SelfProfile";
+import OthersProfile from "./OthersProfile";
 
 // Actions
-import { User, SelectedImage, Sidebar } from "redux/actions";
-
-// Requests
-import {
-  ChangeProfileImage,
-  ChangeDisplayName,
-  DeleteProfileImage,
-  handleErrors,
-} from "requests";
+import { Profile } from "redux/actions";
 
 // Designs
 import "./profile.scss";
 
-// xhr
-import { baseURL } from "components/xhr";
-
-const Profile = () => {
+const TheProfile = () => {
   const dispatch = useDispatch();
-  const inputFileRef = useRef();
-  const changePhotoRippleRef = useRef();
-  const user = useSelector(state => state.User);
-  const [errMsg, setErrMsg] = useState("");
-  const [editMode, setEditMode] = useState(false);
-  const [displayName, setDisplayName] = useState(user.displayname);
-  const [displayNameErrMsg, setDisplayNameErrMsg] = useState("");
-
-  const handleChangePic = pic => {
-    if (pic.type.includes("image")) {
-      setErrMsg("");
-      let body = new FormData();
-      body.append("image", pic);
-      ChangeProfileImage(body)
-        .then(res => {
-          dispatch(User({ image: res.image }));
-          toast.success("عکس پروفایل با موفقیت بروزرسانی شد.");
-        })
-        .catch(err => handleErrors(err, setErrMsg));
-    } else {
-      setErrMsg("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
-    }
-  };
-
-  const handleEditDisplayname = () => {
-    if (editMode === false) {
-      setEditMode(true);
-    } else {
-      if (displayName !== user.displayname) {
-        ChangeDisplayName({ displayname: displayName })
-          .then(res => {
-            dispatch(User({ displayname: res.displayname }));
-            setDisplayNameErrMsg("");
-            toast.success("نام نمایشی با موفیت بروزرسانی شد.");
-          })
-          .catch(err => {
-            setDisplayName(user.displayname);
-            handleErrors(err, setDisplayNameErrMsg);
-          });
-      }
-      setEditMode(false);
-    }
-  };
-
-  const handleCredit = () => {
-    dispatch(User({ isModalOpen: false }));
-    dispatch(Sidebar({ page: "financials" }));
-  };
-
-  const handleDeletePhoto = () => {
-    DeleteProfileImage()
-      .then(() => {
-        dispatch(User({ image: "" }));
-      })
-      .catch(err => console.log(err));
-  };
+  const user = useSelector(state => state.Profile);
+  const _self = useSelector(state => state.User);
 
   return (
     <motion.div
@@ -97,86 +30,27 @@ const Profile = () => {
         <p className="profile-header-title">پروفایل</p>
         <Close
           className="close-modal"
-          onClick={() => dispatch(User({ isModalOpen: false }))}
+          onClick={() =>
+            dispatch(
+              Profile({
+                isModalOpen: false,
+                isLoading: true,
+                id: null,
+                displayname: "",
+                image: "",
+                successfulProjects: 0,
+                unsuccessfulProjects: 0,
+                ontimeDelivery: 0,
+                email: "",
+                credit: 0,
+              })
+            )
+          }
         />
       </div>
-      <div className="profile-content">
-        <div className="profile-content-right">
-          <input
-            type="file"
-            ref={inputFileRef}
-            onChange={e => handleChangePic(e.target.files[0])}
-            onClick={e => {
-              e.target.value = null; // allows uploading the same file over and over
-            }}
-            encType="multipart/form-data"
-            accept="image/*"
-            hidden
-          />
-          {!!user.image ? (
-            <img
-              src={baseURL + user.image}
-              alt="profile"
-              className="profile-pic"
-              onClick={() =>
-                dispatch(
-                  SelectedImage({
-                    isModalOpen: true,
-                    image: baseURL + user.image,
-                  })
-                )
-              }
-            />
-          ) : (
-            <i
-              className="icon profile-pic-default profile-pic"
-              onClick={() => inputFileRef.current.click()}
-            />
-          )}
-          <Button
-            ref={changePhotoRippleRef}
-            title="تغییر عکس پروفایل"
-            className="fit-width"
-            onClick={() => inputFileRef.current.click()}
-          />
-          {user.image && (
-            <div className="delete-photo tooltip" onClick={handleDeletePhoto}>
-              <span className="tooltiptext">حذف عکس</span>
-              <i className="icon icon-close-background-red" />
-            </div>
-          )}
-          <p className="err-msg">{errMsg}</p>
-        </div>
-        <div className="profile-content-left">
-          <p className="title">
-            نام نمایشی{" "}
-            <span className="edit no-select" onClick={handleEditDisplayname}>
-              {!editMode ? "ویرایش" : "ثبت"}
-            </span>
-          </p>
-          {!editMode ? (
-            <p className="value">{displayName}</p>
-          ) : (
-            <Input
-              value={displayName}
-              onChange={e => setDisplayName(e.target.value)}
-              autoFocus
-            />
-          )}
-          <p className="title">ایمیل</p>
-          <p className="value">{user.email}</p>
-          <p className="title">
-            اعتبار{" "}
-            <span className="edit no-select" onClick={handleCredit}>
-              افزایش/برداشت
-            </span>
-          </p>
-          <p className="value">{priceFormat(user.credit)}</p>
-          <p className="displayname-err-msg">{displayNameErrMsg}</p>
-        </div>
-      </div>
+      {_self.id === user.id ? <SelfProfile /> : <OthersProfile />}
     </motion.div>
   );
 };
 
-export default Profile;
+export default TheProfile;

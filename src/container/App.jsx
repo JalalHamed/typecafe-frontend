@@ -182,7 +182,6 @@ const App = () => {
   if (localStorage.getItem("ac_t") && Socket) {
     Socket.onopen = () => {
       dispatch(Loading(false));
-      getInitials();
       console.log("socket open");
     };
 

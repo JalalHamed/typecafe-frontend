@@ -32,7 +32,7 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Profile */}
-      {state.User.isModalOpen && (
+      {state.Profile.isModalOpen && (
         <ModalWrapper>
           <Profile />
         </ModalWrapper>
