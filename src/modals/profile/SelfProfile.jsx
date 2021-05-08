@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 // Components
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
-import { priceFormat } from "components/helper";
+import { Puffloader } from "components/loader";
+import { priceFormat, farsiNumber } from "components/helper";
 
 // Requests
 import {
@@ -15,6 +16,7 @@ import {
   ChangeDisplayName,
   DeleteProfileImage,
   handleErrors,
+  UserProfile,
 } from "requests";
 
 // Actions
@@ -32,6 +34,9 @@ const SelfProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [displayName, setDisplayName] = useState(user.displayname);
   const [displayNameErrMsg, setDisplayNameErrMsg] = useState("");
+  const [asTypist, setAsTypist] = useState(true);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
@@ -58,6 +63,7 @@ const SelfProfile = () => {
         ChangeDisplayName({ displayname: displayName })
           .then(res => {
             dispatch(Profile({ displayname: res.displayname }));
+            dispatch(User({ displayname: res.displayname }));
             setDisplayNameErrMsg("");
             toast.success("نام نمایشی با موفیت بروزرسانی شد.");
           })
@@ -98,6 +104,22 @@ const SelfProfile = () => {
         credit: user.credit,
       })
     );
+    UserProfile({ id: user.id })
+      .then(res => {
+        setLoading(false);
+        setData({
+          typistSuccessfulProjects: res.typist_successful_projects,
+          typistUnsuccessfulProjects: res.typist_unsuccessful_projects,
+          ontimeDelivery: res.ontime_delivery,
+          clientSuccessfulProjects: res.client_successful_projects,
+          clientUnsuccessfulProjects: res.client_unsuccessful_projects,
+          ontimePayment: res.ontime_payment,
+        });
+      })
+      .catch(err => {
+        setLoading(false);
+        console.log(err);
+      });
 
     // eslint-disable-next-line
   }, []);
@@ -120,7 +142,7 @@ const SelfProfile = () => {
           <img
             src={baseURL + user.image}
             alt="profile"
-            className="profile-pic"
+            className="profile-pic point"
             onClick={() =>
               dispatch(
                 SelectedImage({
@@ -132,7 +154,7 @@ const SelfProfile = () => {
           />
         ) : (
           <i
-            className="icon profile-pic-default profile-pic"
+            className="icon profile-pic-default profile-pic point"
             onClick={() => inputFileRef.current.click()}
           />
         )}
@@ -177,6 +199,58 @@ const SelfProfile = () => {
         <p className="value">{priceFormat(user.credit)}</p>
         <p className="displayname-err-msg">{displayNameErrMsg}</p>
       </div>
+      {!loading ? (
+        <div className="profile-content-cv tighter">
+          <div className="typist-client-switcher-wrapper no-select">
+            به عنوان
+            <div
+              className="typist-client-switcher no-select"
+              onClick={() => setAsTypist(!asTypist)}
+            >
+              <div className={asTypist ? "activated" : "deactivated"}>
+                تایپیست
+              </div>
+              <div className={asTypist ? "deactivated" : "activated"}>
+                کارفرما
+              </div>
+            </div>
+          </div>
+          <div className="user-profile-data-wrapper">
+            <p className="title">پروژه های موفق</p>
+            <p className="value green">
+              {asTypist
+                ? farsiNumber(Number(data.typistSuccessfulProjects))
+                : farsiNumber(Number(data.clientSuccessfulProjects))}
+            </p>
+            <p className="title">پروژه های ناموفق</p>
+            <p className="value red">
+              {asTypist
+                ? farsiNumber(Number(data.typistUnsuccessfulProjects))
+                : farsiNumber(Number(data.clientUnsuccessfulProjects))}
+            </p>
+            <p className="title">
+              {asTypist ? <>تحویل به موقع</> : <>پرداخت به موقع</>}
+            </p>
+            <p className="value">
+              {asTypist ? (
+                data.ontimeDelivery ? (
+                  <>{farsiNumber(Number(data.ontimeDelivery))}%</>
+                ) : (
+                  <>—</>
+                )
+              ) : data.ontimePayment ? (
+                <>{farsiNumber(Number(data.ontimePayment))}%</>
+              ) : (
+                <>—</>
+              )}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Puffloader color="#1c3987" loading={loading} size={100} />
+        </>
+      )}
     </div>
   );
 };

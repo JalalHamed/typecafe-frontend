@@ -27,6 +27,10 @@ export const UserDisconnect = () => {
 };
 
 // Profile
+export const UserProfile = body => {
+  return axios.post("account/user-profile/", body).then(res => res.data);
+};
+
 export const UserData = () => {
   return axios.get("account/user-data/").then(res => res.data);
 };

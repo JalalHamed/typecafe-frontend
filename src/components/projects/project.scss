@@ -32,6 +32,7 @@
 
         .client-name {
           cursor: pointer;
+          width: fit-content;
         }
 
         .last-login {
@@ -166,7 +167,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            width: 130px;
+            width: 140px;
 
             .typist-image {
               width: 40px;

@@ -8,6 +8,10 @@
   border-radius: 5px;
   position: relative;
 
+  &.wider {
+    width: 935px;
+  }
+
   .profile-header {
     display: flex;
     justify-content: space-between;
@@ -38,6 +42,10 @@
       align-items: center;
       position: relative;
 
+      .profile-displayname {
+        margin-top: 10px;
+      }
+
       .delete-photo {
         position: absolute;
         right: 28px;
@@ -46,11 +54,14 @@
       }
 
       .profile-pic {
-        cursor: pointer;
         width: 200px;
         height: 200px;
         border-radius: 50%;
         border: 2px solid #ddd;
+
+        &.point {
+          cursor: pointer;
+        }
       }
 
       .err-msg {
@@ -90,6 +101,55 @@
         text-align: justify;
         margin-left: 45px;
         bottom: 30px;
+      }
+    }
+
+    .profile-content-cv {
+      margin-right: 100px;
+
+      .typist-client-switcher-wrapper {
+        display: flex;
+        align-items: center;
+
+        .typist-client-switcher {
+          font-size: 14px;
+          display: flex;
+          margin-right: 10px;
+          background-color: #ddd;
+          border-radius: 50px;
+          cursor: pointer;
+
+          .activated {
+            background-color: #1c3987;
+            color: #fff;
+            border-radius: 50px;
+            padding: 5px 10px;
+          }
+
+          .deactivated {
+            padding: 5px 10px;
+          }
+        }
+      }
+
+      .user-profile-data-wrapper {
+        margin-top: 20px;
+
+        .title {
+          color: #666;
+        }
+
+        .value {
+          margin: 5px 15px 0 0;
+
+          &.green {
+            color: #2d8e38;
+          }
+
+          &.red {
+            color: #d8000c;
+          }
+        }
       }
     }
   }

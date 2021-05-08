@@ -33,10 +33,12 @@ const TheProject = ({ project }) => {
 
   const handleDownloaded = () => {
     window.open(project.file, "_blank");
-    dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
-    Downloaded({ project: project.id })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+    if (user.isLoggedIn) {
+      dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
+      Downloaded({ project: project.id })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
+    }
   };
 
   const getUserTimeStatus = () => {
@@ -62,7 +64,14 @@ const TheProject = ({ project }) => {
                 getUserTimeStatus() ? "is-online" : ""
               }`}
               onClick={() =>
-                dispatch(Profile({ isModalOpen: true, id: project.client_id }))
+                dispatch(
+                  Profile({
+                    isModalOpen: true,
+                    id: project.client_id,
+                    displayname: project.client,
+                    image: project.client_image,
+                  })
+                )
               }
             />
           ) : (
@@ -71,12 +80,33 @@ const TheProject = ({ project }) => {
                 getUserTimeStatus() ? "is-online" : ""
               }`}
               onClick={() =>
-                dispatch(Profile({ isModalOpen: true, id: project.client_id }))
+                dispatch(
+                  Profile({
+                    isModalOpen: true,
+                    id: project.client_id,
+                    displayname: project.client,
+                    image: project.client_image,
+                  })
+                )
               }
             />
           )}
           <div className="client-name-and-status-wrapper">
-            <div className="client-name">{project.client}</div>
+            <div
+              className="client-name no-select"
+              onClick={() =>
+                dispatch(
+                  Profile({
+                    isModalOpen: true,
+                    id: project.client_id,
+                    displayname: project.client,
+                    image: project.client_image,
+                  })
+                )
+              }
+            >
+              {project.client}
+            </div>
             <div
               className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
             >

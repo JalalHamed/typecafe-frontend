@@ -22,7 +22,7 @@ const TheProfile = () => {
 
   return (
     <motion.div
-      className="profile-wrapper"
+      className={`profile-wrapper ${_self.id === user.id ? "wider" : ""}`}
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
     >
