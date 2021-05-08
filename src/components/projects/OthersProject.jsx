@@ -7,14 +7,16 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import { priceFormat, extractCommission } from "components/helper";
+import { Puffloader } from "components/loader";
 
 // Actions
 import { CreateOffer } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.User);
   const submitReqeustRippleRef = useRef();
+  const user = useSelector(state => state.User);
+  const isLoading = useSelector(state => state.Projects.downloadsLoading);
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -58,50 +60,56 @@ const OthersProject = ({ project, downloaded }) => {
   }, [price]);
 
   return (
-    <div className="request-offer-wrapper">
-      {downloaded.includes(project.id) ? (
-        <>
-          <div className="request-offer-form-wrapper">
-            <Input
-              label="قیمت پیشنهادی (هر صفحه)"
-              name="request"
-              type="number"
-              id="request"
-              wrapperStyle={{ width: "100%" }}
-              labelStyle={{ fontSize: "14px" }}
-              style={{ fontSize: "14px", width: "200px" }}
-              min="1500"
-              disabled={inputDisabled}
-              value={price}
-              onChange={e => setPrice(e.target.value)}
-            />
-            <Button
-              ref={submitReqeustRippleRef}
-              title="ثبت پیشنهاد"
-              className="fit-width no-break"
-              disabled={buttonDisabled}
-              onClick={handleOffer}
-            />
-          </div>
-          <div className="calculate-price-wrapper">
-            <p className="left-title">کارمزد</p>
-            <span className="left-value">٪۵</span>
-            <p className="left-title">عایدی شما به ازای هر صفحه</p>
-            <span className="left-value">{priceFormat(typistEarning)}</span>
+    <>
+      {!isLoading ? (
+        <div className="request-offer-wrapper">
+          {downloaded.includes(project.id) ? (
             <>
-              <p className="left-title">جمع کل</p>
-              <p className="left-value">
-                {priceFormat(
-                  extractCommission(price * project.number_of_pages)
-                )}
-              </p>
+              <div className="request-offer-form-wrapper">
+                <Input
+                  label="قیمت پیشنهادی (هر صفحه)"
+                  name="request"
+                  type="number"
+                  id="request"
+                  wrapperStyle={{ width: "100%" }}
+                  labelStyle={{ fontSize: "14px" }}
+                  style={{ fontSize: "14px", width: "200px" }}
+                  min="1500"
+                  disabled={inputDisabled}
+                  value={price}
+                  onChange={e => setPrice(e.target.value)}
+                />
+                <Button
+                  ref={submitReqeustRippleRef}
+                  title="ثبت پیشنهاد"
+                  className="fit-width no-break"
+                  disabled={buttonDisabled}
+                  onClick={handleOffer}
+                />
+              </div>
+              <div className="calculate-price-wrapper">
+                <p className="left-title">کارمزد</p>
+                <span className="left-value">٪۵</span>
+                <p className="left-title">عایدی شما به ازای هر صفحه</p>
+                <span className="left-value">{priceFormat(typistEarning)}</span>
+                <>
+                  <p className="left-title">جمع کل</p>
+                  <p className="left-value">
+                    {priceFormat(
+                      extractCommission(price * project.number_of_pages)
+                    )}
+                  </p>
+                </>
+              </div>
             </>
-          </div>
-        </>
+          ) : (
+            <p className="err-msg">{errMsg}</p>
+          )}
+        </div>
       ) : (
-        <p className="err-msg">{errMsg}</p>
+        <Puffloader color="#1c3987" loading={true} size={100} />
       )}
-    </div>
+    </>
   );
 };
 

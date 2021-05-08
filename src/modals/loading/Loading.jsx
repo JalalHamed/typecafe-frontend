@@ -16,7 +16,7 @@ const Loading = () => {
       animate={{ scale: 1 }}
       className="loading-wrapper"
     >
-      <Puffloader color={"#1c3987"} loading={true} size={100} />
+      <Puffloader color="#1c3987" loading={true} size={100} />
       <p className="loading-note">لطفا صبر کنید...</p>
     </motion.div>
   );

@@ -28,7 +28,7 @@ const Projects = () => {
         })}
       {loading && (
         <div className="middle-of-the-page">
-          <Puffloader color={"#1c3987"} loading={loading} size={100} />
+          <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
       )}
       {!loading && !projects.length && (

@@ -15,6 +15,7 @@ import Projects from "./Projects";
 import AoROffer from "./AoROffer";
 import OnlineUsers from "./OnlineUsers";
 import Messages from "./Messages";
+import Profile from "./Profile";
 
 const allReducers = combineReducers({
   Loading,
@@ -30,6 +31,7 @@ const allReducers = combineReducers({
   AoROffer,
   OnlineUsers,
   Messages,
+  Profile,
 });
 
 export default allReducers;

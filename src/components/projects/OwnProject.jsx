@@ -7,6 +7,7 @@ import "moment/locale/fa";
 
 // Components
 import { priceFormat, addCommission, farsiNumber } from "components/helper";
+import { Puffloader } from "components/loader";
 
 // Actions
 import { AoROfferAction } from "redux/actions";
@@ -16,7 +17,8 @@ import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
   const dispatch = useDispatch();
-  const Offers = useSelector(state => state.Project.offers);
+  const Offers = useSelector(state => state.Projects.offers);
+  const isLoading = useSelector(state => state.Projects.offersLoading);
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
@@ -34,98 +36,110 @@ const OwnProject = ({ project }) => {
 
   return (
     <>
-      {!!offers.length ? (
+      {!isLoading ? (
         <>
-          <div className="offers-title-wrapper">
-            <p className="offers-title">پیشنهادها</p>
-            <p className="number-of-offers">({farsiNumber(offers.length)})</p>
-          </div>
-          <div className="request-wrapper">
-            {offers.map(offer => {
-              return (
-                <div key={offer.id} className="offer">
-                  <div className="typist-wrapper">
-                    {offer.typist_image ? (
-                      <img
-                        src={baseURL + offer.typist_image}
-                        alt="typist_image"
-                        className="typist-image"
-                      />
-                    ) : (
-                      <i className="icon offer-typist-default-pic" />
-                    )}
-                    <span className="typist-displayname">{offer.typist}</span>
-                  </div>
-                  <div className="offered-price-wrapper">
-                    <span className="offered-price-title">قیمت پیشنهادی</span>
-                    <span className="offered-price">
-                      {priceFormat(offer.offered_price)}
-                    </span>
-                  </div>
-                  <div className="offered-price-wrapper">
-                    <span className="offered-price-title">جمع کل</span>
-                    <span className="offered-price">
-                      {priceFormat(
-                        addCommission(
-                          offer.offered_price * project.number_of_pages
-                        )
-                      )}
-                    </span>
-                  </div>
-                  <div className="accept-reject-wrapper no-select">
-                    <div
-                      className="accept"
-                      onClick={() =>
-                        dispatch(
-                          AoROfferAction({
-                            isModalOpen: true,
-                            typist: offer.typist,
-                            typistImage: offer.typist_image,
-                            offeredPrice: offer.offered_price,
-                            wholePrice: addCommission(
+          {!!offers.length ? (
+            <div className="has-offers-wrapper">
+              <div className="offers-title-wrapper">
+                <p className="offers-title">پیشنهادها</p>
+                <span className="number-of-offers">
+                  ({farsiNumber(offers.length)})
+                </span>
+              </div>
+              <div className="request-wrapper">
+                {offers.map(offer => {
+                  return (
+                    <div key={offer.id} className="offer">
+                      <div className="typist-wrapper">
+                        {offer.typist_image ? (
+                          <img
+                            src={baseURL + offer.typist_image}
+                            alt="typist_image"
+                            className="typist-image"
+                          />
+                        ) : (
+                          <i className="icon offer-typist-default-pic" />
+                        )}
+                        <span className="typist-displayname">
+                          {offer.typist}
+                        </span>
+                      </div>
+                      <div className="offered-price-wrapper">
+                        <span className="offered-price-title">
+                          قیمت پیشنهادی
+                        </span>
+                        <span className="offered-price">
+                          {priceFormat(offer.offered_price)}
+                        </span>
+                      </div>
+                      <div className="offered-price-wrapper">
+                        <span className="offered-price-title">جمع کل</span>
+                        <span className="offered-price">
+                          {priceFormat(
+                            addCommission(
                               offer.offered_price * project.number_of_pages
-                            ),
-                            status: "accept",
-                          })
-                        )
-                      }
-                    >
-                      <i className="icon icon-check-green" />
+                            )
+                          )}
+                        </span>
+                      </div>
+                      <div className="accept-reject-wrapper no-select">
+                        <div
+                          className="accept"
+                          onClick={() =>
+                            dispatch(
+                              AoROfferAction({
+                                isModalOpen: true,
+                                typist: offer.typist,
+                                typistImage: offer.typist_image,
+                                offeredPrice: offer.offered_price,
+                                wholePrice: addCommission(
+                                  offer.offered_price * project.number_of_pages
+                                ),
+                                status: "accept",
+                              })
+                            )
+                          }
+                        >
+                          <i className="icon icon-check-green" />
+                        </div>
+                        <div
+                          className="reject"
+                          onClick={() =>
+                            dispatch(
+                              AoROfferAction({
+                                isModalOpen: true,
+                                typist: offer.typist,
+                                typistImage: offer.typist_image,
+                                offeredPrice: offer.offered_price,
+                                wholePrice: addCommission(
+                                  offer.offered_price * project.number_of_pages
+                                ),
+                                status: "reject",
+                              })
+                            )
+                          }
+                        >
+                          <i className="icon icon-close-red" />
+                        </div>
+                      </div>
+                      <div className="offer-created-at">
+                        <Moment fromNow locale="fa">
+                          {offer.created_at}
+                        </Moment>
+                      </div>
                     </div>
-                    <div
-                      className="reject"
-                      onClick={() =>
-                        dispatch(
-                          AoROfferAction({
-                            isModalOpen: true,
-                            typist: offer.typist,
-                            typistImage: offer.typist_image,
-                            offeredPrice: offer.offered_price,
-                            wholePrice: addCommission(
-                              offer.offered_price * project.number_of_pages
-                            ),
-                            status: "reject",
-                          })
-                        )
-                      }
-                    >
-                      <i className="icon icon-close-red" />
-                    </div>
-                  </div>
-                  <div className="offer-created-at">
-                    <Moment fromNow locale="fa">
-                      {offer.created_at}
-                    </Moment>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <div className="no-offer-wrapper">
+              <p>هنوز هیچ پیشنهادی ندارید.</p>
+            </div>
+          )}
         </>
       ) : (
-        <div className="no-offer-wrapper">
-          <p>هنوز هیچ پیشنهادی ندارید.</p>
-        </div>
+        <Puffloader color="#1c3987" loading={true} size={100} />
       )}
     </>
   );

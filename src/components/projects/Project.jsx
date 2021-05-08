@@ -69,7 +69,7 @@ const TheProject = ({ project }) => {
               }`}
             />
           )}
-          <div className="client-status-wrapper">
+          <div className="client-name-and-status-wrapper">
             <div className="client-name">{project.client}</div>
             <div
               className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
