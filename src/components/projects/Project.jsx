@@ -52,6 +52,17 @@ const TheProject = ({ project }) => {
     }
   };
 
+  const openProfile = project => {
+    dispatch(
+      Profile({
+        isModalOpen: true,
+        id: project.client_id,
+        displayname: project.client,
+        image: project.client_image,
+      })
+    );
+  };
+
   return (
     <div className="project-wrapper">
       <div className="right">
@@ -63,47 +74,20 @@ const TheProject = ({ project }) => {
               className={`client-image ${
                 getUserTimeStatus() ? "is-online" : ""
               }`}
-              onClick={() =>
-                dispatch(
-                  Profile({
-                    isModalOpen: true,
-                    id: project.client_id,
-                    displayname: project.client,
-                    image: project.client_image,
-                  })
-                )
-              }
+              onClick={() => openProfile(project)}
             />
           ) : (
             <i
               className={`icon project-client-default-pic client-image ${
                 getUserTimeStatus() ? "is-online" : ""
               }`}
-              onClick={() =>
-                dispatch(
-                  Profile({
-                    isModalOpen: true,
-                    id: project.client_id,
-                    displayname: project.client,
-                    image: project.client_image,
-                  })
-                )
-              }
+              onClick={() => openProfile(project)}
             />
           )}
           <div className="client-name-and-status-wrapper">
             <div
               className="client-name no-select"
-              onClick={() =>
-                dispatch(
-                  Profile({
-                    isModalOpen: true,
-                    id: project.client_id,
-                    displayname: project.client,
-                    image: project.client_image,
-                  })
-                )
-              }
+              onClick={() => openProfile(project)}
             >
               {project.client}
             </div>

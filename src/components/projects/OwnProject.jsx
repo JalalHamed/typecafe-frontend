@@ -10,7 +10,7 @@ import { priceFormat, addCommission, farsiNumber } from "components/helper";
 import { Puffloader } from "components/loader";
 
 // Actions
-import { AoROfferAction } from "redux/actions";
+import { AoROfferAction, Profile } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -20,6 +20,17 @@ const OwnProject = ({ project }) => {
   const Offers = useSelector(state => state.Projects.offers);
   const isLoading = useSelector(state => state.Projects.offersLoading);
   const [offers, setOffers] = useState([]);
+
+  const openProfile = offer => {
+    dispatch(
+      Profile({
+        isModalOpen: true,
+        id: offer.typist_id,
+        displayname: offer.typist,
+        image: offer.typist_image,
+      })
+    );
+  };
 
   useEffect(() => {
     if (Offers.length && Offers.find(offer => offer.project === project.id)) {
@@ -55,12 +66,19 @@ const OwnProject = ({ project }) => {
                           <img
                             src={baseURL + offer.typist_image}
                             alt="typist_image"
-                            className="typist-image"
+                            className="typist-image pointer"
+                            onClick={() => openProfile(offer)}
                           />
                         ) : (
-                          <i className="icon offer-typist-default-pic" />
+                          <i
+                            className="icon offer-typist-default-pic pointer"
+                            onClick={() => openProfile(offer)}
+                          />
                         )}
-                        <span className="typist-displayname">
+                        <span
+                          className="typist-displayname pointer"
+                          onClick={() => openProfile(offer)}
+                        >
                           {offer.typist}
                         </span>
                       </div>
