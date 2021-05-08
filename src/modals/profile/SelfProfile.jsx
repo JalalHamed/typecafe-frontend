@@ -84,7 +84,7 @@ const SelfProfile = () => {
   const handleDeletePhoto = () => {
     DeleteProfileImage()
       .then(() => {
-        dispatch(Profile({ image: "" }));
+        dispatch(User({ image: "" }));
       })
       .catch(err => console.log(err));
   };
@@ -99,7 +99,6 @@ const SelfProfile = () => {
         successfulProjects: user.successfulProjects,
         unsuccessfulProjects: user.unsuccessfulProjects,
         ontimeDelivery: user.ontimeDelivery,
-        // if self
         email: user.email,
         credit: user.credit,
       })
