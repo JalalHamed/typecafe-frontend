@@ -19,7 +19,6 @@
       border-radius: 3px;
       width: 100%;
       font-size: 18px;
-      font-family: "typecafe";
 
       &:focus {
         outline: none;
@@ -27,7 +26,6 @@
 
       &::placeholder {
         text-align: right;
-        font-family: "typecafe";
         padding-right: 15px;
         color: #d8000ba1;
         font-size: 13px;
@@ -52,7 +50,6 @@
 
 .textarea-wrapper {
   .textarea {
-    font-family: "typecafe";
     width: 550px;
     height: 150px;
     padding: 12px 20px;

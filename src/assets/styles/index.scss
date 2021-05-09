@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "typecafe";
 
   &::selection {
     background-color: #df4933;
@@ -40,7 +41,6 @@
 }
 
 body {
-  font-family: "typecafe";
   background-color: #fff;
   color: #29313b;
   height: 100vh;
@@ -48,7 +48,6 @@ body {
 
 button {
   user-select: none;
-  font-family: "typecafe";
 }
 
 .no-select {

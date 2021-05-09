@@ -88,6 +88,11 @@ export const Downloaded = body => {
   return axios.post("downloaded/", body).then(res => res.data);
 };
 
+// Messages
+export const GetMessages = () => {
+  return axios.get("messages/").then(res => res.data);
+};
+
 // Support
 export const CreateSupportTicket = body => {
   return axios.post("account/support-ticket/", body).then(res => res.data);

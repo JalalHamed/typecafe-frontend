@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 // Pages
 import Projects from "./pages/projects/Projects";
 import MyProjects from "./pages/myprojects/MyProjects";
-import Messages from "./pages/messages/Messages";
+import TheMessages from "./pages/messages/Messages";
 import Financials from "./pages/financials/Financials";
 import Rules from "./pages/rules/Rules";
 import Support from "./pages/support/Support";
@@ -28,6 +28,7 @@ import {
   Sidebar,
   Loading,
   OnlineUsers,
+  Messages,
 } from "redux/actions";
 
 // Requests
@@ -39,6 +40,7 @@ import {
   GetOffers,
   UserDisconnect,
   GetDownloads,
+  GetMessages,
 } from "requests";
 
 // Design
@@ -96,6 +98,33 @@ const App = () => {
             dispatch(ProjectsAction({ myprojectsloading: false }));
             console.log(err);
           });
+
+        // Get Messages
+        GetMessages()
+          .then(res => {
+            let arr = [];
+            res.map(message => arr.push(message.user_id));
+            let uniq = [...new Set(arr)];
+            uniq.forEach(id => {
+              let messages = [];
+              res.forEach(message => {
+                if (message.user_id === id) messages.push(message);
+              });
+              dispatch(
+                Messages([
+                  {
+                    displayname: messages[0].user,
+                    id: messages[0].user_id,
+                    is_online: messages[0].user_is_online,
+                    last_login: messages[0].user_last_login,
+                    image: messages[0].user_image,
+                    messages: messages,
+                  },
+                ])
+              );
+            });
+          })
+          .catch(err => console.log(err));
 
         // Get Offers
         GetOffers()
@@ -273,7 +302,7 @@ const App = () => {
         <div className="content">
           {state.Sidebar.page === "projects" && <Projects />}
           {state.Sidebar.page === "my-projects" && <MyProjects />}
-          {state.Sidebar.page === "messages" && <Messages />}
+          {state.Sidebar.page === "messages" && <TheMessages />}
           {state.Sidebar.page === "financials" && <Financials />}
           {state.Sidebar.page === "rules" && <Rules />}
           {state.Sidebar.page === "support" && <Support />}

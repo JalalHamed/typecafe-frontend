@@ -1,23 +1,71 @@
 .messages-wrapper {
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  margin-right: 10px;
 
-  .left-wrapper {
-    border: 1px solid #29313b;
-    border-radius: 5px;
+  .contact-list-warpper {
     width: 25%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 5px;
+
+    .search {
+      width: 93%;
+      padding: 10px 10px;
+      font-size: 18px;
+      margin: 15px 0;
+      border-radius: 3px;
+      background-color: #3d4753;
+      color: #fff;
+      border: none;
+      outline: none;
+
+      &::placeholder {
+        color: #fff;
+        text-align: right;
+        font-size: 15px;
+      }
+    }
+
+    .contact {
+      width: 100%;
+      height: 75px;
+      color: #29313b;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px 10px;
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+
+      .user-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .user-displayname {
+        margin-right: 10px;
+      }
+    }
   }
 
-  .right-wrapper {
-    width: 74%;
+  .message-screen-and-input-wrapper {
+    width: 75%;
     display: flex;
     flex-direction: column;
 
     .message-screen {
       height: 100%;
-      border: 1px solid #29313b;
-      border-radius: 5px;
+      background-color: #29313b;
+      border-top-left-radius: 5px;
+      color: #fff;
 
       &.no-message {
         display: flex;
@@ -25,20 +73,26 @@
         justify-content: center;
         align-items: center;
       }
+
+      .pick-a-message-to-chat {
+        background-color: #454e5a;
+        border-radius: 50px;
+        padding: 5px 10px;
+      }
     }
 
     .message-input {
-      margin-top: 10px;
       padding: 5px 10px;
-      border: 1px solid #29313b;
-      border-radius: 3px;
+      border: none;
       width: 100%;
       font-size: 18px;
-      font-family: "typecafe";
+      border-left: 2px solid #29313b;
+      border-bottom: 2px solid #29313b;
+      border-bottom-left-radius: 5px;
+      outline: none;
 
       &::placeholder {
         text-align: right;
-        font-family: "typecafe";
         padding-right: 5px;
         font-size: 15px;
       }

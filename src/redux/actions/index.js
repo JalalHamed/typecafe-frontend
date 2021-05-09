@@ -88,3 +88,10 @@ export const Profile = payload => {
     payload,
   };
 };
+
+export const Messages = payload => {
+  return {
+    type: "MESSAGES",
+    payload,
+  };
+};

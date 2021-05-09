@@ -1,9 +1,7 @@
-let initialState = {};
-
-const Messages = (state = initialState, action) => {
+const Messages = (state = [], action) => {
   switch (action.type) {
     case "MESSAGES":
-      return { ...state, ...action.payload };
+      return [...state, ...action.payload];
     default:
       return state;
   }
