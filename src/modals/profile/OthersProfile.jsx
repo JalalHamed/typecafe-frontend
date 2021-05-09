@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
+import Moment from "react-moment";
 
 // Components
 import { Puffloader } from "components/loader";
@@ -21,9 +22,21 @@ const OthersProfile = () => {
   const dispatch = useDispatch();
   const sendMessage = useRef();
   const user = useSelector(state => state.Profile);
+  const onlineUsers = useSelector(state => state.OnlineUsers);
   const [asTypist, setAsTypist] = useState(true);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
+
+  const getUserTimeStatus = () => {
+    if (
+      !onlineUsers.disconnects.includes(user.id) &&
+      (data.userIsOnline || onlineUsers.ids.includes(user.id))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   useEffect(() => {
     UserProfile({ id: user.id })
@@ -36,6 +49,8 @@ const OthersProfile = () => {
           clientSuccessfulProjects: res.client_successful_projects,
           clientUnsuccessfulProjects: res.client_unsuccessful_projects,
           ontimePayment: res.ontime_payment,
+          userIsOnline: res.is_online,
+          userLastLogin: res.last_login,
         });
       })
       .catch(err => {
@@ -53,7 +68,9 @@ const OthersProfile = () => {
           <img
             src={baseURL + user.image}
             alt="profile"
-            className="profile-pic point"
+            className={`profile-pic point ${
+              getUserTimeStatus() ? "is-online" : ""
+            }`}
             onClick={() =>
               dispatch(
                 SelectedImage({
@@ -67,6 +84,31 @@ const OthersProfile = () => {
           <i className="icon profile-pic-default profile-pic" />
         )}
         <p className="profile-displayname">{user.displayname}</p>
+        {!loading && (
+          <div
+            className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
+          >
+            {getUserTimeStatus() ? (
+              <span>آنلاین</span>
+            ) : (
+              <span>
+                آخرین بازدید حدود{" "}
+                {!onlineUsers.disconnects.includes(user.id) ? (
+                  <Moment fromNow locale="fa">
+                    {data.userLastLogin}
+                  </Moment>
+                ) : (
+                  <Moment fromNow locale="fa">
+                    {
+                      onlineUsers.lastLogins.find(x => x.id === user.id)
+                        .lastLogin
+                    }
+                  </Moment>
+                )}
+              </span>
+            )}
+          </div>
+        )}
       </div>
       {!loading ? (
         <div className="profile-content-cv">
