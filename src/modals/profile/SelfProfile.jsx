@@ -185,6 +185,7 @@ const SelfProfile = () => {
             value={displayName}
             onChange={e => setDisplayName(e.target.value)}
             autoFocus
+            wrapperStyle={{ width: "200px" }}
           />
         )}
         <p className="title">ایمیل</p>
@@ -199,7 +200,7 @@ const SelfProfile = () => {
         <p className="displayname-err-msg">{displayNameErrMsg}</p>
       </div>
       {!loading ? (
-        <div className="profile-content-cv tighter">
+        <div className="profile-content-cv less-mr">
           <div className="typist-client-switcher-wrapper no-select">
             به عنوان
             <div

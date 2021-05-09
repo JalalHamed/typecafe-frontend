@@ -87,6 +87,7 @@
 
     .profile-content-left {
       margin-right: 100px;
+      width: 230px;
 
       .title {
         margin-top: 10px;
@@ -120,6 +121,10 @@
 
     .profile-content-cv {
       margin-right: 100px;
+
+      &.less-mr {
+        margin-right: 35px;
+      }
 
       .typist-client-switcher-wrapper {
         display: flex;
