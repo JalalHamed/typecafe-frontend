@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
+
+// Requests
+import { SendMessage } from "requests";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -12,10 +15,16 @@ import "./messages.scss";
 const Messages = () => {
   const messages = useSelector(state => state.Messages);
   const [selected, setSelected] = useState(null);
+  const [value, setValue] = useState("");
 
-  useEffect(() => {
-    console.log("messages", messages);
-  }, [messages]);
+  const handleSubmit = e => {
+    e.preventDefault();
+    SendMessage({ receiver: selected, content: value })
+      .then(() => {
+        setValue("");
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className="messages-wrapper">
@@ -77,10 +86,14 @@ const Messages = () => {
           )}
         </div>
         {selected && (
-          <input
-            className="message-input"
-            placeholder="پیام خود را تایپ کنید و Enter بزنید..."
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              className="message-input"
+              placeholder="پیام خود را تایپ کنید و Enter بزنید..."
+              value={value}
+              onChange={e => setValue(e.target.value)}
+            />
+          </form>
         )}
       </div>
     </div>
