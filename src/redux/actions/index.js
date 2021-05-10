@@ -95,3 +95,10 @@ export const Messages = payload => {
     payload,
   };
 };
+
+export const NewMessagesAction = payload => {
+  return {
+    type: "NEW_MESSAGE",
+    payload,
+  };
+};

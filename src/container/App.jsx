@@ -29,6 +29,7 @@ import {
   Loading,
   OnlineUsers,
   Messages,
+  NewMessagesAction,
 } from "redux/actions";
 
 // Requests
@@ -281,6 +282,9 @@ const App = () => {
           dispatch(
             ProjectsAction({ offers: [data, ...state.Projects.offers] })
           );
+          break;
+        case "new-message":
+          dispatch(NewMessagesAction({ id: data.sender, message: data }));
           break;
         default:
           break;

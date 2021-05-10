@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Requests
+import Socket from "requests/Socket";
 import { SendMessage } from "requests";
+
+// Actions
+import { NewMessagesAction } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -12,7 +16,9 @@ import { baseURL } from "components/xhr";
 // Design
 import "./messages.scss";
 
-const Messages = () => {
+const TheMessages = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.User);
   const messages = useSelector(state => state.Messages);
   const [selected, setSelected] = useState(null);
   const [value, setValue] = useState("");
@@ -20,8 +26,12 @@ const Messages = () => {
   const handleSubmit = e => {
     e.preventDefault();
     SendMessage({ receiver: selected, content: value })
-      .then(() => {
+      .then(res => {
+        Socket.send(
+          JSON.stringify({ status: "new-message", sender: user.id, ...res })
+        );
         setValue("");
+        dispatch(NewMessagesAction({ id: selected, message: res }));
       })
       .catch(err => console.log(err));
   };
@@ -70,7 +80,7 @@ const Messages = () => {
                     >
                       <p
                         className={`message ${
-                          message.sor === "sent" ? "sent" : "received"
+                          message.sor === "received" ? "received" : "sent"
                         }`}
                       >
                         {message.content}
@@ -100,4 +110,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default TheMessages;
