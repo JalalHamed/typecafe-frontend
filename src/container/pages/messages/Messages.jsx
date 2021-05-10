@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 // Libraries
+import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
 
 // Requests
@@ -31,7 +32,9 @@ const TheMessages = () => {
           JSON.stringify({ status: "new-message", sender: user.id, ...res })
         );
         setValue("");
-        dispatch(NewMessagesAction({ id: selected, message: res }));
+        dispatch(
+          NewMessagesAction({ id: selected, message: { ...res, sor: "sent" } })
+        );
       })
       .catch(err => console.log(err));
   };
@@ -78,13 +81,29 @@ const TheMessages = () => {
                         message.sor === "received" ? "received" : ""
                       }`}
                     >
-                      <p
-                        className={`message ${
-                          message.sor === "received" ? "received" : "sent"
-                        }`}
-                      >
-                        {message.content}
-                      </p>
+                      <div className="message-content">
+                        {message.sor === "received" && (
+                          <div className="message-date received">
+                            <Moment fromNow locale="fa">
+                              {message.issue_date}
+                            </Moment>
+                          </div>
+                        )}
+                        <p
+                          className={`message ${
+                            message.sor === "received" ? "received" : "sent"
+                          }`}
+                        >
+                          {message.content}
+                        </p>
+                        {message.sor === "sent" && (
+                          <div className="message-date sent">
+                            <Moment fromNow locale="fa">
+                              {message.issue_date}
+                            </Moment>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
