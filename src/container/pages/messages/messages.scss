@@ -18,7 +18,7 @@
       padding: 10px 10px;
       font-size: 18px;
       margin: 15px 0;
-      border-radius: 3px;
+      border-radius: 5px;
       background-color: #3d4753;
       color: #fff;
       border: none;
@@ -44,6 +44,11 @@
         background-color: #f1f1f1;
       }
 
+      &.selected {
+        background-color: #1966b3;
+        color: #fff;
+      }
+
       .user-image {
         width: 50px;
         height: 50px;
@@ -66,6 +71,8 @@
       background-color: #29313b;
       border-top-left-radius: 5px;
       color: #fff;
+      display: flex;
+      flex-direction: column;
 
       &.no-message {
         display: flex;
@@ -78,6 +85,34 @@
         background-color: #454e5a;
         border-radius: 50px;
         padding: 5px 10px;
+      }
+
+      .message-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        &.received {
+          align-items: flex-end;
+        }
+
+        .message {
+          width: fit-content;
+          background-color: #525e6d;
+          padding: 5px 10px;
+          margin-top: 10px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+
+          &.sent {
+            margin-right: 10px;
+            border-bottom-left-radius: 10px;
+          }
+
+          &.received {
+            margin-left: 10px;
+            border-bottom-right-radius: 10px;
+          }
+        }
       }
     }
 

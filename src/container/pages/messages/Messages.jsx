@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import "./messages.scss";
 
 const Messages = () => {
   const messages = useSelector(state => state.Messages);
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     console.log("messages", messages);
@@ -18,11 +19,15 @@ const Messages = () => {
 
   return (
     <div className="messages-wrapper">
-      <div className="contact-list-warpper">
+      <div className="contact-list-warpper no-select">
         <input className="search" placeholder="جستجو" />
         {messages.map(user => {
           return (
-            <div key={user.id} className="contact">
+            <div
+              key={user.id}
+              className={`contact ${selected === user.id ? "selected" : ""}`}
+              onClick={() => setSelected(user.id)}
+            >
               {user.image ? (
                 <img
                   src={baseURL + user.image}
@@ -38,15 +43,45 @@ const Messages = () => {
         })}
       </div>
       <div className="message-screen-and-input-wrapper">
-        <div className="message-screen no-message">
-          <p className="pick-a-message-to-chat">
-            برای ارسال پیام، از لیست سمت راست یک کاربر را انتخاب کنید.
-          </p>
+        <div className={`message-screen ${selected ? "" : "no-message"}`}>
+          {selected ? (
+            <div>
+              {messages
+                .find(user => user.id === selected)
+                .messages.sort((a, b) =>
+                  a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+                )
+                .map(message => {
+                  return (
+                    <div
+                      key={message.id}
+                      className={`message-wrapper ${
+                        message.sor === "received" ? "received" : ""
+                      }`}
+                    >
+                      <p
+                        className={`message ${
+                          message.sor === "sent" ? "sent" : "received"
+                        }`}
+                      >
+                        {message.content}
+                      </p>
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+            <p className="pick-a-message-to-chat">
+              برای ارسال پیام، از لیست سمت راست یک کاربر را انتخاب کنید.
+            </p>
+          )}
         </div>
-        <input
-          className="message-input"
-          placeholder="پیام خود را تایپ کنید و Enter بزنید..."
-        />
+        {selected && (
+          <input
+            className="message-input"
+            placeholder="پیام خود را تایپ کنید و Enter بزنید..."
+          />
+        )}
       </div>
     </div>
   );
