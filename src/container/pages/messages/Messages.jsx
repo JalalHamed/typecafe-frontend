@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
 import Moment from "react-moment";
@@ -19,25 +19,49 @@ import "./messages.scss";
 
 const TheMessages = () => {
   const dispatch = useDispatch();
+  const messageRef = useRef();
   const user = useSelector(state => state.User);
   const messages = useSelector(state => state.Messages);
   const [selected, setSelected] = useState(null);
   const [value, setValue] = useState("");
 
+  const scrollToBottom = () => {
+    const scroll =
+      messageRef.current.scrollHeight - messageRef.current.clientHeight;
+
+    messageRef.current.scrollTo(0, scroll);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    SendMessage({ receiver: selected, content: value })
-      .then(res => {
-        Socket.send(
-          JSON.stringify({ status: "new-message", sender: user.id, ...res })
-        );
-        setValue("");
-        dispatch(
-          NewMessagesAction({ id: selected, message: { ...res, sor: "sent" } })
-        );
-      })
-      .catch(err => console.log(err));
+    if (value)
+      SendMessage({ receiver: selected, content: value })
+        .then(res => {
+          Socket.send(
+            JSON.stringify({ status: "new-message", sender: user.id, ...res })
+          );
+          setValue("");
+          dispatch(
+            NewMessagesAction({
+              id: selected,
+              message: { ...res, sor: "sent" },
+            })
+          );
+          scrollToBottom();
+        })
+        .catch(err => console.log(err));
   };
+
+  const escapeHandler = ({ key }) => {
+    if (key === "Escape") {
+      setSelected(null);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", escapeHandler);
+    return () => window.removeEventListener("keydown", escapeHandler);
+  }, []);
 
   return (
     <div className="messages-wrapper">
@@ -48,7 +72,12 @@ const TheMessages = () => {
             <div
               key={user.id}
               className={`contact ${selected === user.id ? "selected" : ""}`}
-              onClick={() => setSelected(user.id)}
+              onClick={() => {
+                setSelected(user.id);
+                setTimeout(() => {
+                  scrollToBottom();
+                }, 100);
+              }}
             >
               {user.image ? (
                 <img
@@ -65,7 +94,10 @@ const TheMessages = () => {
         })}
       </div>
       <div className="message-screen-and-input-wrapper">
-        <div className={`message-screen ${selected ? "" : "no-message"}`}>
+        <div
+          className={`message-screen ${selected ? "" : "no-message"}`}
+          ref={messageRef}
+        >
           {selected ? (
             <div>
               {messages
@@ -89,13 +121,13 @@ const TheMessages = () => {
                             </Moment>
                           </div>
                         )}
-                        <p
+                        <div
                           className={`message ${
                             message.sor === "received" ? "received" : "sent"
                           }`}
                         >
                           {message.content}
-                        </p>
+                        </div>
                         {message.sor === "sent" && (
                           <div className="message-date sent">
                             <Moment fromNow locale="fa">
@@ -110,7 +142,7 @@ const TheMessages = () => {
             </div>
           ) : (
             <p className="pick-a-message-to-chat">
-              برای ارسال پیام، از لیست سمت راست یک کاربر را انتخاب کنید.
+              برای ارسال پیام یک کاربر را انتخاب کنید.
             </p>
           )}
         </div>

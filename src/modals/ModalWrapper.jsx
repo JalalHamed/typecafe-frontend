@@ -29,9 +29,7 @@ const ModalWrapper = ({ children }) => {
 
   useEffect(() => {
     window.addEventListener("keydown", escapeHandler);
-    return () => {
-      window.removeEventListener("keydown", escapeHandler);
-    };
+    return () => window.removeEventListener("keydown", escapeHandler);
 
     // eslint-disable-next-line
   }, []);
