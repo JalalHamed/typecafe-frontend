@@ -12,7 +12,7 @@ import Previous from "components/buttons/Previous";
 import { priceFormat } from "components/helper";
 
 // Actions
-import { AoROfferAction, Sidebar } from "redux/actions";
+import { AoROfferAction, Sidebar, NotEnoughCreditAction } from "redux/actions";
 
 // xhr
 import { baseURL } from "components/xhr";
@@ -33,8 +33,11 @@ const AoROffer = () => {
   };
 
   const handleAccept = () => {
-    dispatch(AoROfferAction({ isModalOpen: false }));
     if (user.credit < offer.wholePrice) {
+      dispatch(NotEnoughCreditAction(true));
+      setTimeout(() => {
+        dispatch(AoROfferAction({ isModalOpen: false }));
+      }, 48);
     }
   };
 

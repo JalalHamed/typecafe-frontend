@@ -9,7 +9,13 @@ import { Puffloader } from "components/loader";
 import { farsiNumber } from "components/helper";
 
 // Actions
-import { SelectedImage, Sidebar, Profile } from "redux/actions";
+import {
+  SelectedImage,
+  Sidebar,
+  Profile,
+  SendMessageID,
+  Messages,
+} from "redux/actions";
 
 // Requests
 import { UserProfile } from "requests";
@@ -23,11 +29,27 @@ const OthersProfile = () => {
   const sendMessage = useRef();
   const user = useSelector(state => state.Profile);
   const onlineUsers = useSelector(state => state.OnlineUsers);
+  const messages = useSelector(state => state.Messages);
   const [asTypist, setAsTypist] = useState(true);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
   const handleSendMessage = () => {
+    if (!messages.find(x => x.id === user.id)) {
+      dispatch(
+        Messages([
+          {
+            displayname: user.displayname,
+            id: user.id,
+            is_online: data.userIsOnline,
+            last_login: data.userLastLogin,
+            image: user.image,
+            messages: [],
+          },
+        ])
+      );
+    }
+    dispatch(SendMessageID(user.id));
     dispatch(Sidebar({ page: "messages" }));
     dispatch(Profile({ isModalOpen: false }));
   };

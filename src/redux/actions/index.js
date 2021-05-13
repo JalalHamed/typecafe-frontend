@@ -109,3 +109,10 @@ export const NotEnoughCreditAction = payload => {
     payload,
   };
 };
+
+export const SendMessageID = payload => {
+  return {
+    type: "SEND_MESSAGE_ID",
+    payload,
+  };
+};

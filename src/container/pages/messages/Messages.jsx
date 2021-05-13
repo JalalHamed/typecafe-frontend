@@ -9,7 +9,7 @@ import Socket from "requests/Socket";
 import { SendMessage } from "requests";
 
 // Actions
-import { NewMessagesAction } from "redux/actions";
+import { NewMessagesAction, SendMessageID } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -22,7 +22,9 @@ const TheMessages = () => {
   const messageRef = useRef();
   const user = useSelector(state => state.User);
   const messages = useSelector(state => state.Messages);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(
+    useSelector(state => state.SendMessageID)
+  );
   const [value, setValue] = useState("");
 
   const scrollToBottom = () => {
@@ -60,38 +62,45 @@ const TheMessages = () => {
 
   useEffect(() => {
     window.addEventListener("keydown", escapeHandler);
-    return () => window.removeEventListener("keydown", escapeHandler);
+    return () => {
+      window.removeEventListener("keydown", escapeHandler);
+      dispatch(SendMessageID(null));
+    };
+
+    // eslint-disable-next-line
   }, []);
 
   return (
     <div className="messages-wrapper">
       <div className="contact-list-warpper no-select">
         <input className="search" placeholder="جستجو" />
-        {messages.map(user => {
-          return (
-            <div
-              key={user.id}
-              className={`contact ${selected === user.id ? "selected" : ""}`}
-              onClick={() => {
-                setSelected(user.id);
-                setTimeout(() => {
-                  scrollToBottom();
-                }, 100);
-              }}
-            >
-              {user.image ? (
-                <img
-                  src={baseURL + user.image}
-                  alt={`profile ${user.id}`}
-                  className="user-image"
-                />
-              ) : (
-                <i className="icon project-client-default-pic" />
-              )}
-              <p className="user-displayname">{user.displayname}</p>
-            </div>
-          );
-        })}
+        <div className="contacts-wrapper">
+          {messages.map(user => {
+            return (
+              <div
+                key={user.id}
+                className={`contact ${selected === user.id ? "selected" : ""}`}
+                onClick={() => {
+                  setSelected(user.id);
+                  setTimeout(() => {
+                    scrollToBottom();
+                  }, 100);
+                }}
+              >
+                {user.image ? (
+                  <img
+                    src={baseURL + user.image}
+                    alt={`profile ${user.id}`}
+                    className="user-image"
+                  />
+                ) : (
+                  <i className="icon project-client-default-pic" />
+                )}
+                <p className="user-displayname">{user.displayname}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="message-screen-and-input-wrapper">
         <div
