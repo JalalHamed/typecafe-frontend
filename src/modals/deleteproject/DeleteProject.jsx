@@ -49,25 +49,23 @@ const DeleteProjectComp = () => {
         className="close-modal"
         onClick={() => dispatch(DeleteProject({ isModalOpen: false }))}
       />
-      <div className="deleteproject-content">
-        <p className="deleteproject-note">
-          آیا از حذف پروژه با شناسه {farsiNumber(state.id)} مطمئن هستید؟
-        </p>
-        <div className="button-wrapper">
-          <Button
-            ref={submitButtonRippleRef}
-            title="حذف"
-            className="w-68 red"
-            onClick={handleDelete}
-          />
-          <Previous
-            ref={cancelButtonRippleRef}
-            title="انصراف"
-            className="w-30"
-            onClick={() => dispatch(DeleteProject({ isModalOpen: false }))}
-          />
-        </div>
-      </div>
+      <p>
+        آیا از حذف پروژه با شناسه{" "}
+        <span style={{ fontSize: "20px" }}>{farsiNumber(state.id)}</span> مطمئن
+        هستید؟
+      </p>
+      <Button
+        ref={submitButtonRippleRef}
+        title="حذف"
+        className="w-68 red"
+        onClick={handleDelete}
+      />
+      <Previous
+        ref={cancelButtonRippleRef}
+        title="انصراف"
+        className="w-30"
+        onClick={() => dispatch(DeleteProject({ isModalOpen: false }))}
+      />
     </motion.div>
   );
 };

@@ -22,7 +22,7 @@ const SideBar = () => {
   // const tutorialRippleRef = useRef();
   const myProjectsRippleRef = useRef();
   const supportRippleRef = useRef();
-  const donateRippleRef = useRef();
+  // const donateRippleRef = useRef();
   const faqRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isLoading = useSelector(state => state.Sidebar.isLoading);
@@ -77,13 +77,13 @@ const SideBar = () => {
                 ref={supportRippleRef}
               />
             )}
-            {isLoggedIn && (
+            {/* {isLoggedIn && (
               <SideBarItem
                 status="donate"
                 title="حمایت"
                 ref={donateRippleRef}
               />
-            )}
+            )} */}
           </div>
         </>
       ) : (

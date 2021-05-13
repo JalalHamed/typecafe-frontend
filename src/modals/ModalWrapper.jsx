@@ -5,26 +5,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 // Actions
-import { LR, SelectedImage } from "redux/actions";
+import * as actions from "redux/actions";
 
 const ModalWrapper = ({ children }) => {
   const dispatch = useDispatch();
-  const LRModalIsOpen = useSelector(state => state.LR.isModalOpen);
-  const SelectedImageModalIsOpen = useSelector(
-    state => state.SelectedImage.isModalOpen
-  );
+  const state = useSelector(state => state);
 
   const escapeHandler = ({ key }) => {
     if (key === "Escape") {
-      if (SelectedImageModalIsOpen)
-        dispatch(SelectedImage({ isModalOpen: false }));
-      if (LRModalIsOpen) dispatch(LR({ isModalOpen: false }));
+      if (state.LR.isModalOpen) dispatch(actions.LR({ isModalOpen: false }));
+      if (state.CreateProject.isModalOpen)
+        dispatch(actions.CreateProject({ isModalOpen: false }));
+      if (state.Profile.isModalOpen)
+        dispatch(actions.Profile({ isModalOpen: false }));
+      if (state.CreateOffer.isModalOpen)
+        dispatch(actions.CreateOffer({ isModalOpen: false }));
+      if (state.DeleteProject.isModalOpen)
+        dispatch(actions.DeleteProject({ isModalOpen: false }));
+      if (state.AoROffer.isModalOpen)
+        dispatch(actions.AoROfferAction({ isModalOpen: false }));
+      if (state.NotEnoughCredit) dispatch(actions.NotEnoughCreditAction(false));
+      if (state.SelectedImage.isModalOpen)
+        dispatch(actions.SelectedImage({ isModalOpen: false }));
     }
   };
 
   const handleClick = () => {
-    if (SelectedImageModalIsOpen)
-      dispatch(SelectedImage({ isModalOpen: false }));
+    if (state.SelectedImage.isModalOpen)
+      dispatch(actions.SelectedImage({ isModalOpen: false }));
   };
 
   useEffect(() => {
@@ -41,6 +49,7 @@ const ModalWrapper = ({ children }) => {
       transition={{ duration: 0.1 }}
       className="modal-bg"
       onClick={handleClick}
+      exit={{ opacity: 0 }}
     >
       {children}
     </motion.div>

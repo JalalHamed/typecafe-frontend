@@ -18,17 +18,12 @@ const Image = () => {
     dispatch(SelectedImage({ image: "", isModalOpen: false }));
   };
 
-  const StopPropagation = e => {
-    e.stopPropagation();
-  };
-
   return (
     <>
       <img
         src={image}
         alt="typeproject"
         className="selected-image no-select"
-        onClick={e => StopPropagation(e)}
         onMouseDown={
           e => (e.preventDefault ? e.preventDefault() : (e.returnValue = false)) // disables dragging
         }

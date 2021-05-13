@@ -12,7 +12,12 @@ import Previous from "components/buttons/Previous";
 import { priceFormat, farsiNumber, extractCommission } from "components/helper";
 
 // Actions
-import { CreateOffer, Sidebar, ProjectsAction } from "redux/actions";
+import {
+  CreateOffer,
+  Sidebar,
+  ProjectsAction,
+  NotEnoughCreditAction,
+} from "redux/actions";
 
 // Request
 import Socket from "requests/Socket";
@@ -26,10 +31,11 @@ const OfferRequest = () => {
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
   const state = useSelector(state => state);
+  const credit = useSelector(state => state.User.credit);
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
-  const wholePrice = extractCommission(pageCount * pricePerPage);
   const deadline = Number(state.CreateOffer.selectedDeadline);
+  const wholePrice = extractCommission(pageCount * pricePerPage);
 
   const handleMoreAboutThis = () => {
     dispatch(CreateOffer({ isModalOpen: false }));
@@ -37,35 +43,40 @@ const OfferRequest = () => {
   };
 
   const handleSubmitRequest = () => {
-    let project_id = state.CreateOffer.selectedId;
-
-    let body = {
-      project: project_id,
-      offered_price: pricePerPage,
-    };
-
-    CreateOfferReq(body)
-      .then(res => {
-        Socket.send(
-          JSON.stringify({
-            status: "new-offer",
-            id: res.id,
-            user_email: state.User.email,
-            project_id: project_id,
-          })
-        );
+    if (credit >= wholePrice) {
+      let project_id = state.CreateOffer.selectedId;
+      let body = {
+        project: project_id,
+        offered_price: pricePerPage,
+      };
+      CreateOfferReq(body)
+        .then(res => {
+          Socket.send(
+            JSON.stringify({
+              status: "new-offer",
+              id: res.id,
+              user_email: state.User.email,
+              project_id: project_id,
+            })
+          );
+          dispatch(CreateOffer({ isModalOpen: false }));
+          dispatch(
+            ProjectsAction({
+              requested: [...state.Projects.requested, project_id],
+            })
+          );
+          toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
+        })
+        .catch(err => {
+          dispatch(CreateOffer({ isModalOpen: false }));
+          handleErrors(err, toast.error);
+        });
+    } else {
+      dispatch(NotEnoughCreditAction(true));
+      setTimeout(() => {
         dispatch(CreateOffer({ isModalOpen: false }));
-        dispatch(
-          ProjectsAction({
-            requested: [...state.Projects.requested, project_id],
-          })
-        );
-        toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
-      })
-      .catch(err => {
-        dispatch(CreateOffer({ isModalOpen: false }));
-        handleErrors(err, toast.error);
-      });
+      }, 48);
+    }
   };
 
   return (

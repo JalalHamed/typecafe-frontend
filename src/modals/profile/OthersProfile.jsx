@@ -9,7 +9,7 @@ import { Puffloader } from "components/loader";
 import { farsiNumber } from "components/helper";
 
 // Actions
-import { SelectedImage, Messages, Sidebar, Profile } from "redux/actions";
+import { SelectedImage, Sidebar, Profile } from "redux/actions";
 
 // Requests
 import { UserProfile } from "requests";
@@ -30,13 +30,6 @@ const OthersProfile = () => {
   const handleSendMessage = () => {
     dispatch(Sidebar({ page: "messages" }));
     dispatch(Profile({ isModalOpen: false }));
-    dispatch(
-      Messages({
-        id: user.id,
-        displayname: user.displayname,
-        image: user.image,
-      })
-    );
   };
 
   const getUserTimeStatus = () => {
