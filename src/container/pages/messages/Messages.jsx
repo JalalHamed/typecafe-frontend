@@ -40,7 +40,11 @@ const TheMessages = () => {
       SendMessage({ receiver: selected, content: value })
         .then(res => {
           Socket.send(
-            JSON.stringify({ status: "new-message", sender: user.id, ...res })
+            JSON.stringify({
+              status: "new-message",
+              sender_id: user.id,
+              ...res,
+            })
           );
           setValue("");
           dispatch(

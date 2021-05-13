@@ -284,7 +284,30 @@ const App = () => {
           );
           break;
         case "new-message":
-          dispatch(NewMessagesAction({ id: data.sender, message: data }));
+          if (!state.Messages.find(x => x.id === data.sender_id)) {
+            dispatch(
+              Messages([
+                {
+                  image: data.sender_image,
+                  id: data.sender_id,
+                  displayname: data.sender_displayname,
+                  is_online: data.sender_is_online,
+                  last_login: data.sender_last_login,
+                  messages: [
+                    {
+                      content: data.content,
+                      is_read: data.is_read,
+                      sor: data.sor,
+                      id: data.id,
+                      issue_date: data.issue_date,
+                    },
+                  ],
+                },
+              ])
+            );
+          } else {
+            dispatch(NewMessagesAction({ id: data.sender_id, message: data }));
+          }
           break;
         default:
           break;

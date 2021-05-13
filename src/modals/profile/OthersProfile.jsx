@@ -39,11 +39,11 @@ const OthersProfile = () => {
       dispatch(
         Messages([
           {
-            displayname: user.displayname,
             id: user.id,
+            displayname: user.displayname,
+            image: user.image,
             is_online: data.userIsOnline,
             last_login: data.userLastLogin,
-            image: user.image,
             messages: [],
           },
         ])
