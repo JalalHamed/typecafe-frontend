@@ -25,10 +25,17 @@ const AoROffer = () => {
   const previousButtonRippleRef = useRef();
   const dispatch = useDispatch();
   const offer = useSelector(state => state.AoROffer);
+  const user = useSelector(state => state.User);
 
   const handleGoToRules = () => {
     dispatch(AoROfferAction({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
+  };
+
+  const handleAccept = () => {
+    dispatch(AoROfferAction({ isModalOpen: false }));
+    if (user.credit < offer.wholePrice) {
+    }
   };
 
   return (
@@ -79,7 +86,7 @@ const AoROffer = () => {
               ref={submitButtonRippleRef}
               title="تایید پیشنهاد"
               className="w-68 green"
-              // onClick={handleAccept}
+              onClick={handleAccept}
             />
             <Previous
               ref={previousButtonRippleRef}

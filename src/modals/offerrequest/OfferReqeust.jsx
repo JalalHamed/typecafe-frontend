@@ -23,20 +23,13 @@ import "./offerrequest.scss";
 
 const OfferRequest = () => {
   const dispatch = useDispatch();
-  const increaseButtonRippleRef = useRef();
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
   const state = useSelector(state => state);
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
   const wholePrice = extractCommission(pageCount * pricePerPage);
-  const credit = Number(state.User.credit);
   const deadline = Number(state.CreateOffer.selectedDeadline);
-
-  const handleIncreaseCredit = () => {
-    dispatch(CreateOffer({ isModalOpen: false }));
-    dispatch(Sidebar({ page: "financials" }));
-  };
 
   const handleMoreAboutThis = () => {
     dispatch(CreateOffer({ isModalOpen: false }));
@@ -79,52 +72,39 @@ const OfferRequest = () => {
     <motion.div
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
-      className={`offerrequest-wrapper ${credit >= wholePrice ? "" : "w-320"}`}
+      className="offerrequest-wrapper"
     >
       <Close
         className="close-modal"
         onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
       />
       <div className="offerrequest-content">
-        {credit >= wholePrice ? (
-          <>
-            <p className="offerrequest-note">
-              در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه{" "}
-              <span className="highlight">{priceFormat(wholePrice)}</span> به
-              عنوان مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت
-              عدم تحویل پروژه تا قبل از مهلت تعیین شده{" "}
-              <span className="highlight">{farsiNumber(deadline)} ساعت</span> به
-              ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما
-              انتقال داده خواهد شد.
-            </p>
-            <p className="go-to-rules" onClick={handleMoreAboutThis}>
-              اطلاعات بیشتر درباره نحوه عملکرد وبسایت
-            </p>
-            <div className="button-wrapper">
-              <Button
-                ref={submitButtonRippleRef}
-                title="تایید و ثبت پیشنهاد"
-                className="w-68"
-                onClick={handleSubmitRequest}
-              />
-              <Previous
-                ref={previousButtonRippleRef}
-                title="انصراف"
-                className="w-30"
-                onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <p>اعتبار کافی نیست.</p>
-            <Button
-              ref={increaseButtonRippleRef}
-              title="افزایش اعتبار"
-              onClick={handleIncreaseCredit}
-            />
-          </>
-        )}
+        <p className="offerrequest-note">
+          در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه{" "}
+          <span className="highlight">{priceFormat(wholePrice)}</span> به عنوان
+          مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت عدم تحویل
+          پروژه تا قبل از مهلت تعیین شده{" "}
+          <span className="highlight">{farsiNumber(deadline)} ساعت</span> به
+          ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما انتقال
+          داده خواهد شد.
+        </p>
+        <p className="go-to-rules" onClick={handleMoreAboutThis}>
+          اطلاعات بیشتر درباره نحوه عملکرد وبسایت
+        </p>
+        <div className="button-wrapper">
+          <Button
+            ref={submitButtonRippleRef}
+            title="تایید و ثبت پیشنهاد"
+            className="w-68"
+            onClick={handleSubmitRequest}
+          />
+          <Previous
+            ref={previousButtonRippleRef}
+            title="انصراف"
+            className="w-30"
+            onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}
+          />
+        </div>
       </div>
     </motion.div>
   );

@@ -13,6 +13,7 @@ import Profile from "modals/profile/Profile";
 import OfferRequest from "modals/offerrequest/OfferReqeust";
 import DeleteProject from "modals/deleteproject/DeleteProject";
 import AoROffer from "modals/aoroffer/AoROffer";
+import NotEnoughCredit from "modals/notEnoughCredit/NotEnoughCredit";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -53,6 +54,12 @@ const Modals = () => {
       {state.AoROffer.isModalOpen && (
         <ModalWrapper>
           <AoROffer />
+        </ModalWrapper>
+      )}
+      {/* Not Enough Credit */}
+      {state.NotEnoughCredit && (
+        <ModalWrapper>
+          <NotEnoughCredit />
         </ModalWrapper>
       )}
       {/* Image */}

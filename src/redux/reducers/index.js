@@ -16,6 +16,7 @@ import AoROffer from "./AoROffer";
 import OnlineUsers from "./OnlineUsers";
 import Messages from "./Messages";
 import Profile from "./Profile";
+import NotEnoughCredit from "./NotEnoughCredit";
 
 const allReducers = combineReducers({
   Loading,
@@ -32,6 +33,7 @@ const allReducers = combineReducers({
   OnlineUsers,
   Messages,
   Profile,
+  NotEnoughCredit,
 });
 
 export default allReducers;

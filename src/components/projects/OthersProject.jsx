@@ -10,7 +10,7 @@ import { priceFormat, extractCommission } from "components/helper";
 import { Puffloader } from "components/loader";
 
 // Actions
-import { CreateOffer } from "redux/actions";
+import { CreateOffer, NotEnoughCreditAction } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
@@ -22,17 +22,22 @@ const OthersProject = ({ project, downloaded }) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [price, setPrice] = useState(1500);
   const [typistEarning, setTypistEarning] = useState(extractCommission(price));
+  const wholePrice = extractCommission(project.number_of_pages * price);
 
   const handleOffer = () => {
-    dispatch(
-      CreateOffer({
-        isModalOpen: true,
-        selectedPageCount: project.number_of_pages,
-        selectedPricePerPage: price,
-        selectedDeadline: project.delivery_deadline,
-        selectedId: project.id,
-      })
-    );
+    if (user.credit >= wholePrice) {
+      dispatch(
+        CreateOffer({
+          isModalOpen: true,
+          selectedPageCount: project.number_of_pages,
+          selectedPricePerPage: price,
+          selectedDeadline: project.delivery_deadline,
+          selectedId: project.id,
+        })
+      );
+    } else {
+      dispatch(NotEnoughCreditAction(true));
+    }
   };
 
   useEffect(() => {

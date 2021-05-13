@@ -102,3 +102,10 @@ export const NewMessagesAction = payload => {
     payload,
   };
 };
+
+export const NotEnoughCreditAction = payload => {
+  return {
+    type: "NOT_ENOUGH_CREDIT",
+    payload,
+  };
+};
