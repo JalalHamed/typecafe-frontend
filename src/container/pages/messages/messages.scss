@@ -1,5 +1,5 @@
 .messages-wrapper {
-  height: 100%;
+  height: 99%;
   display: flex;
   margin-right: 10px;
 
@@ -20,20 +20,6 @@
       &::-webkit-scrollbar {
         width: 5px;
       }
-
-      &::-webkit-scrollbar-track {
-        background-color: rgb(197, 203, 221);
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: #5481bb;
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: #a5a5a5;
-      }
     }
 
     .search {
@@ -42,13 +28,12 @@
       font-size: 18px;
       margin: 15px 0;
       border-radius: 5px;
-      background-color: #2a404c;
-      color: #fff;
+      background-color: #f1f3f4;
       border: none;
       outline: none;
 
       &::placeholder {
-        color: #fff;
+        color: #777;
         text-align: right;
         font-size: 15px;
       }
@@ -64,57 +49,54 @@
       padding: 5px 10px;
 
       &:hover {
-        background-color: #f1f1f1;
+        background-color: #f1f3f4;
       }
 
       &.selected {
-        background-color: #2a404c;
-        color: #fff;
+        background-color: #f1f3f4;
       }
 
       .user-image {
         width: 50px;
         height: 50px;
         border-radius: 50%;
+        border: 2px solid #ddd;
+
+        &.is-online {
+          border-color: #1c3987;
+        }
       }
 
-      .user-displayname {
+      .user-name-status-wrapper {
         margin-right: 10px;
+
+        .user-time-status {
+          font-size: 10px;
+          color: #555;
+
+          &.is-online {
+            color: #1c3987;
+          }
+        }
       }
     }
   }
 
   .message-screen-and-input-wrapper {
     width: 75%;
-    height: 99%;
     display: flex;
     flex-direction: column;
 
     .message-screen {
       height: 100%;
-      background-color: #2a404c;
+      background-color: #fff;
       border-top-left-radius: 5px;
-      color: #fff;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
 
       &::-webkit-scrollbar {
         width: 5px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background-color: rgb(197, 203, 221);
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: #5481bb;
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: #a5a5a5;
       }
 
       &.no-message {
@@ -125,7 +107,7 @@
       }
 
       .pick-a-message-to-chat {
-        background-color: #20313a;
+        background-color: #f1f3f4;
         border-radius: 50px;
         padding: 5px 10px;
       }
@@ -151,7 +133,7 @@
 
           .message-date {
             font-size: 11px;
-            color: #ddd;
+            color: #999;
             width: 90px;
 
             &.received {
@@ -170,12 +152,12 @@
             border-radius: 20px;
 
             &.sent {
-              background-color: #1f2f38;
+              background-color: #f1f3f4;
               margin-right: 10px;
             }
 
             &.received {
-              border: 1px solid #151e24;
+              border: 1px solid #bbb;
               margin-left: 10px;
             }
           }
@@ -184,13 +166,12 @@
     }
 
     .message-input {
-      padding: 5px 10px;
+      padding: 5px 15px;
       border: none;
       width: 100%;
       font-size: 18px;
-      border-left: 2px solid #29313b;
-      border-bottom: 2px solid #29313b;
-      border-bottom-left-radius: 5px;
+      background-color: #f1f1f1;
+      border-radius: 50px;
       outline: none;
 
       &::placeholder {

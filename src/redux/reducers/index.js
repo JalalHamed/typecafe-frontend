@@ -17,7 +17,6 @@ import OnlineUsers from "./OnlineUsers";
 import Messages from "./Messages";
 import Profile from "./Profile";
 import NotEnoughCredit from "./NotEnoughCredit";
-import SendMessageID from "./SendMessageID";
 
 const allReducers = combineReducers({
   Loading,
@@ -35,7 +34,6 @@ const allReducers = combineReducers({
   Messages,
   Profile,
   NotEnoughCredit,
-  SendMessageID,
 });
 
 export default allReducers;

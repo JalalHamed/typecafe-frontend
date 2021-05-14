@@ -103,16 +103,16 @@ export const NewMessagesAction = payload => {
   };
 };
 
-export const NotEnoughCreditAction = payload => {
+export const SendMessageID = payload => {
   return {
-    type: "NOT_ENOUGH_CREDIT",
+    type: "SEND_MESSAGE_ID",
     payload,
   };
 };
 
-export const SendMessageID = payload => {
+export const NotEnoughCreditAction = payload => {
   return {
-    type: "SEND_MESSAGE_ID",
+    type: "NOT_ENOUGH_CREDIT",
     payload,
   };
 };

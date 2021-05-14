@@ -30,6 +30,7 @@ import {
   OnlineUsers,
   Messages,
   NewMessagesAction,
+  SendMessageID,
 } from "redux/actions";
 
 // Requests
@@ -124,6 +125,7 @@ const App = () => {
                 ])
               );
             });
+            dispatch(SendMessageID({ isLoading: false }));
           })
           .catch(err => console.log(err));
 
@@ -284,7 +286,7 @@ const App = () => {
           );
           break;
         case "new-message":
-          if (!state.Messages.find(x => x.id === data.sender_id)) {
+          if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(
               Messages([
                 {

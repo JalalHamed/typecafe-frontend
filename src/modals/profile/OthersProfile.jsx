@@ -29,7 +29,7 @@ const OthersProfile = () => {
   const sendMessage = useRef();
   const user = useSelector(state => state.Profile);
   const onlineUsers = useSelector(state => state.OnlineUsers);
-  const messages = useSelector(state => state.Messages);
+  const messages = useSelector(state => state.Messages.messages);
   const [asTypist, setAsTypist] = useState(true);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
@@ -49,7 +49,7 @@ const OthersProfile = () => {
         ])
       );
     }
-    dispatch(SendMessageID(user.id));
+    dispatch(SendMessageID({ id: user.id, isWatching: user.id }));
     dispatch(Sidebar({ page: "messages" }));
     dispatch(Profile({ isModalOpen: false }));
   };
