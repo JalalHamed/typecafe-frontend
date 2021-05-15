@@ -97,6 +97,10 @@ export const SendMessage = body => {
   return axios.post("messages/", body).then(res => res.data);
 };
 
+export const SearchDisplayname = body => {
+  return axios.post("account/search-displayname/", body).then(res => res.data);
+};
+
 // Support
 export const CreateSupportTicket = body => {
   return axios.post("account/support-ticket/", body).then(res => res.data);

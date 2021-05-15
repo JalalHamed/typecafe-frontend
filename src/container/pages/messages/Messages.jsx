@@ -9,7 +9,7 @@ import { Puffloader } from "components/loader";
 
 // Requests
 import Socket from "requests/Socket";
-import { SendMessage } from "requests";
+import { SendMessage, SearchDisplayname } from "requests";
 
 // Actions
 import { NewMessagesAction, SendMessageID } from "redux/actions";
@@ -29,6 +29,7 @@ const TheMessages = () => {
   const loading = useSelector(state => state.Messages.isLoading);
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const [value, setValue] = useState("");
+  const [search, setSearch] = useState("");
 
   const scrollToBottom = () => {
     const scroll =
@@ -88,12 +89,24 @@ const TheMessages = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (search)
+      SearchDisplayname({ search })
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+  }, [search]);
+
   return (
     <div className="messages-wrapper">
       {!loading ? (
         <>
           <div className="contact-list-warpper no-select">
-            <input className="search" placeholder="جستجو نام نمایشی" />
+            <input
+              className="search"
+              placeholder="جستجو نام نمایشی"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
             <div className="contacts-wrapper">
               {messages.map(user => {
                 return (

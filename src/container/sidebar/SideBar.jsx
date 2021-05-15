@@ -21,9 +21,9 @@ const SideBar = () => {
   const rulesRippleRef = useRef();
   // const tutorialRippleRef = useRef();
   const myProjectsRippleRef = useRef();
-  const supportRippleRef = useRef();
+  // const supportRippleRef = useRef();
   // const donateRippleRef = useRef();
-  const faqRippleRef = useRef();
+  // const faqRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isLoading = useSelector(state => state.Sidebar.isLoading);
 
@@ -65,18 +65,18 @@ const SideBar = () => {
             )}
             <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
             {/* <SideBarItem status="tutorial" title="آموزش" ref={tutorialRippleRef} /> */}
-            <SideBarItem
+            {/* <SideBarItem
               status="faq"
               title="سؤالات متداول"
               ref={faqRippleRef}
-            />
-            {isLoggedIn && (
+            /> */}
+            {/* {isLoggedIn && (
               <SideBarItem
                 status="support"
                 title="پشتیبانی"
                 ref={supportRippleRef}
               />
-            )}
+            )} */}
             {/* {isLoggedIn && (
               <SideBarItem
                 status="donate"
