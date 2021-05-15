@@ -1,8 +1,38 @@
 .rules-wrapper {
-  height: 100%;
   text-align: justify;
   padding: 10px 15px;
   line-height: 30px;
+
+  &.w-78 {
+    width: 78%;
+  }
+
+  &.w-100 {
+    width: 100%;
+  }
+
+  .quick-access {
+    position: fixed;
+    left: 5%;
+    top: 150px;
+    text-align: center;
+
+    .title {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .item {
+      color: #1c3887da;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover {
+        color: #1c3987;
+      }
+    }
+  }
 
   .rules-initiate-note {
     font-style: italic;
@@ -20,15 +50,15 @@
   .rules-title {
     font-size: 20px;
     color: #1c3987;
-    margin: 25px 10px 0 0;
+    margin: 30px 10px 0 0;
   }
 
   .rules-value {
-    margin: 10px 25px 0;
+    margin: 15px 25px 0 0;
     color: #29313bec;
 
     &.less-mt {
-      margin-top: 5px;
+      margin-top: 10px;
     }
   }
 }
