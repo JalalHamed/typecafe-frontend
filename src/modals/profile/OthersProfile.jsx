@@ -37,16 +37,14 @@ const OthersProfile = () => {
   const handleSendMessage = () => {
     if (!messages.find(x => x.id === user.id)) {
       dispatch(
-        Messages([
-          {
-            id: user.id,
-            displayname: user.displayname,
-            image: user.image,
-            is_online: data.userIsOnline,
-            last_login: data.userLastLogin,
-            messages: [],
-          },
-        ])
+        Messages({
+          id: user.id,
+          displayname: user.displayname,
+          image: user.image,
+          is_online: data.userIsOnline,
+          last_login: data.userLastLogin,
+          messages: [],
+        })
       );
     }
     dispatch(SendMessageID({ id: user.id, isWatching: user.id }));

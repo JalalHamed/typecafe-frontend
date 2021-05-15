@@ -20,7 +20,7 @@ const OthersProject = ({ project, downloaded }) => {
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [price, setPrice] = useState(1500);
+  const [price, setPrice] = useState(1555);
   const [typistEarning, setTypistEarning] = useState(extractCommission(price));
 
   const handleOffer = () => {
@@ -44,8 +44,8 @@ const OthersProject = ({ project, downloaded }) => {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
       setButtonDisabled(true);
       setInputDisabled(true);
-    } else if (price < 1500) {
-      setErrMsg("قیمت پیشنهادی نمی‌تواند کمتر از ۱,۵۰۰ تومان باشد.");
+    } else if (price < 1555) {
+      setErrMsg("قیمت پیشنهادی نمی‌تواند کمتر از ۱,۵۵۵ تومان باشد.");
       setButtonDisabled(true);
       setInputDisabled(false);
     } else {
@@ -74,7 +74,7 @@ const OthersProject = ({ project, downloaded }) => {
                   wrapperStyle={{ width: "100%" }}
                   labelStyle={{ fontSize: "14px" }}
                   style={{ fontSize: "14px", width: "200px" }}
-                  min="1500"
+                  min={1555}
                   disabled={inputDisabled}
                   value={price}
                   onChange={e => setPrice(e.target.value)}
@@ -86,10 +86,11 @@ const OthersProject = ({ project, downloaded }) => {
                   disabled={buttonDisabled}
                   onClick={handleOffer}
                 />
+                <p className="err-msg">{errMsg}</p>
               </div>
               <div className="calculate-price-wrapper">
                 <p className="left-title">کارمزد</p>
-                <span className="left-value">٪۵</span>
+                <span className="left-value">٪۱۰</span>
                 <p className="left-title">عایدی شما به ازای هر صفحه</p>
                 <span className="left-value">{priceFormat(typistEarning)}</span>
                 <>

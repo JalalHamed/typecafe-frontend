@@ -1,4 +1,4 @@
-let typecafe_commission = 5;
+let typecafe_commission = 10;
 
 export const emailOverFlow = props => {
   const email = props.email;

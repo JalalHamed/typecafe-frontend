@@ -113,16 +113,14 @@ const App = () => {
                 if (message.user_id === id) messages.push(message);
               });
               dispatch(
-                Messages([
-                  {
-                    displayname: messages[0].user,
-                    id: messages[0].user_id,
-                    is_online: messages[0].user_is_online,
-                    last_login: messages[0].user_last_login,
-                    image: messages[0].user_image,
-                    messages: messages,
-                  },
-                ])
+                Messages({
+                  displayname: messages[0].user,
+                  id: messages[0].user_id,
+                  is_online: messages[0].user_is_online,
+                  last_login: messages[0].user_last_login,
+                  image: messages[0].user_image,
+                  messages: messages,
+                })
               );
             });
             dispatch(SendMessageID({ isLoading: false }));
@@ -288,24 +286,22 @@ const App = () => {
         case "new-message":
           if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(
-              Messages([
-                {
-                  image: data.sender_image,
-                  id: data.sender_id,
-                  displayname: data.sender_displayname,
-                  is_online: data.sender_is_online,
-                  last_login: data.sender_last_login,
-                  messages: [
-                    {
-                      content: data.content,
-                      is_read: data.is_read,
-                      sor: data.sor,
-                      id: data.id,
-                      issue_date: data.issue_date,
-                    },
-                  ],
-                },
-              ])
+              Messages({
+                image: data.sender_image,
+                id: data.sender_id,
+                displayname: data.sender_displayname,
+                is_online: data.sender_is_online,
+                last_login: data.sender_last_login,
+                messages: [
+                  {
+                    content: data.content,
+                    is_read: data.is_read,
+                    sor: data.sor,
+                    id: data.id,
+                    issue_date: data.issue_date,
+                  },
+                ],
+              })
             );
           } else {
             dispatch(NewMessagesAction({ id: data.sender_id, message: data }));

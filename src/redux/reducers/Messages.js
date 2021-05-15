@@ -8,7 +8,7 @@ let initialState = {
 const Messages = (state = initialState, action) => {
   switch (action.type) {
     case "MESSAGES":
-      return { ...state, messages: action.payload };
+      return { ...state, messages: [...state.messages, action.payload] };
     case "NEW_MESSAGE":
       return {
         ...state,

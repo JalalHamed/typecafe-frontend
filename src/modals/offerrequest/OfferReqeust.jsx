@@ -91,7 +91,8 @@ const OfferRequest = () => {
       />
       <div className="offerrequest-content">
         <p className="offerrequest-note">
-          در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه{" "}
+          در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه با احتساب
+          کارمزد سایت{" "}
           <span className="highlight">{priceFormat(wholePrice)}</span> به عنوان
           مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت عدم تحویل
           پروژه تا قبل از مهلت تعیین شده{" "}

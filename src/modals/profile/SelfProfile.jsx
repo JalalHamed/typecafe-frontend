@@ -47,7 +47,7 @@ const SelfProfile = () => {
         .then(res => {
           dispatch(Profile({ image: res.image }));
           dispatch(User({ image: res.image }));
-          toast.success("عکس پروفایل با موفقیت بروزرسانی شد.");
+          toast.success("عکس پروفایل با موفقیت به‌روزرسانی شد.");
         })
         .catch(err => handleErrors(err, setErrMsg));
     } else {
@@ -65,7 +65,7 @@ const SelfProfile = () => {
             dispatch(Profile({ displayname: res.displayname }));
             dispatch(User({ displayname: res.displayname }));
             setDisplayNameErrMsg("");
-            toast.success("نام نمایشی با موفیت بروزرسانی شد.");
+            toast.success("نام نمایشی با موفیت به‌روزرسانی شد.");
           })
           .catch(err => {
             setDisplayName(user.displayname);

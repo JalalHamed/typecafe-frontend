@@ -14,7 +14,7 @@ const LeftSide = () => {
         </p>
         <p className="register-option">
           <i className="icon icon-check no-select" />
-          فقط ۵٪ کارمزد
+          فقط ۱۰٪ کارمزد
         </p>
       </div>
     </>

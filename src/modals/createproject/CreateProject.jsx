@@ -50,12 +50,12 @@ const CreateNewProject = () => {
         {state.step === "reviewandsubmit" && <ReviewAndSubmit />}
       </div>
       <div className="user-agreement">
-        با ثبت پروژه خود در تایپ‌کافه، شما با
+        به یاد داشته باشد شما با استفاده از هر یک از خدمات تایپ‌کافه،
         <span className="add-project-rules" onClick={handleRulesClick}>
           {" "}
-          قوانین ثبت پروژه{" "}
+          قوانین{" "}
         </span>
-        موافقت می‌کنید.
+        تایپ‌کافه را به رسمیت می‌شناسید.
       </div>
     </motion.div>
   );
