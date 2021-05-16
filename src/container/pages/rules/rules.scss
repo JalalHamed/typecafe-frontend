@@ -36,21 +36,27 @@
 
   .rules-initiate-note {
     font-style: italic;
+  }
 
-    .typecafe-url {
-      color: #1c3987;
-      cursor: pointer;
+  .blue-note {
+    color: #1c3987;
+    cursor: pointer;
 
-      &:hover {
-        border-bottom: 1px solid #1c3987;
-      }
+    &:hover {
+      border-bottom: 1px solid #1c3987;
     }
   }
 
   .rules-title {
+    cursor: pointer;
     font-size: 20px;
     color: #1c3987;
-    margin: 30px 10px 0 0;
+    margin: 10px 10px 0 0;
+    padding-top: 20px;
+
+    &:hover {
+      color: #1c3887e0;
+    }
   }
 
   .rules-value {

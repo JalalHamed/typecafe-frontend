@@ -88,7 +88,7 @@ const AoROffer = () => {
             تایپیست واریز خواهد شد.
           </p>
           <p className="go-to-rules" onClick={handleGoToRules}>
-            اطلاعات بیشتر درباره نحوه عملکرد وبسایت
+            اطلاعات بیشتر درباره نحوه ایجاد و انجام پروژه
           </p>
           <div className="button-wrapper">
             <Button

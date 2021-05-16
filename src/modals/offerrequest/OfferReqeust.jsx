@@ -103,7 +103,7 @@ const OfferRequest = () => {
           داده خواهد شد.
         </p>
         <p className="go-to-rules" onClick={handleMoreAboutThis}>
-          اطلاعات بیشتر درباره نحوه عملکرد وبسایت
+          اطلاعات بیشتر درباره نحوه ایجاد و انجام پروژه
         </p>
         <div className="button-wrapper">
           <Button
