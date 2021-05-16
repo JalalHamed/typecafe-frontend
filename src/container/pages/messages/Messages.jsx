@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import { Puffloader } from "components/loader";
+import User from "./User";
 
 // Requests
 import Socket from "requests/Socket";
@@ -13,9 +14,6 @@ import { SendMessage, SearchDisplayname } from "requests";
 
 // Actions
 import { NewMessagesAction, SendMessageID } from "redux/actions";
-
-// XHR
-import { baseURL } from "components/xhr";
 
 // Design
 import "./messages.scss";
@@ -27,25 +25,14 @@ const TheMessages = () => {
   const messages = useSelector(state => state.Messages.messages);
   const selected = useSelector(state => state.Messages.id);
   const loading = useSelector(state => state.Messages.isLoading);
-  const onlineUsers = useSelector(state => state.OnlineUsers);
   const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const scrollToBottom = () => {
     const scroll =
       messageRef.current.scrollHeight - messageRef.current.clientHeight;
     messageRef.current.scrollTo(0, scroll);
-  };
-
-  const getUserTimeStatus = user => {
-    if (
-      !onlineUsers.disconnects.includes(user.id) &&
-      (user.is_online || onlineUsers.ids.includes(user.id))
-    ) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   const handleSubmit = e => {
@@ -90,10 +77,13 @@ const TheMessages = () => {
   }, []);
 
   useEffect(() => {
-    if (search)
+    if (search.length) {
       SearchDisplayname({ search })
-        .then(res => console.log(res))
+        .then(res => {
+          setSearchResults(res);
+        })
         .catch(err => console.error(err));
+    }
   }, [search]);
 
   return (
@@ -101,77 +91,47 @@ const TheMessages = () => {
       {!loading ? (
         <>
           <div className="contact-list-warpper no-select">
-            <input
-              className="search"
-              placeholder="جستجو نام نمایشی"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-            <div className="contacts-wrapper">
-              {messages.map(user => {
-                return (
-                  <div
-                    key={user.id}
-                    className={`contact ${
-                      selected === user.id ? "selected" : ""
-                    }`}
-                    onClick={() => {
-                      dispatch(
-                        SendMessageID({ id: user.id, isWatching: user.id })
-                      );
-                      setTimeout(() => {
-                        scrollToBottom();
-                      }, 100);
-                    }}
-                  >
-                    {user.image ? (
-                      <img
-                        src={baseURL + user.image}
-                        alt={`profile ${user.id}`}
-                        className={`user-image ${
-                          getUserTimeStatus(user) ? "is-online" : ""
-                        }`}
-                      />
+            <>
+              <input
+                className="search"
+                placeholder="جستجو نام نمایشی"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+              <div className="contacts-wrapper">
+                {!search.length ? (
+                  messages.map(user => (
+                    <User
+                      user={user}
+                      isSearch={false}
+                      selected={selected}
+                      messages={messages}
+                      setSearch={setSearch}
+                      setSearchResults={setSearchResults}
+                      scrollToBottom={scrollToBottom}
+                    />
+                  ))
+                ) : (
+                  <>
+                    {searchResults.length ? (
+                      searchResults.map(user => (
+                        <User
+                          user={user}
+                          isSearch={true}
+                          selected={selected}
+                          messages={messages}
+                          setSearch={setSearch}
+                          setSearchResults={setSearchResults}
+                          scrollToBottom={scrollToBottom}
+                        />
+                      ))
                     ) : (
-                      <i
-                        className={`icon project-client-default-pic user-image ${
-                          getUserTimeStatus(user) ? "is-online" : ""
-                        }`}
-                      />
+                      <p style={{ color: "#fff" }}>در حال بارگذاری</p>
                     )}
-                    <div className="user-name-status-wrapper">
-                      <p>{user.displayname}</p>
-                      <div
-                        className={`user-time-status ${
-                          getUserTimeStatus(user) ? "is-online" : ""
-                        }`}
-                      >
-                        {getUserTimeStatus(user) ? (
-                          <span>آنلاین</span>
-                        ) : (
-                          <span>
-                            آخرین بازدید حدود{" "}
-                            {!onlineUsers.disconnects.includes(user.id) ? (
-                              <Moment fromNow locale="fa">
-                                {user.last_login}
-                              </Moment>
-                            ) : (
-                              <Moment fromNow locale="fa">
-                                {
-                                  onlineUsers.lastLogins.find(
-                                    x => x.id === user.id
-                                  ).lastLogin
-                                }
-                              </Moment>
-                            )}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  </>
+                )}
+              </div>
+            </>
           </div>
           <div className="message-screen-and-input-wrapper">
             <div

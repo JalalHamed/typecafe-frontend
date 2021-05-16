@@ -1,7 +1,7 @@
 let initialState = {
   isOpen: true,
   isLoading: true,
-  page: "rules",
+  page: "messages",
 };
 
 const Sidebar = (state = initialState, action) => {

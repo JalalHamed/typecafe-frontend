@@ -12,7 +12,6 @@ import Financials from "./pages/financials/Financials";
 import Rules from "./pages/rules/Rules";
 import Support from "./pages/support/Support";
 import Donate from "./pages/donate/Donate";
-import Faq from "./pages/faq/Faq";
 
 // Components
 import TopBar from "./topbar/TopBar";
@@ -332,7 +331,6 @@ const App = () => {
           {state.Sidebar.page === "rules" && <Rules />}
           {state.Sidebar.page === "support" && <Support />}
           {state.Sidebar.page === "donate" && <Donate />}
-          {state.Sidebar.page === "faq" && <Faq />}
         </div>
       </div>
 
