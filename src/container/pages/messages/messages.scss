@@ -14,6 +14,7 @@
     align-items: center;
     border-radius: 5px;
     background-color: #29313b;
+    position: relative;
 
     .contacts-wrapper {
       width: 100%;
@@ -21,6 +22,19 @@
 
       &::-webkit-scrollbar {
         width: 5px;
+      }
+
+      .search-result-note {
+        padding-right: 20px;
+        background-color: #fff;
+        width: 100%;
+      }
+
+      .no-messasges-yet {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
       }
     }
 

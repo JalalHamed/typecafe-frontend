@@ -35,3 +35,8 @@ export const addCommission = price => {
 export const extractCommission = price => {
   return Math.round(price - price * 0.01 * typecafe_commission);
 };
+
+export const scrollToRef = ref => {
+  const scroll = ref.current.scrollHeight - ref.current.clientHeight;
+  ref.current.scrollTo(0, scroll);
+};

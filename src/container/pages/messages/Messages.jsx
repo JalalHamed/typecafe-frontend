@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
-import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
 
 // Components
+import User from "components/messages/User";
+import Message from "components/messages/Message";
 import { Puffloader } from "components/loader";
-import User from "./User";
+import { scrollToRef } from "components/helper";
 
 // Requests
 import Socket from "requests/Socket";
@@ -27,13 +28,8 @@ const TheMessages = () => {
   const loading = useSelector(state => state.Messages.isLoading);
   const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-
-  const scrollToBottom = () => {
-    const scroll =
-      messageRef.current.scrollHeight - messageRef.current.clientHeight;
-    messageRef.current.scrollTo(0, scroll);
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -54,7 +50,7 @@ const TheMessages = () => {
               message: { ...res, sor: "sent" },
             })
           );
-          scrollToBottom();
+          scrollToRef(messageRef);
         })
         .catch(err => console.log(err));
   };
@@ -78,11 +74,16 @@ const TheMessages = () => {
 
   useEffect(() => {
     if (search.length) {
+      setSearchLoading(true);
       SearchDisplayname({ search })
         .then(res => {
           setSearchResults(res);
+          setSearchLoading(false);
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error(err);
+          setSearchLoading(false);
+        });
     }
   }, [search]);
 
@@ -91,26 +92,30 @@ const TheMessages = () => {
       {!loading ? (
         <>
           <div className="contact-list-warpper no-select">
-            <>
-              <input
-                className="search"
-                placeholder="جستجو نام نمایشی"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
+            <input
+              className="search"
+              placeholder="جستجو نام نمایشی"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            {!searchLoading ? (
               <div className="contacts-wrapper">
                 {!search.length ? (
-                  messages.map(user => (
-                    <User
-                      user={user}
-                      isSearch={false}
-                      selected={selected}
-                      messages={messages}
-                      setSearch={setSearch}
-                      setSearchResults={setSearchResults}
-                      scrollToBottom={scrollToBottom}
-                    />
-                  ))
+                  messages.length ? (
+                    messages.map(user => (
+                      <User
+                        user={user}
+                        isSearch={false}
+                        selected={selected}
+                        messages={messages}
+                        setSearch={setSearch}
+                        setSearchResults={setSearchResults}
+                        messageRef={messageRef}
+                      />
+                    ))
+                  ) : (
+                    <p className="no-messasges-yet">هنوز هیچ پیامی ندارید.</p>
+                  )
                 ) : (
                   <>
                     {searchResults.length ? (
@@ -122,16 +127,22 @@ const TheMessages = () => {
                           messages={messages}
                           setSearch={setSearch}
                           setSearchResults={setSearchResults}
-                          scrollToBottom={scrollToBottom}
+                          messageRef={messageRef}
                         />
                       ))
                     ) : (
-                      <p style={{ color: "#fff" }}>در حال بارگذاری</p>
+                      <p className="no-messasges-yet">
+                        کاربری با این نام نمایشی یافت نشد.
+                      </p>
                     )}
                   </>
                 )}
               </div>
-            </>
+            ) : (
+              <div className="middle-of-the-page">
+                <Puffloader color="#fff" loading={true} size={100} />
+              </div>
+            )}
           </div>
           <div className="message-screen-and-input-wrapper">
             <div
@@ -144,40 +155,7 @@ const TheMessages = () => {
                   .messages.sort((a, b) =>
                     a.id > b.id ? 1 : b.id > a.id ? -1 : 0
                   )
-                  .map(message => {
-                    return (
-                      <div
-                        key={message.id}
-                        className={`message-wrapper ${
-                          message.sor === "received" ? "received" : ""
-                        }`}
-                      >
-                        <div className="message-content">
-                          {message.sor === "received" && (
-                            <div className="message-date received">
-                              <Moment fromNow locale="fa">
-                                {message.issue_date}
-                              </Moment>
-                            </div>
-                          )}
-                          <div
-                            className={`message ${
-                              message.sor === "received" ? "received" : "sent"
-                            }`}
-                          >
-                            {message.content}
-                          </div>
-                          {message.sor === "sent" && (
-                            <div className="message-date sent">
-                              <Moment fromNow locale="fa">
-                                {message.issue_date}
-                              </Moment>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })
+                  .map(message => <Message message={message} />)
               ) : (
                 <p className="pick-a-message-to-chat">
                   برای ارسال پیام یک کاربر را انتخاب کنید.

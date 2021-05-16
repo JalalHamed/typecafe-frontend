@@ -12,7 +12,12 @@ import Previous from "components/buttons/Previous";
 import { priceFormat } from "components/helper";
 
 // Actions
-import { AoROfferAction, Sidebar, NotEnoughCreditAction } from "redux/actions";
+import {
+  AoROfferAction,
+  Sidebar,
+  NotEnoughCreditAction,
+  RulesScrollToHTWW,
+} from "redux/actions";
 
 // xhr
 import { baseURL } from "components/xhr";
@@ -21,13 +26,14 @@ import { baseURL } from "components/xhr";
 import "./aoroffer.scss";
 
 const AoROffer = () => {
+  const dispatch = useDispatch();
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
-  const dispatch = useDispatch();
   const offer = useSelector(state => state.AoROffer);
   const user = useSelector(state => state.User);
 
   const handleGoToRules = () => {
+    dispatch(RulesScrollToHTWW(true));
     dispatch(AoROfferAction({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };

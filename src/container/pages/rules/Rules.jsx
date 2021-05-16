@@ -1,17 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
 
+// Libraries
+import { useSelector, useDispatch } from "react-redux";
+
+// Actions
+import { RulesScrollToHTWW } from "redux/actions";
+
 // Designs
 import "./rules.scss";
 
 const Rules = () => {
+  const dispatch = useDispatch();
   const DistributionOfContent = useRef();
+  const HowTheWebsiteWorks = useRef();
+  const ResponsibilityOfTakingCareOfPassword = useRef();
+  const scrollTo = useSelector(state => state.Rules);
   const [width, setWidth] = useState(window.innerWidth);
-
-  const ScrollTo = elementRef => {
-    const scroll =
-      elementRef.current.scrollHeight - elementRef.current.clientHeight;
-    elementRef.current.scrollTo(0, scroll);
-  };
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -22,16 +26,40 @@ const Rules = () => {
     // eslint-disable-next-line
   }, [width]);
 
+  useEffect(() => {
+    if (scrollTo) {
+      HowTheWebsiteWorks.current.scrollIntoView();
+      dispatch(RulesScrollToHTWW(false));
+    }
+
+    // eslint-disable-next-line
+  }, [scrollTo]);
+
   return (
     <div className={`rules-wrapper ${width < 1050 ? "w-100" : "w-78"}`}>
       {width > 1050 && (
         <div className="quick-access">
           <p className="title">انتقال سریع</p>
-          <p className="item" onClick={() => ScrollTo(DistributionOfContent)}>
+          <p
+            className="item"
+            onClick={() => DistributionOfContent.current.scrollIntoView()}
+          >
             توزیع و انتشار محتوا
           </p>
-          <p className="item">نحوه عملکرد وب‌سایت</p>
-          <p className="item">مسئولیت محافظت از رمز عبور</p>
+          <p
+            className="item"
+            onClick={() => HowTheWebsiteWorks.current.scrollIntoView()}
+          >
+            نحوه عملکرد وب‌سایت
+          </p>
+          <p
+            className="item"
+            onClick={() =>
+              ResponsibilityOfTakingCareOfPassword.current.scrollIntoView()
+            }
+          >
+            مسئولیت محافظت از رمز عبور
+          </p>
         </div>
       )}
       <p className="rules-initiate-note">
@@ -42,7 +70,9 @@ const Rules = () => {
         <span className="typecafe-url">https://typecafe.ir</span> می‌باشد و
         تمامی حقوق برای تایپ‌کافه محفوظ است.
       </p>
-      <p className="rules-title">توزیع و انتشار محتوا</p>
+      <p className="rules-title" ref={DistributionOfContent}>
+        توزیع و انتشار محتوا
+      </p>
       <p className="rules-value">
         تایپ‌کافه تحت قوانین جمهوری اسلامی ایران فعالیت می‌کند و هدف آن تسهیل
         خدمات تایپ به صورت آنلاین و دورکاری می‌باشد. در نتیجه انتشار و توزیع
@@ -61,7 +91,9 @@ const Rules = () => {
         <li>هرگونه تبلیغ و یا ترویج</li>
         <li>...</li>
       </ul>
-      <p className="rules-title">نحوه عملکرد وب‌سایت</p>
+      <p className="rules-title" ref={HowTheWebsiteWorks}>
+        نحوه عملکرد وب‌سایت
+      </p>
       <p className="rules-value">
         هر کاربر عضو شده در وب‌سایت تایپ‌کافه، ضمن رعایت قوانین، می‌تواند همزمان
         هم به عنوان تایپیست و هم به عنوان کارفرما در وب‌سایت فعالیت کند.
@@ -112,7 +144,9 @@ const Rules = () => {
         پروژه ناموفق در پروفایل تایپیست ثبت خواهد شد.
       </p>
       <p className="rules-value less-mt"></p>
-      <p className="rules-title">مسئولیت محافظت از رمز عبور</p>
+      <p className="rules-title" ref={ResponsibilityOfTakingCareOfPassword}>
+        مسئولیت محافظت از رمز عبور
+      </p>
     </div>
   );
 };

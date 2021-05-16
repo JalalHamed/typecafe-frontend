@@ -11,7 +11,7 @@ import TheMessages from "./pages/messages/Messages";
 import Financials from "./pages/financials/Financials";
 import Rules from "./pages/rules/Rules";
 import Support from "./pages/support/Support";
-import Donate from "./pages/donate/Donate";
+// import Donate from "./pages/donate/Donate";
 
 // Components
 import TopBar from "./topbar/TopBar";
@@ -330,7 +330,7 @@ const App = () => {
           {state.Sidebar.page === "financials" && <Financials />}
           {state.Sidebar.page === "rules" && <Rules />}
           {state.Sidebar.page === "support" && <Support />}
-          {state.Sidebar.page === "donate" && <Donate />}
+          {/* {state.Sidebar.page === "donate" && <Donate />} */}
         </div>
       </div>
 

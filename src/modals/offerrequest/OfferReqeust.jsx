@@ -17,6 +17,7 @@ import {
   Sidebar,
   ProjectsAction,
   NotEnoughCreditAction,
+  RulesScrollToHTWW,
 } from "redux/actions";
 
 // Request
@@ -38,6 +39,7 @@ const OfferRequest = () => {
   const wholePrice = extractCommission(pageCount * pricePerPage);
 
   const handleMoreAboutThis = () => {
+    dispatch(RulesScrollToHTWW(true));
     dispatch(CreateOffer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };
