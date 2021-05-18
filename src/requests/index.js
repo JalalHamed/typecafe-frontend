@@ -1,5 +1,11 @@
 import axios from "./Api";
 
+export const CookieDemo = () => {
+  return axios
+    .get("account/cookie-demo/", { withCredentials: true })
+    .then(res => res.data);
+};
+
 // New Acc Token
 export const NewAccToken = body => {
   return axios.post("account/token/refresh/", body).then(res => res.data);

@@ -39,7 +39,7 @@ const Rules = () => {
   return (
     <div className={`rules-wrapper ${width < 1050 ? "w-100" : "w-78"}`}>
       {width > 1050 && (
-        <div className="quick-access">
+        <div className="quick-access no-select">
           <p className="title">انتقال سریع</p>
           <p
             className="item"
