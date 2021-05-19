@@ -104,6 +104,7 @@ const TheMessages = () => {
                   messages.length ? (
                     messages.map(user => (
                       <User
+                        key={user.id}
                         user={user}
                         isSearch={false}
                         selected={selected}
@@ -121,6 +122,7 @@ const TheMessages = () => {
                     {searchResults.length ? (
                       searchResults.map(user => (
                         <User
+                          key={user.id}
                           user={user}
                           isSearch={true}
                           selected={selected}
@@ -155,7 +157,9 @@ const TheMessages = () => {
                   .messages.sort((a, b) =>
                     a.id > b.id ? 1 : b.id > a.id ? -1 : 0
                   )
-                  .map(message => <Message message={message} />)
+                  .map(message => (
+                    <Message key={message.id} message={message} />
+                  ))
               ) : (
                 <p className="pick-a-message-to-chat">
                   برای ارسال پیام یک کاربر را انتخاب کنید.

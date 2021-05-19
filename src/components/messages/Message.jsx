@@ -6,7 +6,6 @@ import Moment from "react-moment";
 const Message = ({ message }) => {
   return (
     <div
-      key={message.id}
       className={`message-wrapper ${
         message.sor === "received" ? "received" : ""
       }`}

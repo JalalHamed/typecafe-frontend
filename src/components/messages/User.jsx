@@ -29,7 +29,6 @@ const User = ({
     <>
       {isSearch && <p className="search-result-note">نتیجه جسجتو</p>}
       <div
-        key={user.id}
         className={`contact ${selected === user.id ? "selected" : ""}`}
         onClick={() => {
           if (!isSearch) {
