@@ -48,9 +48,7 @@ const Projects = () => {
   return (
     <div className="projects-wrapper">
       {!!projects.length &&
-        projects.map(project => {
-          return <Project key={project.id} project={project} />;
-        })}
+        projects.map(project => <Project key={project.id} project={project} />)}
       {loading && (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />

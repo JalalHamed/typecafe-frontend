@@ -22,7 +22,6 @@ const SideBar = () => {
   const tutorialRippleRef = useRef();
   const myProjectsRippleRef = useRef();
   const supportRippleRef = useRef();
-  // const donateRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isLoading = useSelector(state => state.Sidebar.isLoading);
 
@@ -75,17 +74,10 @@ const SideBar = () => {
                 ref={supportRippleRef}
               />
             )}
-            {/* {isLoggedIn && (
-              <SideBarItem
-                status="donate"
-                title="حمایت"
-                ref={donateRippleRef}
-              />
-            )} */}
           </div>
         </>
       ) : (
-        <div className="sidebar-loading">
+        <div className="middle-of-the-page">
           <Puffloader color="#fff" loading={isLoading} size={100} />
         </div>
       )}
