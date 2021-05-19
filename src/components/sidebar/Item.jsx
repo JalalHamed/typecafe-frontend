@@ -5,39 +5,53 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import RippleWrapper from "components/ripple/RippleWrapper";
+import { farsiNumber } from "components/helper";
 
 // Actions
 import { Sidebar } from "redux/actions";
 
 const Item = forwardRef(({ status, title }, ref) => {
-  const page = useSelector(state => state.Sidebar.page);
-  const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
+  const state = useSelector(state => state);
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    if (page !== status) {
+    if (state.Sidebar.page !== status) {
       dispatch(Sidebar({ page: status }));
     }
   };
 
   return (
     <RippleWrapper
-      className={`sidebar-items_item${page === status ? "_selected" : ""}`}
+      className={`sidebar-items_item${
+        state.Sidebar.page === status ? "_selected" : ""
+      }`}
       onClick={handleClick}
       ref={ref}
     >
       <i
         className={`icon icon-margin-24 ${
-          page === status ? `icon-${status}-dark` : `icon-${status}-white`
+          state.Sidebar.page === status
+            ? `icon-${status}-dark`
+            : `icon-${status}-white`
         }`}
       />
-      <div
+      <p
         className={
-          isSidebarOpen ? "sidebar-item-title" : "sidebar-item-no-title"
+          state.Sidebar.isOpen ? "sidebar-item-title" : "sidebar-item-no-title"
         }
       >
         {title}
-      </div>
+      </p>
+      {status === "my-projects" && !!state.Projects.myprojects.length && (
+        <div className="sidebar-counter">
+          {farsiNumber(state.Projects.myprojects.length)}
+        </div>
+      )}
+      {status === "messages" && !!state.Messages.totalUnread && (
+        <div className="sidebar-counter red">
+          {farsiNumber(state.Messages.totalUnread)}
+        </div>
+      )}
     </RippleWrapper>
   );
 });

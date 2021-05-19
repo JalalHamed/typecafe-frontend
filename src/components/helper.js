@@ -41,10 +41,10 @@ export const scrollToRef = ref => {
   ref.current.scrollTo(0, scroll);
 };
 
-export const getUserTimeStatus = (onlineUsers, user) => {
+export const getUserTimeStatus = (onlineUsers, id, is_online) => {
   if (
-    !onlineUsers.disconnects.includes(user.id) &&
-    (user.is_online || onlineUsers.ids.includes(user.id))
+    !onlineUsers.disconnects.includes(id) &&
+    (is_online || onlineUsers.ids.includes(id))
   ) {
     return true;
   } else {

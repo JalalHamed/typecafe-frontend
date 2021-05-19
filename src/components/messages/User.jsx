@@ -5,10 +5,13 @@ import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import { scrollToRef, getUserTimeStatus } from "components/helper";
+import { scrollToRef, getUserTimeStatus, farsiNumber } from "components/helper";
+
+// Requests
+import { ReadMessages } from "requests";
 
 // Actions
-import { Messages, SendMessageID } from "redux/actions";
+import { Messages, MessagesElse } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -32,7 +35,11 @@ const User = ({
         className={`contact ${selected === user.id ? "selected" : ""}`}
         onClick={() => {
           if (!isSearch) {
-            dispatch(SendMessageID({ id: user.id, isWatching: user.id }));
+            dispatch(MessagesElse({ id: user.id, isWatching: user.id }));
+            if (user.unread)
+              ReadMessages({ sender_id: user.id })
+                .then(res => console.log(res))
+                .catch(err => console.error(err));
           } else {
             if (!messages.find(x => x.id === user.id)) {
               dispatch(
@@ -46,7 +53,7 @@ const User = ({
                 })
               );
             }
-            dispatch(SendMessageID({ id: user.id, isWatching: user.id }));
+            dispatch(MessagesElse({ id: user.id, isWatching: user.id }));
             setSearch("");
             setSearchResults([]);
           }
@@ -60,7 +67,8 @@ const User = ({
             src={baseURL + user.image}
             alt={`profile ${user.id}`}
             className={`user-image ${
-              getUserTimeStatus(onlineUsers, user) && selected === user.id
+              getUserTimeStatus(onlineUsers, user.id, user.is_online) &&
+              selected === user.id
                 ? "is-online"
                 : ""
             }`}
@@ -68,7 +76,8 @@ const User = ({
         ) : (
           <i
             className={`icon project-client-default-pic user-image ${
-              getUserTimeStatus(onlineUsers, user) && selected === user.id
+              getUserTimeStatus(onlineUsers, user.id, user.is_online) &&
+              selected === user.id
                 ? "is-online"
                 : ""
             }`}
@@ -80,12 +89,13 @@ const User = ({
             className={`user-time-status ${
               selected === user.id ? "selected" : ""
             } ${
-              getUserTimeStatus(onlineUsers, user) && selected === user.id
+              getUserTimeStatus(onlineUsers, user.id, user.is_online) &&
+              selected === user.id
                 ? "is-online"
                 : ""
             }`}
           >
-            {getUserTimeStatus(onlineUsers, user) ? (
+            {getUserTimeStatus(onlineUsers, user.id, user.is_online) ? (
               <span>آنلاین</span>
             ) : (
               <span>
@@ -106,6 +116,11 @@ const User = ({
             )}
           </div>
         </div>
+        {!!user.unread && (
+          <div className="unread-messages-counter">
+            {farsiNumber(user.unread)}
+          </div>
+        )}
       </div>
     </>
   );

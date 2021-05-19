@@ -3,6 +3,7 @@ let initialState = {
   id: null,
   isWatching: null,
   isLoading: true,
+  totalUnread: 0,
 };
 
 const Messages = (state = initialState, action) => {
@@ -19,7 +20,7 @@ const Messages = (state = initialState, action) => {
           return user;
         }),
       };
-    case "SEND_MESSAGE_ID":
+    case "MESSAGES_ELSE":
       return { ...state, ...action.payload };
     default:
       return state;

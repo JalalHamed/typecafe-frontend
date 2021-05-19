@@ -9,7 +9,7 @@ import {
   ProjectsAction,
   Sidebar,
   Messages,
-  SendMessageID,
+  MessagesElse,
 } from "redux/actions";
 
 // Requests
@@ -74,13 +74,24 @@ const Requests = () => {
         // Get Messages
         GetMessages()
           .then(res => {
-            let arr = [];
-            res.map(message => arr.push(message.user_id));
-            let uniq = [...new Set(arr)];
-            uniq.forEach(id => {
+            let total_unread = 0;
+            res.forEach(message => {
+              if (message.sor === "received" && !message.is_read)
+                total_unread += 1;
+            });
+            if (total_unread)
+              dispatch(MessagesElse({ totalUnread: total_unread }));
+            let userArr = res.map(message => message.user_id);
+            let uniqUserArr = [...new Set(userArr)];
+            uniqUserArr.forEach(id => {
               let messages = [];
+              let unread_count = 0;
               res.forEach(message => {
                 if (message.user_id === id) messages.push(message);
+              });
+              messages.forEach(message => {
+                if (message.sor === "received" && !message.is_read)
+                  unread_count += 1;
               });
               dispatch(
                 Messages({
@@ -89,11 +100,12 @@ const Requests = () => {
                   is_online: messages[0].user_is_online,
                   last_login: messages[0].user_last_login,
                   image: messages[0].user_image,
+                  unread: unread_count,
                   messages: messages,
                 })
               );
             });
-            dispatch(SendMessageID({ isLoading: false }));
+            dispatch(MessagesElse({ isLoading: false }));
           })
           .catch(err => console.log(err));
 

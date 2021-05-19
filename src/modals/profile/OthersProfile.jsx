@@ -13,7 +13,7 @@ import {
   SelectedImage,
   Sidebar,
   Profile,
-  SendMessageID,
+  MessagesElse,
   Messages,
 } from "redux/actions";
 
@@ -47,7 +47,7 @@ const OthersProfile = () => {
         })
       );
     }
-    dispatch(SendMessageID({ id: user.id, isWatching: user.id }));
+    dispatch(MessagesElse({ id: user.id, isWatching: user.id }));
     dispatch(Sidebar({ page: "messages" }));
     dispatch(Profile({ isModalOpen: false }));
   };
@@ -83,7 +83,9 @@ const OthersProfile = () => {
             src={baseURL + user.image}
             alt="profile"
             className={`profile-pic point ${
-              getUserTimeStatus(onlineUsers, user.id) ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user.id, data.userIsOnline)
+                ? "is-online"
+                : ""
             }`}
             onClick={() =>
               dispatch(
@@ -101,10 +103,12 @@ const OthersProfile = () => {
         {!loading && (
           <div
             className={`last-login ${
-              getUserTimeStatus(onlineUsers, user.id) ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user.id, data.userIsOnline)
+                ? "is-online"
+                : ""
             }`}
           >
-            {getUserTimeStatus(onlineUsers, user.id) ? (
+            {getUserTimeStatus(onlineUsers, user.id, data.userIsOnline) ? (
               <span>آنلاین</span>
             ) : (
               <span>

@@ -14,7 +14,7 @@ import Socket from "requests/Socket";
 import { SendMessage, SearchDisplayname } from "requests";
 
 // Actions
-import { NewMessagesAction, SendMessageID } from "redux/actions";
+import { NewMessagesAction, MessagesElse } from "redux/actions";
 
 // Design
 import "./messages.scss";
@@ -22,6 +22,7 @@ import "./messages.scss";
 const TheMessages = () => {
   const dispatch = useDispatch();
   const messageRef = useRef();
+  const inputRef = useRef();
   const user = useSelector(state => state.User);
   const messages = useSelector(state => state.Messages.messages);
   const selected = useSelector(state => state.Messages.id);
@@ -57,16 +58,16 @@ const TheMessages = () => {
 
   const escapeHandler = ({ key }) => {
     if (key === "Escape") {
-      dispatch(SendMessageID({ id: null, isWatching: null }));
+      dispatch(MessagesElse({ id: null, isWatching: null }));
     }
   };
 
   useEffect(() => {
-    dispatch(SendMessageID({ isWatching: selected }));
+    dispatch(MessagesElse({ isWatching: selected }));
     window.addEventListener("keydown", escapeHandler);
     return () => {
       window.removeEventListener("keydown", escapeHandler);
-      dispatch(SendMessageID({ isWatching: null }));
+      dispatch(MessagesElse({ isWatching: null }));
     };
 
     // eslint-disable-next-line
@@ -170,10 +171,11 @@ const TheMessages = () => {
               <form onSubmit={handleSubmit}>
                 <input
                   className="message-input"
-                  autoFocus={true}
+                  ref={inputRef}
                   placeholder="پیام خود را تایپ کنید و Enter بزنید..."
                   value={value}
                   onChange={e => setValue(e.target.value)}
+                  autoFocus
                 />
               </form>
             )}

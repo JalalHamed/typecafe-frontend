@@ -103,9 +103,9 @@ export const NewMessagesAction = payload => {
   };
 };
 
-export const SendMessageID = payload => {
+export const MessagesElse = payload => {
   return {
-    type: "SEND_MESSAGE_ID",
+    type: "MESSAGES_ELSE",
     payload,
   };
 };

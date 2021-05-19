@@ -61,7 +61,11 @@ const TheProject = ({ project }) => {
               src={baseURL + project.client_image}
               alt="User Profile"
               className={`client-image ${
-                getUserTimeStatus(onlineUsers, project.client_id)
+                getUserTimeStatus(
+                  onlineUsers,
+                  project.client_id,
+                  project.client_is_online
+                )
                   ? "is-online"
                   : ""
               }`}
@@ -70,7 +74,11 @@ const TheProject = ({ project }) => {
           ) : (
             <i
               className={`icon project-client-default-pic client-image ${
-                getUserTimeStatus(onlineUsers, project.client_id)
+                getUserTimeStatus(
+                  onlineUsers,
+                  project.client_id,
+                  project.client_is_online
+                )
                   ? "is-online"
                   : ""
               }`}
@@ -86,12 +94,20 @@ const TheProject = ({ project }) => {
             </div>
             <div
               className={`last-login ${
-                getUserTimeStatus(onlineUsers, project.client_id)
+                getUserTimeStatus(
+                  onlineUsers,
+                  project.client_id,
+                  project.client_is_online
+                )
                   ? "is-online"
                   : ""
               }`}
             >
-              {getUserTimeStatus(onlineUsers, project.client_id) ? (
+              {getUserTimeStatus(
+                onlineUsers,
+                project.client_id,
+                project.client_is_online
+              ) ? (
                 <span>آنلاین</span>
               ) : (
                 <span>

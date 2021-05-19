@@ -115,5 +115,21 @@
       visibility: hidden;
       transition: opacity 0.3s, visibility 0.5s;
     }
+
+    .sidebar-counter {
+      text-align: center;
+      min-width: 22px;
+      min-height: 20px;
+      background-color: #486ccf;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 14px;
+      position: absolute;
+      left: 50px;
+
+      &.red {
+        background-color: #ff2d2d;
+      }
+    }
   }
 }
