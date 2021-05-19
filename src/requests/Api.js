@@ -18,7 +18,7 @@ const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem("ac_t");
+    const token = localStorage.getItem("_at");
     if (token) config.headers["Authorization"] = "Bearer " + token;
     return config;
   },
@@ -43,7 +43,7 @@ AxiosInstance.interceptors.response.use(
         refresh: localStorage.getItem("re_t"),
       })
         .then(res => {
-          localStorage.setItem("ac_t", res.access);
+          localStorage.setItem("_at", res.access);
           localStorage.setItem("re_t", res.refresh);
           AxiosInstance.defaults.headers["Authorization"] =
             "Bearer " + res.access;

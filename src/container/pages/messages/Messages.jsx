@@ -166,6 +166,7 @@ const TheMessages = () => {
               <form onSubmit={handleSubmit}>
                 <input
                   className="message-input"
+                  autoFocus={true}
                   placeholder="پیام خود را تایپ کنید و Enter بزنید..."
                   value={value}
                   onChange={e => setValue(e.target.value)}

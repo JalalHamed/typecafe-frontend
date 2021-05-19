@@ -40,3 +40,14 @@ export const scrollToRef = ref => {
   const scroll = ref.current.scrollHeight - ref.current.clientHeight;
   ref.current.scrollTo(0, scroll);
 };
+
+export const getUserTimeStatus = (onlineUsers, user) => {
+  if (
+    !onlineUsers.disconnects.includes(user.id) &&
+    (user.is_online || onlineUsers.ids.includes(user.id))
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};

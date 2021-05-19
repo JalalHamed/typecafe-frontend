@@ -9,7 +9,7 @@ import "moment/locale/fa";
 import Button from "components/buttons/Button";
 import OwnProject from "./OwnProject";
 import OthersProject from "./OthersProject";
-import { farsiNumber } from "components/helper";
+import { farsiNumber, getUserTimeStatus } from "components/helper";
 
 // Requests
 import { Downloaded } from "requests";
@@ -41,17 +41,6 @@ const TheProject = ({ project }) => {
     }
   };
 
-  const getUserTimeStatus = () => {
-    if (
-      !onlineUsers.disconnects.includes(project.client_id) &&
-      (project.client_is_online || onlineUsers.ids.includes(project.client_id))
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const openProfile = project => {
     dispatch(
       Profile({
@@ -72,14 +61,18 @@ const TheProject = ({ project }) => {
               src={baseURL + project.client_image}
               alt="User Profile"
               className={`client-image ${
-                getUserTimeStatus() ? "is-online" : ""
+                getUserTimeStatus(onlineUsers, project.client_id)
+                  ? "is-online"
+                  : ""
               }`}
               onClick={() => openProfile(project)}
             />
           ) : (
             <i
               className={`icon project-client-default-pic client-image ${
-                getUserTimeStatus() ? "is-online" : ""
+                getUserTimeStatus(onlineUsers, project.client_id)
+                  ? "is-online"
+                  : ""
               }`}
               onClick={() => openProfile(project)}
             />
@@ -92,9 +85,13 @@ const TheProject = ({ project }) => {
               {project.client}
             </div>
             <div
-              className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
+              className={`last-login ${
+                getUserTimeStatus(onlineUsers, project.client_id)
+                  ? "is-online"
+                  : ""
+              }`}
             >
-              {getUserTimeStatus() ? (
+              {getUserTimeStatus(onlineUsers, project.client_id) ? (
                 <span>آنلاین</span>
               ) : (
                 <span>

@@ -5,7 +5,7 @@ import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import { scrollToRef } from "components/helper";
+import { scrollToRef, getUserTimeStatus } from "components/helper";
 
 // Actions
 import { Messages, SendMessageID } from "redux/actions";
@@ -24,17 +24,6 @@ const User = ({
 }) => {
   const dispatch = useDispatch();
   const onlineUsers = useSelector(state => state.OnlineUsers);
-
-  const getUserTimeStatus = user => {
-    if (
-      !onlineUsers.disconnects.includes(user.id) &&
-      (user.is_online || onlineUsers.ids.includes(user.id))
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   return (
     <>
@@ -72,13 +61,17 @@ const User = ({
             src={baseURL + user.image}
             alt={`profile ${user.id}`}
             className={`user-image ${
-              getUserTimeStatus(user) && selected === user.id ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user) && selected === user.id
+                ? "is-online"
+                : ""
             }`}
           />
         ) : (
           <i
             className={`icon project-client-default-pic user-image ${
-              getUserTimeStatus(user) && selected === user.id ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user) && selected === user.id
+                ? "is-online"
+                : ""
             }`}
           />
         )}
@@ -88,10 +81,12 @@ const User = ({
             className={`user-time-status ${
               selected === user.id ? "selected" : ""
             } ${
-              getUserTimeStatus(user) && selected === user.id ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user) && selected === user.id
+                ? "is-online"
+                : ""
             }`}
           >
-            {getUserTimeStatus(user) ? (
+            {getUserTimeStatus(onlineUsers, user) ? (
               <span>آنلاین</span>
             ) : (
               <span>

@@ -6,7 +6,7 @@ import Moment from "react-moment";
 
 // Components
 import { Puffloader } from "components/loader";
-import { farsiNumber } from "components/helper";
+import { farsiNumber, getUserTimeStatus } from "components/helper";
 
 // Actions
 import {
@@ -52,17 +52,6 @@ const OthersProfile = () => {
     dispatch(Profile({ isModalOpen: false }));
   };
 
-  const getUserTimeStatus = () => {
-    if (
-      !onlineUsers.disconnects.includes(user.id) &&
-      (data.userIsOnline || onlineUsers.ids.includes(user.id))
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   useEffect(() => {
     UserProfile({ id: user.id })
       .then(res => {
@@ -94,7 +83,7 @@ const OthersProfile = () => {
             src={baseURL + user.image}
             alt="profile"
             className={`profile-pic point ${
-              getUserTimeStatus() ? "is-online" : ""
+              getUserTimeStatus(onlineUsers, user.id) ? "is-online" : ""
             }`}
             onClick={() =>
               dispatch(
@@ -111,9 +100,11 @@ const OthersProfile = () => {
         <p className="profile-displayname">{user.displayname}</p>
         {!loading && (
           <div
-            className={`last-login ${getUserTimeStatus() ? "is-online" : ""}`}
+            className={`last-login ${
+              getUserTimeStatus(onlineUsers, user.id) ? "is-online" : ""
+            }`}
           >
-            {getUserTimeStatus() ? (
+            {getUserTimeStatus(onlineUsers, user.id) ? (
               <span>آنلاین</span>
             ) : (
               <span>

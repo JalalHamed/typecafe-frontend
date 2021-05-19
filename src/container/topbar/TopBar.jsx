@@ -12,9 +12,6 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import UserDropDown from "components/dropdowns/UserDropDown";
 import NotificationDropDown from "components/dropdowns/NotificationDropDown";
 
-// Requests
-import { CookieDemo } from "requests";
-
 // Actions
 import { Sidebar, LR, CreateProject, User, Notifications } from "redux/actions";
 
@@ -91,9 +88,6 @@ const TopBar = () => {
                       dispatch(
                         Notifications({ isDropdownOpen: !notifDropDown })
                       );
-                      CookieDemo({ some: "thing" })
-                        .then(res => console.log(res))
-                        .catch(err => console.error(err));
                     }}
                   >
                     <i className="icon icon-notification" />

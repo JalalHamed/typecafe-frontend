@@ -1,12 +1,6 @@
 import axios from "./Api";
 
-export const CookieDemo = () => {
-  return axios
-    .get("account/cookie-demo/", { withCredentials: true })
-    .then(res => res.data);
-};
-
-// New Acc Token
+// Token
 export const NewAccToken = body => {
   return axios.post("account/token/refresh/", body).then(res => res.data);
 };
@@ -17,7 +11,9 @@ export const UserRegister = body => {
 };
 
 export const UserLogin = body => {
-  return axios.post("account/login/", body).then(res => res.data);
+  return axios
+    .post("account/login/", body, { withCredentials: true })
+    .then(res => res.data);
 };
 
 export const CheckEmail = body => {

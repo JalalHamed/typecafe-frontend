@@ -20,7 +20,7 @@ const Sockets = () => {
   const now = new Date();
   const state = useSelector(state => state);
 
-  if (localStorage.getItem("ac_t") && Socket) {
+  if (localStorage.getItem("_at") && Socket) {
     Socket.onopen = () => {
       dispatch(Loading(false));
       console.log("socket open");

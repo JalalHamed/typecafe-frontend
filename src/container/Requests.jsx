@@ -121,7 +121,7 @@ const Requests = () => {
       })
       .catch(err => {
         if (err.response?.data?.detail === "User not found") {
-          localStorage.removeItem("ac_t");
+          localStorage.removeItem("_at");
         }
         dispatch(Sidebar({ isLoading: false }));
         dispatch(User({ isTopbarLoading: false }));
