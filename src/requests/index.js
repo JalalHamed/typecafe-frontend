@@ -11,9 +11,7 @@ export const UserRegister = body => {
 };
 
 export const UserLogin = body => {
-  return axios
-    .post("account/login/", body, { withCredentials: true })
-    .then(res => res.data);
+  return axios.post("account/login/", body).then(res => res.data);
 };
 
 export const CheckEmail = body => {

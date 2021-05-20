@@ -19,7 +19,7 @@ const UserDropDown = () => {
   const handleLogout = () => {
     UserDisconnect()
       .then(() => {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.reload();
       })
       .catch(err => console.log(err));

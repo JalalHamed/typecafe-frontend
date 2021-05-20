@@ -20,7 +20,7 @@ import Requests from "./Requests";
 import Sockets from "./Sockets";
 
 // Actions
-import { Sidebar } from "redux/actions";
+import { Sidebar, Tokens } from "redux/actions";
 
 // Requests
 import Socket from "requests/Socket";
@@ -33,6 +33,34 @@ const App = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
   const [width, setWidth] = useState(window.innerWidth);
+
+  window.onbeforeunload = () => {
+    UserDisconnect()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    Socket.send(
+      JSON.stringify({
+        status: "user-offline",
+        user_id: state.User.id,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("_at") && sessionStorage.getItem("_rt"))
+      dispatch(
+        Tokens({
+          re_t: sessionStorage.getItem("_rt"),
+          ac_t: sessionStorage.getItem("_at"),
+        })
+      );
+
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (state.Tokens.re_t && state.Tokens.ac_t) sessionStorage.clear();
+  }, [state.Tokens.re_t, state.Tokens.ac_t]);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -58,18 +86,6 @@ const App = () => {
         })
       );
   }, [state.User.id]);
-
-  window.onbeforeunload = () => {
-    UserDisconnect()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    Socket.send(
-      JSON.stringify({
-        status: "user-offline",
-        user_id: state.User.id,
-      })
-    );
-  };
 
   return (
     <div className="wrapper">

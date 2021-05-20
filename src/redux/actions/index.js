@@ -123,3 +123,10 @@ export const RulesScrollToHTWW = payload => {
     payload,
   };
 };
+
+export const Tokens = payload => {
+  return {
+    type: "TOKENS",
+    payload,
+  };
+};

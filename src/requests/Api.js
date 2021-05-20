@@ -7,6 +7,12 @@ import { NewAccToken } from "./index";
 // XHR
 import { baseURL } from "components/xhr";
 
+let token = null;
+
+export function setToken(ac_t) {
+  token = ac_t;
+}
+
 const AxiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
@@ -18,7 +24,6 @@ const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem("_at");
     if (token) config.headers["Authorization"] = "Bearer " + token;
     return config;
   },
@@ -36,15 +41,15 @@ AxiosInstance.interceptors.response.use(
     if (
       error?.response?.status === 401 &&
       !originalRequest._retry &&
-      localStorage.getItem("re_t")
+      sessionStorage.getItem("re_t")
     ) {
       originalRequest._retry = true;
       return NewAccToken({
-        refresh: localStorage.getItem("re_t"),
+        refresh: sessionStorage.getItem("re_t"),
       })
         .then(res => {
-          localStorage.setItem("_at", res.access);
-          localStorage.setItem("re_t", res.refresh);
+          sessionStorage.setItem("_at", res.access);
+          sessionStorage.setItem("_rt", res.refresh);
           AxiosInstance.defaults.headers["Authorization"] =
             "Bearer " + res.access;
           return AxiosInstance(originalRequest);

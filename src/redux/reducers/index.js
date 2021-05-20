@@ -18,6 +18,7 @@ import Messages from "./Messages";
 import Profile from "./Profile";
 import NotEnoughCredit from "./NotEnoughCredit";
 import Rules from "./Rules";
+import Tokens from "./Tokens";
 
 const allReducers = combineReducers({
   Loading,
@@ -36,6 +37,7 @@ const allReducers = combineReducers({
   Profile,
   NotEnoughCredit,
   Rules,
+  Tokens,
 });
 
 export default allReducers;

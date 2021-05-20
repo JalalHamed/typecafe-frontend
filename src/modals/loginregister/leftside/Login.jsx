@@ -29,7 +29,8 @@ const Login = () => {
 
     UserLogin({ email, ...data })
       .then(res => {
-        localStorage.setItem("_at", res.access);
+        sessionStorage.setItem("_at", res.access);
+        sessionStorage.setItem("_rt", res.refresh);
         window.location.reload();
       })
       .catch(err => {
