@@ -14,7 +14,7 @@ import Socket from "requests/Socket";
 import { SendMessage, SearchDisplayname } from "requests";
 
 // Actions
-import { NewMessagesAction, MessagesElse } from "redux/actions";
+import { NewMessageAction, MessagesElse } from "redux/actions";
 
 // Design
 import "./messages.scss";
@@ -46,7 +46,7 @@ const TheMessages = () => {
           );
           setValue("");
           dispatch(
-            NewMessagesAction({
+            NewMessageAction({
               id: selected,
               message: { ...res, sor: "sent" },
             })

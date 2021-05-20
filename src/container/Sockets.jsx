@@ -9,7 +9,7 @@ import {
   Loading,
   OnlineUsers,
   Messages,
-  NewMessagesAction,
+  NewMessageAction,
 } from "redux/actions";
 
 // Requests
@@ -103,6 +103,7 @@ const Sockets = () => {
                 displayname: data.sender_displayname,
                 is_online: data.sender_is_online,
                 last_login: data.sender_last_login,
+                unread: 1,
                 messages: [
                   {
                     content: data.content,
@@ -115,7 +116,7 @@ const Sockets = () => {
               })
             );
           } else {
-            dispatch(NewMessagesAction({ id: data.sender_id, message: data }));
+            dispatch(NewMessageAction({ id: data.sender_id, message: data }));
           }
           break;
         default:

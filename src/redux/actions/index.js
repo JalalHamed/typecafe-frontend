@@ -96,7 +96,7 @@ export const Messages = payload => {
   };
 };
 
-export const NewMessagesAction = payload => {
+export const NewMessageAction = payload => {
   return {
     type: "NEW_MESSAGE",
     payload,

@@ -125,10 +125,15 @@
       border-radius: 50%;
       font-size: 14px;
       position: absolute;
-      left: 50px;
+      left: 25px;
+      transition: all 0.5s;
 
       &.red {
         background-color: #ff2d2d;
+      }
+
+      &.sidebar-counter-close {
+        left: 10px;
       }
     }
   }

@@ -43,12 +43,20 @@ const Item = forwardRef(({ status, title }, ref) => {
         {title}
       </p>
       {status === "my-projects" && !!state.Projects.myprojects.length && (
-        <div className="sidebar-counter">
+        <div
+          className={`sidebar-counter ${
+            !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
+          }`}
+        >
           {farsiNumber(state.Projects.myprojects.length)}
         </div>
       )}
       {status === "messages" && !!state.Messages.totalUnread && (
-        <div className="sidebar-counter red">
+        <div
+          className={`sidebar-counter red ${
+            !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
+          }`}
+        >
           {farsiNumber(state.Messages.totalUnread)}
         </div>
       )}
