@@ -15,7 +15,7 @@ import { farsiNumber } from "components/helper";
 import { DeleteProject } from "redux/actions";
 
 // Request
-import Socket from "requests/Socket";
+import ws from "requests/ws";
 import { DeleteProjectReq } from "requests";
 
 // Design
@@ -30,7 +30,7 @@ const DeleteProjectComp = () => {
   const handleDelete = () => {
     DeleteProjectReq({ id: state.id })
       .then(() => {
-        Socket.send(JSON.stringify({ status: "delete-project", id: state.id }));
+        ws.send(JSON.stringify({ status: "delete-project", id: state.id }));
         dispatch(DeleteProject({ isModalOpen: false, id: "" }));
         toast.success(
           "پروژه شما با شناسه " + farsiNumber(state.id) + " با موفقیت حذف شد."

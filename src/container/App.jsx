@@ -23,7 +23,7 @@ import Sockets from "./Sockets";
 import { Sidebar, Tokens } from "redux/actions";
 
 // Requests
-import Socket from "requests/Socket";
+import ws from "requests/ws";
 import { UserDisconnect } from "requests";
 
 // Design
@@ -42,7 +42,7 @@ const App = () => {
     UserDisconnect()
       .then(res => console.log(res))
       .catch(err => console.log(err));
-    Socket.send(
+    ws.send(
       JSON.stringify({
         status: "user-offline",
         user_id: state.User.id,
@@ -60,7 +60,7 @@ const App = () => {
       );
 
     // eslint-disable-next-line
-  }, []);
+  }, [sessionStorage.getItem("_at"), sessionStorage.getItem("_rt")]);
 
   useEffect(() => {
     if (state.Tokens.re_t && state.Tokens.ac_t) sessionStorage.clear();
@@ -82,13 +82,20 @@ const App = () => {
   }, [width]);
 
   useEffect(() => {
-    if (state.User.id)
-      Socket.send(
+    setTimeout(() => {
+      console.log(ws);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (state.User.id && ws) {
+      ws.send(
         JSON.stringify({
           status: "user-online",
           user_id: state.User.id,
         })
       );
+    }
   }, [state.User.id]);
 
   return (

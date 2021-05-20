@@ -12,7 +12,7 @@ import { fileNameFilter } from "components/helper";
 import { CreateProject } from "redux/actions";
 
 // Requests
-import Socket from "requests/Socket";
+import ws from "requests/ws";
 import { handleErrors, CreateProjectReq } from "requests";
 
 // Designs
@@ -20,8 +20,8 @@ import "./reviewandsubmit.scss";
 
 const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.CreateProject);
-  const email = useSelector((state) => state.User.email);
+  const state = useSelector(state => state.CreateProject);
+  const email = useSelector(state => state.User.email);
   const previousStepRippleRef = useRef();
   const submitRippleRef = useRef();
   const [error, setError] = useState("");
@@ -41,9 +41,9 @@ const ReviewAndSubmit = () => {
     body.append("type", type);
 
     CreateProjectReq(body)
-      .then((res) => {
+      .then(res => {
         setLoading(false);
-        Socket.send(
+        ws.send(
           JSON.stringify({
             status: "new-project",
             id: res.id,
@@ -64,15 +64,15 @@ const ReviewAndSubmit = () => {
         );
         toast.success("پروژه‌ شما با موفقیت ثبت شد.");
       })
-      .catch((err) => {
+      .catch(err => {
         setLoading(false);
         handleErrors(err, setError);
       });
   };
 
   useEffect(() => {
-    state.languagesAndAdditions.forEach((lang) => {
-      setLangs((prevState) => [...prevState, lang.label]);
+    state.languagesAndAdditions.forEach(lang => {
+      setLangs(prevState => [...prevState, lang.label]);
     });
   }, [state.languagesAndAdditions]);
 
@@ -98,9 +98,7 @@ const ReviewAndSubmit = () => {
           </p>
           <p className="label mt-10">زبان(ها) و پیوست های پروژه</p>
           <p className="mr-12">
-            {state.languagesAndAdditions.map(
-              (language) => language.label + " "
-            )}
+            {state.languagesAndAdditions.map(language => language.label + " ")}
           </p>
           <div className="inline mt-10">
             <div>

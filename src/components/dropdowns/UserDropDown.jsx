@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UserDisconnect } from "requests";
 
 // Actions
-import { User, Profile } from "redux/actions";
+import { User, Profile, Tokens } from "redux/actions";
 
 // Designs
 import "./dropdowns.scss";
@@ -19,7 +19,7 @@ const UserDropDown = () => {
   const handleLogout = () => {
     UserDisconnect()
       .then(() => {
-        sessionStorage.clear();
+        dispatch(Tokens({ ac_t: null, re_t: null }));
         window.location.reload();
       })
       .catch(err => console.log(err));

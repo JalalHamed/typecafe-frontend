@@ -10,7 +10,7 @@ import { Puffloader } from "components/loader";
 import { scrollToRef } from "components/helper";
 
 // Requests
-import Socket from "requests/Socket";
+import ws from "requests/ws";
 import { SendMessage, SearchDisplayname } from "requests";
 
 // Actions
@@ -37,7 +37,7 @@ const TheMessages = () => {
     if (value)
       SendMessage({ receiver: selected, content: value })
         .then(res => {
-          Socket.send(
+          ws.send(
             JSON.stringify({
               status: "new-message",
               sender_id: user.id,
