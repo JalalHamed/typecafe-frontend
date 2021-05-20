@@ -35,6 +35,10 @@ const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   window.onbeforeunload = () => {
+    if (state.Tokens.ac_t && state.Tokens.re_t) {
+      sessionStorage.setItem("_at", state.Tokens.ac_t);
+      sessionStorage.setItem("_rt", state.Tokens.re_t);
+    }
     UserDisconnect()
       .then(res => console.log(res))
       .catch(err => console.log(err));
