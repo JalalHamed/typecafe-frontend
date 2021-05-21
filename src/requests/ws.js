@@ -7,9 +7,8 @@ export function setTokenWs(token) {
   ac_t = token;
 }
 
-if (ac_t) {
-  console.log(ac_t);
+setTimeout(() => {
   ws = new ReconnectingWebSocket("ws://127.0.0.1:8000/ws/tc/?token=" + ac_t);
-}
+}, 2000);
 
 export default ws;

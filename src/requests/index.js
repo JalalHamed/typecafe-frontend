@@ -1,4 +1,4 @@
-import axios from "./Api";
+import axios from "./api";
 
 // Token
 export const NewAccToken = body => {

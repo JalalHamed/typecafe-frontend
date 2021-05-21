@@ -10,8 +10,9 @@ import { baseURL } from "components/xhr";
 let ac_t = null;
 let re_t = null;
 
-export function setToken(token) {
-  ac_t = token;
+export function setToken(access, refresh) {
+  ac_t = access;
+  re_t = refresh;
 }
 
 const AxiosInstance = axios.create({
