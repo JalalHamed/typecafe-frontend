@@ -13,25 +13,25 @@ import {
 } from "redux/actions";
 
 // Requests
-import ws from "requests/ws";
+import socket from "requests/socket";
 
 const Sockets = () => {
   const dispatch = useDispatch();
   const now = new Date();
   const state = useSelector(state => state);
 
-  if (sessionStorage.getItem("_at") && ws) {
-    ws.onopen = () => {
+  if (state.Tokens.ac_t && socket) {
+    socket.onopen = () => {
       dispatch(Loading(false));
       console.log("socket open");
     };
 
-    ws.onclose = () => {
+    socket.onclose = () => {
       dispatch(Loading(true));
       console.log("socket close");
     };
 
-    ws.onmessage = e => {
+    socket.onmessage = e => {
       let data = JSON.parse(e.data);
       switch (data.ws_type) {
         case "user-online":

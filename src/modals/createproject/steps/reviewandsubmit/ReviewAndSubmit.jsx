@@ -12,7 +12,7 @@ import { fileNameFilter } from "components/helper";
 import { CreateProject } from "redux/actions";
 
 // Requests
-import ws from "requests/ws";
+import socket from "requests/socket";
 import { handleErrors, CreateProjectReq } from "requests";
 
 // Designs
@@ -43,7 +43,7 @@ const ReviewAndSubmit = () => {
     CreateProjectReq(body)
       .then(res => {
         setLoading(false);
-        ws.send(
+        socket.send(
           JSON.stringify({
             status: "new-project",
             id: res.id,

@@ -21,7 +21,7 @@ import {
 } from "redux/actions";
 
 // Request
-import ws from "requests/ws";
+import socket from "requests/socket";
 import { CreateOfferReq, handleErrors } from "requests";
 
 // Design
@@ -53,7 +53,7 @@ const OfferRequest = () => {
       };
       CreateOfferReq(body)
         .then(res => {
-          ws.send(
+          socket.send(
             JSON.stringify({
               status: "new-offer",
               id: res.id,

@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import App from "container/App";
 import allReducers from "redux/reducers";
 import { setToken } from "requests/api";
-import { setTokenWs } from "requests/ws";
+import { setTokenWs } from "requests/socket";
 
 // Designs
 import "components/ripple/ripple.scss";
