@@ -74,7 +74,7 @@ const TheMessages = () => {
   }, []);
 
   useEffect(() => {
-    if (search.length) {
+    if (search.length && search.length < 2) {
       setSearchLoading(true);
       SearchDisplayname({ search })
         .then(res => {
@@ -86,6 +86,20 @@ const TheMessages = () => {
           setSearchLoading(false);
         });
     }
+    if (search.length > 1 && search.length < 15 && searchResults.length) {
+      setSearchLoading(true);
+      SearchDisplayname({ search })
+        .then(res => {
+          setSearchResults(res);
+          setSearchLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setSearchLoading(false);
+        });
+    }
+
+    // eslint-disable-next-line
   }, [search]);
 
   return (
@@ -98,6 +112,7 @@ const TheMessages = () => {
               placeholder="جستجو نام نمایشی"
               value={search}
               onChange={e => setSearch(e.target.value)}
+              maxLength={14}
             />
             {!searchLoading ? (
               <div className="contacts-wrapper">

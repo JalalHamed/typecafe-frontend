@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import App from "container/App";
 import allReducers from "redux/reducers";
 import { setToken } from "requests/api";
-import { setTokenWs } from "requests/socket";
 
 // Designs
 import "components/ripple/ripple.scss";
@@ -18,12 +17,8 @@ import "./assets/styles/index.scss";
 
 const middleWare = () => next => action => {
   if (action.type === "TOKENS") {
-    // after a successful login, update the token in the API
     setToken(action.payload.ac_t, action.payload.re_t);
-    setTokenWs(action.payload.ac_t);
   }
-
-  // continue processing this action
   return next(action);
 };
 
