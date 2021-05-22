@@ -130,8 +130,12 @@ const TheProject = ({ project }) => {
             </div>
           </div>
         </div>
-        <div className="title">توضیحات</div>
-        <div className="description-value value">{project.description}</div>
+        {project.description && (
+          <>
+            <div className="title">توضیحات</div>
+            <div className="description-value value">{project.description}</div>
+          </>
+        )}
         <div className="inline">
           <div>
             <div className="title">تعداد صفحات</div>

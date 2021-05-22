@@ -4,11 +4,12 @@ import React, { forwardRef } from "react";
 import "./inputs.scss";
 
 const TextArea = forwardRef(
-  ({ label, name, id, onChange, value, className }, ref) => {
+  ({ label, name, id, onChange, value, className, optional }, ref) => {
     return (
       <div className="textarea-wrapper">
         <label htmlFor={id} className="label no-select">
           {label}
+          {optional && <span className="optional"> (اختیاری)</span>}
         </label>
         <textarea
           className={`textarea ${className ? className : ""}`}

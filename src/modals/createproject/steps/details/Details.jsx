@@ -107,7 +107,6 @@ const Details = () => {
     let ddl = Number(deliveryDeadline);
 
     if (
-      description &&
       nof > 0 &&
       ddl > 0 &&
       languagesAndAdditions &&
@@ -126,7 +125,7 @@ const Details = () => {
       } else if (ddl && !Number.isInteger(ddl)) {
         setErrorMsg("مهلت تحویل نمی‌تواند یک عدد اعشاری باشد.");
       } else {
-        setErrorMsg("برای ادامه دادن باید همه‌ فیلد های بالا را کامل کنید.");
+        setErrorMsg("برای ادامه دادن باید فیلد های بالا را کامل کنید.");
       }
     }
 
@@ -198,6 +197,7 @@ const Details = () => {
         name="description"
         value={description}
         onChange={e => setDescription(e.target.value)}
+        optional
       />
       <div className="details-buttons-wrapper">
         <Button
