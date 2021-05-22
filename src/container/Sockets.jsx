@@ -96,9 +96,11 @@ const Sockets = () => {
           );
           break;
         case "new-message":
-          dispatch(
-            MessagesElse({ totalUnread: state.Messages.totalUnread + 1 })
-          );
+          if (state.Messages.isWatching !== data.sender_id) {
+            dispatch(
+              MessagesElse({ totalUnread: state.Messages.totalUnread + 1 })
+            );
+          }
           if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(
               Messages({
@@ -107,7 +109,7 @@ const Sockets = () => {
                 displayname: data.sender_displayname,
                 is_online: data.sender_is_online,
                 last_login: data.sender_last_login,
-                unread: 1,
+                unread: state.Messages.isWatching !== data.sender_id ? 1 : 0,
                 messages: [
                   {
                     content: data.content,

@@ -11,7 +11,7 @@ import { scrollToRef, getUserTimeStatus, farsiNumber } from "components/helper";
 import { ReadMessages } from "requests";
 
 // Actions
-import { Messages, MessagesElse } from "redux/actions";
+import { Messages, MessagesElse, ReadMessagesAction } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -27,17 +27,25 @@ const User = ({
 }) => {
   const dispatch = useDispatch();
   const onlineUsers = useSelector(state => state.OnlineUsers);
+  const totalUnread = useSelector(state => state.Messages.totalUnread);
 
   return (
     <div
       className={`contact ${selected === user.id ? "selected" : ""}`}
       onClick={() => {
         if (!isSearch) {
-          dispatch(MessagesElse({ id: user.id, isWatching: user.id }));
           if (user.unread)
             ReadMessages({ sender_id: user.id })
               .then(res => console.log(res))
               .catch(err => console.error(err));
+          dispatch(
+            MessagesElse({
+              id: user.id,
+              isWatching: user.id,
+              totalUnread: totalUnread - user.unread,
+            })
+          );
+          dispatch(ReadMessagesAction({ id: user.id }));
         } else {
           if (!messages.find(x => x.id === user.id)) {
             dispatch(

@@ -103,6 +103,13 @@ export const NewMessageAction = payload => {
   };
 };
 
+export const ReadMessagesAction = payload => {
+  return {
+    type: "READ_MESSAGES",
+    payload,
+  };
+};
+
 export const MessagesElse = payload => {
   return {
     type: "MESSAGES_ELSE",
