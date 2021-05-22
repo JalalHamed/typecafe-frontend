@@ -87,9 +87,9 @@ const Requests = () => {
               });
               if (total_unread)
                 dispatch(MessagesElse({ totalUnread: total_unread }));
-              let userArr = res.map(message => message.user_id);
-              let uniqUserArr = [...new Set(userArr)];
-              uniqUserArr.forEach(id => {
+              let userIdArr = res.map(message => message.user_id);
+              let uniqUserIdArr = [...new Set(userIdArr)];
+              uniqUserIdArr.forEach(id => {
                 let messages = [];
                 let unread_count = 0;
                 res.forEach(message => {

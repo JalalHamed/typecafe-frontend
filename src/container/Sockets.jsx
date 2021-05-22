@@ -10,6 +10,7 @@ import {
   OnlineUsers,
   Messages,
   NewMessageAction,
+  MessagesElse,
 } from "redux/actions";
 
 // Requests
@@ -95,6 +96,9 @@ const Sockets = () => {
           );
           break;
         case "new-message":
+          dispatch(
+            MessagesElse({ totalUnread: state.Messages.totalUnread + 1 })
+          );
           if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(
               Messages({
