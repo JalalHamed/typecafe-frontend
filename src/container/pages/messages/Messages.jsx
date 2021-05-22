@@ -34,7 +34,7 @@ const TheMessages = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (value)
+    if (value.trim())
       SendMessage({ receiver: selected, content: value })
         .then(res => {
           socket.send(
@@ -116,6 +116,11 @@ const TheMessages = () => {
             />
             {!searchLoading ? (
               <div className="contacts-wrapper">
+                {search.length ? (
+                  <p className="search-result-note">نتیجه جسجتو</p>
+                ) : (
+                  <></>
+                )}
                 {!search.length ? (
                   messages.length ? (
                     messages.map(user => (

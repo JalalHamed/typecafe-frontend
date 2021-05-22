@@ -35,6 +35,7 @@ const Register = () => {
       UserRegister({ email, ...data })
         .then(res => {
           sessionStorage.setItem("_at", res.access);
+          sessionStorage.setItem("_rt", res.refresh);
           window.location.reload();
         })
         .catch(err => {

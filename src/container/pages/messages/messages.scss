@@ -128,10 +128,6 @@
       flex-direction: column;
       overflow-y: auto;
 
-      &::-webkit-scrollbar {
-        width: 5px;
-      }
-
       &.no-message {
         display: flex;
         flex-direction: column;
