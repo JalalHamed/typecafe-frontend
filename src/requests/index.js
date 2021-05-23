@@ -80,6 +80,10 @@ export const GetOffers = () => {
   return axios.get("offers/").then(res => res.data);
 };
 
+export const GetOffereds = () => {
+  return axios.get("offereds/").then(res => res.data);
+};
+
 export const GetDownloads = () => {
   return axios.get("downloaded/").then(res => res.data);
 };

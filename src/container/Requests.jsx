@@ -18,6 +18,7 @@ import {
   GetProjects,
   GetMyProjects,
   GetOffers,
+  GetOffereds,
   GetDownloads,
   GetMessages,
 } from "requests";
@@ -117,11 +118,26 @@ const Requests = () => {
 
           // Get Offers
           GetOffers()
-            .then(res => {
-              dispatch(ProjectsAction({ offers: res, offersLoading: false }));
-            })
+            .then(res =>
+              dispatch(ProjectsAction({ offers: res, offersLoading: false }))
+            )
             .catch(err => {
               dispatch(ProjectsAction({ offersLoading: false }));
+              console.log(err);
+            });
+
+          // Get Offereds
+          GetOffereds()
+            .then(res =>
+              dispatch(
+                ProjectsAction({
+                  offereds: res,
+                  offeredsLoading: false,
+                })
+              )
+            )
+            .catch(err => {
+              dispatch(ProjectsAction({ offeredsLoading: false }));
               console.log(err);
             });
 
@@ -161,6 +177,7 @@ const Requests = () => {
           loading: false,
           myprojectsloading: false,
           offersLoading: false,
+          offeredsLoading: false,
           downloadsLoading: false,
         })
       );

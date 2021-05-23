@@ -82,10 +82,6 @@ const App = () => {
   }, [width]);
 
   useEffect(() => {
-    console.log(socket);
-  }, []);
-
-  useEffect(() => {
     if (state.User.id && socket) {
       socket.send(
         JSON.stringify({

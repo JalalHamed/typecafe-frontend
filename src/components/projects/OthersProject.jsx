@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 // Libraries
+import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
 
 // Components
@@ -16,7 +17,8 @@ const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
   const submitReqeustRippleRef = useRef();
   const user = useSelector(state => state.User);
-  const isLoading = useSelector(state => state.Projects.downloadsLoading);
+  const offereds = useSelector(state => state.Projects.offereds);
+  const isLoading = useSelector(state => state.Projects);
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -61,52 +63,106 @@ const OthersProject = ({ project, downloaded }) => {
 
   return (
     <>
-      {!isLoading ? (
-        <div className="request-offer-wrapper">
+      {!isLoading.offeredsLoading && !isLoading.downloadsLoading ? (
+        <>
           {downloaded.includes(project.id) ? (
             <>
-              <div className="request-offer-form-wrapper">
-                <Input
-                  label="قیمت پیشنهادی (هر صفحه)"
-                  name="request"
-                  type="number"
-                  id="request"
-                  wrapperStyle={{ width: "100%" }}
-                  labelStyle={{ fontSize: "14px" }}
-                  style={{ fontSize: "14px", width: "200px" }}
-                  min={1555}
-                  disabled={inputDisabled}
-                  value={price}
-                  onChange={e => setPrice(e.target.value)}
-                />
-                <Button
-                  ref={submitReqeustRippleRef}
-                  title="ثبت پیشنهاد"
-                  className="fit-width no-break"
-                  disabled={buttonDisabled}
-                  onClick={handleOffer}
-                />
-                <p className="err-msg">{errMsg}</p>
-              </div>
-              <div className="calculate-price-wrapper">
-                <p className="left-title">کارمزد</p>
-                <span className="left-value">٪۱۰</span>
-                <p className="left-title">عایدی شما به ازای هر صفحه</p>
-                <span className="left-value">{priceFormat(typistEarning)}</span>
+              {offereds.find(offer => offer.project === project.id) ? (
                 <>
-                  <p className="left-title">جمع کل</p>
-                  <p className="left-value">
-                    {priceFormat(
-                      extractCommission(price * project.number_of_pages)
-                    )}
-                  </p>
+                  <div className="has-offers-wrapper no-height less-width">
+                    <p style={{ marginRight: "10px", fontSize: "14px" }}>
+                      پیشنهاد من
+                    </p>
+                    <div className="request-wrapper less-tp">
+                      <div className="offer">
+                        <div className="offered-price-wrapper">
+                          <span className="offered-price-title">
+                            قیمت پیشنهادی
+                          </span>
+                          <span className="offered-price">
+                            {priceFormat(
+                              offereds.find(
+                                offer => offer.project === project.id
+                              ).offered_price
+                            )}
+                          </span>
+                        </div>
+                        <div className="offered-price-wrapper">
+                          <span className="offered-price-title">عایدی کل</span>
+                          <span className="offered-price">
+                            {priceFormat(
+                              extractCommission(
+                                offereds.find(
+                                  offer => offer.project === project.id
+                                ).offered_price * project.number_of_pages
+                              )
+                            )}
+                          </span>
+                        </div>
+                        <span className="waiting-for-approval">
+                          در انتظار تایید
+                        </span>
+                        <div className="offer-created-at">
+                          <Moment fromNow locale="fa">
+                            {
+                              offereds.find(
+                                offer => offer.project === project.id
+                              ).created_at
+                            }
+                          </Moment>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </>
-              </div>
+              ) : (
+                <div className="request-offer-wrapper">
+                  <div className="request-offer-form-wrapper">
+                    <Input
+                      label="قیمت پیشنهادی (هر صفحه)"
+                      name="request"
+                      type="number"
+                      id="request"
+                      wrapperStyle={{ width: "100%" }}
+                      labelStyle={{ fontSize: "14px" }}
+                      style={{ fontSize: "14px", width: "200px" }}
+                      min={1555}
+                      disabled={inputDisabled}
+                      value={price}
+                      onChange={e => setPrice(e.target.value)}
+                    />
+                    <Button
+                      ref={submitReqeustRippleRef}
+                      title="ثبت پیشنهاد"
+                      className="fit-width no-break"
+                      disabled={buttonDisabled}
+                      onClick={handleOffer}
+                    />
+                    <p className="err-msg">{errMsg}</p>
+                  </div>
+                  <div className="calculate-price-wrapper">
+                    <p className="left-title">کارمزد</p>
+                    <span className="left-value">٪۱۰</span>
+                    <p className="left-title">عایدی شما به ازای هر صفحه</p>
+                    <span className="left-value">
+                      {priceFormat(typistEarning)}
+                    </span>
+                    <>
+                      <p className="left-title">جمع کل</p>
+                      <p className="left-value">
+                        {priceFormat(
+                          extractCommission(price * project.number_of_pages)
+                        )}
+                      </p>
+                    </>
+                  </div>
+                </div>
+              )}
             </>
           ) : (
             <p className="err-msg">{errMsg}</p>
           )}
-        </div>
+        </>
       ) : (
         <Puffloader color="#1c3987" loading={true} size={100} />
       )}
