@@ -95,6 +95,13 @@ const Sockets = () => {
             ProjectsAction({ offers: [data, ...state.Projects.offers] })
           );
           break;
+        case "delete-offer":
+          dispatch(
+            ProjectsAction({
+              offers: state.Projects.offers.filter(x => x.id !== data.id),
+            })
+          );
+          break;
         case "new-message":
           if (state.Messages.isWatching !== data.sender_id) {
             dispatch(

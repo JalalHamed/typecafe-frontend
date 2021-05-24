@@ -76,6 +76,10 @@ export const CreateOfferReq = body => {
   return axios.post("createoffer/", body).then(res => res.data);
 };
 
+export const DeleteOffer = id => {
+  return axios.post("deleteoffer/", id).then(res => res.data);
+};
+
 export const GetOffers = () => {
   return axios.get("offers/").then(res => res.data);
 };

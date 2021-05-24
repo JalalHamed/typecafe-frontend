@@ -64,7 +64,15 @@ const OfferRequest = () => {
           dispatch(CreateOffer({ isModalOpen: false }));
           dispatch(
             ProjectsAction({
-              requested: [...state.Projects.requested, project_id],
+              offereds: [
+                ...state.Projects.offereds,
+                {
+                  project: project_id,
+                  offered_price: pricePerPage,
+                  id: res.id,
+                  created_at: new Date(),
+                },
+              ],
             })
           );
           toast.success("پیشنهاد شما با موفقیت ثبت گردید.");

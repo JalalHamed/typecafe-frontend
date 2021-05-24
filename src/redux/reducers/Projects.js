@@ -9,7 +9,6 @@ let initialState = {
   offers: [],
   offereds: [],
   downloaded: [],
-  requested: [],
   next: "",
 };
 

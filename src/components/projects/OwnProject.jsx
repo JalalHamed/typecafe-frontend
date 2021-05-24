@@ -40,6 +40,8 @@ const OwnProject = ({ project }) => {
           setOffers(prevState => [...prevState, offer]);
         }
       });
+    } else {
+      setOffers([]);
     }
 
     // eslint-disable-next-line

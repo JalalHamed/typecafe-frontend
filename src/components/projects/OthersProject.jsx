@@ -10,8 +10,12 @@ import Button from "components/buttons/Button";
 import { priceFormat, extractCommission } from "components/helper";
 import { Puffloader } from "components/loader";
 
+// Requests
+import socket from "requests/socket";
+import { DeleteOffer } from "requests";
+
 // Actions
-import { CreateOffer } from "redux/actions";
+import { CreateOffer, ProjectsAction } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
@@ -35,6 +39,23 @@ const OthersProject = ({ project, downloaded }) => {
         selectedId: project.id,
       })
     );
+  };
+
+  const handleDelete = id => {
+    DeleteOffer({ id })
+      .then(() => {
+        dispatch(
+          ProjectsAction({ offereds: offereds.filter(x => x.id !== id) })
+        );
+        socket.send(
+          JSON.stringify({
+            status: "offer-delete",
+            id: id,
+            project_owner: project.client_id,
+          })
+        );
+      })
+      .catch(err => console.error(err));
   };
 
   useEffect(() => {
@@ -74,6 +95,15 @@ const OthersProject = ({ project, downloaded }) => {
                       پیشنهاد من
                     </p>
                     <div className="request-wrapper less-tp">
+                      <i
+                        className="icon icon-close-background-red delete-offer"
+                        onClick={() =>
+                          handleDelete(
+                            offereds.find(offer => offer.project === project.id)
+                              .id
+                          )
+                        }
+                      />
                       <div className="offer">
                         <div className="offered-price-wrapper">
                           <span className="offered-price-title">

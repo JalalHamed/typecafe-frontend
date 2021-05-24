@@ -130,12 +130,10 @@ const TheProject = ({ project }) => {
             </div>
           </div>
         </div>
-        {project.description && (
-          <>
-            <div className="title">توضیحات</div>
-            <div className="description-value value">{project.description}</div>
-          </>
-        )}
+        <div className="title">توضیحات</div>
+        <div className="description-value value">
+          {project.description ? project.description : <>ـــ</>}
+        </div>
         <div className="inline">
           <div>
             <div className="title">تعداد صفحات</div>
@@ -192,7 +190,7 @@ const TheProject = ({ project }) => {
       </div>
       <div className="project-id">
         شناسه پروژه{" "}
-        <span className="project-id-value">[ {farsiNumber(project.id)}# ]</span>
+        <span className="project-id-value">[ {farsiNumber(project.id)} ]</span>
       </div>
     </div>
   );
