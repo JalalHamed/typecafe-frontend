@@ -26,7 +26,7 @@ const OthersProject = ({ project, downloaded }) => {
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [price, setPrice] = useState(1555);
+  const [price, setPrice] = useState(1560);
   const [typistEarning, setTypistEarning] = useState(extractCommission(price));
 
   const handleOffer = () => {
@@ -67,8 +67,8 @@ const OthersProject = ({ project, downloaded }) => {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
       setButtonDisabled(true);
       setInputDisabled(true);
-    } else if (price < 1555) {
-      setErrMsg("قیمت پیشنهادی نمی‌تواند کمتر از ۱,۵۵۵ تومان باشد.");
+    } else if (price < 1560) {
+      setErrMsg("قیمت پیشنهادی نمی‌تواند کمتر از ۱,۵۶۰ تومان باشد.");
       setButtonDisabled(true);
       setInputDisabled(false);
     } else {
@@ -156,7 +156,7 @@ const OthersProject = ({ project, downloaded }) => {
                       wrapperStyle={{ width: "100%" }}
                       labelStyle={{ fontSize: "14px" }}
                       style={{ fontSize: "14px", width: "200px" }}
-                      min={1555}
+                      min={1560}
                       disabled={inputDisabled}
                       value={price}
                       onChange={e => setPrice(e.target.value)}
