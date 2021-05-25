@@ -82,7 +82,7 @@ const App = () => {
   }, [width]);
 
   useEffect(() => {
-    if (state.User.id && socket) {
+    if (state.User.id && !state.Loading) {
       socket.send(
         JSON.stringify({
           status: "user-online",
@@ -90,7 +90,7 @@ const App = () => {
         })
       );
     }
-  }, [state.User.id]);
+  }, [state.User.id, state.Loading]);
 
   return (
     <div className="wrapper">

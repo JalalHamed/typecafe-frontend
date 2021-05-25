@@ -58,26 +58,26 @@ export const GetMoreProjects = url => {
 
 export const CreateProjectReq = body => {
   return axios
-    .post("createproject/", body, {
+    .post("create-project/", body, {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then(res => res.data);
 };
 
 export const GetMyProjects = () => {
-  return axios.get("myprojects/").then(res => res.data);
+  return axios.get("my-projects/").then(res => res.data);
 };
 
 export const DeleteProjectReq = id => {
-  return axios.post("deleteproject/", id).then(res => res.data);
+  return axios.post("delete-project/", id).then(res => res.data);
 };
 
 export const CreateOfferReq = body => {
-  return axios.post("createoffer/", body).then(res => res.data);
+  return axios.post("create-offer/", body).then(res => res.data);
 };
 
 export const DeleteOffer = id => {
-  return axios.post("deleteoffer/", id).then(res => res.data);
+  return axios.post("delete-offer/", id).then(res => res.data);
 };
 
 export const GetOffers = () => {

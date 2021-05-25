@@ -1,4 +1,4 @@
-const Loading = (state = false, action) => {
+const Loading = (state = true, action) => {
   switch (action.type) {
     case "LOADING":
       return action.payload;

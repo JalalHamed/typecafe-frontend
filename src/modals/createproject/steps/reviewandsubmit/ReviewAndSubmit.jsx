@@ -115,7 +115,7 @@ const ReviewAndSubmit = () => {
             className="mr-12"
             style={{ overflow: "auto", maxHeight: "56px", width: "260px" }}
           >
-            {state.description}
+            {state.description ? state.description : "ـــ"}
           </p>
         </div>
       </div>

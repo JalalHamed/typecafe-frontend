@@ -136,6 +136,8 @@ const Sockets = () => {
           break;
       }
     };
+  } else {
+    dispatch(Loading(false));
   }
 
   return <></>;
