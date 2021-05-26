@@ -19,6 +19,9 @@ import {
   RulesScrollToHTWW,
 } from "redux/actions";
 
+// Requests
+import { RejectOffer } from "requests";
+
 // xhr
 import { baseURL } from "components/xhr";
 
@@ -45,6 +48,12 @@ const AoROffer = () => {
         dispatch(AoROfferAction({ isModalOpen: false }));
       }, 48);
     }
+  };
+
+  const handleReject = () => {
+    RejectOffer({ id: offer.id })
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   };
 
   return (
@@ -85,7 +94,7 @@ const AoROffer = () => {
             پس از تایید درخواست، مبلغ کل از حساب شما کسر و در حساب سایت بلوکه
             خواهد شد. در صورت نپرداختن دستمزد تایپیست به مدت ۲۴ ساعت پس از آپلود
             شدن فایل نهایی توسط تایپیست برای شما، این مبلغ به طور خودکار به حساب
-            تایپیست واریز خواهد شد.
+            تایپیست واریز و یک پروژه ناموفق در کارنامه شما ثبت خواهد شد.
           </p>
           <p className="go-to-rules" onClick={handleGoToRules}>
             اطلاعات بیشتر درباره نحوه ایجاد و انجام پروژه
@@ -112,7 +121,7 @@ const AoROffer = () => {
             ref={submitButtonRippleRef}
             title="رد پیشنهاد"
             className="w-68 red"
-            // onClick={handleReject}
+            onClick={handleReject}
           />
           <Previous
             ref={previousButtonRippleRef}

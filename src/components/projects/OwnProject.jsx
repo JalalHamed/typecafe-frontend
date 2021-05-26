@@ -32,6 +32,22 @@ const OwnProject = ({ project }) => {
     );
   };
 
+  const openAoRModal = (offer, status) => {
+    dispatch(
+      AoROfferAction({
+        isModalOpen: true,
+        id: offer.id,
+        typist: offer.typist,
+        typistImage: offer.typist_image,
+        offeredPrice: offer.offered_price,
+        wholePrice: addCommission(
+          offer.offered_price * project.number_of_pages
+        ),
+        status: status,
+      })
+    );
+  };
+
   useEffect(() => {
     if (Offers.length && Offers.find(offer => offer.project === project.id)) {
       setOffers([]);
@@ -105,39 +121,13 @@ const OwnProject = ({ project }) => {
                       <div className="accept-reject-wrapper no-select">
                         <div
                           className="accept"
-                          onClick={() =>
-                            dispatch(
-                              AoROfferAction({
-                                isModalOpen: true,
-                                typist: offer.typist,
-                                typistImage: offer.typist_image,
-                                offeredPrice: offer.offered_price,
-                                wholePrice: addCommission(
-                                  offer.offered_price * project.number_of_pages
-                                ),
-                                status: "accept",
-                              })
-                            )
-                          }
+                          onClick={() => openAoRModal(offer, "accept")}
                         >
                           <i className="icon icon-check-green" />
                         </div>
                         <div
                           className="reject"
-                          onClick={() =>
-                            dispatch(
-                              AoROfferAction({
-                                isModalOpen: true,
-                                typist: offer.typist,
-                                typistImage: offer.typist_image,
-                                offeredPrice: offer.offered_price,
-                                wholePrice: addCommission(
-                                  offer.offered_price * project.number_of_pages
-                                ),
-                                status: "reject",
-                              })
-                            )
-                          }
+                          onClick={() => openAoRModal(offer, "reject")}
                         >
                           <i className="icon icon-close-red" />
                         </div>
