@@ -163,6 +163,9 @@
 
         &.less-tp {
           padding-top: 5px;
+        }
+
+        &.more-pl {
           padding-left: 30px;
         }
 
@@ -190,6 +193,10 @@
 
           &:last-child {
             margin-bottom: 0;
+          }
+
+          &.rejected {
+            border-color: #ff2d2d;
           }
 
           .waiting-for-approval {

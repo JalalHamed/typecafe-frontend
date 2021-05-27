@@ -106,14 +106,22 @@ const OthersProject = ({ project, downloaded }) => {
                     <p style={{ marginRight: "10px", fontSize: "14px" }}>
                       پیشنهاد من
                     </p>
-                    <div className="request-wrapper less-tp">
+                    <div
+                      className={`request-wrapper less-tp ${
+                        offer.status === "A" ? "more-pl" : ""
+                      }`}
+                    >
                       {offer.status === "A" && (
                         <i
                           className="icon icon-close-background-red delete-offer"
                           onClick={() => handleDelete(offer.id)}
                         />
                       )}
-                      <div className="offer">
+                      <div
+                        className={`offer ${
+                          offer.status === "REJ" ? "rejected" : ""
+                        }`}
+                      >
                         <div className="offered-price-wrapper">
                           <span className="offered-price-title">
                             قیمت پیشنهادی
