@@ -11,16 +11,18 @@ import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
 import { priceFormat } from "components/helper";
 
+// Requests
+import socket from "requests/socket";
+import { RejectOffer } from "requests";
+
 // Actions
 import {
   AoROfferAction,
   Sidebar,
   NotEnoughCreditAction,
   RulesScrollToHTWW,
+  ProjectsAction,
 } from "redux/actions";
-
-// Requests
-import { RejectOffer } from "requests";
 
 // xhr
 import { baseURL } from "components/xhr";
@@ -34,6 +36,7 @@ const AoROffer = () => {
   const previousButtonRippleRef = useRef();
   const offer = useSelector(state => state.AoROffer);
   const user = useSelector(state => state.User);
+  const offers = useSelector(state => state.Projects.offers);
 
   const handleGoToRules = () => {
     dispatch(RulesScrollToHTWW(true));
@@ -52,7 +55,18 @@ const AoROffer = () => {
 
   const handleReject = () => {
     RejectOffer({ id: offer.id })
-      .then(res => console.log(res))
+      .then(() => {
+        dispatch(
+          ProjectsAction({ offers: offers.filter(x => x.id !== offer.id) })
+        );
+        dispatch(AoROfferAction({ isModalOpen: false }));
+        socket.send(
+          JSON.stringify({
+            status: "offer-rejected",
+            id: offer.id,
+          })
+        );
+      })
       .catch(err => console.error(err));
   };
 

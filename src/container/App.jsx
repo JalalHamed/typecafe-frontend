@@ -100,7 +100,7 @@ const App = () => {
       <TopBar />
       <div className="main">
         <div
-          className={state.Sidebar.isOpen ? "sidebar-open" : "sidebar-close"}
+          className={`sidebar ${state.Sidebar.isOpen ? "sidebar-open" : "sidebar-close"}`}
         >
           <SideBar />
         </div>
@@ -115,7 +115,7 @@ const App = () => {
       </div>
       <ToastContainer
         position="bottom-left"
-        autoClose={3000}
+        autoClose={3500}
         hideProgressBar={false}
         newestOnTop={false}
         rtl
