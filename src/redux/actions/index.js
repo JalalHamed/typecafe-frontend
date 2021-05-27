@@ -61,6 +61,13 @@ export const CreateOffer = payload => {
   };
 };
 
+export const ChangeOfferedStatus = payload => {
+  return {
+    type: "CHANGE_OFFERED_STATUS",
+    payload,
+  };
+};
+
 export const ProjectsAction = payload => {
   return {
     type: "PROJECTS",

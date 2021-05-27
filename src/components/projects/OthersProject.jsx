@@ -28,6 +28,7 @@ const OthersProject = ({ project, downloaded }) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [price, setPrice] = useState(1560);
   const [typistEarning, setTypistEarning] = useState(extractCommission(price));
+  const [offer, setOffer] = useState(null);
 
   const handleOffer = () => {
     dispatch(
@@ -82,39 +83,43 @@ const OthersProject = ({ project, downloaded }) => {
     setTypistEarning(extractCommission(price));
   }, [price]);
 
+  useEffect(() => {
+    if (offereds.find(offer => offer.project === project.id))
+      setOffer(offereds.find(offer => offer.project === project.id));
+
+    // eslint-disable-next-line
+  }, [offereds]);
+
+  useEffect(() => {
+    console.log(offer);
+  }, [offer]);
+
   return (
     <>
       {!isLoading.offeredsLoading && !isLoading.downloadsLoading ? (
         <>
           {downloaded.includes(project.id) ? (
             <>
-              {offereds.find(offer => offer.project === project.id) ? (
+              {offer ? (
                 <>
                   <div className="has-offers-wrapper no-height less-width">
                     <p style={{ marginRight: "10px", fontSize: "14px" }}>
                       پیشنهاد من
                     </p>
                     <div className="request-wrapper less-tp">
-                      <i
-                        className="icon icon-close-background-red delete-offer"
-                        onClick={() =>
-                          handleDelete(
-                            offereds.find(offer => offer.project === project.id)
-                              .id
-                          )
-                        }
-                      />
+                      {offer.status === "A" && (
+                        <i
+                          className="icon icon-close-background-red delete-offer"
+                          onClick={() => handleDelete(offer.id)}
+                        />
+                      )}
                       <div className="offer">
                         <div className="offered-price-wrapper">
                           <span className="offered-price-title">
                             قیمت پیشنهادی
                           </span>
                           <span className="offered-price">
-                            {priceFormat(
-                              offereds.find(
-                                offer => offer.project === project.id
-                              ).offered_price
-                            )}
+                            {priceFormat(offer.offered_price)}
                           </span>
                         </div>
                         <div className="offered-price-wrapper">
@@ -122,23 +127,20 @@ const OthersProject = ({ project, downloaded }) => {
                           <span className="offered-price">
                             {priceFormat(
                               extractCommission(
-                                offereds.find(
-                                  offer => offer.project === project.id
-                                ).offered_price * project.number_of_pages
+                                offer.offered_price * project.number_of_pages
                               )
                             )}
                           </span>
                         </div>
-                        <span className="waiting-for-approval">
-                          در انتظار تایید
-                        </span>
+                        <p className="waiting-for-approval">
+                          {offer.status === "A" && <span>در انتظار تایید</span>}
+                          {offer.status === "REJ" && (
+                            <span className="rejected-note">رد شده</span>
+                          )}
+                        </p>
                         <div className="offer-created-at">
                           <Moment fromNow locale="fa">
-                            {
-                              offereds.find(
-                                offer => offer.project === project.id
-                              ).created_at
-                            }
+                            {offer.created_at}
                           </Moment>
                         </div>
                       </div>

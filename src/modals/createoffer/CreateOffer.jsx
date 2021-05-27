@@ -25,9 +25,9 @@ import socket from "requests/socket";
 import { CreateOfferReq, handleErrors } from "requests";
 
 // Design
-import "./offerrequest.scss";
+import "./createoffer.scss";
 
-const OfferRequest = () => {
+const TheCreateOffer = () => {
   const dispatch = useDispatch();
   const submitButtonRippleRef = useRef();
   const previousButtonRippleRef = useRef();
@@ -71,6 +71,7 @@ const OfferRequest = () => {
                   offered_price: pricePerPage,
                   id: res.id,
                   created_at: new Date(),
+                  status: res.status,
                 },
               ],
             })
@@ -132,4 +133,4 @@ const OfferRequest = () => {
   );
 };
 
-export default OfferRequest;
+export default TheCreateOffer;

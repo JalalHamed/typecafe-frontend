@@ -10,7 +10,7 @@ import LoginRegister from "modals/loginregister/LoginRegister";
 import CreateProject from "modals/createproject/CreateProject";
 import Image from "modals/image/Image";
 import Profile from "modals/profile/Profile";
-import OfferRequest from "modals/offerrequest/OfferReqeust";
+import OfferRequest from "modals/createoffer/CreateOffer";
 import DeleteProject from "modals/deleteproject/DeleteProject";
 import AoROffer from "modals/aoroffer/AoROffer";
 import NotEnoughCredit from "modals/notEnoughCredit/NotEnoughCredit";

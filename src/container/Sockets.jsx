@@ -2,16 +2,13 @@ import React from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
+// Components
+import { farsiNumber } from "components/helper";
 
 // Actions
-import {
-  ProjectsAction,
-  Loading,
-  OnlineUsers,
-  Messages,
-  NewMessageAction,
-  MessagesElse,
-} from "redux/actions";
+import * as actions from "redux/actions";
 
 // Requests
 import socket from "requests/socket";
@@ -23,12 +20,12 @@ const Sockets = () => {
 
   if (state.Tokens.ac_t && socket) {
     socket.onopen = () => {
-      dispatch(Loading(false));
+      dispatch(actions.Loading(false));
       console.log("socket open");
     };
 
     socket.onclose = () => {
-      dispatch(Loading(true));
+      dispatch(actions.Loading(true));
       console.log("socket close");
     };
 
@@ -38,11 +35,13 @@ const Sockets = () => {
         case "user-online":
           if (!state.OnlineUsers.ids.includes(data.user_id))
             dispatch(
-              OnlineUsers({ ids: [...state.OnlineUsers.ids, data.user_id] })
+              actions.OnlineUsers({
+                ids: [...state.OnlineUsers.ids, data.user_id],
+              })
             );
           if (state.OnlineUsers.disconnects.includes(data.user_id))
             dispatch(
-              OnlineUsers({
+              actions.OnlineUsers({
                 disconnects: state.OnlineUsers.disconnects.filter(
                   x => x !== data.user_id
                 ),
@@ -54,7 +53,7 @@ const Sockets = () => {
           break;
         case "user-offline":
           dispatch(
-            OnlineUsers({
+            actions.OnlineUsers({
               ids: state.OnlineUsers.ids.filter(x => x !== data.user_id),
               disconnects: [...state.OnlineUsers.disconnects, data.user_id],
               lastLogins: [
@@ -66,11 +65,13 @@ const Sockets = () => {
           break;
         case "new-project":
           dispatch(
-            ProjectsAction({ projects: [data, ...state.Projects.projects] })
+            actions.ProjectsAction({
+              projects: [data, ...state.Projects.projects],
+            })
           );
           if (data.client_email === state.User.email) {
             dispatch(
-              ProjectsAction({
+              actions.ProjectsAction({
                 myprojects: [data, ...state.Projects.myprojects],
               })
             );
@@ -78,12 +79,12 @@ const Sockets = () => {
           break;
         case "delete-project":
           dispatch(
-            ProjectsAction({
+            actions.ProjectsAction({
               projects: state.Projects.projects.filter(x => x.id !== data.id),
             })
           );
           dispatch(
-            ProjectsAction({
+            actions.ProjectsAction({
               myprojects: state.Projects.myprojects.filter(
                 x => x.id !== data.id
               ),
@@ -92,12 +93,12 @@ const Sockets = () => {
           break;
         case "new-offer":
           dispatch(
-            ProjectsAction({ offers: [data, ...state.Projects.offers] })
+            actions.ProjectsAction({ offers: [data, ...state.Projects.offers] })
           );
           break;
         case "delete-offer":
           dispatch(
-            ProjectsAction({
+            actions.ProjectsAction({
               offers: state.Projects.offers.filter(x => x.id !== data.id),
             })
           );
@@ -105,12 +106,14 @@ const Sockets = () => {
         case "new-message":
           if (state.Messages.isWatching !== data.sender_id) {
             dispatch(
-              MessagesElse({ totalUnread: state.Messages.totalUnread + 1 })
+              actions.MessagesElse({
+                totalUnread: state.Messages.totalUnread + 1,
+              })
             );
           }
           if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(
-              Messages({
+              actions.Messages({
                 image: data.sender_image,
                 id: data.sender_id,
                 displayname: data.sender_displayname,
@@ -129,15 +132,25 @@ const Sockets = () => {
               })
             );
           } else {
-            dispatch(NewMessageAction({ id: data.sender_id, message: data }));
+            dispatch(
+              actions.NewMessageAction({ id: data.sender_id, message: data })
+            );
           }
+          break;
+        case "offer-rejected":
+          dispatch(actions.ChangeOfferedStatus({ id: data.id }));
+          toast.info(
+            `پیشنهاد شما برای پروژه با شناسه ${farsiNumber(
+              data.project
+            )} رد شد.`
+          );
           break;
         default:
           break;
       }
     };
   } else {
-    dispatch(Loading(false));
+    dispatch(actions.Loading(false));
   }
 
   return <></>;
