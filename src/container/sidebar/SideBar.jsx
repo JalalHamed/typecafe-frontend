@@ -19,7 +19,7 @@ const SideBar = () => {
   const messagesRippleRef = useRef();
   const financialRippleRef = useRef();
   const rulesRippleRef = useRef();
-  const tutorialRippleRef = useRef();
+  // const tutorialRippleRef = useRef();
   const myProjectsRippleRef = useRef();
   const supportRippleRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
@@ -62,11 +62,11 @@ const SideBar = () => {
               />
             )}
             <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
-            <SideBarItem
+            {/* <SideBarItem
               status="tutorial"
               title="آموزش"
               ref={tutorialRippleRef}
-            />
+            /> */}
             {isLoggedIn && (
               <SideBarItem
                 status="support"

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -37,6 +37,7 @@ const AoROffer = () => {
   const offer = useSelector(state => state.AoROffer);
   const user = useSelector(state => state.User);
   const offers = useSelector(state => state.Projects.offers);
+  const [loading, setLoading] = useState(false);
 
   const handleGoToRules = () => {
     dispatch(RulesScrollToHTWW(true));
@@ -45,7 +46,9 @@ const AoROffer = () => {
   };
 
   const handleAccept = () => {
+    setLoading(true);
     if (user.credit < offer.wholePrice) {
+      setLoading(false);
       dispatch(NotEnoughCreditAction(true));
       setTimeout(() => {
         dispatch(AoROfferAction({ isModalOpen: false }));
@@ -53,14 +56,22 @@ const AoROffer = () => {
     } else {
       dispatch(AoROfferAction({ isModalOpen: false }));
       AcceptOffer({ id: offer.id })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then(res => {
+          setLoading(false);
+          console.log(res);
+        })
+        .catch(err => {
+          setLoading(false);
+          console.log(err);
+        });
     }
   };
 
   const handleReject = () => {
+    setLoading(true);
     RejectOffer({ id: offer.id })
       .then(() => {
+        setLoading(false);
         dispatch(
           ProjectsAction({ offers: offers.filter(x => x.id !== offer.id) })
         );
@@ -72,7 +83,10 @@ const AoROffer = () => {
           })
         );
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        setLoading(false);
+        console.error(err);
+      });
   };
 
   return (
@@ -124,6 +138,7 @@ const AoROffer = () => {
               title="تایید پیشنهاد"
               className="w-68 green"
               onClick={handleAccept}
+              loading={loading}
             />
             <Previous
               ref={previousButtonRippleRef}
@@ -141,6 +156,7 @@ const AoROffer = () => {
             title="رد پیشنهاد"
             className="w-68 red"
             onClick={handleReject}
+            loading={loading}
           />
           <Previous
             ref={previousButtonRippleRef}

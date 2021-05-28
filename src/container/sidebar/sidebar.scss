@@ -127,6 +127,12 @@
       position: absolute;
       left: 25px;
       transition: all 0.5s;
+      z-index: 2;
+
+      &.light-blue {
+        background-color: #4297ff;
+        z-index: 1;
+      }
 
       &.red {
         background-color: #ff2d2d;
@@ -134,6 +140,10 @@
 
       &.sidebar-counter-close {
         left: 10px;
+      }
+
+      &.left-50 {
+        left: 50px;
       }
     }
   }

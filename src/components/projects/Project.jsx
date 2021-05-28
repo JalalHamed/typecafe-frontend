@@ -179,7 +179,8 @@ const TheProject = ({ project }) => {
         ) : (
           <OthersProject project={project} downloaded={downloaded} />
         )}
-        {offereds.find(offer => offer.project === project.id) && (
+        {offereds.find(offer => offer.project === project.id)?.status ===
+          "A" && (
           <div className="hint-arrow-wrapper">
             <div className="ha-arrow">
               <HintArrow />

@@ -42,14 +42,27 @@ const Item = forwardRef(({ status, title }, ref) => {
       >
         {title}
       </p>
-      {status === "my-projects" && !!state.Projects.myprojects.length && (
-        <div
-          className={`sidebar-counter ${
-            !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
-          }`}
-        >
-          {farsiNumber(state.Projects.myprojects.length)}
-        </div>
+      {status === "my-projects" && (
+        <>
+          {!!state.Projects.myprojects.length && (
+            <div
+              className={`sidebar-counter ${
+                !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
+              }`}
+            >
+              {farsiNumber(state.Projects.myprojects.length)}
+            </div>
+          )}
+          {!!state.Projects.offereds.length && (
+            <div
+              className={`sidebar-counter light-blue ${
+                !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
+              } ${!!state.Projects.myprojects.length ? "left-50" : ""}`}
+            >
+              {farsiNumber(state.Projects.offereds.length)}
+            </div>
+          )}
+        </>
       )}
       {status === "messages" && !!state.Messages.totalUnread && (
         <div

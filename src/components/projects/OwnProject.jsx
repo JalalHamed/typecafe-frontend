@@ -17,11 +17,11 @@ import { baseURL } from "components/xhr";
 
 const OwnProject = ({ project }) => {
   const dispatch = useDispatch();
-  const Offers = useSelector((state) => state.Projects.offers);
-  const isLoading = useSelector((state) => state.Projects.offersLoading);
+  const Offers = useSelector(state => state.Projects.offers);
+  const isLoading = useSelector(state => state.Projects.offersLoading);
   const [offers, setOffers] = useState([]);
 
-  const openProfile = (offer) => {
+  const openProfile = offer => {
     dispatch(
       Profile({
         isModalOpen: true,
@@ -49,11 +49,11 @@ const OwnProject = ({ project }) => {
   };
 
   useEffect(() => {
-    if (Offers.length && Offers.find((offer) => offer.project === project.id)) {
+    if (Offers.length && Offers.find(offer => offer.project === project.id)) {
       setOffers([]);
-      Offers.forEach((offer) => {
+      Offers.forEach(offer => {
         if (offer.project === project.id && offer.status === "A") {
-          setOffers((prevState) => [...prevState, offer]);
+          setOffers(prevState => [...prevState, offer]);
         }
       });
     } else {
@@ -76,7 +76,7 @@ const OwnProject = ({ project }) => {
                 </span>
               </div>
               <div className="request-wrapper">
-                {offers.map((offer) => {
+                {offers.map(offer => {
                   return (
                     <div key={offer.id} className="offer">
                       <div className="typist-wrapper">

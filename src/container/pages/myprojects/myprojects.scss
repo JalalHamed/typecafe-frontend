@@ -1,10 +1,15 @@
-.projects-wrapper {
+.my-projects-wrapper {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 
   .no-project-note {
     margin-top: 15px;
+  }
+
+  .mp-title {
+    font-size: 18px;
+    padding: 0 10px 7px 0;
   }
 
   .add-a-project-wrapper {
