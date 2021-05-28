@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Puffloader } from "components/loader";
 import Project from "components/projects/Project";
 import RippleWrapper from "components/ripple/RippleWrapper";
+import { farsiNumber } from "components/helper";
 
 // Actions
 import { CreateProject } from "redux/actions";
@@ -27,6 +28,7 @@ const Projects = () => {
       {!!myprojects.length && (
         <>
           <p className="mp-title">پروژه ها</p>
+          <div className="mp-counter">{farsiNumber(myprojects.length)}</div>
           {myprojects.map(project => {
             return <Project key={project.id} project={project} />;
           })}
@@ -35,6 +37,9 @@ const Projects = () => {
       {!!offereds.length && (
         <>
           <p className="mp-title">پیشنهادها</p>
+          <div className="mp-counter mp-light-blue">
+            {farsiNumber(offereds.length)}
+          </div>
           {offereds.map(offer => {
             let project = projects.find(x => x.id === offer.project);
             return <Project key={project.id} project={project} />;
