@@ -10,6 +10,7 @@ import Button from "components/buttons/Button";
 import OwnProject from "./OwnProject";
 import OthersProject from "./OthersProject";
 import { farsiNumber, getUserTimeStatus } from "components/helper";
+import HintArrow from "./HintArrow";
 
 // Requests
 import { Downloaded } from "requests";
@@ -30,6 +31,7 @@ const TheProject = ({ project }) => {
   const user = useSelector(state => state.User);
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
+  const offereds = useSelector(state => state.Projects.offereds);
 
   const handleDownloaded = () => {
     window.open(project.file, "_blank");
@@ -176,6 +178,14 @@ const TheProject = ({ project }) => {
           <OwnProject project={project} />
         ) : (
           <OthersProject project={project} downloaded={downloaded} />
+        )}
+        {offereds.find(offer => offer.project === project.id) && (
+          <div className="hint-arrow-wrapper">
+            <div className="ha-arrow">
+              <HintArrow />
+            </div>
+            <p className="ha-note">لغو پیشنهاد</p>
+          </div>
         )}
       </div>
       <div className="top-left">

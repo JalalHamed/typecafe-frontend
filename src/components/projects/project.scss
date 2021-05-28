@@ -85,6 +85,38 @@
       color: #777;
     }
 
+    .hint-arrow-wrapper {
+      .ha-arrow {
+        position: absolute;
+        left: 8.9%;
+        top: 118px;
+
+        #hintArrowStem {
+          stroke-dasharray: 29.25143051147461;
+          stroke-dashoffset: 29.25143051147461;
+          animation: haStem 1s linear forwards, haFadeOut 1s ease 5s forwards;
+        }
+
+        #hintArrowCap {
+          stroke-dasharray: 14.705007553100586;
+          stroke-dashoffset: 14.705007553100586;
+          animation: haCap 0.5s linear 1s forwards,
+            haFadeOut 1s ease 5s forwards;
+        }
+      }
+
+      .ha-note {
+        position: absolute;
+        left: 6.7%;
+        top: 98px;
+        font-size: 11px;
+        transform: rotate(335deg);
+        opacity: 0;
+        animation: haFadeIn 0.8s ease 1.5s forwards,
+          haFadeOut 1s ease 5s forwards;
+      }
+    }
+
     .request-offer-wrapper {
       display: flex;
       justify-content: center;
@@ -320,5 +352,29 @@
     .project-id-value {
       margin-right: 3px;
     }
+  }
+}
+
+@keyframes haStem {
+  to {
+    stroke-dashoffset: 58.502861023;
+  }
+}
+
+@keyframes haCap {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes haFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes haFadeOut {
+  to {
+    opacity: 0;
   }
 }

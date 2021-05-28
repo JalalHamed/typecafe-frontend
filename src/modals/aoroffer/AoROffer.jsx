@@ -13,7 +13,7 @@ import { priceFormat } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { RejectOffer } from "requests";
+import { RejectOffer, AcceptOffer } from "requests";
 
 // Actions
 import {
@@ -50,6 +50,11 @@ const AoROffer = () => {
       setTimeout(() => {
         dispatch(AoROfferAction({ isModalOpen: false }));
       }, 48);
+    } else {
+      dispatch(AoROfferAction({ isModalOpen: false }));
+      AcceptOffer({ id: offer.id })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
   };
 

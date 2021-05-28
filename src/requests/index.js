@@ -80,6 +80,10 @@ export const DeleteOffer = id => {
   return axios.post("delete-offer/", id).then(res => res.data);
 };
 
+export const AcceptOffer = id => {
+  return axios.post("accept-offer/", id).then(res => res.data);
+};
+
 export const RejectOffer = id => {
   return axios.post("reject-offer/", id).then(res => res.data);
 };

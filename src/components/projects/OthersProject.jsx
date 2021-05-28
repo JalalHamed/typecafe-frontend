@@ -84,15 +84,14 @@ const OthersProject = ({ project, downloaded }) => {
   }, [price]);
 
   useEffect(() => {
-    if (offereds.find(offer => offer.project === project.id))
+    if (offereds.find(offer => offer.project === project.id)) {
       setOffer(offereds.find(offer => offer.project === project.id));
+    } else {
+      setOffer(null);
+    }
 
     // eslint-disable-next-line
   }, [offereds]);
-
-  useEffect(() => {
-    console.log(offer);
-  }, [offer]);
 
   return (
     <>
