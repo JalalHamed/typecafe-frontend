@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +33,7 @@ const TheCreateOffer = () => {
   const previousButtonRippleRef = useRef();
   const state = useSelector(state => state);
   const credit = useSelector(state => state.User.credit);
+  const [loading, setLoading] = useState(false);
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
   const deadline = Number(state.CreateOffer.selectedDeadline);
@@ -51,8 +52,10 @@ const TheCreateOffer = () => {
         project: project_id,
         offered_price: pricePerPage,
       };
+      setLoading(true);
       CreateOfferReq(body)
         .then(res => {
+          setLoading(false);
           socket.send(
             JSON.stringify({
               status: "new-offer",
@@ -79,6 +82,7 @@ const TheCreateOffer = () => {
           toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
         })
         .catch(err => {
+          setLoading(false);
           dispatch(CreateOffer({ isModalOpen: false }));
           handleErrors(err, toast.error);
         });
@@ -120,6 +124,7 @@ const TheCreateOffer = () => {
             title="تایید و ثبت پیشنهاد"
             className="w-68"
             onClick={handleSubmitRequest}
+            loading={loading}
           />
           <Previous
             ref={previousButtonRippleRef}

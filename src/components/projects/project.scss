@@ -165,6 +165,10 @@
         width: 85%;
       }
 
+      &.lower-opacity {
+        opacity: 0.5;
+      }
+
       .offers-title-wrapper {
         display: flex;
 
@@ -209,6 +213,10 @@
           top: 45%;
           transform: translate(0, -45%);
           cursor: pointer;
+
+          &.not-pointer {
+            cursor: auto;
+          }
         }
 
         .offer {

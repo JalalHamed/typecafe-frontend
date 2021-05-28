@@ -29,6 +29,7 @@ const OthersProject = ({ project, downloaded }) => {
   const [price, setPrice] = useState(1560);
   const [typistEarning, setTypistEarning] = useState(extractCommission(price));
   const [offer, setOffer] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleOffer = () => {
     dispatch(
@@ -43,20 +44,27 @@ const OthersProject = ({ project, downloaded }) => {
   };
 
   const handleDelete = id => {
-    DeleteOffer({ id })
-      .then(() => {
-        dispatch(
-          ProjectsAction({ offereds: offereds.filter(x => x.id !== id) })
-        );
-        socket.send(
-          JSON.stringify({
-            status: "offer-delete",
-            id: id,
-            project_owner: project.client_id,
-          })
-        );
-      })
-      .catch(err => console.error(err));
+    if (!loading) {
+      setLoading(true);
+      DeleteOffer({ id })
+        .then(() => {
+          setLoading(false);
+          dispatch(
+            ProjectsAction({ offereds: offereds.filter(x => x.id !== id) })
+          );
+          socket.send(
+            JSON.stringify({
+              status: "offer-delete",
+              id: id,
+              project_owner: project.client_id,
+            })
+          );
+        })
+        .catch(err => {
+          setLoading(false);
+          console.error(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -101,7 +109,11 @@ const OthersProject = ({ project, downloaded }) => {
             <>
               {offer ? (
                 <>
-                  <div className="has-offers-wrapper no-height less-width">
+                  <div
+                    className={`has-offers-wrapper no-height less-width ${
+                      loading ? "lower-opacity" : ""
+                    }`}
+                  >
                     <p style={{ marginRight: "10px", fontSize: "14px" }}>
                       پیشنهاد من
                     </p>
@@ -112,7 +124,9 @@ const OthersProject = ({ project, downloaded }) => {
                     >
                       {offer.status === "A" && (
                         <i
-                          className="icon icon-close-background-red delete-offer"
+                          className={`icon icon-close-background-red delete-offer ${
+                            loading ? "not-pointer" : ""
+                          }`}
                           onClick={() => handleDelete(offer.id)}
                         />
                       )}
