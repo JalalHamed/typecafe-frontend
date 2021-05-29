@@ -28,7 +28,7 @@ const Projects = () => {
       {!!myprojects.length && (
         <>
           <p className="mp-title">پروژه ها</p>
-          <div className="mp-counter">{farsiNumber(myprojects.length)}</div>
+          <div className="mp-counter">({farsiNumber(myprojects.length)})</div>
           {myprojects.map(project => {
             return <Project key={project.id} project={project} />;
           })}
@@ -37,9 +37,7 @@ const Projects = () => {
       {!!offereds.length && (
         <>
           <p className="mp-title">پیشنهادها</p>
-          <div className="mp-counter mp-light-blue">
-            {farsiNumber(offereds.length)}
-          </div>
+          <div className="mp-counter">({farsiNumber(offereds.length)})</div>
           {offereds.map(offer => {
             let project = projects.find(x => x.id === offer.project);
             return <Project key={project.id} project={project} />;

@@ -57,11 +57,9 @@ const AoROffer = () => {
       dispatch(AoROfferAction({ isModalOpen: false }));
       AcceptOffer({ id: offer.id })
         .then(res => {
-          setLoading(false);
           console.log(res);
         })
         .catch(err => {
-          setLoading(false);
           console.log(err);
         });
     }
