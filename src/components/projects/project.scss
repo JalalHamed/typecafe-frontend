@@ -8,6 +8,11 @@
   background-color: #f7f8fc;
   border-radius: 5px;
 
+  &.pw-in-progress {
+    border-color: #fca636;
+    background-color: #fcfbf7;
+  }
+
   .right {
     width: 48%;
 
@@ -235,6 +240,10 @@
             margin-bottom: 0;
           }
 
+          &.accepted {
+            border-color: #15b300;
+          }
+
           &.rejected {
             border-color: #ff2d2d;
           }
@@ -243,6 +252,10 @@
             font-size: 14px;
             margin-top: 7px;
             color: #1c3987;
+
+            .accepted-note {
+              color: #15b300;
+            }
 
             .rejected-note {
               color: #ff2d2d;
@@ -347,6 +360,10 @@
     .project-status {
       font-size: 12px;
       color: #1c3987;
+
+      &.ps-in-progress {
+        color: #fca636;
+      }
     }
   }
 

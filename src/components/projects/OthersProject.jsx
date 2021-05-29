@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import { priceFormat, extractCommission } from "components/helper";
-import { Puffloader } from "components/loader";
+import { Puffloader, Skewloader } from "components/loader";
 
 // Requests
 import socket from "requests/socket";
@@ -68,8 +68,12 @@ const OthersProject = ({ project, downloaded }) => {
   };
 
   useEffect(() => {
-    if (!user.isLoggedIn) {
+    if (!user.isLoggedIn && project.status === "O") {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
+      setButtonDisabled(true);
+      setInputDisabled(true);
+    } else if (!user.isLoggedIn && project.status === "IP") {
+      setErrMsg("In Progress");
       setButtonDisabled(true);
       setInputDisabled(true);
     } else if (!downloaded.includes(project.id)) {
@@ -85,7 +89,7 @@ const OthersProject = ({ project, downloaded }) => {
       setButtonDisabled(false);
       setInputDisabled(false);
     }
-  }, [user.isLoggedIn, downloaded, price, project.id]);
+  }, [user.isLoggedIn, downloaded, price, project.id, project.status]);
 
   useEffect(() => {
     setTypistEarning(extractCommission(price));
@@ -131,7 +135,8 @@ const OthersProject = ({ project, downloaded }) => {
                         />
                       )}
                       <div
-                        className={`offer ${
+                        className={`offer
+                        ${offer.status === "ACC" ? "accepted" : ""} ${
                           offer.status === "REJ" ? "rejected" : ""
                         }`}
                       >
@@ -155,6 +160,9 @@ const OthersProject = ({ project, downloaded }) => {
                         </div>
                         <p className="waiting-for-approval">
                           {offer.status === "A" && <span>در انتظار تایید</span>}
+                          {offer.status === "ACC" && (
+                            <span className="accepted-note">تایید شده</span>
+                          )}
                           {offer.status === "REJ" && (
                             <span className="rejected-note">رد شده</span>
                           )}
@@ -170,50 +178,58 @@ const OthersProject = ({ project, downloaded }) => {
                 </>
               ) : (
                 <div className="request-offer-wrapper">
-                  <div className="request-offer-form-wrapper">
-                    <Input
-                      label="قیمت پیشنهادی (هر صفحه)"
-                      name="request"
-                      type="number"
-                      id="request"
-                      wrapperStyle={{ width: "100%" }}
-                      labelStyle={{ fontSize: "14px" }}
-                      style={{ fontSize: "14px", width: "200px" }}
-                      min={1560}
-                      disabled={inputDisabled}
-                      value={price}
-                      onChange={e => setPrice(e.target.value)}
-                    />
-                    <Button
-                      ref={submitReqeustRippleRef}
-                      title="ثبت پیشنهاد"
-                      className="fit-width no-break"
-                      disabled={buttonDisabled}
-                      onClick={handleOffer}
-                    />
-                    <p className="err-msg">{errMsg}</p>
-                  </div>
-                  <div className="calculate-price-wrapper">
-                    <p className="left-title">کارمزد</p>
-                    <span className="left-value">٪۱۰</span>
-                    <p className="left-title">عایدی شما به ازای هر صفحه</p>
-                    <span className="left-value">
-                      {priceFormat(typistEarning)}
-                    </span>
+                  {project.status === "O" && (
                     <>
-                      <p className="left-title">جمع کل</p>
-                      <p className="left-value">
-                        {priceFormat(
-                          extractCommission(price * project.number_of_pages)
-                        )}
-                      </p>
+                      <div className="request-offer-form-wrapper">
+                        <Input
+                          label="قیمت پیشنهادی (هر صفحه)"
+                          name="request"
+                          type="number"
+                          id="request"
+                          wrapperStyle={{ width: "100%" }}
+                          labelStyle={{ fontSize: "14px" }}
+                          style={{ fontSize: "14px", width: "200px" }}
+                          min={1560}
+                          disabled={inputDisabled}
+                          value={price}
+                          onChange={e => setPrice(e.target.value)}
+                        />
+                        <Button
+                          ref={submitReqeustRippleRef}
+                          title="ثبت پیشنهاد"
+                          className="fit-width no-break"
+                          disabled={buttonDisabled}
+                          onClick={handleOffer}
+                        />
+                        <p className="err-msg">{errMsg}</p>
+                      </div>
+                      <div className="calculate-price-wrapper">
+                        <p className="left-title">کارمزد</p>
+                        <span className="left-value">٪۱۰</span>
+                        <p className="left-title">عایدی شما به ازای هر صفحه</p>
+                        <span className="left-value">
+                          {priceFormat(typistEarning)}
+                        </span>
+                        <>
+                          <p className="left-title">جمع کل</p>
+                          <p className="left-value">
+                            {priceFormat(
+                              extractCommission(price * project.number_of_pages)
+                            )}
+                          </p>
+                        </>
+                      </div>
                     </>
-                  </div>
+                  )}
+                  {project.status === "IP" && <Skewloader color="#fca636" />}
                 </div>
               )}
             </>
           ) : (
-            <p className="err-msg">{errMsg}</p>
+            <p className="err-msg">
+              {errMsg === "In Progress" && <Skewloader color="#fca636" />}
+              {errMsg !== "In Progress" && errMsg}
+            </p>
           )}
         </>
       ) : (

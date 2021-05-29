@@ -52,7 +52,10 @@ const OwnProject = ({ project }) => {
     if (Offers.length && Offers.find(offer => offer.project === project.id)) {
       setOffers([]);
       Offers.forEach(offer => {
-        if (offer.project === project.id && offer.status === "A") {
+        if (
+          offer.project === project.id &&
+          (offer.status === "A" || offer.status === "ACC")
+        ) {
           setOffers(prevState => [...prevState, offer]);
         }
       });
@@ -69,12 +72,14 @@ const OwnProject = ({ project }) => {
         <>
           {!!offers.length ? (
             <div className="has-offers-wrapper">
-              <div className="offers-title-wrapper">
-                <p className="offers-title">پیشنهادها</p>
-                <span className="number-of-offers">
-                  ({farsiNumber(offers.length)})
-                </span>
-              </div>
+              {project.status === "O" && (
+                <div className="offers-title-wrapper">
+                  <p className="offers-title">پیشنهادها</p>
+                  <span className="number-of-offers">
+                    ({farsiNumber(offers.length)})
+                  </span>
+                </div>
+              )}
               <div className="request-wrapper">
                 {offers.map(offer => {
                   return (

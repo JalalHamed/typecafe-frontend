@@ -55,7 +55,11 @@ const TheProject = ({ project }) => {
   };
 
   return (
-    <div className="project-wrapper">
+    <div
+      className={`project-wrapper ${
+        project.status === "IP" ? "pw-in-progress" : ""
+      }`}
+    >
       <div className="right">
         <div className="client-wrapper">
           {!!project.client_image ? (
@@ -162,7 +166,7 @@ const TheProject = ({ project }) => {
           className="fit-width"
           onClick={handleDownloaded}
         />
-        {user.id === project.client_id && (
+        {user.id === project.client_id && project.status === "O" && (
           <Button
             ref={deleteProjectRippleRef}
             title="حذف پروژه"
@@ -197,7 +201,15 @@ const TheProject = ({ project }) => {
         }
       </div>
       <div className="bottom-left">
-        <p className="project-status">وضعیت پروژه: باز</p>
+        <p
+          className={`project-status ${
+            project.status === "IP" ? "ps-in-progress" : ""
+          }`}
+        >
+          <span style={{ color: "#555" }}>وضعیت پروژه</span>&nbsp;&nbsp;
+          {project.status === "O" && <span>باز</span>}
+          {project.status === "IP" && <span>در حال اجرا</span>}
+        </p>
       </div>
       <div className="project-id">
         شناسه پروژه{" "}
