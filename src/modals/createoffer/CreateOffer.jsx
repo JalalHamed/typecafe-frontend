@@ -88,7 +88,7 @@ const TheCreateOffer = () => {
             toast.error(
               `ابتدا پروژه با شناسه ${farsiNumber(
                 err.response.data
-              )} را به اتمام برسانید.`
+              )} را تحویل دهید.`
             );
           console.log(err.response);
         });
