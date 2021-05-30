@@ -73,79 +73,81 @@ const OwnProject = ({ project }) => {
           {!!offers.length ? (
             <div className="has-offers-wrapper">
               {project.status === "O" && (
-                <div className="offers-title-wrapper">
-                  <p className="offers-title">پیشنهادها</p>
-                  <span className="number-of-offers">
-                    ({farsiNumber(offers.length)})
-                  </span>
-                </div>
+                <>
+                  <div className="offers-title-wrapper">
+                    <p className="offers-title">پیشنهادها</p>
+                    <span className="number-of-offers">
+                      ({farsiNumber(offers.length)})
+                    </span>
+                  </div>
+                  <div className="request-wrapper">
+                    {offers.map(offer => {
+                      return (
+                        <div key={offer.id} className="offer">
+                          <div className="typist-wrapper">
+                            {offer.typist_image ? (
+                              <img
+                                src={baseURL + offer.typist_image}
+                                alt="typist_image"
+                                className="typist-image pointer"
+                                onClick={() => openProfile(offer)}
+                              />
+                            ) : (
+                              <i
+                                className="icon offer-typist-default-pic pointer"
+                                onClick={() => openProfile(offer)}
+                              />
+                            )}
+                            <span
+                              className="typist-displayname pointer"
+                              onClick={() => openProfile(offer)}
+                            >
+                              {offer.typist}
+                            </span>
+                          </div>
+                          <div className="offered-price-wrapper">
+                            <span className="offered-price-title">
+                              قیمت پیشنهادی
+                            </span>
+                            <span className="offered-price">
+                              {priceFormat(offer.offered_price)}
+                            </span>
+                          </div>
+                          <div className="offered-price-wrapper">
+                            <span className="offered-price-title">جمع کل</span>
+                            <span className="offered-price">
+                              {priceFormat(
+                                addCommission(
+                                  offer.offered_price * project.number_of_pages
+                                )
+                              )}
+                            </span>
+                          </div>
+                          <div className="accept-reject-wrapper no-select">
+                            <div
+                              className="accept"
+                              onClick={() => openAoRModal(offer, "accept")}
+                            >
+                              <i className="icon icon-check-green" />
+                            </div>
+                            <div
+                              className="reject"
+                              onClick={() => openAoRModal(offer, "reject")}
+                            >
+                              <i className="icon icon-close-red" />
+                            </div>
+                          </div>
+                          <div className="offer-created-at">
+                            <Moment fromNow locale="fa">
+                              {offer.created_at}
+                            </Moment>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
               )}
-              <div className="request-wrapper">
-                {offers.map(offer => {
-                  return (
-                    <div key={offer.id} className="offer">
-                      <div className="typist-wrapper">
-                        {offer.typist_image ? (
-                          <img
-                            src={baseURL + offer.typist_image}
-                            alt="typist_image"
-                            className="typist-image pointer"
-                            onClick={() => openProfile(offer)}
-                          />
-                        ) : (
-                          <i
-                            className="icon offer-typist-default-pic pointer"
-                            onClick={() => openProfile(offer)}
-                          />
-                        )}
-                        <span
-                          className="typist-displayname pointer"
-                          onClick={() => openProfile(offer)}
-                        >
-                          {offer.typist}
-                        </span>
-                      </div>
-                      <div className="offered-price-wrapper">
-                        <span className="offered-price-title">
-                          قیمت پیشنهادی
-                        </span>
-                        <span className="offered-price">
-                          {priceFormat(offer.offered_price)}
-                        </span>
-                      </div>
-                      <div className="offered-price-wrapper">
-                        <span className="offered-price-title">جمع کل</span>
-                        <span className="offered-price">
-                          {priceFormat(
-                            addCommission(
-                              offer.offered_price * project.number_of_pages
-                            )
-                          )}
-                        </span>
-                      </div>
-                      <div className="accept-reject-wrapper no-select">
-                        <div
-                          className="accept"
-                          onClick={() => openAoRModal(offer, "accept")}
-                        >
-                          <i className="icon icon-check-green" />
-                        </div>
-                        <div
-                          className="reject"
-                          onClick={() => openAoRModal(offer, "reject")}
-                        >
-                          <i className="icon icon-close-red" />
-                        </div>
-                      </div>
-                      <div className="offer-created-at">
-                        <Moment fromNow locale="fa">
-                          {offer.created_at}
-                        </Moment>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           ) : (
             <div className="no-offer-wrapper">

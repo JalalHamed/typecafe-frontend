@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { emailOverFlow } from "components/helper";
+import { emailOverFlow, farsiNumber } from "components/helper";
 
 // Actions
 import { LR } from "redux/actions";
@@ -123,7 +123,7 @@ const ConfirmEmail = () => {
       </form>
       {timeleft ? (
         <div className="login-send-confirm-code-again">
-          ارسال مجدد تا {timeleft} ثانیه دیگر
+          ارسال مجدد تا {farsiNumber(timeleft)} ثانیه دیگر
         </div>
       ) : (
         <Button

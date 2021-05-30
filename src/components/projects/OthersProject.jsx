@@ -113,68 +113,72 @@ const OthersProject = ({ project, downloaded }) => {
             <>
               {offer ? (
                 <>
-                  <div
-                    className={`has-offers-wrapper no-height less-width ${
-                      loading ? "lower-opacity" : ""
-                    }`}
-                  >
-                    <p style={{ marginRight: "10px", fontSize: "14px" }}>
-                      پیشنهاد من
-                    </p>
+                  {offer.status === "ACC" ? (
+                    <></>
+                  ) : (
                     <div
-                      className={`request-wrapper less-tp ${
-                        offer.status === "A" ? "more-pl" : ""
+                      className={`has-offers-wrapper no-height less-width ${
+                        loading ? "lower-opacity" : ""
                       }`}
                     >
-                      {offer.status === "A" && (
-                        <i
-                          className={`icon icon-close-background-red delete-offer ${
-                            loading ? "not-pointer" : ""
-                          }`}
-                          onClick={() => handleDelete(offer.id)}
-                        />
-                      )}
+                      <p style={{ marginRight: "10px", fontSize: "14px" }}>
+                        پیشنهاد من
+                      </p>
                       <div
-                        className={`offer
-                        ${offer.status === "ACC" ? "accepted" : ""} ${
-                          offer.status === "REJ" ? "rejected" : ""
+                        className={`request-wrapper less-tp ${
+                          offer.status === "A" ? "more-pl" : ""
                         }`}
                       >
-                        <div className="offered-price-wrapper">
-                          <span className="offered-price-title">
-                            قیمت پیشنهادی
-                          </span>
-                          <span className="offered-price">
-                            {priceFormat(offer.offered_price)}
-                          </span>
-                        </div>
-                        <div className="offered-price-wrapper">
-                          <span className="offered-price-title">عایدی کل</span>
-                          <span className="offered-price">
-                            {priceFormat(
-                              extractCommission(
-                                offer.offered_price * project.number_of_pages
-                              )
+                        {offer.status === "A" && (
+                          <i
+                            className={`icon icon-close-background-red delete-offer ${
+                              loading ? "not-pointer" : ""
+                            }`}
+                            onClick={() => handleDelete(offer.id)}
+                          />
+                        )}
+                        <div
+                          className={`offer ${
+                            offer.status === "REJ" ? "rejected" : ""
+                          }`}
+                        >
+                          <div className="offered-price-wrapper">
+                            <span className="offered-price-title">
+                              قیمت پیشنهادی
+                            </span>
+                            <span className="offered-price">
+                              {priceFormat(offer.offered_price)}
+                            </span>
+                          </div>
+                          <div className="offered-price-wrapper">
+                            <span className="offered-price-title">
+                              عایدی کل
+                            </span>
+                            <span className="offered-price">
+                              {priceFormat(
+                                extractCommission(
+                                  offer.offered_price * project.number_of_pages
+                                )
+                              )}
+                            </span>
+                          </div>
+                          <p className="waiting-for-approval">
+                            {offer.status === "A" && (
+                              <span>در انتظار تایید</span>
                             )}
-                          </span>
-                        </div>
-                        <p className="waiting-for-approval">
-                          {offer.status === "A" && <span>در انتظار تایید</span>}
-                          {offer.status === "ACC" && (
-                            <span className="accepted-note">تایید شده</span>
-                          )}
-                          {offer.status === "REJ" && (
-                            <span className="rejected-note">رد شده</span>
-                          )}
-                        </p>
-                        <div className="offer-created-at">
-                          <Moment fromNow locale="fa">
-                            {offer.created_at}
-                          </Moment>
+                            {offer.status === "REJ" && (
+                              <span className="rejected-note">رد شده</span>
+                            )}
+                          </p>
+                          <div className="offer-created-at">
+                            <Moment fromNow locale="fa">
+                              {offer.created_at}
+                            </Moment>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </>
               ) : (
                 <div className="request-offer-wrapper">
