@@ -10,6 +10,7 @@ let initialState = {
   successfulProjects: 0,
   unsuccessfulProjects: 0,
   ontimeDelivery: 0,
+  playSounds: true,
 };
 
 const User = (state = initialState, action) => {

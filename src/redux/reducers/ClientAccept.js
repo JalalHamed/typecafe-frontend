@@ -2,6 +2,7 @@ let initialState = {
   isModalOpen: false,
   project: null,
   issued_at: null,
+  client: "",
 };
 
 const ClientAccept = (state = initialState, action) => {

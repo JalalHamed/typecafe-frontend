@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-// import { toast } from "react-toastify";
 
 // Components
 import Close from "components/buttons/Close";

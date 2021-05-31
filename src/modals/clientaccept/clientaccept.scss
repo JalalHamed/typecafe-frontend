@@ -1,18 +1,27 @@
 .client-accept-wrapper {
-  width: 475px;
-  height: 300px;
+  min-width: 450px;
+  height: 220px;
   background-color: #fff;
   border-radius: 5px;
   padding: 45px 40px 25px;
   text-align: center;
 
-  .ct-note {
-    .ct-emphasize {
+  .ca-note {
+    .ca-emphasize {
       color: #1c3987;
     }
   }
 
-  .ct-are-you-ready {
+  .ca-are-you-ready {
+    margin-top: 5px;
+  }
+
+  .ca-ready-button {
     margin-top: 20px;
+  }
+
+  .ca-countdown {
+    margin-top: 15px;
+    font-size: 18px;
   }
 }

@@ -51,3 +51,18 @@ export const getUserTimeStatus = (onlineUsers, id, is_online) => {
     return false;
   }
 };
+
+export const period = (_date, _deadline, unit) => {
+  let getDeadline = () => {
+    switch (unit) {
+      case "seconds":
+        return _deadline * 1000;
+      default:
+        return;
+    }
+  };
+
+  let date = Date.parse(_date);
+  let deadline = Date.now() + getDeadline();
+  return Math.round((deadline - date) / 1000);
+};
