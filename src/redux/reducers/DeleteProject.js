@@ -6,10 +6,7 @@ let initialState = {
 const DeleteProject = (state = initialState, action) => {
   switch (action.type) {
     case "DELETE_PROJECT":
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return { ...state, ...action.payload };
     default:
       return state;
   }

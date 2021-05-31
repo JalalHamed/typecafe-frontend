@@ -11,10 +11,14 @@ import { scrollToRef } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { SendMessage, SearchDisplayname } from "requests";
+import { SendMessage, SearchDisplayname, ReadMessages } from "requests";
 
 // Actions
-import { NewMessageAction, MessagesElse } from "redux/actions";
+import {
+  NewMessageAction,
+  MessagesElse,
+  ReadMessagesAction,
+} from "redux/actions";
 
 // Design
 import "./messages.scss";
@@ -26,6 +30,7 @@ const TheMessages = () => {
   const user = useSelector(state => state.User);
   const messages = useSelector(state => state.Messages.messages);
   const selected = useSelector(state => state.Messages.id);
+  const totalUnread = useSelector(state => state.Messages.totalUnread);
   const loading = useSelector(state => state.Messages.isLoading);
   const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
@@ -51,7 +56,6 @@ const TheMessages = () => {
               message: { ...res, sor: "sent" },
             })
           );
-          scrollToRef(messageRef);
         })
         .catch(err => console.log(err));
   };
@@ -63,11 +67,21 @@ const TheMessages = () => {
   };
 
   useEffect(() => {
-    dispatch(MessagesElse({ isWatching: selected }));
+    if (selected) {
+      dispatch(MessagesElse({ isWatching: selected }));
+      ReadMessages({ sender_id: selected });
+      dispatch(
+        MessagesElse({
+          totalUnread:
+            totalUnread - messages.find(x => x.id === selected).unread,
+        })
+      );
+      dispatch(ReadMessagesAction({ id: selected }));
+    }
     window.addEventListener("keydown", escapeHandler);
     return () => {
-      window.removeEventListener("keydown", escapeHandler);
       dispatch(MessagesElse({ isWatching: null }));
+      window.removeEventListener("keydown", escapeHandler);
     };
 
     // eslint-disable-next-line
@@ -101,6 +115,10 @@ const TheMessages = () => {
 
     // eslint-disable-next-line
   }, [search]);
+
+  useEffect(() => {
+    scrollToRef(messageRef);
+  }, [messages]);
 
   return (
     <div className="messages-wrapper">

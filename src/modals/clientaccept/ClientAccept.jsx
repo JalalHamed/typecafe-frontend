@@ -4,7 +4,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { Howl } from "howler";
 
 // Components
 import Button from "components/buttons/Button";
@@ -13,16 +12,12 @@ import { farsiNumber, period } from "components/helper";
 // Actions
 import { ClientAccept } from "redux/actions";
 
-// Sounds
-import ClientAcceptSound from "assets/sounds/client-accept.mp3";
-
 // Design
 import "./clientaccept.scss";
 
 const TheClientAccept = () => {
   const dispatch = useDispatch();
   const submitRef = useRef();
-  const user = useSelector(state => state.User);
   const data = useSelector(state => state.ClientAccept);
   const [deadline, setDeadline] = useState(
     period(data.issued_at, 30, "seconds")
@@ -55,7 +50,7 @@ const TheClientAccept = () => {
         toast.error(
           `پیشنهاد شما برای انجام پروژه با شناسه ${farsiNumber(
             data.project
-          )} تایید شد اما شما در اعلام آمادگی خود برای شروع انجام کار ناموفق بودید.`
+          )} تایید شد اما شما در اعلام آمادگی خود برای شروع کار ناموفق بودید.`
         );
       }
     }, 1000);
@@ -64,15 +59,6 @@ const TheClientAccept = () => {
 
     // eslint-disable-next-line
   }, [deadline]);
-
-  useEffect(() => {
-    if (user.playSounds) {
-      let sound = new Howl({ src: [ClientAcceptSound] });
-      sound.play();
-    }
-
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <motion.div

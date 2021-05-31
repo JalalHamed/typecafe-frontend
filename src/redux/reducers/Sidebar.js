@@ -7,10 +7,7 @@ let initialState = {
 const Sidebar = (state = initialState, action) => {
   switch (action.type) {
     case "SIDEBAR":
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return { ...state, ...action.payload };
     default:
       return state;
   }

@@ -69,6 +69,7 @@ const Sockets = () => {
               projects: [data, ...state.Projects.projects],
             })
           );
+          dispatch(actions.Sounds({ newProject: state.Sounds.newProject + 1 }));
           if (data.client_email === state.User.email) {
             dispatch(
               actions.ProjectsAction({
@@ -104,6 +105,7 @@ const Sockets = () => {
           );
           break;
         case "new-message":
+          dispatch(actions.Sounds({ newMessage: state.Sounds.newMessage + 1 }));
           if (state.Messages.isWatching !== data.sender_id) {
             dispatch(
               actions.MessagesElse({
@@ -153,6 +155,9 @@ const Sockets = () => {
               issued_at: data.issued_at,
               client: data.client,
             })
+          );
+          dispatch(
+            actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
           );
           break;
         default:

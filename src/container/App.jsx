@@ -18,6 +18,7 @@ import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
 import Requests from "./Requests";
 import Sockets from "./Sockets";
+import Sounds from "./Sounds";
 
 // Actions
 import { Sidebar, Tokens } from "redux/actions";
@@ -95,6 +96,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <Requests />
+      <Sounds />
       <Sockets />
       <Modals />
       <TopBar />

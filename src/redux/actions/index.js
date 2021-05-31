@@ -151,3 +151,10 @@ export const ClientAccept = payload => {
     payload,
   };
 };
+
+export const Sounds = payload => {
+  return {
+    type: "SOUNDS",
+    payload,
+  };
+};

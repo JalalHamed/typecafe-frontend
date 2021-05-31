@@ -20,6 +20,7 @@ import NotEnoughCredit from "./NotEnoughCredit";
 import Rules from "./Rules";
 import Tokens from "./Tokens";
 import ClientAccept from "./ClientAccept";
+import Sounds from "./Sounds";
 
 const allReducers = combineReducers({
   Loading,
@@ -40,6 +41,7 @@ const allReducers = combineReducers({
   Rules,
   Tokens,
   ClientAccept,
+  Sounds,
 });
 
 export default allReducers;

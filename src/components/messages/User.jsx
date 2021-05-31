@@ -34,10 +34,7 @@ const User = ({
       className={`contact ${selected === user.id ? "selected" : ""}`}
       onClick={() => {
         if (!isSearch) {
-          if (user.unread)
-            ReadMessages({ sender_id: user.id })
-              .then(res => console.log(res))
-              .catch(err => console.error(err));
+          if (user.unread) ReadMessages({ sender_id: user.id });
           dispatch(
             MessagesElse({
               id: user.id,
