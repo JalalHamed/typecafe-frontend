@@ -61,6 +61,7 @@ const AoROffer = () => {
             JSON.stringify({
               status: "client-accept",
               id: offer.id,
+              client: user.displayname,
               issued_at: res,
             })
           );

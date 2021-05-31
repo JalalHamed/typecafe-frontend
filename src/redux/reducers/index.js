@@ -19,6 +19,7 @@ import Profile from "./Profile";
 import NotEnoughCredit from "./NotEnoughCredit";
 import Rules from "./Rules";
 import Tokens from "./Tokens";
+import ClientAccept from "./ClientAccept";
 
 const allReducers = combineReducers({
   Loading,
@@ -38,6 +39,7 @@ const allReducers = combineReducers({
   NotEnoughCredit,
   Rules,
   Tokens,
+  ClientAccept,
 });
 
 export default allReducers;

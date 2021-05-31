@@ -144,3 +144,10 @@ export const Tokens = payload => {
     payload,
   };
 };
+
+export const ClientAccept = payload => {
+  return {
+    type: "CLIENT_ACCEPT",
+    payload,
+  };
+};

@@ -145,7 +145,16 @@ const Sockets = () => {
             )} رد شد.`
           );
           break;
-        // case 'client-accept':
+        case "client-accept":
+          dispatch(
+            actions.ClientAccept({
+              isModalOpen: true,
+              project: data.project,
+              issued_at: data.issued_at,
+              client: data.client,
+            })
+          );
+          break;
         default:
           break;
       }

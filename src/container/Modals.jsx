@@ -14,6 +14,7 @@ import OfferRequest from "modals/createoffer/CreateOffer";
 import DeleteProject from "modals/deleteproject/DeleteProject";
 import AoROffer from "modals/aoroffer/AoROffer";
 import NotEnoughCredit from "modals/notEnoughCredit/NotEnoughCredit";
+import ClientAccept from "modals/clientaccept/ClientAccept";
 
 const Modals = () => {
   const state = useSelector(state => state);
@@ -63,10 +64,17 @@ const Modals = () => {
         </ModalWrapper>
       )}
       {/* Image */}
-      {/* NOTE: This has to be the second last modal so it appers on top of everything else except Loading... */}
+      {/* NOTE: This has to be the third last modal so it appers on top of everything else except ClientAccept & Loading... */}
       {state.SelectedImage.isModalOpen && (
         <ModalWrapper>
           <Image />
+        </ModalWrapper>
+      )}
+      {/* Client Accept */}
+      {/* NOTE: This has to be the second last modal so it appers on top of everything else except Loading... */}
+      {state.ClientAccept.isModalOpen && (
+        <ModalWrapper>
+          <ClientAccept />
         </ModalWrapper>
       )}
       {/* Loading */}
