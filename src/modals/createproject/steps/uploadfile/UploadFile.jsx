@@ -19,8 +19,8 @@ import "./uploadfile.scss";
 const UploadFiles = () => {
   const dispatch = useDispatch();
   const uploadInput = useRef();
-  const chooseFilesRippleRef = useRef();
-  const nextStepRippleRef = useRef();
+  const chooseFilesRef = useRef();
+  const nextStepRef = useRef();
   const firstMount = useSelector(state => state.CreateProject.firstMount);
   const [file, setFile] = useState(
     useSelector(state => state.CreateProject.file)
@@ -81,7 +81,7 @@ const UploadFiles = () => {
               </span>
             </p>
             <Button
-              ref={chooseFilesRippleRef}
+              ref={chooseFilesRef}
               title="انتخاب فایل‌"
               className="upload-button"
               onClick={openFileInput}
@@ -117,7 +117,7 @@ const UploadFiles = () => {
                 </>
               )}
               <Button
-                ref={nextStepRippleRef}
+                ref={nextStepRef}
                 className="next-step icon icon-next-step"
                 onClick={goToNextStep}
               />

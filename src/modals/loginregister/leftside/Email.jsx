@@ -16,7 +16,7 @@ import { CheckEmail, handleErrors } from "requests";
 
 const Email = () => {
   const { register, handleSubmit, errors } = useForm();
-  const loginRippleRef = useRef();
+  const loginRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -82,7 +82,7 @@ const Email = () => {
         />
         <Button
           className="submit-button"
-          ref={loginRippleRef}
+          ref={loginRef}
           title="ادامه"
           loading={loading}
           type="submit"

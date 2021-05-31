@@ -19,7 +19,7 @@ import { CreateOffer, ProjectsAction } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
-  const submitReqeustRippleRef = useRef();
+  const submitReqeustRef = useRef();
   const user = useSelector(state => state.User);
   const offereds = useSelector(state => state.Projects.offereds);
   const isLoading = useSelector(state => state.Projects);
@@ -199,7 +199,7 @@ const OthersProject = ({ project, downloaded }) => {
                           onChange={e => setPrice(e.target.value)}
                         />
                         <Button
-                          ref={submitReqeustRippleRef}
+                          ref={submitReqeustRef}
                           title="ثبت پیشنهاد"
                           className="fit-width no-break"
                           disabled={buttonDisabled}

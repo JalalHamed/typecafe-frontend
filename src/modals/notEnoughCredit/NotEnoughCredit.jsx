@@ -16,7 +16,7 @@ import "./notenoughcredit.scss";
 
 const NotEnoughCredit = () => {
   const dispatch = useDispatch();
-  const increaseButtonRippleRef = useRef();
+  const increaseButtonRef = useRef();
 
   const handleIncreaseCredit = () => {
     dispatch(NotEnoughCreditAction(false));
@@ -35,7 +35,7 @@ const NotEnoughCredit = () => {
       />
       <p>اعتبار کافی نیست.</p>
       <Button
-        ref={increaseButtonRippleRef}
+        ref={increaseButtonRef}
         title="افزایش اعتبار"
         onClick={handleIncreaseCredit}
       />

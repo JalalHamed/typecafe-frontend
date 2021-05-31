@@ -29,8 +29,8 @@ import "./createoffer.scss";
 
 const TheCreateOffer = () => {
   const dispatch = useDispatch();
-  const submitButtonRippleRef = useRef();
-  const previousButtonRippleRef = useRef();
+  const submitButtonRef = useRef();
+  const previousButtonRef = useRef();
   const state = useSelector(state => state);
   const credit = useSelector(state => state.User.credit);
   const [loading, setLoading] = useState(false);
@@ -126,14 +126,14 @@ const TheCreateOffer = () => {
         </p>
         <div className="button-wrapper">
           <Button
-            ref={submitButtonRippleRef}
+            ref={submitButtonRef}
             title="تایید و ثبت پیشنهاد"
             className="w-68"
             onClick={handleSubmitRequest}
             loading={loading}
           />
           <Previous
-            ref={previousButtonRippleRef}
+            ref={previousButtonRef}
             title="انصراف"
             className="w-30"
             onClick={() => dispatch(CreateOffer({ isModalOpen: false }))}

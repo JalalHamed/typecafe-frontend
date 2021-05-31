@@ -26,8 +26,8 @@ import "./project.scss";
 
 const TheProject = ({ project }) => {
   const dispatch = useDispatch();
-  const downloadFileRippleRef = useRef();
-  const deleteProjectRippleRef = useRef();
+  const downloadFileRef = useRef();
+  const deleteProjectRef = useRef();
   const user = useSelector(state => state.User);
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
@@ -161,14 +161,14 @@ const TheProject = ({ project }) => {
           </div>
         </div>
         <Button
-          ref={downloadFileRippleRef}
+          ref={downloadFileRef}
           title="دانلود فایل پروژه"
           className="fit-width"
           onClick={handleDownloaded}
         />
         {user.id === project.client_id && project.status === "O" && (
           <Button
-            ref={deleteProjectRippleRef}
+            ref={deleteProjectRef}
             title="حذف پروژه"
             className="fit-width delete-project red"
             onClick={() =>

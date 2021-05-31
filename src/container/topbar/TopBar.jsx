@@ -23,9 +23,9 @@ import "./topbar.scss";
 
 const TopBar = () => {
   const dispatch = useDispatch();
-  const menuIconRippleRef = useRef();
-  const signUpRippleRef = useRef();
-  const createProjectRippleRef = useRef();
+  const menuIconRef = useRef();
+  const signUpRef = useRef();
+  const createProjectRef = useRef();
   const notifDropDownRef = useRef();
   const userDropDownRef = useRef();
   const user = useSelector(state => state.User);
@@ -49,7 +49,7 @@ const TopBar = () => {
         <RippleWrapper
           className="hamburger-menu-icon no-select"
           onClick={() => dispatch(Sidebar({ isOpen: !isSidebarOpen }))}
-          ref={menuIconRippleRef}
+          ref={menuIconRef}
         >
           <div className="line1"></div>
           <div className="line2"></div>
@@ -65,7 +65,7 @@ const TopBar = () => {
               <RippleWrapper
                 className="topbar-sign-up no-select"
                 onClick={() => dispatch(LR({ isModalOpen: true }))}
-                ref={signUpRippleRef}
+                ref={signUpRef}
               >
                 <i className="icon icon-user-red-topbar" />
                 <span style={{ color: "#ff2d2d" }}>ورود/ثبت‌نام</span>
@@ -75,7 +75,7 @@ const TopBar = () => {
                 <RippleWrapper
                   className="create-project no-select"
                   onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
-                  ref={createProjectRippleRef}
+                  ref={createProjectRef}
                 >
                   <i className="icon icon-create" />
                   <p className="create-project-title">ثبت پروژه</p>

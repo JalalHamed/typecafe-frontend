@@ -13,15 +13,15 @@ import SideBarProfile from "components/sidebar/Profile";
 import "./sidebar.scss";
 
 const SideBar = () => {
-  const loginRippleRef = useRef();
-  const profileRippleRef = useRef();
-  const projectsRippleRef = useRef();
-  const messagesRippleRef = useRef();
-  const financialRippleRef = useRef();
-  const rulesRippleRef = useRef();
-  // const tutorialRippleRef = useRef();
-  const myProjectsRippleRef = useRef();
-  const supportRippleRef = useRef();
+  const loginRef = useRef();
+  const profileRef = useRef();
+  const projectsRef = useRef();
+  const messagesRef = useRef();
+  const financialRef = useRef();
+  const rulesRef = useRef();
+  // const tutorialRef = useRef();
+  const myProjectsRef = useRef();
+  const supportRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isLoading = useSelector(state => state.Sidebar.isLoading);
 
@@ -30,49 +30,41 @@ const SideBar = () => {
       {!isLoading ? (
         <>
           {isLoggedIn ? (
-            <SideBarProfile ref={profileRippleRef} />
+            <SideBarProfile ref={profileRef} />
           ) : (
-            <SideBarLogin ref={loginRippleRef} />
+            <SideBarLogin ref={loginRef} />
           )}
           <div className="sidebar-items">
-            <SideBarItem
-              status="projects"
-              title="پروژه ها"
-              ref={projectsRippleRef}
-            />
+            <SideBarItem status="projects" title="پروژه ها" ref={projectsRef} />
             {isLoggedIn && (
               <SideBarItem
                 status="my-projects"
                 title="کارهای من"
-                ref={myProjectsRippleRef}
+                ref={myProjectsRef}
               />
             )}
             {isLoggedIn && (
               <SideBarItem
                 status="messages"
                 title="پیام ها"
-                ref={messagesRippleRef}
+                ref={messagesRef}
               />
             )}
             {isLoggedIn && (
               <SideBarItem
                 status="financials"
                 title="مدیریت مالی"
-                ref={financialRippleRef}
+                ref={financialRef}
               />
             )}
-            <SideBarItem status="rules" title="قوانین" ref={rulesRippleRef} />
+            <SideBarItem status="rules" title="قوانین" ref={rulesRef} />
             {/* <SideBarItem
               status="tutorial"
               title="آموزش"
-              ref={tutorialRippleRef}
+              ref={tutorialRef}
             /> */}
             {isLoggedIn && (
-              <SideBarItem
-                status="support"
-                title="پشتیبانی"
-                ref={supportRippleRef}
-              />
+              <SideBarItem status="support" title="پشتیبانی" ref={supportRef} />
             )}
           </div>
         </>

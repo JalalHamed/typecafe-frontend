@@ -8,7 +8,7 @@ import Button from "components/buttons/Button";
 import "./support.scss";
 
 const Support = () => {
-  const sendSupportTicketRippleRef = useRef();
+  const sendSupportTicketRef = useRef();
   const [message, setMessage] = useState("");
 
   const handleCreateTicket = () => {};
@@ -24,7 +24,7 @@ const Support = () => {
         />
         <Button
           title="ارسال تیکت"
-          ref={sendSupportTicketRippleRef}
+          ref={sendSupportTicketRef}
           className="fit-width"
           onClick={handleCreateTicket}
         />

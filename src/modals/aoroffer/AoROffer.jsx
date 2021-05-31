@@ -32,8 +32,8 @@ import "./aoroffer.scss";
 
 const AoROffer = () => {
   const dispatch = useDispatch();
-  const submitButtonRippleRef = useRef();
-  const previousButtonRippleRef = useRef();
+  const submitButtonRef = useRef();
+  const previousButtonRef = useRef();
   const offer = useSelector(state => state.AoROffer);
   const user = useSelector(state => state.User);
   const offers = useSelector(state => state.Projects.offers);
@@ -139,14 +139,14 @@ const AoROffer = () => {
           </p>
           <div className="button-wrapper">
             <Button
-              ref={submitButtonRippleRef}
+              ref={submitButtonRef}
               title="تایید پیشنهاد"
               className="w-68 green"
               onClick={handleAccept}
               loading={loading}
             />
             <Previous
-              ref={previousButtonRippleRef}
+              ref={previousButtonRef}
               title="انصراف"
               className="w-30"
               onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}
@@ -157,14 +157,14 @@ const AoROffer = () => {
       {offer.status === "reject" && (
         <div className="button-wrapper">
           <Button
-            ref={submitButtonRippleRef}
+            ref={submitButtonRef}
             title="رد پیشنهاد"
             className="w-68 red"
             onClick={handleReject}
             loading={loading}
           />
           <Previous
-            ref={previousButtonRippleRef}
+            ref={previousButtonRef}
             title="انصراف"
             className="w-30"
             onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}

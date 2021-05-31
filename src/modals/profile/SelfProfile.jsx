@@ -28,7 +28,7 @@ import { baseURL } from "components/xhr";
 const SelfProfile = () => {
   const dispatch = useDispatch();
   const inputFileRef = useRef();
-  const changePhotoRippleRef = useRef();
+  const changePhotoRef = useRef();
   const user = useSelector(state => state.User);
   const [errMsg, setErrMsg] = useState("");
   const [editMode, setEditMode] = useState(false);
@@ -158,7 +158,7 @@ const SelfProfile = () => {
           />
         )}
         <Button
-          ref={changePhotoRippleRef}
+          ref={changePhotoRef}
           title="تغییر عکس پروفایل"
           className="fit-width"
           onClick={() => inputFileRef.current.click()}

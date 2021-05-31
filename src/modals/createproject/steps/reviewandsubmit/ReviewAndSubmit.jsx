@@ -22,8 +22,8 @@ const ReviewAndSubmit = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.CreateProject);
   const email = useSelector(state => state.User.email);
-  const previousStepRippleRef = useRef();
-  const submitRippleRef = useRef();
+  const previousStepRef = useRef();
+  const submitRef = useRef();
   const [error, setError] = useState("");
   const [langs, setLangs] = useState([]);
   const [type, setType] = useState("");
@@ -122,12 +122,12 @@ const ReviewAndSubmit = () => {
       {error && <p className="cp-error-on-submit">{error}</p>}
       <div className="ras-buttons-wrapper">
         <Button
-          ref={previousStepRippleRef}
+          ref={previousStepRef}
           onClick={() => dispatch(CreateProject({ step: "details" }))}
           className="prev-step icon icon-previous-step"
         />
         <Button
-          ref={submitRippleRef}
+          ref={submitRef}
           onClick={onSubmit}
           className="next-step"
           title="ثبت"

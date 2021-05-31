@@ -21,7 +21,7 @@ const Projects = () => {
   const myprojects = useSelector(state => state.Projects.myprojects);
   const offereds = useSelector(state => state.Projects.offereds);
   const loading = useSelector(state => state.Projects.myprojectsloading);
-  const AddProjectRippleRef = useRef();
+  const AddProjectRef = useRef();
 
   return (
     <div className="my-projects-wrapper">
@@ -55,7 +55,7 @@ const Projects = () => {
             هنوز پروژه یا پیشنهادی ثبت نکرده اید.
           </p>
           <RippleWrapper
-            ref={AddProjectRippleRef}
+            ref={AddProjectRef}
             className="add-a-project-wrapper no-select"
             onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
           >

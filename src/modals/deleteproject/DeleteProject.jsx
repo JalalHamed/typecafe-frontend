@@ -23,8 +23,8 @@ import "./deleteproject.scss";
 
 const DeleteProjectComp = () => {
   const dispatch = useDispatch();
-  const submitButtonRippleRef = useRef();
-  const cancelButtonRippleRef = useRef();
+  const submitButtonRef = useRef();
+  const cancelButtonRef = useRef();
   const state = useSelector(state => state.DeleteProject);
 
   const handleDelete = () => {
@@ -55,13 +55,13 @@ const DeleteProjectComp = () => {
         هستید؟
       </p>
       <Button
-        ref={submitButtonRippleRef}
+        ref={submitButtonRef}
         title="حذف"
         className="w-68 red"
         onClick={handleDelete}
       />
       <Previous
-        ref={cancelButtonRippleRef}
+        ref={cancelButtonRef}
         title="انصراف"
         className="w-30"
         onClick={() => dispatch(DeleteProject({ isModalOpen: false }))}

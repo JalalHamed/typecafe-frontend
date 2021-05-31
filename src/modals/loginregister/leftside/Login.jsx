@@ -19,8 +19,8 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const email = useSelector(state => state.LR.email);
-  const loginRippleRef = useRef();
-  const backRippleRef = useRef();
+  const loginRef = useRef();
+  const backRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -67,13 +67,13 @@ const Login = () => {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             className="w-68"
-            ref={loginRippleRef}
+            ref={loginRef}
             title="ورود"
             loading={loading}
             type="submit"
           />
           <Previous
-            ref={backRippleRef}
+            ref={backRef}
             className="w-30"
             onClick={() => dispatch(LR({ page: "Email" }))}
           />

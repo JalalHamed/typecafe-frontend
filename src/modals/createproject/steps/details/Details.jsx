@@ -48,8 +48,8 @@ const selectTypeStyles = {
 
 const Details = () => {
   const dispatch = useDispatch();
-  const nextStepRippleRef = useRef();
-  const previousStepRippleRef = useRef();
+  const nextStepRef = useRef();
+  const previousStepRef = useRef();
   const [languagesAndAdditions, setLanguagesAndAdditions] = useState(
     useSelector(state => state.CreateProject.languagesAndAdditions)
   );
@@ -201,12 +201,12 @@ const Details = () => {
       />
       <div className="details-buttons-wrapper">
         <Button
-          ref={previousStepRippleRef}
+          ref={previousStepRef}
           onClick={handlePrevStep}
           className="prev-step icon icon-previous-step"
         />
         <Button
-          ref={nextStepRippleRef}
+          ref={nextStepRef}
           onClick={onSubmit}
           className="next-step icon icon-next-step"
           disabled={!detailsComplete}
