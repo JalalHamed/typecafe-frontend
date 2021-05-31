@@ -13,7 +13,7 @@ import { priceFormat } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { RejectOffer, AcceptOffer } from "requests";
+import { RejectOffer, ClientAccept } from "requests";
 
 // Actions
 import {
@@ -55,9 +55,15 @@ const AoROffer = () => {
       }, 48);
     } else {
       dispatch(AoROfferAction({ isModalOpen: false }));
-      AcceptOffer({ id: offer.id })
+      ClientAccept({ id: offer.id })
         .then(res => {
-          console.log(res);
+          socket.send(
+            JSON.stringify({
+              status: "client-accept",
+              id: offer.id,
+              issued_at: res,
+            })
+          );
         })
         .catch(err => {
           console.log(err);

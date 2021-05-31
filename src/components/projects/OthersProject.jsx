@@ -189,7 +189,7 @@ const OthersProject = ({ project, downloaded }) => {
                           label="قیمت پیشنهادی (هر صفحه)"
                           name="request"
                           type="number"
-                          id="request"
+                          id={project.id}
                           wrapperStyle={{ width: "100%" }}
                           labelStyle={{ fontSize: "14px" }}
                           style={{ fontSize: "14px", width: "200px" }}

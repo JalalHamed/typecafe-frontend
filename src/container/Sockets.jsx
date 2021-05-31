@@ -145,6 +145,7 @@ const Sockets = () => {
             )} رد شد.`
           );
           break;
+        // case 'client-accept':
         default:
           break;
       }

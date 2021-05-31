@@ -206,7 +206,8 @@ const TheProject = ({ project }) => {
             project.status === "IP" ? "ps-in-progress" : ""
           }`}
         >
-          <span style={{ color: "#555" }}>وضعیت پروژه</span>&nbsp;&nbsp;
+          <span style={{ color: "#555", fontSize: "11px" }}>وضعیت پروژه</span>
+          &nbsp;&nbsp;
           {project.status === "O" && <span>باز</span>}
           {project.status === "IP" && <span>در حال اجرا</span>}
         </p>
