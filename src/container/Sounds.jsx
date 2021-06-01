@@ -8,6 +8,8 @@ import { Howl } from "howler";
 import NewProjectSound from "assets/sounds/new-project.mp3";
 import ClientAcceptSound from "assets/sounds/client-accept.mp3";
 import NewMessageSound from "assets/sounds/new-message.mp3";
+import TypistFailedToAccept from "assets/sounds/typist-failed-to-accept.mp3";
+import TypistAccept from "assets/sounds/typist-accept.mp3";
 
 const Sounds = () => {
   const sounds = useSelector(state => state.Sounds);
@@ -20,17 +22,28 @@ const Sounds = () => {
   // Client Accept
   useEffect(() => {
     if (user.playSounds && sounds.clientAccept) play(ClientAcceptSound);
-  }, [sounds.clientAccept, user.playSounds]);
+  }, [user.playSounds, sounds.clientAccept]);
 
   // New Project
   useEffect(() => {
     if (user.playSounds && sounds.newProject) play(NewProjectSound);
-  }, [sounds.newProject, user.playSounds]);
+  }, [user.playSounds, sounds.newProject]);
 
   // New Message
   useEffect(() => {
     if (user.playSounds && sounds.newMessage) play(NewMessageSound);
-  }, [sounds.newMessage, user.playSounds]);
+  }, [user.playSounds, sounds.newMessage]);
+
+  // Typist Failed to Accept
+  useEffect(() => {
+    if (user.playSounds && sounds.typistFailedToAccept)
+      play(TypistFailedToAccept);
+  }, [user.playSounds, sounds.typistFailedToAccept]);
+
+  // Typist Accept
+  useEffect(() => {
+    if (user.playSounds && sounds.typistAccept) play(TypistAccept);
+  }, [user.playSounds, sounds.typistAccept]);
 
   return <></>;
 };

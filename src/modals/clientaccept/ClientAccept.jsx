@@ -10,7 +10,7 @@ import Button from "components/buttons/Button";
 import { farsiNumber, period } from "components/helper";
 
 // Actions
-import { ClientAccept } from "redux/actions";
+import { ClientAccept, Sounds } from "redux/actions";
 
 // Design
 import "./clientaccept.scss";
@@ -19,11 +19,13 @@ const TheClientAccept = () => {
   const dispatch = useDispatch();
   const submitRef = useRef();
   const data = useSelector(state => state.ClientAccept);
+  const sounds = useSelector(state => state.Sounds);
   const [deadline, setDeadline] = useState(
     period(data.issued_at, 30, "seconds")
   );
 
   const handleSubmit = () => {
+    dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
     dispatch(
       ClientAccept({
         isModalOpen: false,
@@ -39,6 +41,9 @@ const TheClientAccept = () => {
       if (deadline !== 0) {
         setDeadline(deadline - 1);
       } else {
+        dispatch(
+          Sounds({ typistFailedToAccept: sounds.typistFailedToAccept + 1 })
+        );
         dispatch(
           ClientAccept({
             isModalOpen: false,

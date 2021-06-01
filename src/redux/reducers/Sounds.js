@@ -3,6 +3,7 @@ let initialState = {
   newMessage: 0,
   clientAccept: 0,
   typistAccept: 0,
+  typistFailedToAccept: 0,
 };
 
 const Sounds = (state = initialState, action) => {
