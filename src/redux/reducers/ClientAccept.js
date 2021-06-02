@@ -1,8 +1,8 @@
 let initialState = {
   isModalOpen: false,
+  client: "",
   project: null,
   issued_at: null,
-  client: "",
   offer: null,
 };
 

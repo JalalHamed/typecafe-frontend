@@ -72,7 +72,7 @@ export const DeleteProjectReq = id => {
   return axios.post("delete-project/", id).then(res => res.data);
 };
 
-export const ClientAccept = id => {
+export const ClientAcceptReq = id => {
   return axios.post("client-accept/", id).then(res => res.data);
 };
 

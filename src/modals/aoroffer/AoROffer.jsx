@@ -12,7 +12,7 @@ import { priceFormat } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { RejectOffer, ClientAccept } from "requests";
+import { RejectOffer, ClientAcceptReq } from "requests";
 
 // Actions
 import {
@@ -21,6 +21,7 @@ import {
   NotEnoughCreditAction,
   RulesScrollToHTWW,
   ProjectsAction,
+  ClientAccept,
 } from "redux/actions";
 
 // xhr
@@ -54,7 +55,7 @@ const AoROffer = () => {
       }, 48);
     } else {
       dispatch(AoROfferAction({ isModalOpen: false }));
-      ClientAccept({ id: offer.id })
+      ClientAcceptReq({ id: offer.id })
         .then(res => {
           socket.send(
             JSON.stringify({
@@ -62,6 +63,13 @@ const AoROffer = () => {
               id: offer.id,
               client: user.displayname,
               issued_at: res,
+            })
+          );
+          dispatch(
+            ClientAccept({
+              offer: offer.id,
+              issued_at: res,
+              project: offer.project_id,
             })
           );
         })
@@ -148,7 +156,20 @@ const AoROffer = () => {
               ref={previousButtonRef}
               title="انصراف"
               className="w-30"
-              onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}
+              onClick={() =>
+                dispatch(
+                  AoROfferAction({
+                    isModalOpen: false,
+                    id: null,
+                    project_id: null,
+                    typist: "",
+                    typistImage: "",
+                    offeredPrice: 0,
+                    wholePrice: 0,
+                    status: "",
+                  })
+                )
+              }
             />
           </div>
         </>
@@ -166,7 +187,20 @@ const AoROffer = () => {
             ref={previousButtonRef}
             title="انصراف"
             className="w-30"
-            onClick={() => dispatch(AoROfferAction({ isModalOpen: false }))}
+            onClick={() =>
+              dispatch(
+                AoROfferAction({
+                  isModalOpen: false,
+                  id: null,
+                  project_id: null,
+                  typist: "",
+                  typistImage: "",
+                  offeredPrice: 0,
+                  wholePrice: 0,
+                  status: "",
+                })
+              )
+            }
           />
         </div>
       )}

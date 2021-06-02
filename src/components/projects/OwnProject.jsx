@@ -37,6 +37,7 @@ const OwnProject = ({ project }) => {
       AoROfferAction({
         isModalOpen: true,
         id: offer.id,
+        project_id: project.id,
         typist: offer.typist,
         typistImage: offer.typist_image,
         offeredPrice: offer.offered_price,

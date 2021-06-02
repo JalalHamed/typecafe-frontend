@@ -1,6 +1,7 @@
 let initialState = {
   isModalOpen: false,
   id: null,
+  project_id: null,
   typist: "",
   typistImage: "",
   offeredPrice: 0,
