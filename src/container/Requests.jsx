@@ -10,6 +10,7 @@ import {
   Sidebar,
   Messages,
   MessagesElse,
+  Sounds,
 } from "redux/actions";
 
 // Requests
@@ -25,6 +26,7 @@ import {
 
 const Requests = () => {
   const dispatch = useDispatch();
+  const state = useSelector(state => state);
   const token = useSelector(state => state.Tokens.ac_t);
 
   useEffect(() => {
@@ -86,8 +88,10 @@ const Requests = () => {
                 if (message.sor === "received" && !message.is_read)
                   total_unread += 1;
               });
-              if (total_unread)
+              if (total_unread) {
                 dispatch(MessagesElse({ totalUnread: total_unread }));
+                dispatch(Sounds({ newMessage: state.Sounds.newMessage + 1 }));
+              }
               let userIdArr = res.map(message => message.user_id);
               let uniqUserIdArr = [...new Set(userIdArr)];
               uniqUserIdArr.forEach(id => {

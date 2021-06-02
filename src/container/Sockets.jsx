@@ -154,6 +154,7 @@ const Sockets = () => {
               project: data.project,
               issued_at: data.issued_at,
               client: data.client,
+              offer: data.offer,
             })
           );
           dispatch(

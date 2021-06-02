@@ -16,7 +16,8 @@ const Sounds = () => {
   const user = useSelector(state => state.User);
 
   const play = src => {
-    new Howl({ src: [src] }).play();
+    let sound = new Howl({ src: [src], autoplay: true });
+    sound.play();
   };
 
   // Client Accept

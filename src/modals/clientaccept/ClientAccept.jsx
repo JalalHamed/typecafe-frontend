@@ -12,6 +12,9 @@ import { farsiNumber, period } from "components/helper";
 // Actions
 import { ClientAccept, Sounds } from "redux/actions";
 
+// Requests
+import { TypistFailedToAccept } from "requests";
+
 // Design
 import "./clientaccept.scss";
 
@@ -41,6 +44,7 @@ const TheClientAccept = () => {
       if (deadline !== 0) {
         setDeadline(deadline - 1);
       } else {
+        TypistFailedToAccept({ id: data.offer });
         dispatch(
           Sounds({ typistFailedToAccept: sounds.typistFailedToAccept + 1 })
         );

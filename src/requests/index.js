@@ -76,6 +76,10 @@ export const ClientAccept = id => {
   return axios.post("client-accept/", id).then(res => res.data);
 };
 
+export const TypistFailedToAccept = id => {
+  return axios.post("typist-failed-to-accept/", id).then(res => res.data);
+};
+
 export const CreateOfferReq = body => {
   return axios.post("create-offer/", body).then(res => res.data);
 };

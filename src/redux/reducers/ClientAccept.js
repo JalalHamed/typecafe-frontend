@@ -3,6 +3,7 @@ let initialState = {
   project: null,
   issued_at: null,
   client: "",
+  offer: null,
 };
 
 const ClientAccept = (state = initialState, action) => {
