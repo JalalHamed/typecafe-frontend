@@ -12,6 +12,7 @@ import * as actions from "redux/actions";
 
 // Requests
 import socket from "requests/socket";
+import { ReadMessages } from "requests";
 
 const Sockets = () => {
   const dispatch = useDispatch();
@@ -105,13 +106,17 @@ const Sockets = () => {
           );
           break;
         case "new-message":
-          dispatch(actions.Sounds({ newMessage: state.Sounds.newMessage + 1 }));
           if (state.Messages.isWatching !== data.sender_id) {
             dispatch(
               actions.MessagesElse({
                 totalUnread: state.Messages.totalUnread + 1,
               })
             );
+            dispatch(
+              actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
+            );
+          } else {
+            ReadMessages({ sender_id: data.sender_id });
           }
           if (!state.Messages.messages.find(x => x.id === data.sender_id)) {
             dispatch(

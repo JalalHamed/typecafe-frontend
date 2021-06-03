@@ -68,10 +68,10 @@ const TheMessages = () => {
 
   useEffect(() => {
     if (selected) {
-      dispatch(MessagesElse({ isWatching: selected }));
       ReadMessages({ sender_id: selected });
       dispatch(
         MessagesElse({
+          isWatching: selected,
           totalUnread:
             totalUnread - messages.find(x => x.id === selected).unread,
         })
