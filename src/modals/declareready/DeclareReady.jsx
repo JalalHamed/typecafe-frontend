@@ -16,7 +16,7 @@ import { ClientAccept, Sounds } from "redux/actions";
 import { TypistFailedToAccept } from "requests";
 
 // Design
-import "./clientaccept.scss";
+import "./declareready.scss";
 
 const TheClientAccept = () => {
   const dispatch = useDispatch();
@@ -73,22 +73,22 @@ const TheClientAccept = () => {
     <motion.div
       initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
-      className="client-accept-wrapper"
+      className="declare-ready-wrapper"
     >
-      <p className="ca-note">
-        <span className="ca-emphasize">{data.client}</span> پیشنهاد شما برای
+      <p className="dr-note">
+        <span className="dr-emphasize">{data.client}</span> پیشنهاد شما برای
         پروژه با شناسه{" "}
-        <span className="ca-emphasize">{farsiNumber(data.project)}</span> را
+        <span className="dr-emphasize">{farsiNumber(data.project)}</span> را
         تایید کرد.
       </p>
-      <p className="ca-are-you-ready">آماده‌اید شروع کنید؟</p>
+      <p className="dr-are-you-ready">آماده‌اید شروع کنید؟</p>
       <Button
         ref={submitRef}
         title="آماده‌ام"
-        className="w-49 ca-ready-button green"
+        className="w-49 dr-ready-button green"
         onClick={handleSubmit}
       />
-      <div className="ca-countdown">{farsiNumber(deadline)}</div>
+      <div className="dr-countdown">{farsiNumber(deadline)}</div>
     </motion.div>
   );
 };

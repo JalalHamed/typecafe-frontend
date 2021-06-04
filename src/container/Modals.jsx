@@ -13,8 +13,8 @@ import Profile from "modals/profile/Profile";
 import OfferRequest from "modals/createoffer/CreateOffer";
 import DeleteProject from "modals/deleteproject/DeleteProject";
 import AoROffer from "modals/aoroffer/AoROffer";
-import NotEnoughCredit from "modals/notEnoughCredit/NotEnoughCredit";
-import ClientAccept from "modals/clientaccept/ClientAccept";
+import NotEnoughCredit from "modals/notenoughcredit/NotEnoughCredit";
+import ClientAccept from "modals/declareready/DeclareReady";
 
 const Modals = () => {
   const state = useSelector(state => state);

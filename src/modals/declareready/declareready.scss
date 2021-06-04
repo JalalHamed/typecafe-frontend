@@ -1,4 +1,4 @@
-.client-accept-wrapper {
+.declare-ready-wrapper {
   min-width: 450px;
   height: 220px;
   background-color: #fff;
@@ -6,21 +6,21 @@
   padding: 45px 40px 25px;
   text-align: center;
 
-  .ca-note {
-    .ca-emphasize {
+  .dr-note {
+    .dr-emphasize {
       color: #1c3987;
     }
   }
 
-  .ca-are-you-ready {
+  .dr-are-you-ready {
     margin-top: 5px;
   }
 
-  .ca-ready-button {
+  .dr-ready-button {
     margin-top: 20px;
   }
 
-  .ca-countdown {
+  .dr-countdown {
     margin-top: 15px;
     font-size: 18px;
   }
