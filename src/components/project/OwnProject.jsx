@@ -44,7 +44,7 @@ const OwnProject = ({ project }) => {
                   {project.status === "O" && (
                     <>
                       <div className="offers-title-wrapper">
-                        <p className="offers-title">پیشنهادها</p>
+                        <p>پیشنهادها</p>
                         <span className="number-of-offers">
                           ({farsiNumber(offers.length)})
                         </span>
@@ -70,14 +70,16 @@ const OwnProject = ({ project }) => {
               )}
             </>
           ) : (
-            <>
-              <p>تایپیست ۳۰ ثانیه مهلت اعلام آمادگی دارد.</p>
-              <p>لطفا منتظر بمانید.</p>
+            <div className="has-offers-wrapper no-height">
+              <p className="waiting-for-typist-note">
+                در انتظار اعلام آمادگی تاپیست
+              </p>
               <Offer
                 project={project}
                 offer={offers.find(x => x.id === ClientAccept.offer)}
+                countdown
               />
-            </>
+            </div>
           )}
         </>
       ) : (

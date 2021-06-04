@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 
 // Components
-import { priceFormat, addCommission } from "components/helper";
+import {
+  priceFormat,
+  addCommission,
+  period,
+  farsiNumber,
+} from "components/helper";
 
 // Actions
 import { AoROfferAction, Profile } from "redux/actions";
@@ -16,9 +21,13 @@ import { baseURL } from "components/xhr";
 // Design
 import "./offer.scss";
 
-const Offer = ({ offer, project }) => {
+const Offer = ({ offer, project, countdown }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.User);
+  const ClientAccept = useSelector(state => state.ClientAccept);
+  const [deadline, setDeadline] = useState(
+    period(ClientAccept.issued_at, 30, "seconds")
+  );
 
   const openProfile = offer => {
     dispatch(
@@ -47,6 +56,18 @@ const Offer = ({ offer, project }) => {
       })
     );
   };
+
+  useEffect(() => {
+    if (countdown) {
+      let interval = setInterval(() => {
+        if (deadline !== 0) {
+          setDeadline(deadline - 1);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [countdown, deadline]);
 
   return (
     <div key={offer.id} className="offer">
@@ -87,22 +108,34 @@ const Offer = ({ offer, project }) => {
           )}
         </span>
       </div>
-      {project.client_id === user.id ? (
-        <div className="accept-reject-wrapper no-select">
-          <div className="accept" onClick={() => openAoRModal(offer, "accept")}>
-            <i className="icon icon-check-green" />
-          </div>
-          <div className="reject" onClick={() => openAoRModal(offer, "reject")}>
-            <i className="icon icon-close-red" />
-          </div>
-        </div>
-      ) : (
-        <p className="waiting-for-approval">
-          {offer.status === "A" && <span>در انتظار تایید</span>}
-          {offer.status === "REJ" && (
-            <span className="rejected-note">رد شده</span>
+      {!countdown ? (
+        <>
+          {project.client_id === user.id ? (
+            <div className="accept-reject-wrapper no-select">
+              <div
+                className="accept"
+                onClick={() => openAoRModal(offer, "accept")}
+              >
+                <i className="icon icon-check-green" />
+              </div>
+              <div
+                className="reject"
+                onClick={() => openAoRModal(offer, "reject")}
+              >
+                <i className="icon icon-close-red" />
+              </div>
+            </div>
+          ) : (
+            <p className="waiting-for-approval">
+              {offer.status === "A" && <span>در انتظار تایید</span>}
+              {offer.status === "REJ" && (
+                <span className="rejected-note">رد شده</span>
+              )}
+            </p>
           )}
-        </p>
+        </>
+      ) : (
+        <p className="deadline">{farsiNumber(deadline)}</p>
       )}
       <div className="offer-created-at">
         <Moment fromNow locale="fa">
