@@ -74,6 +74,7 @@ const TheCreateOffer = () => {
                   id: res.id,
                   created_at: new Date(),
                   status: res.status,
+                  typist_id: res.typist_id,
                 },
               ],
             })

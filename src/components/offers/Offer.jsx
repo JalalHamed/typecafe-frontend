@@ -1,7 +1,7 @@
 import React from "react";
 
 // Libraries
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 
 // Components
@@ -18,6 +18,7 @@ import "./offer.scss";
 
 const Offer = ({ offer, project }) => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.User);
 
   const openProfile = offer => {
     dispatch(
@@ -49,27 +50,29 @@ const Offer = ({ offer, project }) => {
 
   return (
     <div key={offer.id} className="offer">
-      <div className="typist-wrapper">
-        {offer.typist_image ? (
-          <img
-            src={baseURL + offer.typist_image}
-            alt="typist_image"
-            className="typist-image pointer"
+      {offer.typist_id !== user.id && (
+        <div className="typist-wrapper">
+          {offer.typist_image ? (
+            <img
+              src={baseURL + offer.typist_image}
+              alt="typist_image"
+              className="typist-image pointer"
+              onClick={() => openProfile(offer)}
+            />
+          ) : (
+            <i
+              className="icon offer-typist-default-pic pointer"
+              onClick={() => openProfile(offer)}
+            />
+          )}
+          <span
+            className="typist-displayname pointer"
             onClick={() => openProfile(offer)}
-          />
-        ) : (
-          <i
-            className="icon offer-typist-default-pic pointer"
-            onClick={() => openProfile(offer)}
-          />
-        )}
-        <span
-          className="typist-displayname pointer"
-          onClick={() => openProfile(offer)}
-        >
-          {offer.typist}
-        </span>
-      </div>
+          >
+            {offer.typist}
+          </span>
+        </div>
+      )}
       <div className="offered-price-wrapper">
         <span className="offered-price-title">قیمت پیشنهادی</span>
         <span className="offered-price">
@@ -84,14 +87,23 @@ const Offer = ({ offer, project }) => {
           )}
         </span>
       </div>
-      <div className="accept-reject-wrapper no-select">
-        <div className="accept" onClick={() => openAoRModal(offer, "accept")}>
-          <i className="icon icon-check-green" />
+      {project.client_id === user.id ? (
+        <div className="accept-reject-wrapper no-select">
+          <div className="accept" onClick={() => openAoRModal(offer, "accept")}>
+            <i className="icon icon-check-green" />
+          </div>
+          <div className="reject" onClick={() => openAoRModal(offer, "reject")}>
+            <i className="icon icon-close-red" />
+          </div>
         </div>
-        <div className="reject" onClick={() => openAoRModal(offer, "reject")}>
-          <i className="icon icon-close-red" />
-        </div>
-      </div>
+      ) : (
+        <p className="waiting-for-approval">
+          {offer.status === "A" && <span>در انتظار تایید</span>}
+          {offer.status === "REJ" && (
+            <span className="rejected-note">رد شده</span>
+          )}
+        </p>
+      )}
       <div className="offer-created-at">
         <Moment fromNow locale="fa">
           {offer.created_at}

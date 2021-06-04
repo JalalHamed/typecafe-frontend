@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 
 // Libraries
-import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
+import Offer from "components/offers/Offer";
 import { priceFormat, extractCommission } from "components/helper";
 import { Puffloader, Skewloader } from "components/loader";
 
@@ -139,45 +139,7 @@ const OthersProject = ({ project, downloaded }) => {
                             onClick={() => handleDelete(offer.id)}
                           />
                         )}
-                        <div
-                          className={`offer ${
-                            offer.status === "REJ" ? "rejected" : ""
-                          }`}
-                        >
-                          <div className="offered-price-wrapper">
-                            <span className="offered-price-title">
-                              قیمت پیشنهادی
-                            </span>
-                            <span className="offered-price">
-                              {priceFormat(offer.offered_price)}
-                            </span>
-                          </div>
-                          <div className="offered-price-wrapper">
-                            <span className="offered-price-title">
-                              عایدی کل
-                            </span>
-                            <span className="offered-price">
-                              {priceFormat(
-                                extractCommission(
-                                  offer.offered_price * project.number_of_pages
-                                )
-                              )}
-                            </span>
-                          </div>
-                          <p className="waiting-for-approval">
-                            {offer.status === "A" && (
-                              <span>در انتظار تایید</span>
-                            )}
-                            {offer.status === "REJ" && (
-                              <span className="rejected-note">رد شده</span>
-                            )}
-                          </p>
-                          <div className="offer-created-at">
-                            <Moment fromNow locale="fa">
-                              {offer.created_at}
-                            </Moment>
-                          </div>
-                        </div>
+                        <Offer project={project} offer={offer} />
                       </div>
                     </div>
                   )}
