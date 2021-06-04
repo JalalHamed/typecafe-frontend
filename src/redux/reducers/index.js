@@ -12,6 +12,7 @@ import Notifications from "./Notifications";
 import CreateOffer from "./CreateOffer";
 import DeleteProject from "./DeleteProject";
 import Projects from "./Projects";
+import Offers from "./Offers";
 import AoROffer from "./AoROffer";
 import OnlineUsers from "./OnlineUsers";
 import Messages from "./Messages";
@@ -33,6 +34,7 @@ const allReducers = combineReducers({
   CreateOffer,
   DeleteProject,
   Projects,
+  Offers,
   AoROffer,
   OnlineUsers,
   Messages,

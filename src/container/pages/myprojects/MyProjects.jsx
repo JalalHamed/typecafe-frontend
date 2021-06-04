@@ -19,7 +19,7 @@ const Projects = () => {
   const dispatch = useDispatch();
   const projects = useSelector(state => state.Projects.projects);
   const myprojects = useSelector(state => state.Projects.myprojects);
-  const offereds = useSelector(state => state.Projects.offereds);
+  const offereds = useSelector(state => state.Offers.offereds);
   const loading = useSelector(state => state.Projects.myprojectsloading);
   const AddProjectRef = useRef();
 

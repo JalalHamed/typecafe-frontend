@@ -53,13 +53,13 @@ const Item = forwardRef(({ status, title }, ref) => {
               {farsiNumber(state.Projects.myprojects.length)}
             </div>
           )}
-          {!!state.Projects.offereds.length && (
+          {!!state.Offers.offereds.length && (
             <div
               className={`sidebar-counter light-blue ${
                 !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
               } ${!!state.Projects.myprojects.length ? "left-50" : ""}`}
             >
-              {farsiNumber(state.Projects.offereds.length)}
+              {farsiNumber(state.Offers.offereds.length)}
             </div>
           )}
         </>

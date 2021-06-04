@@ -75,6 +75,13 @@ export const ProjectsAction = payload => {
   };
 };
 
+export const OffersAction = payload => {
+  return {
+    type: "OFFERS",
+    payload,
+  };
+};
+
 export const AoROfferAction = payload => {
   return {
     type: "AOROFFER",

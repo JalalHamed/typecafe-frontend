@@ -20,7 +20,6 @@ import {
   Sidebar,
   NotEnoughCreditAction,
   RulesScrollToHTWW,
-  ProjectsAction,
   ClientAccept,
 } from "redux/actions";
 
@@ -36,7 +35,7 @@ const AoROffer = () => {
   const previousButtonRef = useRef();
   const offer = useSelector(state => state.AoROffer);
   const user = useSelector(state => state.User);
-  const offers = useSelector(state => state.Projects.offers);
+  const offers = useSelector(state => state.Offers.offers);
   const [loading, setLoading] = useState(false);
 
   const handleGoToRules = () => {
@@ -46,9 +45,7 @@ const AoROffer = () => {
   };
 
   const handleAccept = () => {
-    setLoading(true);
     if (user.credit < offer.wholePrice) {
-      setLoading(false);
       dispatch(NotEnoughCreditAction(true));
       setTimeout(() => {
         dispatch(AoROfferAction({ isModalOpen: false }));
@@ -84,9 +81,7 @@ const AoROffer = () => {
     RejectOffer({ id: offer.id })
       .then(() => {
         setLoading(false);
-        dispatch(
-          ProjectsAction({ offers: offers.filter(x => x.id !== offer.id) })
-        );
+        dispatch({ offers: offers.filter(x => x.id !== offer.id) });
         dispatch(AoROfferAction({ isModalOpen: false }));
         socket.send(
           JSON.stringify({

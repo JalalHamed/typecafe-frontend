@@ -15,7 +15,7 @@ import { priceFormat, farsiNumber, extractCommission } from "components/helper";
 import {
   CreateOffer,
   Sidebar,
-  ProjectsAction,
+  OffersAction,
   NotEnoughCreditAction,
   RulesScrollToHTWW,
 } from "redux/actions";
@@ -64,11 +64,10 @@ const TheCreateOffer = () => {
               project_id: project_id,
             })
           );
-          dispatch(CreateOffer({ isModalOpen: false }));
           dispatch(
-            ProjectsAction({
+            OffersAction({
               offereds: [
-                ...state.Projects.offereds,
+                ...state.Offers.offereds,
                 {
                   project: project_id,
                   offered_price: pricePerPage,
@@ -79,7 +78,8 @@ const TheCreateOffer = () => {
               ],
             })
           );
-          toast.success("پیشنهاد شما با موفقیت ثبت گردید.");
+          dispatch(CreateOffer({ isModalOpen: false }));
+          toast.success("پیشنهاد شما با موفقیت ثبت شد.");
         })
         .catch(err => {
           setLoading(false);

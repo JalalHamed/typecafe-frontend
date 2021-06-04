@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   User,
   ProjectsAction,
+  OffersAction,
   Sidebar,
   Messages,
   MessagesElse,
@@ -123,10 +124,10 @@ const Requests = () => {
           // Get Offers
           GetOffers()
             .then(res =>
-              dispatch(ProjectsAction({ offers: res, offersLoading: false }))
+              dispatch(OffersAction({ offers: res, offersLoading: false }))
             )
             .catch(err => {
-              dispatch(ProjectsAction({ offersLoading: false }));
+              dispatch(OffersAction({ offersLoading: false }));
               console.log(err);
             });
 
@@ -134,14 +135,14 @@ const Requests = () => {
           GetOffereds()
             .then(res =>
               dispatch(
-                ProjectsAction({
+                OffersAction({
                   offereds: res,
                   offeredsLoading: false,
                 })
               )
             )
             .catch(err => {
-              dispatch(ProjectsAction({ offeredsLoading: false }));
+              dispatch(OffersAction({ offeredsLoading: false }));
               console.log(err);
             });
 
@@ -167,8 +168,13 @@ const Requests = () => {
             ProjectsAction({
               loading: false,
               myprojectsloading: false,
-              offersLoading: false,
               downloadsLoading: false,
+            })
+          );
+          dispatch(
+            OffersAction({
+              offersLoading: false,
+              offeredsLoading: true,
             })
           );
         });
@@ -180,9 +186,13 @@ const Requests = () => {
         ProjectsAction({
           loading: false,
           myprojectsloading: false,
-          offersLoading: false,
-          offeredsLoading: false,
           downloadsLoading: false,
+        })
+      );
+      dispatch(
+        OffersAction({
+          offersLoading: false,
+          offeredsLoading: true,
         })
       );
     }

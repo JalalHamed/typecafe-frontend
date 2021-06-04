@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 // Libraries
 import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
@@ -15,13 +16,13 @@ import socket from "requests/socket";
 import { DeleteOffer } from "requests";
 
 // Actions
-import { CreateOffer, ProjectsAction } from "redux/actions";
+import { CreateOffer, OffersAction } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
   const submitReqeustRef = useRef();
   const user = useSelector(state => state.User);
-  const offereds = useSelector(state => state.Projects.offereds);
+  const offereds = useSelector(state => state.Offers.offereds);
   const isLoading = useSelector(state => state.Projects);
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
@@ -50,7 +51,7 @@ const OthersProject = ({ project, downloaded }) => {
         .then(() => {
           setLoading(false);
           dispatch(
-            ProjectsAction({ offereds: offereds.filter(x => x.id !== id) })
+            OffersAction({ offereds: offereds.filter(x => x.id !== id) })
           );
           socket.send(
             JSON.stringify({
@@ -59,6 +60,7 @@ const OthersProject = ({ project, downloaded }) => {
               project_owner: project.client_id,
             })
           );
+          toast.info("پیشنهاد شما با موفقیت لغو شد.");
         })
         .catch(err => {
           setLoading(false);

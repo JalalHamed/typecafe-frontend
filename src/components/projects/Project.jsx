@@ -31,15 +31,13 @@ const TheProject = ({ project }) => {
   const user = useSelector(state => state.User);
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
-  const offereds = useSelector(state => state.Projects.offereds);
+  const offereds = useSelector(state => state.Offers.offereds);
 
   const handleDownloaded = () => {
     window.open(project.file, "_blank");
     if (user.isLoggedIn) {
       dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
-      Downloaded({ project: project.id })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
+      Downloaded({ project: project.id });
     }
   };
 

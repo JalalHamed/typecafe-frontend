@@ -95,13 +95,13 @@ const Sockets = () => {
           break;
         case "new-offer":
           dispatch(
-            actions.ProjectsAction({ offers: [data, ...state.Projects.offers] })
+            actions.OffersAction({ offers: [data, ...state.Offers.offers] })
           );
           break;
         case "delete-offer":
           dispatch(
-            actions.ProjectsAction({
-              offers: state.Projects.offers.filter(x => x.id !== data.id),
+            actions.OffersAction({
+              offers: state.Offers.offers.filter(x => x.id !== data.id),
             })
           );
           break;
