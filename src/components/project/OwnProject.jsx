@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import "moment/locale/fa";
 
 // Components
-import Offer from "components/offers/Offer";
+import Offer from "components/offer/Offer";
 import { farsiNumber } from "components/helper";
 import { Puffloader } from "components/loader";
 
@@ -73,12 +73,10 @@ const OwnProject = ({ project }) => {
             <>
               <p>تایپیست ۳۰ ثانیه مهلت اعلام آمادگی دارد.</p>
               <p>لطفا منتظر بمانید.</p>
-              <div className="request-wrapper">
-                <Offer
-                  project={project}
-                  offer={offers.find(x => x.id === ClientAccept.offer)}
-                />
-              </div>
+              <Offer
+                project={project}
+                offer={offers.find(x => x.id === ClientAccept.offer)}
+              />
             </>
           )}
         </>

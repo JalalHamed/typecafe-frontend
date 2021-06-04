@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import { Puffloader } from "components/loader";
-import Project from "components/projects/Project";
+import Project from "components/project/Project";
 import RippleWrapper from "components/ripple/RippleWrapper";
 import { farsiNumber } from "components/helper";
 

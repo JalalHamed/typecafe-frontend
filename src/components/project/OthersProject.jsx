@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 // Components
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
-import Offer from "components/offers/Offer";
+import Offer from "components/offer/Offer";
 import { priceFormat, extractCommission } from "components/helper";
 import { Puffloader, Skewloader } from "components/loader";
 

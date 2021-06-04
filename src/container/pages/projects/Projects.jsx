@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Components
-import Project from "components/projects/Project";
+import Project from "components/project/Project";
 import { Puffloader } from "components/loader";
 
 // Requests
