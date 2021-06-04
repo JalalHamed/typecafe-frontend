@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
+import { Howl } from "howler";
 
 // Sounds
 import NewProjectSound from "assets/sounds/new-project.mp3";
@@ -15,8 +16,8 @@ const Sounds = () => {
   const user = useSelector(state => state.User);
 
   const play = src => {
-    let audio = new Audio(src);
-    audio.play();
+    let sound = new Howl({ src: [src] });
+    sound.play();
   };
 
   // Client Accept
