@@ -93,8 +93,11 @@ const ReviewAndSubmit = () => {
             {fileNameFilter(state.file.name)}
           </p>
           <p className="label mt-10">حجم فایل</p>
-          <p className="mr-12 ltr" style={{ direction: "rtl" }}>
-            {Number(state.file.size / 1000).toFixed(0)} کیلوبایت
+          <p
+            className="mr-12 ltr"
+            style={{ direction: "rtl", width: "max-content" }}
+          >
+            {Number(state.file.size / 1000).toFixed(1)} کیلوبایت
           </p>
           <p className="label mt-10">زبان(ها) و پیوست های پروژه</p>
           <p className="mr-12">

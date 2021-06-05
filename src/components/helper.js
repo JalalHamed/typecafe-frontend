@@ -52,6 +52,14 @@ export const getUserTimeStatus = (onlineUsers, id, is_online) => {
   }
 };
 
+export const lastSeen = (onlineUsers, id) => {
+  if (!onlineUsers.disconnects.includes(id)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const period = (_date, _deadline, unit) => {
   let getDeadline = () => {
     switch (unit) {
@@ -61,7 +69,6 @@ export const period = (_date, _deadline, unit) => {
         return;
     }
   };
-
   let date = Date.parse(_date);
   let deadline = Date.now() + getDeadline();
   return Math.round((deadline - date) / 1000);

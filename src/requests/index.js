@@ -22,10 +22,6 @@ export const ConfirmEmailReq = body => {
   return axios.post("account/confirm-email/", body).then(res => res.data);
 };
 
-export const UserDisconnect = () => {
-  return axios.get("account/user-disconnect/").then(res => res.data);
-};
-
 // Profile
 export const UserProfile = body => {
   return axios.post("account/user-profile/", body).then(res => res.data);

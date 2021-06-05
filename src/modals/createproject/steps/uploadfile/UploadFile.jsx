@@ -99,8 +99,8 @@ const UploadFiles = () => {
                 <p className="label">نام فایل</p>
                 <p>{fileNameFilter(file.name)}&nbsp;&nbsp;</p>
                 <p className="label">حجم فایل</p>
-                <p style={{ direction: "rtl" }}>
-                  &nbsp;&nbsp;{Number(file.size / 1000).toFixed(0)} کیلوبایت
+                <p style={{ direction: "rtl", width: "max-content" }}>
+                  &nbsp;&nbsp;{Number(file.size / 1000).toFixed(1)} کیلوبایت
                 </p>
               </div>
             </div>

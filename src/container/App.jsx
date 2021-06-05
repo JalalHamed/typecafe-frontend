@@ -23,10 +23,6 @@ import Sounds from "./Sounds";
 // Actions
 import { Sidebar, Tokens } from "redux/actions";
 
-// Requests
-import socket from "requests/socket";
-import { UserDisconnect } from "requests";
-
 // Design
 import "./app.scss";
 
@@ -40,15 +36,6 @@ const App = () => {
       sessionStorage.setItem("_at", state.Tokens.ac_t);
       sessionStorage.setItem("_rt", state.Tokens.re_t);
     }
-    UserDisconnect()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    socket.send(
-      JSON.stringify({
-        status: "user-offline",
-        user_id: state.User.id,
-      })
-    );
   };
 
   useEffect(() => {
@@ -81,17 +68,6 @@ const App = () => {
 
     // eslint-disable-next-line
   }, [width]);
-
-  useEffect(() => {
-    if (state.User.id && !state.Loading) {
-      socket.send(
-        JSON.stringify({
-          status: "user-online",
-          user_id: state.User.id,
-        })
-      );
-    }
-  }, [state.User.id, state.Loading]);
 
   return (
     <div className="wrapper">

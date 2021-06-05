@@ -58,16 +58,13 @@ const Offer = ({ offer, project, countdown }) => {
   };
 
   useEffect(() => {
-    if (countdown) {
-      let interval = setInterval(() => {
-        if (deadline !== 0) {
-          setDeadline(deadline - 1);
-        }
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [countdown, deadline]);
+    let interval = setInterval(() => {
+      if (deadline !== 0) {
+        setDeadline(deadline - 1);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [deadline]);
 
   return (
     <div key={offer.id} className="offer">

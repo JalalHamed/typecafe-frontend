@@ -9,7 +9,7 @@ import "moment/locale/fa";
 import Button from "components/buttons/Button";
 import OwnProject from "./OwnProject";
 import OthersProject from "./OthersProject";
-import { farsiNumber, getUserTimeStatus } from "components/helper";
+import { farsiNumber, getUserTimeStatus, lastSeen } from "components/helper";
 import HintArrow from "./HintArrow";
 
 // Requests
@@ -116,7 +116,7 @@ const TheProject = ({ project }) => {
               ) : (
                 <span>
                   آخرین بازدید حدود{" "}
-                  {!onlineUsers.disconnects.includes(project.client_id) ? (
+                  {lastSeen(onlineUsers, project.client_id) ? (
                     <Moment fromNow locale="fa">
                       {project.client_last_login}
                     </Moment>

@@ -3,9 +3,6 @@ import React from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 
-// Requests
-import { UserDisconnect } from "requests";
-
 // Actions
 import { User, Profile, Tokens } from "redux/actions";
 
@@ -17,12 +14,10 @@ const UserDropDown = () => {
   const user = useSelector(state => state.User);
 
   const handleLogout = () => {
-    UserDisconnect()
-      .then(() => {
-        dispatch(Tokens({ ac_t: null, re_t: null }));
-        window.location.reload();
-      })
-      .catch(err => console.log(err));
+    dispatch(Tokens({ ac_t: null, re_t: null }));
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   const handleProfile = () => {
