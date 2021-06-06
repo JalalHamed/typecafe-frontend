@@ -97,9 +97,17 @@ const UploadFiles = () => {
               <i className="icon icon-zip" style={{ textAlign: "center" }} />
               <div className="file-detials">
                 <p className="label">نام فایل</p>
-                <p>{fileNameFilter(file.name)}&nbsp;&nbsp;</p>
+                <p style={{ width: "max-content", float: "right" }}>
+                  {fileNameFilter(file.name)}&nbsp;&nbsp;
+                </p>
                 <p className="label">حجم فایل</p>
-                <p style={{ direction: "rtl", width: "max-content" }}>
+                <p
+                  style={{
+                    direction: "rtl",
+                    width: "max-content",
+                    float: "right",
+                  }}
+                >
                   &nbsp;&nbsp;{Number(file.size / 1000).toFixed(1)} کیلوبایت
                 </p>
               </div>

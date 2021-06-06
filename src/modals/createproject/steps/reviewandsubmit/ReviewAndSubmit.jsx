@@ -88,7 +88,11 @@ const ReviewAndSubmit = () => {
           <p className="label">نام فایل</p>
           <p
             className="mr-12 ltr"
-            style={{ overflow: "auto", maxHeight: "56px", width: "260px" }}
+            style={{
+              overflow: "auto",
+              maxHeight: "56px",
+              width: "max-content",
+            }}
           >
             {fileNameFilter(state.file.name)}
           </p>

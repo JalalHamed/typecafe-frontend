@@ -32,11 +32,11 @@ export const UserData = () => {
 };
 
 export const ChangeProfileImage = body => {
-  return axios.patch("account/update-image/", body).then(res => res.data);
+  return axios.post("account/update-image/", body).then(res => res.data);
 };
 
 export const ChangeDisplayName = body => {
-  return axios.patch("account/update-displayname/", body).then(res => res.data);
+  return axios.post("account/update-displayname/", body).then(res => res.data);
 };
 
 export const DeleteProfileImage = () => {
