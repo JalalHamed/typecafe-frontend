@@ -60,16 +60,9 @@ export const lastSeen = (onlineUsers, id) => {
   }
 };
 
-export const period = (_date, _deadline, unit) => {
-  let getDeadline = () => {
-    switch (unit) {
-      case "seconds":
-        return _deadline * 1000;
-      default:
-        return;
-    }
-  };
-  let date = Date.parse(_date);
-  let deadline = Date.now() + getDeadline();
-  return Math.round((deadline - date) / 1000);
+export const remainingTime = (_issued_at, _deadline) => {
+  let now = Date.parse(new Date());
+  let issued_at = Date.parse(_issued_at);
+  let deadline = _deadline * 1000;
+  return Math.round((deadline - (now - issued_at)) / 1000);
 };

@@ -7,13 +7,10 @@ import { motion } from "framer-motion";
 
 // Components
 import Button from "components/buttons/Button";
-import { farsiNumber, period } from "components/helper";
+import { farsiNumber, remainingTime } from "components/helper";
 
 // Actions
 import { ClientAccept, Sounds } from "redux/actions";
-
-// Requests
-import { TypistFailedToAccept } from "requests";
 
 // Design
 import "./declareready.scss";
@@ -23,9 +20,7 @@ const TheClientAccept = () => {
   const submitRef = useRef();
   const data = useSelector(state => state.ClientAccept);
   const sounds = useSelector(state => state.Sounds);
-  const [deadline, setDeadline] = useState(
-    period(data.issued_at, 30, "seconds")
-  );
+  const [deadline, setDeadline] = useState(remainingTime(data.issued_at, 30));
 
   const handleSubmit = () => {
     dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
@@ -41,10 +36,9 @@ const TheClientAccept = () => {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      if (deadline !== 0) {
-        setDeadline(deadline - 1);
+      if (deadline > 0) {
+        setDeadline(remainingTime(data.issued_at, 30));
       } else {
-        TypistFailedToAccept({ id: data.offer });
         dispatch(
           Sounds({ typistFailedToAccept: sounds.typistFailedToAccept + 1 })
         );

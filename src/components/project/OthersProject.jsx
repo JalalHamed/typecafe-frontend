@@ -8,7 +8,11 @@ import { toast } from "react-toastify";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import Offer from "components/offer/Offer";
-import { priceFormat, extractCommission } from "components/helper";
+import {
+  priceFormat,
+  extractCommission,
+  remainingTime,
+} from "components/helper";
 import { Puffloader, Skewloader } from "components/loader";
 
 // Requests
@@ -16,7 +20,7 @@ import socket from "requests/socket";
 import { DeleteOffer } from "requests";
 
 // Actions
-import { CreateOffer, OffersAction } from "redux/actions";
+import { CreateOffer, OffersAction, ClientAccept } from "redux/actions";
 
 const OthersProject = ({ project, downloaded }) => {
   const dispatch = useDispatch();
@@ -98,8 +102,22 @@ const OthersProject = ({ project, downloaded }) => {
   }, [price]);
 
   useEffect(() => {
-    if (offereds.find(offer => offer.project === project.id)) {
-      setOffer(offereds.find(offer => offer.project === project.id));
+    let ownOffer = offereds.find(offer => offer.project === project.id);
+    if (ownOffer) {
+      setOffer(ownOffer);
+      if (
+        ownOffer.client_accept &&
+        remainingTime(ownOffer.client_accept, 30) >= 0
+      )
+        dispatch(
+          ClientAccept({
+            isModalOpen: true,
+            project: ownOffer.project,
+            issued_at: ownOffer.client_accept,
+            client: project.client,
+            offer: ownOffer.id,
+          })
+        );
     } else {
       setOffer(null);
     }

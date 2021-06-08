@@ -8,7 +8,7 @@ import Moment from "react-moment";
 import {
   priceFormat,
   addCommission,
-  period,
+  remainingTime,
   farsiNumber,
 } from "components/helper";
 
@@ -26,7 +26,7 @@ const Offer = ({ offer, project, countdown }) => {
   const user = useSelector(state => state.User);
   const ClientAccept = useSelector(state => state.ClientAccept);
   const [deadline, setDeadline] = useState(
-    period(ClientAccept.issued_at, 30, "seconds")
+    remainingTime(ClientAccept.issued_at, 30)
   );
 
   const openProfile = offer => {
@@ -59,11 +59,13 @@ const Offer = ({ offer, project, countdown }) => {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      if (deadline !== 0) {
-        setDeadline(deadline - 1);
+      if (deadline > 0) {
+        setDeadline(remainingTime(ClientAccept.issued_at, 30));
       }
     }, 1000);
     return () => clearInterval(interval);
+
+    // eslint-disable-next-line
   }, [deadline]);
 
   return (

@@ -91,7 +91,12 @@ const TheCreateOffer = () => {
                 err.response.data
               )} را تحویل دهید.`
             );
-          console.log(err.response);
+          if (
+            err?.response?.data?.error ===
+            "You have already made a request for this project."
+          )
+            toast.error("شما قبلا برای این پروژه پیشنهاد ثبت کرده‌اید.");
+          console.log(err.response.data.error);
         });
     } else {
       dispatch(NotEnoughCreditAction(true));
