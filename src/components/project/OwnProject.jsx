@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "moment/locale/fa";
 
 // Components
 import Offer from "components/offer/Offer";
-import { farsiNumber } from "components/helper";
+import { farsiNumber, remainingTime } from "components/helper";
 import { Puffloader } from "components/loader";
 
+// Actions
+import { ClientAccept } from "redux/actions";
+
 const OwnProject = ({ project }) => {
+  const dispatch = useDispatch();
   const isLoading = useSelector(state => state.Offers.offersLoading);
-  const ClientAccept = useSelector(state => state.ClientAccept);
+  const ClientAcceptState = useSelector(state => state.ClientAccept);
   const Offers = useSelector(state => state.Offers.offers);
   const [offers, setOffers] = useState([]);
 
@@ -25,6 +29,15 @@ const OwnProject = ({ project }) => {
         ) {
           setOffers(prevState => [...prevState, offer]);
         }
+        if (offer.client_accept && remainingTime(offer.client_accept, 30) >= 0)
+          dispatch(
+            ClientAccept({
+              project: project.id,
+              issued_at: offer.client_accept,
+              client: project.client,
+              offer: offer.id,
+            })
+          );
       });
     } else {
       setOffers([]);
@@ -37,7 +50,7 @@ const OwnProject = ({ project }) => {
     <>
       {!isLoading ? (
         <>
-          {ClientAccept.project !== project.id ? (
+          {ClientAcceptState.project !== project.id ? (
             <>
               {!!offers.length ? (
                 <div className="has-offers-wrapper">
@@ -76,7 +89,7 @@ const OwnProject = ({ project }) => {
               </p>
               <Offer
                 project={project}
-                offer={offers.find(x => x.id === ClientAccept.offer)}
+                offer={offers.find(x => x.id === ClientAcceptState.offer)}
                 countdown
               />
             </div>

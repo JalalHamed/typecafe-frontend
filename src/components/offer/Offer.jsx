@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
+import { toast } from "react-toastify";
 
 // Components
 import {
@@ -13,7 +14,7 @@ import {
 } from "components/helper";
 
 // Actions
-import { AoROfferAction, Profile } from "redux/actions";
+import { AoROfferAction, Profile, ClientAccept } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -24,9 +25,9 @@ import "./offer.scss";
 const Offer = ({ offer, project, countdown }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.User);
-  const ClientAccept = useSelector(state => state.ClientAccept);
+  const ClientAcceptState = useSelector(state => state.ClientAccept);
   const [deadline, setDeadline] = useState(
-    remainingTime(ClientAccept.issued_at, 30)
+    remainingTime(ClientAcceptState.issued_at, 30)
   );
 
   const openProfile = offer => {
@@ -58,12 +59,24 @@ const Offer = ({ offer, project, countdown }) => {
   };
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      if (deadline > 0) {
-        setDeadline(remainingTime(ClientAccept.issued_at, 30));
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+    if (ClientAcceptState.issued_at) {
+      let interval = setInterval(() => {
+        if (deadline > 0) {
+          setDeadline(remainingTime(ClientAcceptState.issued_at, 30));
+        } else {
+          dispatch(
+            ClientAccept({
+              client: "",
+              project: null,
+              issued_at: null,
+              offer: null,
+            })
+          );
+          toast.info("تایپیست مورد نظر در اعلام آمادگی خود ناموفق بود.");
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
 
     // eslint-disable-next-line
   }, [deadline]);

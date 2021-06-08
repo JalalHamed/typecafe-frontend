@@ -141,9 +141,7 @@ const OthersProject = ({ project, downloaded }) => {
                         loading ? "lower-opacity" : ""
                       }`}
                     >
-                      <p style={{ marginRight: "10px", fontSize: "14px" }}>
-                        پیشنهاد من
-                      </p>
+                      <p style={{ fontSize: "14px" }}>پیشنهاد من</p>
                       <div
                         className={`request-wrapper less-tp ${
                           offer.status === "A" ? "more-pl" : ""
