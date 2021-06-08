@@ -82,7 +82,10 @@ const Offer = ({ offer, project, countdown }) => {
   }, [deadline]);
 
   return (
-    <div key={offer.id} className="offer">
+    <div
+      key={offer.id}
+      className={`offer ${offer.status === "REJ" ? "rejected" : ""}`}
+    >
       {offer.typist_id !== user.id && (
         <div className="typist-wrapper">
           {offer.typist_image ? (

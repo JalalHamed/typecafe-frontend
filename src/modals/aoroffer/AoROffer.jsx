@@ -21,6 +21,7 @@ import {
   NotEnoughCreditAction,
   RulesScrollToHTWW,
   ClientAccept,
+  OffersAction,
 } from "redux/actions";
 
 // xhr
@@ -81,7 +82,9 @@ const AoROffer = () => {
     RejectOffer({ id: offer.id })
       .then(() => {
         setLoading(false);
-        dispatch({ offers: offers.filter(x => x.id !== offer.id) });
+        dispatch(
+          OffersAction({ offers: offers.filter(x => x.id !== offer.id) })
+        );
         dispatch(AoROfferAction({ isModalOpen: false }));
         socket.send(
           JSON.stringify({
