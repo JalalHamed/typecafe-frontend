@@ -47,13 +47,6 @@ export const SelectedImage = payload => {
   };
 };
 
-export const Notifications = payload => {
-  return {
-    type: "NOTIFICATION",
-    payload,
-  };
-};
-
 export const CreateOffer = payload => {
   return {
     type: "CREATE_OFFER",

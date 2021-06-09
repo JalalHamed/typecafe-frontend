@@ -10,10 +10,9 @@ import UseOnClickOutside from "hooks/UseOnClickOutside";
 import { Puffloader } from "components/loader/";
 import RippleWrapper from "components/ripple/RippleWrapper";
 import UserDropDown from "components/dropdowns/UserDropDown";
-import NotificationDropDown from "components/dropdowns/NotificationDropDown";
 
 // Actions
-import { Sidebar, LR, CreateProject, User, Notifications } from "redux/actions";
+import { Sidebar, LR, CreateProject, User } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -26,21 +25,13 @@ const TopBar = () => {
   const menuIconRef = useRef();
   const signUpRef = useRef();
   const createProjectRef = useRef();
-  const notifDropDownRef = useRef();
   const userDropDownRef = useRef();
   const user = useSelector(state => state.User);
   const userDropDown = useSelector(state => state.User.isDropdownOpen);
-  const notifDropDown = useSelector(
-    state => state.Notifications.isDropdownOpen
-  );
   const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
 
   UseOnClickOutside(userDropDownRef, () => {
     if (userDropDown) dispatch(User({ isDropdownOpen: false }));
-  });
-
-  UseOnClickOutside(notifDropDownRef, () => {
-    if (notifDropDown) dispatch(Notifications({ isDropdownOpen: false }));
   });
 
   return (
@@ -80,18 +71,13 @@ const TopBar = () => {
                   <i className="icon icon-create" />
                   <p className="create-project-title">ثبت پروژه</p>
                 </RippleWrapper>
-                <div ref={notifDropDownRef}>
-                  {notifDropDown && <NotificationDropDown />}
-                  <div
-                    className="notif-wrapper no-select"
-                    onClick={() => {
-                      dispatch(
-                        Notifications({ isDropdownOpen: !notifDropDown })
-                      );
-                    }}
-                  >
-                    <i className="icon icon-notification" />
-                  </div>
+                <div
+                  className={`speaker ${user.playSounds ? "" : "mute"}`}
+                  onClick={() =>
+                    dispatch(User({ playSounds: !user.playSounds }))
+                  }
+                >
+                  <span />
                 </div>
                 <div ref={userDropDownRef}>
                   {user.isDropdownOpen && <UserDropDown />}

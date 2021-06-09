@@ -9,6 +9,9 @@ import { motion } from "framer-motion";
 import Button from "components/buttons/Button";
 import { farsiNumber, remainingTime } from "components/helper";
 
+// Requests
+import { TypistDeclareReady } from "requests";
+
 // Actions
 import { ClientAccept, Sounds } from "redux/actions";
 
@@ -23,6 +26,7 @@ const TheClientAccept = () => {
   const [deadline, setDeadline] = useState(remainingTime(data.issued_at, 30));
 
   const handleSubmit = () => {
+    TypistDeclareReady({ id: data.offer });
     dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
     dispatch(
       ClientAccept({
@@ -30,6 +34,7 @@ const TheClientAccept = () => {
         project: null,
         issued_at: null,
         client: "",
+        offer: null,
       })
     );
   };

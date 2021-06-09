@@ -72,8 +72,8 @@ export const ClientAcceptReq = id => {
   return axios.post("client-accept/", id).then(res => res.data);
 };
 
-export const TypistFailedToAccept = id => {
-  return axios.post("typist-failed-to-accept/", id).then(res => res.data);
+export const TypistDeclareReady = id => {
+  return axios.post("typist-declare-ready/", id).then(res => res.data);
 };
 
 export const CreateOfferReq = body => {
