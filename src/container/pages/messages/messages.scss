@@ -204,11 +204,10 @@
 
     .message-input {
       padding: 5px 15px;
-      border: none;
       width: 100%;
       font-size: 18px;
-      background-color: #29313b;
-      color: #fff;
+      border: 1px solid #bbb;
+      background-color: #f1f1f1;
       border-radius: 50px;
       outline: none;
 
@@ -216,7 +215,6 @@
         text-align: right;
         padding-right: 5px;
         font-size: 15px;
-        color: #f1f1f1;
       }
     }
   }

@@ -12,7 +12,7 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import UserDropDown from "components/dropdowns/UserDropDown";
 
 // Actions
-import { Sidebar, LR, CreateProject, User } from "redux/actions";
+import { Sidebar, LR, CreateProject, User, Sounds } from "redux/actions";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -29,10 +29,31 @@ const TopBar = () => {
   const user = useSelector(state => state.User);
   const userDropDown = useSelector(state => state.User.isDropdownOpen);
   const isSidebarOpen = useSelector(state => state.Sidebar.isOpen);
+  const sounds = useSelector(state => state.Sounds);
 
   UseOnClickOutside(userDropDownRef, () => {
     if (userDropDown) dispatch(User({ isDropdownOpen: false }));
   });
+
+  const handlMutreOrUnmute = () => {
+    if (
+      sounds.newProject ||
+      sounds.newMessage ||
+      sounds.clientAccept ||
+      sounds.typistAccept ||
+      sounds.typistFailedToAccept
+    )
+      dispatch(
+        Sounds({
+          newProject: 0,
+          newMessage: 0,
+          clientAccept: 0,
+          typistAccept: 0,
+          typistFailedToAccept: 0,
+        })
+      );
+    dispatch(User({ playSounds: !user.playSounds }));
+  };
 
   return (
     <div className="topbar-wrapper">
@@ -72,10 +93,10 @@ const TopBar = () => {
                   <p className="create-project-title">ثبت پروژه</p>
                 </RippleWrapper>
                 <div
-                  className={`speaker ${user.playSounds ? "" : "mute"}`}
-                  onClick={() =>
-                    dispatch(User({ playSounds: !user.playSounds }))
-                  }
+                  className={`speaker ${
+                    user.playSounds ? "" : "mute"
+                  } no-select`}
+                  onClick={handlMutreOrUnmute}
                 >
                   <span />
                 </div>

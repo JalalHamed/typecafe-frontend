@@ -60,6 +60,7 @@ const Offer = ({ offer, project, countdown }) => {
 
   useEffect(() => {
     if (ClientAcceptState.issued_at) {
+      console.log("in");
       let interval = setInterval(() => {
         if (deadline > 0) {
           setDeadline(remainingTime(ClientAcceptState.issued_at, 30));

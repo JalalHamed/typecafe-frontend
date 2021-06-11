@@ -21,7 +21,7 @@ const Projects = () => {
   const projects = useSelector(state => state.Projects.projects);
   const loading = useSelector(state => state.Projects.loading);
   const nextPage = useSelector(state => state.Projects.next);
-  const [loadMoreloading, setLoadMoreLoading] = useState(false);
+  const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
   const handleMoreProjects = () => {
     setLoadMoreLoading(true);
@@ -47,25 +47,25 @@ const Projects = () => {
 
   return (
     <div className="projects-wrapper">
-      {!!projects.length &&
-        projects.map(project => <Project key={project.id} project={project} />)}
       {loading && (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
       )}
+      {!!projects.length &&
+        projects.map(project => <Project key={project.id} project={project} />)}
       {!loading && !projects.length && (
         <div className="middle-of-the-page">
           <p className="no-project-note">هنوز پروژه ای ثبت نشده است.</p>
         </div>
       )}
-      {!!projects.length && nextPage && !loadMoreloading && (
+      {!!projects.length && nextPage && !loadMoreLoading && (
         <div className="load-more-projects" onClick={handleMoreProjects}>
           بارگذاری موارد بیشتر
         </div>
       )}
-      {loadMoreloading && (
-        <Puffloader color="#1c3987" loading={loadMoreloading} size={100} />
+      {loadMoreLoading && (
+        <Puffloader color="#1c3987" loading={loadMoreLoading} size={100} />
       )}
     </div>
   );
