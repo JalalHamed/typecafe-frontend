@@ -35,9 +35,7 @@ AxiosInstance.interceptors.request.use(
 );
 
 AxiosInstance.interceptors.response.use(
-  response => {
-    return response;
-  },
+  response => response,
   error => {
     const originalRequest = error.config;
     if (error?.response?.status === 401 && !originalRequest._retry && re_t) {

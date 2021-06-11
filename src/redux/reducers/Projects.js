@@ -6,6 +6,7 @@ let initialState = {
   myprojects: [],
   downloaded: [],
   next: "",
+  error: false,
 };
 
 const Projects = (state = initialState, action) => {

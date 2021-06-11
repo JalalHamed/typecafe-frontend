@@ -21,6 +21,7 @@ const Projects = () => {
   const projects = useSelector(state => state.Projects.projects);
   const loading = useSelector(state => state.Projects.loading);
   const nextPage = useSelector(state => state.Projects.next);
+  const error = useSelector(state => state.Projects.error);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
   const handleMoreProjects = () => {
@@ -56,7 +57,13 @@ const Projects = () => {
         projects.map(project => <Project key={project.id} project={project} />)}
       {!loading && !projects.length && (
         <div className="middle-of-the-page">
-          <p className="no-project-note">هنوز پروژه ای ثبت نشده است.</p>
+          <p className={`no-project-note ${error ? "red" : ""}`}>
+            {error ? (
+              <>خطا در برقراری ارتباط با سرور</>
+            ) : (
+              <>هنوز پروژه ای ثبت نشده است.</>
+            )}
+          </p>
         </div>
       )}
       {!!projects.length && nextPage && !loadMoreLoading && (

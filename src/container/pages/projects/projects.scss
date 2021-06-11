@@ -5,6 +5,10 @@
 
   .no-project-note {
     margin-top: 15px;
+
+    &.red {
+      color: #ff2d2d;
+    }
   }
 
   .load-more-projects {

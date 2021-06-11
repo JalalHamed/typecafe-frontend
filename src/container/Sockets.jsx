@@ -19,16 +19,12 @@ const Sockets = () => {
   const now = new Date();
   const state = useSelector(state => state);
 
-  if (state.Tokens.ac_t && socket) {
+  if (state.Tokens.ac_t) {
     socket.onopen = () => {
-      dispatch(actions.Loading(false));
-      console.log("socket open");
+      if (state.Loading) dispatch(actions.Loading(false));
     };
 
-    socket.onclose = () => {
-      dispatch(actions.Loading(true));
-      console.log("socket close");
-    };
+    socket.onclose = () => dispatch(actions.Loading(true));
 
     socket.onmessage = e => {
       let data = JSON.parse(e.data);
@@ -170,7 +166,9 @@ const Sockets = () => {
           break;
       }
     };
-  } else {
+  }
+
+  if (!state.Tokens.ac_t && state.Loading) {
     dispatch(actions.Loading(false));
   }
 

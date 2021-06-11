@@ -34,21 +34,14 @@ const Requests = () => {
     GetProjects()
       .then(res => {
         dispatch(ProjectsAction({ loading: false, projects: res.results }));
-        if (res.next) {
-          dispatch(ProjectsAction({ next: res.next }));
-        } else {
+        if (res.next) dispatch(ProjectsAction({ next: res.next }));
+        if (!res.next && state.Projects.next)
           dispatch(ProjectsAction({ next: "" }));
-        }
       })
-      .catch(err => {
-        dispatch(ProjectsAction({ loading: false }));
-        console.log(err);
+      .catch(() => {
+        dispatch(ProjectsAction({ loading: false, error: true }));
       });
 
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
     if (token)
       // Get User Data
       UserData()
