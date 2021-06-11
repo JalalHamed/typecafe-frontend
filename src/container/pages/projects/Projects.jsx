@@ -48,31 +48,36 @@ const Projects = () => {
 
   return (
     <div className="projects-wrapper">
-      {loading && (
+      {loading ? (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
-      )}
-      {!!projects.length &&
-        projects.map(project => <Project key={project.id} project={project} />)}
-      {!loading && !projects.length && (
-        <div className="middle-of-the-page">
-          <p className={`no-project-note ${error ? "red" : ""}`}>
-            {error ? (
-              <>خطا در برقراری ارتباط با سرور</>
-            ) : (
-              <>هنوز پروژه ای ثبت نشده است.</>
-            )}
-          </p>
-        </div>
-      )}
-      {!!projects.length && nextPage && !loadMoreLoading && (
-        <div className="load-more-projects" onClick={handleMoreProjects}>
-          بارگذاری موارد بیشتر
-        </div>
-      )}
-      {loadMoreLoading && (
-        <Puffloader color="#1c3987" loading={loadMoreLoading} size={100} />
+      ) : (
+        <>
+          {!!projects.length &&
+            projects.map(project => (
+              <Project key={project.id} project={project} />
+            ))}
+          {!projects.length && (
+            <div className="middle-of-the-page">
+              <p className={`no-project-note ${error ? "red" : ""}`}>
+                {error ? (
+                  <>خطا در برقراری ارتباط با سرور</>
+                ) : (
+                  <>هنوز پروژه ای ثبت نشده است.</>
+                )}
+              </p>
+            </div>
+          )}
+          {!!projects.length && nextPage && !loadMoreLoading && (
+            <div className="load-more-projects" onClick={handleMoreProjects}>
+              بارگذاری موارد بیشتر
+            </div>
+          )}
+          {loadMoreLoading && (
+            <Puffloader color="#1c3987" loading={loadMoreLoading} size={100} />
+          )}
+        </>
       )}
     </div>
   );
