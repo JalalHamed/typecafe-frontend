@@ -37,7 +37,6 @@ AxiosInstance.interceptors.request.use(
 AxiosInstance.interceptors.response.use(
   response => response,
   error => {
-    console.log("IN");
     const originalRequest = error.config;
     if (error?.response?.status === 401 && !originalRequest._retry && re_t) {
       originalRequest._retry = true;
@@ -47,13 +46,13 @@ AxiosInstance.interceptors.response.use(
         .then(res => {
           sessionStorage.setItem("_at", res.access);
           sessionStorage.setItem("_rt", res.refresh);
-          AxiosInstance.headers["Authorization"] = "Bearer " + res.access;
-          return AxiosInstance(originalRequest);
+          sessionStorage.setItem("dont't replace", 1);
+          window.location.reload();
         })
         .catch(err => {
           // if (err.response?.data?.detail === "Token is blacklisted") {
           // }
-          console.log("haji", err.response?.data?.detail);
+          console.log("err", err.response?.data?.detail);
         });
     }
     return Promise.reject(error);

@@ -16,8 +16,7 @@ import Support from "./pages/support/Support";
 import TopBar from "./topbar/TopBar";
 import SideBar from "./sidebar/SideBar";
 import Modals from "./Modals";
-import Requests from "./Requests";
-import Sockets from "./Sockets";
+import SaR from "./SaR";
 import Sounds from "./Sounds";
 
 // Actions
@@ -32,7 +31,11 @@ const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   window.onbeforeunload = () => {
-    if (state.Tokens.ac_t && state.Tokens.re_t) {
+    if (
+      state.Tokens.ac_t &&
+      state.Tokens.re_t &&
+      !sessionStorage.getItem("dont't replace")
+    ) {
       sessionStorage.setItem("_at", state.Tokens.ac_t);
       sessionStorage.setItem("_rt", state.Tokens.re_t);
     }
@@ -71,9 +74,8 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <Requests />
+      <SaR />
       <Sounds />
-      <Sockets />
       <Modals />
       <TopBar />
       <div className="main">
