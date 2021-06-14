@@ -40,19 +40,24 @@ AxiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     if (error?.response?.status === 401 && !originalRequest._retry && re_t) {
       originalRequest._retry = true;
-      return NewAccToken({
+      NewAccToken({
         refresh: re_t,
       })
         .then(res => {
           sessionStorage.setItem("_at", res.access);
           sessionStorage.setItem("_rt", res.refresh);
-          sessionStorage.setItem("dont't replace", 1);
+          sessionStorage.setItem("dont't set", 1);
           window.location.reload();
         })
         .catch(err => {
-          // if (err.response?.data?.detail === "Token is blacklisted") {
-          // }
-          console.log("err", err.response?.data?.detail);
+          if (
+            err.response?.data?.detail === "Token is blacklisted" ||
+            err.response?.data?.detail === "Token is invalid or expired"
+          ) {
+            sessionStorage.setItem("dont't set", 1);
+            sessionStorage.setItem("long inactivity", 1);
+            window.location.reload();
+          }
         });
     }
     return Promise.reject(error);

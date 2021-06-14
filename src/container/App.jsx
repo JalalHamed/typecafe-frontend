@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 // Pages
 import Projects from "./pages/projects/Projects";
@@ -34,12 +35,21 @@ const App = () => {
     if (
       state.Tokens.ac_t &&
       state.Tokens.re_t &&
-      !sessionStorage.getItem("dont't replace")
+      !sessionStorage.getItem("dont't set")
     ) {
       sessionStorage.setItem("_at", state.Tokens.ac_t);
       sessionStorage.setItem("_rt", state.Tokens.re_t);
     }
   };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("long inactivity")) {
+      toast.info(
+        "دسترسی شما به دلیل عدم فعالیت منقضی شده است. مجددا وارد حساب کاربری خود شوید."
+      );
+      sessionStorage.clear();
+    }
+  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem("_at") && sessionStorage.getItem("_rt"))
@@ -51,7 +61,7 @@ const App = () => {
       );
 
     // eslint-disable-next-line
-  }, [sessionStorage.getItem("_at"), sessionStorage.getItem("_rt")]);
+  }, []);
 
   useEffect(() => {
     if (state.Tokens.re_t && state.Tokens.ac_t) sessionStorage.clear();
