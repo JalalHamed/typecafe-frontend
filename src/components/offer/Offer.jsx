@@ -73,6 +73,7 @@ const Offer = ({ offer, project, countdown }) => {
             })
           );
           toast.info("تایپیست مورد نظر در اعلام آمادگی خود ناموفق بود.");
+          clearInterval(interval);
         }
       }, 1000);
       return () => clearInterval(interval);

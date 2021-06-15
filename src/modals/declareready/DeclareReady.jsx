@@ -10,7 +10,8 @@ import Button from "components/buttons/Button";
 import { farsiNumber, remainingTime } from "components/helper";
 
 // Requests
-import { TypistDeclareReady } from "requests";
+import socket from "requests/socket";
+import { TypistDeclareReady, handleErrors } from "requests";
 
 // Actions
 import { ClientAccept, Sounds } from "redux/actions";
@@ -26,7 +27,16 @@ const TheClientAccept = () => {
   const [deadline, setDeadline] = useState(remainingTime(data.issued_at, 30));
 
   const handleSubmit = () => {
-    TypistDeclareReady({ id: data.offer });
+    TypistDeclareReady({ id: data.offer })
+      .then(() => {
+        socket.send(
+          JSON.stringify({
+            status: "in-progress",
+            project: data.project,
+          })
+        );
+      })
+      .catch(err => handleErrors(err, toast.error));
     dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
     dispatch(
       ClientAccept({

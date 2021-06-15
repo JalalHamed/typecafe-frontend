@@ -46,16 +46,18 @@ const SocketsAndRequests = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(actions.Sidebar({ isLoading: false }));
-    dispatch(actions.User({ isTopbarLoading: false }));
-    dispatch(
-      actions.ProjectsAction({
-        downloadsLoading: false,
-      })
-    );
+    if (!sessionStorage.getItem("_at")) {
+      dispatch(actions.Sidebar({ isLoading: false }));
+      dispatch(actions.User({ isTopbarLoading: false }));
+      dispatch(
+        actions.ProjectsAction({
+          downloadsLoading: false,
+        })
+      );
+    }
 
     // eslint-disable-next-line
-  }, [state.Tokens.ac_t]);
+  }, []);
 
   if (state.Tokens.ac_t) {
     socket.onopen = () => {
@@ -340,6 +342,10 @@ const SocketsAndRequests = () => {
           dispatch(
             actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
           );
+          break;
+        case "in-progress":
+          dispatch(actions.ProjectInProgress({ id: data.project }));
+          console.log(data);
           break;
         default:
           break;

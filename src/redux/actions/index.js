@@ -68,6 +68,13 @@ export const ProjectsAction = payload => {
   };
 };
 
+export const ProjectInProgress = payload => {
+  return {
+    type: "PROJECT_IN_PROGRESS",
+    payload,
+  };
+};
+
 export const OffersAction = payload => {
   return {
     type: "OFFERS",
