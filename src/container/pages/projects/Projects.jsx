@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 // Components
 import Project from "components/project/Project";
