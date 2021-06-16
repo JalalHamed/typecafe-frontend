@@ -34,7 +34,7 @@ const TheProject = ({ project }) => {
   const offereds = useSelector(state => state.Offers.offereds);
 
   const handleDownloaded = () => {
-    window.open(project.file, "_blank");
+    window.open(project.file, "_self");
     if (user.isLoggedIn) {
       dispatch(ProjectsAction({ downloaded: [...downloaded, project.id] }));
       Downloaded({ project: project.id });

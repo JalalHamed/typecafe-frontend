@@ -2,13 +2,14 @@ import React, { useState } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Project from "components/project/Project";
 import { Puffloader } from "components/loader";
 
 // Requests
-import { GetMoreProjects } from "requests";
+import { GetMoreProjects, handleErrors } from "requests";
 
 // Actions
 import { ProjectsAction } from "redux/actions";
@@ -42,7 +43,7 @@ const Projects = () => {
       })
       .catch(err => {
         setLoadMoreLoading(false);
-        console.log(err);
+        handleErrors(err);
       });
   };
 

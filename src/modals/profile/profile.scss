@@ -77,12 +77,6 @@
           border: 2px solid #1c3987;
         }
       }
-
-      .err-msg {
-        color: #d8000c;
-        position: absolute;
-        bottom: 55px;
-      }
     }
 
     .profile-content-left {
@@ -107,15 +101,6 @@
         &:hover {
           border-bottom: 1px solid #1c3987;
         }
-      }
-
-      .displayname-err-msg {
-        position: absolute;
-        color: #d8000c;
-        font-size: 13px;
-        text-align: justify;
-        margin-left: 45px;
-        bottom: 30px;
       }
     }
 

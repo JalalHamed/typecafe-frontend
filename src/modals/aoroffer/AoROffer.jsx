@@ -12,7 +12,7 @@ import { priceFormat } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { RejectOffer, ClientAcceptReq } from "requests";
+import { RejectOffer, ClientAcceptReq, handleErrors } from "requests";
 
 // Actions
 import {
@@ -71,9 +71,7 @@ const AoROffer = () => {
             })
           );
         })
-        .catch(err => {
-          console.log(err);
-        });
+        .catch(err => handleErrors(err));
     }
   };
 
@@ -95,7 +93,7 @@ const AoROffer = () => {
       })
       .catch(err => {
         setLoading(false);
-        console.error(err);
+        handleErrors(err);
       });
   };
 

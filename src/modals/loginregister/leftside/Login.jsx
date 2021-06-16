@@ -21,7 +21,6 @@ const Login = () => {
   const email = useSelector(state => state.LR.email);
   const loginRef = useRef();
   const backRef = useRef();
-  const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
@@ -35,7 +34,7 @@ const Login = () => {
       })
       .catch(err => {
         setLoading(false);
-        handleErrors(err, setErrMsg);
+        handleErrors(err);
       });
   };
 
@@ -79,7 +78,6 @@ const Login = () => {
           />
         </div>
       </form>
-      {!!errMsg.length && <div className="error-message">{errMsg}</div>}
     </>
   );
 };

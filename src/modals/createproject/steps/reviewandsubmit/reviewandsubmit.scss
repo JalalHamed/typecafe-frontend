@@ -9,7 +9,7 @@
   .ras-review-wrapper {
     display: flex;
     font-size: 18px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     text-align: right;
     max-width: 330px;
 
@@ -71,11 +71,5 @@
         background-color: #f7f7f7;
       }
     }
-  }
-
-  .cp-error-on-submit {
-    color: #d8000c;
-    position: absolute;
-    bottom: 130px;
   }
 }

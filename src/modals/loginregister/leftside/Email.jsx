@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 // Componenets
 import Input from "components/inputs/Input";
@@ -17,15 +18,12 @@ import { CheckEmail, handleErrors } from "requests";
 const Email = () => {
   const { register, handleSubmit, errors } = useForm();
   const loginRef = useRef();
-  const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = data => {
     setLoading(true);
-    setErrMsg("");
     let lowerCaseEmail = data.email.toLowerCase();
-
     CheckEmail({ email: lowerCaseEmail })
       .then(res => {
         setLoading(false);
@@ -43,7 +41,7 @@ const Email = () => {
       })
       .catch(err => {
         setLoading(false);
-        handleErrors(err, setErrMsg);
+        handleErrors(err);
       });
   };
 
@@ -51,7 +49,7 @@ const Email = () => {
     if (loading) {
       let timeout = setTimeout(() => {
         if (loading) {
-          setErrMsg(
+          toast.info(
             "عملیات ارسال ایمیل بیش از حد معمول به طول انجامیده است. لطفا در صورت استفاده از سرویس های تغییر IP مانند فیلترشکن (VPN)، این سرویس را غیرفعال کنید و مجددا تلاش کنید."
           );
         }
@@ -88,13 +86,6 @@ const Email = () => {
           type="submit"
         />
       </form>
-      {!!errMsg.length && (
-        <div
-          className={`error-message ${loading ? "email-taking-too-long" : ""}`}
-        >
-          {errMsg}
-        </div>
-      )}
     </>
   );
 };

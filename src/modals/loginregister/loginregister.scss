@@ -82,52 +82,6 @@
       margin-top: 60px;
     }
 
-    .error-message {
-      margin-top: 15px;
-      padding: 5px 10px;
-      font-size: 14px;
-      color: #d8000c;
-      border-radius: 2px;
-      text-align: center;
-      background-color: #ffe3e5;
-      position: relative;
-
-      &.confirm {
-        margin-top: 10px;
-
-        .close-error {
-          display: inline-block;
-          position: absolute;
-          right: 5px;
-          background-color: #fb6b75;
-          width: 21px;
-          height: 21px;
-          border-radius: 50px;
-          font-size: 16px;
-          line-height: 22px;
-          color: #ffe3e5;
-          cursor: pointer;
-
-          &:hover {
-            background-color: #ff3846;
-          }
-        }
-      }
-
-      &.email-taking-too-long {
-        font-size: 13px;
-      }
-    }
-
-    .register-error-message {
-      margin-top: 10px;
-      padding: 5px 10px;
-      font-size: 13px;
-      color: #d8000c;
-      border-radius: 2px;
-      text-align: center;
-    }
-
     .login-send-confirm-code-again {
       margin-top: 25px;
       font-size: 14px;

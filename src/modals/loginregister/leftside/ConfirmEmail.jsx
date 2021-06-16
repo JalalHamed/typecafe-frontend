@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
@@ -23,7 +24,6 @@ const ConfirmEmail = () => {
   const confirmEmailRef = useRef();
   const backRef = useRef();
   const sendCodeAgainRef = useRef();
-  const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [sendCodeLoading, setSendCodeLoading] = useState(false);
   const [timeleft, setTimeleft] = useState(
@@ -43,12 +43,12 @@ const ConfirmEmail = () => {
           dispatch(LR({ page: "Register" }));
         }
         if (res.potato === "potahto") {
-          setErrMsg("کد تایید وارد شده صحیح نمی‌باشد.");
+          toast.error("کد تایید وارد شده صحیح نمی‌باشد.");
         }
       })
       .catch(err => {
         setLoading(false);
-        handleErrors(err, setErrMsg);
+        handleErrors(err);
       });
   };
 
@@ -62,7 +62,7 @@ const ConfirmEmail = () => {
       })
       .catch(err => {
         setSendCodeLoading(false);
-        handleErrors(err, setErrMsg);
+        handleErrors(err);
       });
   };
 
@@ -133,14 +133,6 @@ const ConfirmEmail = () => {
           onClick={sendCodeAgain}
           loading={sendCodeLoading}
         />
-      )}
-      {!!errMsg?.length && (
-        <div className="error-message confirm">
-          <div className="close-error no-select" onClick={() => setErrMsg("")}>
-            x
-          </div>
-          {errMsg}
-        </div>
       )}
     </>
   );

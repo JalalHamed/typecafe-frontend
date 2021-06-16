@@ -18,7 +18,7 @@ import {
 } from "redux/actions";
 
 // Requests
-import { UserProfile } from "requests";
+import { handleErrors, UserProfile } from "requests";
 
 // xhr
 import { baseURL } from "components/xhr";
@@ -69,7 +69,7 @@ const OthersProfile = () => {
       })
       .catch(err => {
         setLoading(false);
-        console.log(err);
+        handleErrors(err);
       });
 
     // eslint-disable-next-line

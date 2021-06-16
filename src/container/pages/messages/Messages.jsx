@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import User from "components/messages/User";
@@ -11,7 +12,12 @@ import { scrollToRef } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
-import { SendMessage, SearchDisplayname, ReadMessages } from "requests";
+import {
+  SendMessage,
+  SearchDisplayname,
+  ReadMessages,
+  handleErrors,
+} from "requests";
 
 // Actions
 import {
@@ -57,7 +63,7 @@ const TheMessages = () => {
             })
           );
         })
-        .catch(err => console.log(err));
+        .catch(err => handleErrors(err));
   };
 
   const escapeHandler = ({ key }) => {
@@ -96,7 +102,7 @@ const TheMessages = () => {
           setSearchLoading(false);
         })
         .catch(err => {
-          console.error(err);
+          handleErrors(err);
           setSearchLoading(false);
         });
     }
@@ -108,7 +114,7 @@ const TheMessages = () => {
           setSearchLoading(false);
         })
         .catch(err => {
-          console.error(err);
+          handleErrors(err);
           setSearchLoading(false);
         });
     }

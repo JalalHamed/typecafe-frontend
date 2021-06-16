@@ -24,7 +24,6 @@ const ReviewAndSubmit = () => {
   const email = useSelector(state => state.User.email);
   const previousStepRef = useRef();
   const submitRef = useRef();
-  const [error, setError] = useState("");
   const [langs, setLangs] = useState([]);
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,7 +65,7 @@ const ReviewAndSubmit = () => {
       })
       .catch(err => {
         setLoading(false);
-        handleErrors(err, setError);
+        handleErrors(err);
       });
   };
 
@@ -126,7 +125,6 @@ const ReviewAndSubmit = () => {
           </p>
         </div>
       </div>
-      {error && <p className="cp-error-on-submit">{error}</p>}
       <div className="ras-buttons-wrapper">
         <Button
           ref={previousStepRef}

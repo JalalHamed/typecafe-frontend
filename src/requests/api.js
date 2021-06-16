@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // Requests
-import { NewAccToken } from "./index";
+import { handleErrors, NewAccToken } from "./index";
 
 // XHR
 import { baseURL } from "components/xhr";
@@ -50,14 +50,7 @@ AxiosInstance.interceptors.response.use(
           window.location.reload();
         })
         .catch(err => {
-          if (
-            err.response?.data?.detail === "Token is blacklisted" ||
-            err.response?.data?.detail === "Token is invalid or expired"
-          ) {
-            sessionStorage.setItem("dont't set", 1);
-            sessionStorage.setItem("long inactivity", 1);
-            window.location.reload();
-          }
+          handleErrors(err);
         });
     }
     return Promise.reject(error);

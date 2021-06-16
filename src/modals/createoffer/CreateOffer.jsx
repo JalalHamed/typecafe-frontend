@@ -22,7 +22,7 @@ import {
 
 // Request
 import socket from "requests/socket";
-import { CreateOfferReq } from "requests";
+import { CreateOfferReq, handleErrors } from "requests";
 
 // Design
 import "./createoffer.scss";
@@ -85,18 +85,15 @@ const TheCreateOffer = () => {
         .catch(err => {
           setLoading(false);
           dispatch(CreateOffer({ isModalOpen: false }));
-          if (typeof err?.response?.data === "number")
+          if (typeof err?.response?.data === "number") {
             toast.error(
               `ابتدا پروژه با شناسه ${farsiNumber(
                 err.response.data
               )} را تحویل دهید.`
             );
-          if (
-            err?.response?.data?.error ===
-            "You have already made a request for this project."
-          )
-            toast.error("شما قبلا برای این پروژه پیشنهاد ثبت کرده‌اید.");
-          console.log(err.response.data.error);
+          } else {
+            handleErrors(err);
+          }
         });
     } else {
       dispatch(NotEnoughCreditAction(true));

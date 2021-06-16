@@ -17,7 +17,7 @@ import { Puffloader, Skewloader } from "components/loader";
 
 // Requests
 import socket from "requests/socket";
-import { DeleteOffer } from "requests";
+import { DeleteOffer, handleErrors } from "requests";
 
 // Actions
 import { CreateOffer, OffersAction, ClientAccept } from "redux/actions";
@@ -68,7 +68,7 @@ const OthersProject = ({ project, downloaded }) => {
         })
         .catch(err => {
           setLoading(false);
-          console.error(err);
+          handleErrors(err);
         });
     }
   };

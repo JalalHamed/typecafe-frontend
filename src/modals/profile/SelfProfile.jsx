@@ -30,17 +30,14 @@ const SelfProfile = () => {
   const inputFileRef = useRef();
   const changePhotoRef = useRef();
   const user = useSelector(state => state.User);
-  const [errMsg, setErrMsg] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [displayName, setDisplayName] = useState(user.displayname);
-  const [displayNameErrMsg, setDisplayNameErrMsg] = useState("");
   const [asTypist, setAsTypist] = useState(true);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   const handleChangePic = pic => {
     if (pic.type.includes("image")) {
-      setErrMsg("");
       let body = new FormData();
       body.append("image", pic);
       ChangeProfileImage(body)
@@ -49,9 +46,9 @@ const SelfProfile = () => {
           dispatch(User({ image: res.image }));
           toast.success("عکس پروفایل با موفقیت به‌روزرسانی شد.");
         })
-        .catch(err => handleErrors(err, setErrMsg));
+        .catch(err => handleErrors(err));
     } else {
-      setErrMsg("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
+      toast.error("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
     }
   };
 
@@ -64,12 +61,11 @@ const SelfProfile = () => {
           .then(res => {
             dispatch(Profile({ displayname: res.displayname }));
             dispatch(User({ displayname: res.displayname }));
-            setDisplayNameErrMsg("");
             toast.success("نام نمایشی با موفیت به‌روزرسانی شد.");
           })
           .catch(err => {
             setDisplayName(user.displayname);
-            handleErrors(err, setDisplayNameErrMsg);
+            handleErrors(err);
           });
       }
       setEditMode(false);
@@ -86,7 +82,7 @@ const SelfProfile = () => {
       .then(() => {
         dispatch(User({ image: "" }));
       })
-      .catch(err => console.log(err));
+      .catch(err => handleErrors(err));
   };
 
   useEffect(() => {
@@ -117,7 +113,7 @@ const SelfProfile = () => {
       })
       .catch(err => {
         setLoading(false);
-        console.log(err);
+        handleErrors(err);
       });
 
     // eslint-disable-next-line
@@ -169,7 +165,6 @@ const SelfProfile = () => {
             <i className="icon icon-close-background-red" />
           </div>
         )}
-        <p className="err-msg">{errMsg}</p>
       </div>
       <div className="profile-content-left">
         <p className="title">
@@ -197,7 +192,6 @@ const SelfProfile = () => {
           </span>
         </p>
         <p className="value">{priceFormat(user.credit)}</p>
-        <p className="displayname-err-msg">{displayNameErrMsg}</p>
       </div>
       {!loading ? (
         <div className="profile-content-cv less-mr">

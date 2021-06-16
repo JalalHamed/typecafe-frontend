@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 // Libraries
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 // Components
 import Input from "components/inputs/Input";
@@ -21,15 +22,13 @@ const Register = () => {
   const registerRef = useRef();
   const backRef = useRef();
   const email = useSelector(state => state.LR.email);
-  const [errMsg, setErrMsg] = useState();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = data => {
     setLoading(true);
-    setErrMsg("");
 
     if (data.password.length < 8) {
-      setErrMsg("پسورد باید حداقل ۸ کاراکتر داشته باشد.");
+      toast.error("رمز عبور باید حداقل ۸ کاراکتر داشته باشد.");
       setLoading(false);
     } else {
       UserRegister({ email, ...data })
@@ -40,7 +39,7 @@ const Register = () => {
         })
         .catch(err => {
           setLoading(false);
-          handleErrors(err, setErrMsg);
+          handleErrors(err);
         });
     }
   };
@@ -100,7 +99,6 @@ const Register = () => {
           />
         </div>
       </form>
-      {!!errMsg?.length && <div className="error-message">{errMsg}</div>}
     </>
   );
 };

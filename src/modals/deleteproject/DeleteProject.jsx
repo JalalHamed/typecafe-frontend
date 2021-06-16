@@ -16,7 +16,7 @@ import { DeleteProject } from "redux/actions";
 
 // Request
 import socket from "requests/socket";
-import { DeleteProjectReq } from "requests";
+import { DeleteProjectReq, handleErrors } from "requests";
 
 // Design
 import "./deleteproject.scss";
@@ -36,7 +36,7 @@ const DeleteProjectComp = () => {
           "پروژه شما با شناسه " + farsiNumber(state.id) + " با موفقیت حذف شد."
         );
       })
-      .catch(err => console.log(err));
+      .catch(err => handleErrors(err));
   };
 
   return (

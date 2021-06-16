@@ -21,6 +21,7 @@ import {
   GetOffereds,
   GetDownloads,
   GetMessages,
+  handleErrors,
 } from "requests";
 
 const SocketsAndRequests = () => {
@@ -38,8 +39,9 @@ const SocketsAndRequests = () => {
         if (!res.next && state.Projects.next)
           dispatch(actions.ProjectsAction({ next: "" }));
       })
-      .catch(() => {
+      .catch(err => {
         dispatch(actions.ProjectsAction({ loading: false, error: true }));
+        handleErrors(err);
       });
 
     // eslint-disable-next-line
@@ -93,7 +95,7 @@ const SocketsAndRequests = () => {
             })
             .catch(err => {
               dispatch(actions.ProjectsAction({ myprojectsloading: false }));
-              console.log(err);
+              handleErrors(err);
             });
 
           // Get Messages
@@ -136,7 +138,7 @@ const SocketsAndRequests = () => {
               });
               dispatch(actions.MessagesElse({ isLoading: false }));
             })
-            .catch(err => console.log(err));
+            .catch(err => handleErrors(err));
 
           // Get Offers
           GetOffers()
@@ -147,7 +149,7 @@ const SocketsAndRequests = () => {
             )
             .catch(err => {
               dispatch(actions.OffersAction({ offersLoading: false }));
-              console.log(err);
+              handleErrors(err);
             });
 
           // Get Offereds
@@ -162,7 +164,7 @@ const SocketsAndRequests = () => {
             )
             .catch(err => {
               dispatch(actions.OffersAction({ offeredsLoading: false }));
-              console.log(err);
+              handleErrors(err);
             });
 
           // Get Downloads
@@ -177,13 +179,11 @@ const SocketsAndRequests = () => {
             })
             .catch(err => {
               dispatch(actions.ProjectsAction({ downloadsLoading: false }));
-              console.log(err);
+              handleErrors(err);
             });
         })
         .catch(err => {
-          if (err.response?.data?.detail === "User not found") {
-            sessionStorage.removeItem("_at");
-          }
+          handleErrors(err);
           dispatch(actions.Sidebar({ isLoading: false }));
           dispatch(actions.User({ isTopbarLoading: false }));
           dispatch(

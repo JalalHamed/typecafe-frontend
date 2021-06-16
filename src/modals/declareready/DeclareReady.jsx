@@ -36,7 +36,7 @@ const TheClientAccept = () => {
           })
         );
       })
-      .catch(err => handleErrors(err, toast.error));
+      .catch(err => handleErrors(err));
     dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
     dispatch(
       ClientAccept({
