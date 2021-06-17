@@ -61,6 +61,13 @@ export const ChangeOfferedStatus = payload => {
   };
 };
 
+export const RemoveBusyTypistOffer = payload => {
+  return {
+    type: "REMOVE_BUSY_TYPIST_OFFER",
+    payload,
+  };
+};
+
 export const ProjectsAction = payload => {
   return {
     type: "PROJECTS",

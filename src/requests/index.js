@@ -136,6 +136,7 @@ export const handleErrors = error => {
   if (error.response) {
     // Request made and server responded
     const err = error.response.data;
+    console.log(err);
     if (err?.detail === "Password is not correct.") {
       toast.error("رمز عبور صحیح نمی‌باشد.");
     } else if (
@@ -191,6 +192,8 @@ export const handleErrors = error => {
         "You have already made a request for this project."
     ) {
       toast.error("شما قبلا برای این پروژه پیشنهاد ثبت کرده‌اید.");
+    } else if (err === "Not enough credits.") {
+      toast.error("اعتبار کافی نیست.");
     } else if (err.response?.data?.detail === "User not found") {
       sessionStorage.removeItem("_at");
       toast.error("کاربر یافت نشد.");
@@ -203,6 +206,8 @@ export const handleErrors = error => {
       window.location.reload();
     } else if (error.response.status === 500) {
       toast.error("خطای سرور");
+    } else {
+      toast.error(err);
     }
   } else if (error.request) {
     // The request was made but no response was received

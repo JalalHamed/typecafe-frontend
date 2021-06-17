@@ -11,7 +11,7 @@ import Button from "components/buttons/Button";
 import Close from "components/buttons/Close";
 import ArrowStem from "./ArrowStem";
 import ArrowCap from "./ArrowCap";
-import { fileNameFilter } from "components/helper";
+import { fileNameFilter, farsiNumber } from "components/helper";
 
 // Designs
 import "./uploadfile.scss";
@@ -97,18 +97,13 @@ const UploadFiles = () => {
               <i className="icon icon-zip" style={{ textAlign: "center" }} />
               <div className="file-detials">
                 <p className="label">نام فایل</p>
-                <p style={{ width: "max-content" }}>
+                <p style={{ direction: "ltr", width: "max-content" }}>
                   {fileNameFilter(file.name)}&nbsp;&nbsp;
                 </p>
                 <p className="label">حجم فایل</p>
-                <p
-                  style={{
-                    direction: "rtl",
-                    width: "max-content",
-                    float: "right",
-                  }}
-                >
-                  &nbsp;&nbsp;{Number(file.size / 1000).toFixed(1)} کیلوبایت
+                <p>
+                  &nbsp;&nbsp;
+                  {farsiNumber(Number(file.size / 1000).toFixed(1))} کیلوبایت
                 </p>
               </div>
             </div>

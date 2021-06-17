@@ -85,7 +85,7 @@ const Offer = ({ offer, project, countdown }) => {
   return (
     <div
       key={offer.id}
-      className={`offer ${offer.status === "REJ" ? "rejected" : ""}`}
+      className={`offer ${offer?.status === "REJ" ? "rejected" : ""}`}
     >
       {offer.typist_id !== user.id && (
         <div className="typist-wrapper">

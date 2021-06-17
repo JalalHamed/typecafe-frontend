@@ -1,5 +1,5 @@
 .Toastify__toast-container {
-  width: 320px;
+  min-width: 350px;
 }
 
 .Toastify__toast--default {
@@ -21,4 +21,5 @@
 
 .Toastify__toast--error {
   background: #cc0000;
+  font-weight: bold;
 }

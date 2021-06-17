@@ -345,7 +345,8 @@ const SocketsAndRequests = () => {
           break;
         case "in-progress":
           dispatch(actions.ProjectInProgress({ id: data.project }));
-          console.log(data);
+          if (state.Offers.offers.find(x => x.typist_id === data.typist))
+            dispatch(actions.RemoveBusyTypistOffer({ id: data.typist }));
           break;
         default:
           break;

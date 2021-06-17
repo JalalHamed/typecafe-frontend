@@ -22,6 +22,7 @@ import "./declareready.scss";
 const TheClientAccept = () => {
   const dispatch = useDispatch();
   const submitRef = useRef();
+  const user = useSelector(state => state.User);
   const data = useSelector(state => state.ClientAccept);
   const sounds = useSelector(state => state.Sounds);
   const [deadline, setDeadline] = useState(remainingTime(data.issued_at, 30));
@@ -33,20 +34,21 @@ const TheClientAccept = () => {
           JSON.stringify({
             status: "in-progress",
             project: data.project,
+            typist: user.id,
+          })
+        );
+        dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
+        dispatch(
+          ClientAccept({
+            isModalOpen: false,
+            project: null,
+            issued_at: null,
+            client: "",
+            offer: null,
           })
         );
       })
       .catch(err => handleErrors(err));
-    dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
-    dispatch(
-      ClientAccept({
-        isModalOpen: false,
-        project: null,
-        issued_at: null,
-        client: "",
-        offer: null,
-      })
-    );
   };
 
   useEffect(() => {

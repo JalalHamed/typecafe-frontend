@@ -19,6 +19,13 @@ const Offers = (state = initialState, action) => {
           return offer;
         }),
       };
+    case "REMOVE_BUSY_TYPIST_OFFER":
+      return {
+        ...state,
+        offers: state.offers.filter(
+          offer => offer.typist_id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }
