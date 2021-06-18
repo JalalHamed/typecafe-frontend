@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 
 // Components
 import Button from "components/buttons/Button";
-import { farsiNumber, remainingTime } from "components/helper";
+import { farsiNumber, priceFormat, remainingTime } from "components/helper";
 
 // Requests
 import socket from "requests/socket";
 import { TypistDeclareReady, handleErrors } from "requests";
 
 // Actions
-import { ClientAccept, Sounds } from "redux/actions";
+import { ClientAccept, Sounds, User } from "redux/actions";
 
 // Design
 import "./declareready.scss";
@@ -37,6 +37,7 @@ const TheClientAccept = () => {
             typist: user.id,
           })
         );
+        dispatch(User({ credit: user.credit - data.total_price }));
         dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
         dispatch(
           ClientAccept({
@@ -45,7 +46,20 @@ const TheClientAccept = () => {
             issued_at: null,
             client: "",
             offer: null,
+            total_price: null,
           })
+        );
+        toast.info(
+          <>
+            برداشت از اعتبار
+            <br />
+            مبلغ: {priceFormat(data.total_price)}
+            <br />
+            مانده: {priceFormat(user.credit)}
+          </>
+        );
+        toast.success(
+          `پروژه با شناسه فلان با موفقیت به شما سپرده و مبلغ فلان تومان به عنوان مبلغ گروگذاری از حساب شما کسر شد.`
         );
       })
       .catch(err => handleErrors(err));

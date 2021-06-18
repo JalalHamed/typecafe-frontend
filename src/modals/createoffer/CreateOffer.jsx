@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Close from "components/buttons/Close";
 import Button from "components/buttons/Button";
 import Previous from "components/buttons/Previous";
-import { priceFormat, farsiNumber, extractCommission } from "components/helper";
+import { priceFormat, farsiNumber, addCommission } from "components/helper";
 
 // Actions
 import {
@@ -37,7 +37,7 @@ const TheCreateOffer = () => {
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
   const deadline = Number(state.CreateOffer.selectedDeadline);
-  const wholePrice = extractCommission(pageCount * pricePerPage);
+  const wholePrice = addCommission(pageCount * pricePerPage);
 
   const handleMoreAboutThis = () => {
     dispatch(RulesScrollToHTWW(true));
@@ -71,6 +71,7 @@ const TheCreateOffer = () => {
                 {
                   project: project_id,
                   offered_price: pricePerPage,
+                  total_price: res.total_price,
                   id: res.id,
                   created_at: new Date(),
                   status: res.status,
@@ -121,8 +122,9 @@ const TheCreateOffer = () => {
           مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت عدم تحویل
           پروژه تا قبل از مهلت تعیین شده{" "}
           <span className="highlight">{farsiNumber(deadline)} ساعت</span> به
-          ازای هر ۱۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما انتقال
-          داده خواهد شد.
+          ازای هر ۵ دقیقه تاخیر ٪۱۰ از این مبلغ کسر و به حساب کارفرما انتقال
+          داده خواهد شد. در نتیجه پس از ۵۰ دقیقه کل مبلغ گروگذاری شده به حساب
+          کارفرما منتقل و یک پروژه ناموفق برای شما ثبت خواهد شد.
         </p>
         <p className="go-to-rules" onClick={handleMoreAboutThis}>
           اطلاعات بیشتر درباره نحوه ایجاد و انجام پروژه

@@ -11,6 +11,7 @@ import Offer from "components/offer/Offer";
 import {
   priceFormat,
   extractCommission,
+  addCommission,
   remainingTime,
 } from "components/helper";
 import { Puffloader, Skewloader } from "components/loader";
@@ -78,10 +79,6 @@ const OthersProject = ({ project, downloaded }) => {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا به حساب کاربری خود وارد شوید.");
       setButtonDisabled(true);
       setInputDisabled(true);
-    } else if (!user.isLoggedIn && project.status === "IP") {
-      setErrMsg("In Progress");
-      setButtonDisabled(true);
-      setInputDisabled(true);
     } else if (!downloaded.includes(project.id)) {
       setErrMsg("جهت ثبت پیشنهاد، ابتدا فایل پروژه را دانلود کنید.");
       setButtonDisabled(true);
@@ -129,13 +126,11 @@ const OthersProject = ({ project, downloaded }) => {
     <>
       {!isLoading.offeredsLoading && !isLoading.downloadsLoading ? (
         <>
-          {downloaded.includes(project.id) ? (
+          {project.status === "O" && (
             <>
-              {offer ? (
+              {downloaded.includes(project.id) ? (
                 <>
-                  {offer.status === "ACC" ? (
-                    <></>
-                  ) : (
+                  {offer ? (
                     <div
                       className={`has-offers-wrapper no-height less-width ${
                         loading ? "lower-opacity" : ""
@@ -158,12 +153,8 @@ const OthersProject = ({ project, downloaded }) => {
                         <Offer project={project} offer={offer} />
                       </div>
                     </div>
-                  )}
-                </>
-              ) : (
-                <div className="request-offer-wrapper">
-                  {project.status === "O" && (
-                    <>
+                  ) : (
+                    <div className="request-offer-wrapper">
                       <div className="request-offer-form-wrapper">
                         <Input
                           label="قیمت پیشنهادی (هر صفحه)"
@@ -198,23 +189,20 @@ const OthersProject = ({ project, downloaded }) => {
                           <p className="left-title">جمع کل</p>
                           <p className="left-value">
                             {priceFormat(
-                              extractCommission(price * project.number_of_pages)
+                              addCommission(price * project.number_of_pages)
                             )}
                           </p>
                         </>
                       </div>
-                    </>
+                    </div>
                   )}
-                  {project.status === "IP" && <Skewloader color="#fca636" />}
-                </div>
+                </>
+              ) : (
+                <p className="err-msg">{errMsg}</p>
               )}
             </>
-          ) : (
-            <p className="err-msg">
-              {errMsg === "In Progress" && <Skewloader color="#fca636" />}
-              {errMsg !== "In Progress" && errMsg}
-            </p>
           )}
+          {project.status === "IP" && <Skewloader color="#fca636" />}
         </>
       ) : (
         <Puffloader color="#1c3987" loading={true} size={100} />

@@ -6,12 +6,7 @@ import Moment from "react-moment";
 import { toast } from "react-toastify";
 
 // Components
-import {
-  priceFormat,
-  addCommission,
-  remainingTime,
-  farsiNumber,
-} from "components/helper";
+import { priceFormat, remainingTime, farsiNumber } from "components/helper";
 
 // Actions
 import { AoROfferAction, Profile, ClientAccept } from "redux/actions";
@@ -50,9 +45,7 @@ const Offer = ({ offer, project, countdown }) => {
         typist: offer.typist,
         typistImage: offer.typist_image,
         offeredPrice: offer.offered_price,
-        wholePrice: addCommission(
-          offer.offered_price * project.number_of_pages
-        ),
+        totalPrice: offer.total_price,
         status: status,
       })
     );
@@ -83,82 +76,84 @@ const Offer = ({ offer, project, countdown }) => {
   }, [deadline]);
 
   return (
-    <div
-      key={offer.id}
-      className={`offer ${offer?.status === "REJ" ? "rejected" : ""}`}
-    >
-      {offer.typist_id !== user.id && (
-        <div className="typist-wrapper">
-          {offer.typist_image ? (
-            <img
-              src={baseURL + offer.typist_image}
-              alt="typist_image"
-              className="typist-image pointer"
-              onClick={() => openProfile(offer)}
-            />
-          ) : (
-            <i
-              className="icon offer-typist-default-pic pointer"
-              onClick={() => openProfile(offer)}
-            />
+    <>
+      {!!offer && (
+        <div
+          key={offer.id}
+          className={`offer ${offer.status === "REJ" ? "rejected" : ""}`}
+        >
+          {offer.typist_id !== user.id && (
+            <div className="typist-wrapper">
+              {offer.typist_image ? (
+                <img
+                  src={baseURL + offer.typist_image}
+                  alt="typist_image"
+                  className="typist-image pointer"
+                  onClick={() => openProfile(offer)}
+                />
+              ) : (
+                <i
+                  className="icon offer-typist-default-pic pointer"
+                  onClick={() => openProfile(offer)}
+                />
+              )}
+              <span
+                className="typist-displayname pointer"
+                onClick={() => openProfile(offer)}
+              >
+                {offer.typist}
+              </span>
+            </div>
           )}
-          <span
-            className="typist-displayname pointer"
-            onClick={() => openProfile(offer)}
-          >
-            {offer.typist}
-          </span>
+          <div className="offered-price-wrapper">
+            <span className="offered-price-title">قیمت پیشنهادی</span>
+            <span className="offered-price">
+              {priceFormat(offer.offered_price)}
+            </span>
+          </div>
+          <div className="offered-price-wrapper">
+            <span className="offered-price-title">جمع کل</span>
+            <span className="offered-price">
+              {priceFormat(offer.total_price)}
+            </span>
+          </div>
+          {!countdown ? (
+            <>
+              {project.client_id === user.id ? (
+                <div className="accept-reject-wrapper no-select">
+                  <div
+                    className="accept"
+                    onClick={() => openAoRModal(offer, "accept")}
+                  >
+                    <i className="icon icon-check-green" />
+                  </div>
+                  <div
+                    className="reject"
+                    onClick={() => openAoRModal(offer, "reject")}
+                  >
+                    <i className="icon icon-close-red" />
+                  </div>
+                </div>
+              ) : (
+                <p className="waiting-for-approval">
+                  {offer.status === "A" && <span>در انتظار تایید</span>}
+                  {offer.status === "REJ" && (
+                    <span className="rejected-note">رد شده</span>
+                  )}
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="deadline">{farsiNumber(deadline)}</p>
+          )}
+          <div className="offer-created-at">
+            <Moment fromNow locale="fa">
+              {offer.created_at}
+            </Moment>
+          </div>
         </div>
       )}
-      <div className="offered-price-wrapper">
-        <span className="offered-price-title">قیمت پیشنهادی</span>
-        <span className="offered-price">
-          {priceFormat(offer.offered_price)}
-        </span>
-      </div>
-      <div className="offered-price-wrapper">
-        <span className="offered-price-title">جمع کل</span>
-        <span className="offered-price">
-          {priceFormat(
-            addCommission(offer.offered_price * project.number_of_pages)
-          )}
-        </span>
-      </div>
-      {!countdown ? (
-        <>
-          {project.client_id === user.id ? (
-            <div className="accept-reject-wrapper no-select">
-              <div
-                className="accept"
-                onClick={() => openAoRModal(offer, "accept")}
-              >
-                <i className="icon icon-check-green" />
-              </div>
-              <div
-                className="reject"
-                onClick={() => openAoRModal(offer, "reject")}
-              >
-                <i className="icon icon-close-red" />
-              </div>
-            </div>
-          ) : (
-            <p className="waiting-for-approval">
-              {offer.status === "A" && <span>در انتظار تایید</span>}
-              {offer.status === "REJ" && (
-                <span className="rejected-note">رد شده</span>
-              )}
-            </p>
-          )}
-        </>
-      ) : (
-        <p className="deadline">{farsiNumber(deadline)}</p>
-      )}
-      <div className="offer-created-at">
-        <Moment fromNow locale="fa">
-          {offer.created_at}
-        </Moment>
-      </div>
-    </div>
+    </>
   );
 };
 

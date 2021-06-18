@@ -337,6 +337,7 @@ const SocketsAndRequests = () => {
               issued_at: data.issued_at,
               client: data.client,
               offer: data.offer,
+              total_price: data.total_price,
             })
           );
           dispatch(

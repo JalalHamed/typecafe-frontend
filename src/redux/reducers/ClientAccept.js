@@ -4,6 +4,7 @@ let initialState = {
   project: null,
   issued_at: null,
   offer: null,
+  total_price: null,
 };
 
 const ClientAccept = (state = initialState, action) => {

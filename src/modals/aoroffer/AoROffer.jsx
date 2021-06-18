@@ -126,7 +126,7 @@ const AoROffer = () => {
           <p className="title" style={{ marginTop: "7px" }}>
             جمع کل با احتساب ۱۰٪ کارمزد سایت
           </p>
-          <p className="value">{priceFormat(offer.wholePrice)}</p>
+          <p className="value">{priceFormat(offer.totalPrice)}</p>
         </div>
       </div>
       {offer.status === "accept" && (
