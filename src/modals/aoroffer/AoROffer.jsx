@@ -46,7 +46,7 @@ const AoROffer = () => {
   };
 
   const handleAccept = () => {
-    if (user.credit < offer.wholePrice) {
+    if (user.credit < offer.totalPrice) {
       dispatch(NotEnoughCreditAction(true));
       setTimeout(() => {
         dispatch(AoROfferAction({ isModalOpen: false }));
@@ -161,7 +161,7 @@ const AoROffer = () => {
                     typist: "",
                     typistImage: "",
                     offeredPrice: 0,
-                    wholePrice: 0,
+                    totalPrice: 0,
                     status: "",
                   })
                 )
@@ -192,7 +192,7 @@ const AoROffer = () => {
                   typist: "",
                   typistImage: "",
                   offeredPrice: 0,
-                  wholePrice: 0,
+                  totalPrice: 0,
                   status: "",
                 })
               )

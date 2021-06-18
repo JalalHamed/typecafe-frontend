@@ -51,15 +51,16 @@ const TheClientAccept = () => {
         );
         toast.info(
           <>
-            برداشت از اعتبار
+            <span className="f-14">برداشت از اعتبار</span>
             <br />
-            مبلغ: {priceFormat(data.total_price)}
-            <br />
-            مانده: {priceFormat(user.credit)}
+            <span className="f-14">مبلغ:</span> {priceFormat(data.total_price)}
           </>
         );
-        toast.success(
-          `پروژه با شناسه فلان با موفقیت به شما سپرده و مبلغ فلان تومان به عنوان مبلغ گروگذاری از حساب شما کسر شد.`
+        toast.info(
+          <>
+            پروژه {farsiNumber(data.project)} با موفقیت به شما سپرده شد.
+            می‌توانید شروع کنید.
+          </>
         );
       })
       .catch(err => handleErrors(err));

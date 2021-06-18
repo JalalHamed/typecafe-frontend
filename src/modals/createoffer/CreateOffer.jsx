@@ -37,7 +37,7 @@ const TheCreateOffer = () => {
   const pageCount = Number(state.CreateOffer.selectedPageCount);
   const pricePerPage = Number(state.CreateOffer.selectedPricePerPage);
   const deadline = Number(state.CreateOffer.selectedDeadline);
-  const wholePrice = addCommission(pageCount * pricePerPage);
+  const totalPrice = addCommission(pageCount * pricePerPage);
 
   const handleMoreAboutThis = () => {
     dispatch(RulesScrollToHTWW(true));
@@ -46,7 +46,7 @@ const TheCreateOffer = () => {
   };
 
   const handleSubmitRequest = () => {
-    if (credit >= wholePrice) {
+    if (credit >= totalPrice) {
       let project_id = state.CreateOffer.selectedId;
       let body = {
         project: project_id,
@@ -81,7 +81,7 @@ const TheCreateOffer = () => {
             })
           );
           dispatch(CreateOffer({ isModalOpen: false }));
-          toast.success("پیشنهاد شما با موفقیت ثبت شد.");
+          toast.success(<>پیشنهاد شما ثبت شد.</>);
         })
         .catch(err => {
           setLoading(false);
@@ -118,7 +118,7 @@ const TheCreateOffer = () => {
         <p className="offerrequest-note">
           در صورت تایید پیشنهاد شما توسط کارفرما، مجموع مبلغ پروژه با احتساب
           کارمزد سایت{" "}
-          <span className="highlight">{priceFormat(wholePrice)}</span> به عنوان
+          <span className="highlight">{priceFormat(totalPrice)}</span> به عنوان
           مبلغ ضمانت انجام پروژه از اعتبار شما کسر خواهد شد و در صورت عدم تحویل
           پروژه تا قبل از مهلت تعیین شده{" "}
           <span className="highlight">{farsiNumber(deadline)} ساعت</span> به

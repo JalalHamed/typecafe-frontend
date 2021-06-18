@@ -50,12 +50,12 @@ const OwnProject = ({ project }) => {
     <>
       {!isLoading ? (
         <>
-          {ClientAcceptState.project !== project.id ? (
+          {project.status === "O" && (
             <>
-              {!!offers.length ? (
-                <div className="has-offers-wrapper">
-                  {project.status === "O" && (
-                    <>
+              {ClientAcceptState.project !== project.id ? (
+                <>
+                  {!!offers.length ? (
+                    <div className="has-offers-wrapper">
                       <div className="offers-title-wrapper">
                         <p>پیشنهادها</p>
                         <span className="number-of-offers">
@@ -73,26 +73,26 @@ const OwnProject = ({ project }) => {
                           );
                         })}
                       </div>
-                    </>
+                    </div>
+                  ) : (
+                    <div className="no-offer-wrapper">
+                      <p>هنوز هیچ پیشنهادی ندارید.</p>
+                    </div>
                   )}
-                </div>
+                </>
               ) : (
-                <div className="no-offer-wrapper">
-                  <p>هنوز هیچ پیشنهادی ندارید.</p>
+                <div className="has-offers-wrapper no-height">
+                  <p className="waiting-for-typist-note">
+                    در انتظار اعلام آمادگی تاپیست
+                  </p>
+                  <Offer
+                    project={project}
+                    offer={offers.find(x => x.id === ClientAcceptState.offer)}
+                    countdown
+                  />
                 </div>
               )}
             </>
-          ) : (
-            <div className="has-offers-wrapper no-height">
-              <p className="waiting-for-typist-note">
-                در انتظار اعلام آمادگی تاپیست
-              </p>
-              <Offer
-                project={project}
-                offer={offers.find(x => x.id === ClientAcceptState.offer)}
-                countdown
-              />
-            </div>
           )}
         </>
       ) : (

@@ -163,6 +163,7 @@ const TheProject = ({ project }) => {
           title="دانلود فایل پروژه"
           className="fit-width"
           onClick={handleDownloaded}
+          disabled={!user.isLoggedIn}
         />
         {user.id === project.client_id && project.status === "O" && (
           <Button

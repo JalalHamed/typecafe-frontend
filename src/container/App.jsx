@@ -107,7 +107,7 @@ const App = () => {
       </div>
       <ToastContainer
         position="bottom-left"
-        autoClose={8000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         rtl

@@ -25,7 +25,7 @@ const Offer = ({ offer, project, countdown }) => {
     remainingTime(ClientAcceptState.issued_at, 30)
   );
 
-  const openProfile = offer => {
+  const openProfile = () => {
     dispatch(
       Profile({
         isModalOpen: true,
@@ -36,7 +36,7 @@ const Offer = ({ offer, project, countdown }) => {
     );
   };
 
-  const openAoRModal = (offer, status) => {
+  const openAoRModal = status => {
     dispatch(
       AoROfferAction({
         isModalOpen: true,
@@ -89,17 +89,17 @@ const Offer = ({ offer, project, countdown }) => {
                   src={baseURL + offer.typist_image}
                   alt="typist_image"
                   className="typist-image pointer"
-                  onClick={() => openProfile(offer)}
+                  onClick={openProfile}
                 />
               ) : (
                 <i
                   className="icon offer-typist-default-pic pointer"
-                  onClick={() => openProfile(offer)}
+                  onClick={openProfile}
                 />
               )}
               <span
                 className="typist-displayname pointer"
-                onClick={() => openProfile(offer)}
+                onClick={openProfile}
               >
                 {offer.typist}
               </span>
@@ -123,13 +123,13 @@ const Offer = ({ offer, project, countdown }) => {
                 <div className="accept-reject-wrapper no-select">
                   <div
                     className="accept"
-                    onClick={() => openAoRModal(offer, "accept")}
+                    onClick={() => openAoRModal("accept")}
                   >
                     <i className="icon icon-check-green" />
                   </div>
                   <div
                     className="reject"
-                    onClick={() => openAoRModal(offer, "reject")}
+                    onClick={() => openAoRModal("reject")}
                   >
                     <i className="icon icon-close-red" />
                   </div>

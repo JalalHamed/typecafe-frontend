@@ -65,7 +65,7 @@ const OthersProject = ({ project, downloaded }) => {
               project_owner: project.client_id,
             })
           );
-          toast.info("پیشنهاد شما با موفقیت لغو شد.");
+          toast.info(<>پیشنهاد شما لغو شد.</>);
         })
         .catch(err => {
           setLoading(false);
