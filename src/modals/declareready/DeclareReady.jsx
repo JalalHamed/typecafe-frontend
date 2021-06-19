@@ -56,12 +56,14 @@ const TheClientAccept = () => {
             <span className="f-14">مبلغ:</span> {priceFormat(data.total_price)}
           </>
         );
-        toast.info(
-          <>
-            پروژه {farsiNumber(data.project)} با موفقیت به شما سپرده شد.
-            می‌توانید شروع کنید.
-          </>
-        );
+        setTimeout(() => {
+          toast.success(
+            <>
+              پروژه {farsiNumber(data.project)} با موفقیت به شما سپرده شد. شروع
+              کنید.
+            </>
+          );
+        }, 1000);
       })
       .catch(err => handleErrors(err));
   };

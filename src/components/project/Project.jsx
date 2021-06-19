@@ -161,9 +161,20 @@ const TheProject = ({ project }) => {
         <Button
           ref={downloadFileRef}
           title="دانلود فایل پروژه"
-          className="fit-width"
+          className={`fit-width ${
+            project.status === "IP" &&
+            user.id !== project.client_id &&
+            !offereds.find(x => x.project === project.id)
+              ? "download-project-orange"
+              : ""
+          }`}
           onClick={handleDownloaded}
-          disabled={!user.isLoggedIn}
+          disabled={
+            !user.isLoggedIn ||
+            (project.status === "IP" &&
+              user.id !== project.client_id &&
+              !offereds.find(x => x.project === project.id))
+          }
         />
         {user.id === project.client_id && project.status === "O" && (
           <Button
@@ -208,7 +219,7 @@ const TheProject = ({ project }) => {
           <span style={{ color: "#555", fontSize: "11px" }}>وضعیت پروژه</span>
           &nbsp;&nbsp;
           {project.status === "O" && <span>باز</span>}
-          {project.status === "IP" && <span>در حال اجرا</span>}
+          {project.status === "IP" && <span>در دست اجرا</span>}
         </p>
       </div>
       <div className="project-id">
