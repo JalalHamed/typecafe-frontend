@@ -1,0 +1,74 @@
+.upload-typed-file-wrapper {
+  width: 55%;
+  display: flex;
+  justify-content: flex-start;
+
+  .time-left-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .time-digit {
+      font-size: 25px;
+      line-height: 23px;
+      margin-top: 17px;
+      color: #1c3987;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .time-title {
+      color: #666;
+      font-size: 14px;
+    }
+  }
+
+  .upload-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .upload-icon-circle {
+      width: 75px;
+      height: 75px;
+      background-color: #ebebeb;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .upload-typed-file-note {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .upload-typed-file-valid-format {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+
+      &.red {
+        color: #ff2d2d;
+      }
+    }
+
+    .upload-button {
+      margin-top: 10px;
+    }
+
+    .number-of-pages-and-submit-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .submit {
+        margin-right: 10px;
+      }
+    }
+  }
+}

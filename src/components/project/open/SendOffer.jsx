@@ -25,10 +25,11 @@ import { CreateOffer, OffersAction, ClientAccept } from "redux/actions";
 // Designs
 import "./open.scss";
 
-const SendOffer = ({ project, downloaded }) => {
+const SendOffer = ({ project }) => {
   const dispatch = useDispatch();
   const submitReqeustRef = useRef();
   const user = useSelector(state => state.User);
+  const downloaded = useSelector(state => state.Projects.downloaded);
   const offereds = useSelector(state => state.Offers.offereds);
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);

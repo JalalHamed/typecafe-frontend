@@ -191,7 +191,7 @@ const TheProject = ({ project }) => {
         {user.id === project.client_id ? (
           <OwnProject project={project} />
         ) : (
-          <OthersProject project={project} downloaded={downloaded} />
+          <OthersProject project={project} />
         )}
         {offereds.find(offer => offer.project === project.id)?.status ===
           "A" && (
