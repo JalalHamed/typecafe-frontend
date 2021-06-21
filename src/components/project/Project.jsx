@@ -7,10 +7,10 @@ import "moment/locale/fa";
 
 // Components
 import Button from "components/buttons/Button";
-import OwnProject from "./OwnProject";
-import OthersProject from "./OthersProject";
 import { farsiNumber, getUserTimeStatus, lastSeen } from "components/helper";
 import HintArrow from "./HintArrow";
+import Open from "./statuses/open/Open";
+import InProgress from "./statuses/inprogress/InProgress";
 
 // Requests
 import { Downloaded } from "requests";
@@ -188,11 +188,8 @@ const TheProject = ({ project }) => {
         )}
       </div>
       <div className="left">
-        {user.id === project.client_id ? (
-          <OwnProject project={project} />
-        ) : (
-          <OthersProject project={project} />
-        )}
+        {project.status === "O" && <Open project={project} />}
+        {project.status === "IP" && <InProgress project={project} />}
         {offereds.find(offer => offer.project === project.id)?.status ===
           "A" && (
           <div className="hint-arrow-wrapper">
