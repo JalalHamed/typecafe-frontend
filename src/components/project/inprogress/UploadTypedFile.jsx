@@ -23,6 +23,7 @@ const UploadTypedFile = ({ project }) => {
   const uploadInputRef = useRef();
   const submitRef = useRef();
   const offereds = useSelector(state => state.Offers.offereds);
+  const offer = offereds.find(x => x.project === project.id);
   const [file, setFile] = useState(null);
   const [badFormat, setBadFormat] = useState(false);
   const [numberOfPages, setNumberOfPages] = useState("");
@@ -75,12 +76,12 @@ const UploadTypedFile = ({ project }) => {
   }, [numberOfPages]);
 
   useEffect(() => {
-    console.log(typeof err === "object");
-  }, [err]);
+    console.log(offer);
+  }, [offer]);
 
   return (
     <>
-      {offereds.find(x => x.project === project.id) ? (
+      {offer ? (
         <div className="upload-typed-file-wrapper">
           <div className="time-left-wrapper">
             <p className="time-digit">۱</p>

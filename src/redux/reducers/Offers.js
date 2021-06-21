@@ -26,6 +26,16 @@ const Offers = (state = initialState, action) => {
           offer => offer.typist_id !== action.payload.id
         ),
       };
+    case "ADD_TYPIST_READY_TIME":
+      return {
+        ...state,
+        offereds: state.offereds.map(offer => {
+          if (offer.project === action.payload.project) {
+            offer["typist_ready"] = action.payload.typist_ready;
+          }
+          return offer;
+        }),
+      };
     default:
       return state;
   }

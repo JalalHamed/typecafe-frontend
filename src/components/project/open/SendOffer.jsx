@@ -128,30 +128,7 @@ const SendOffer = ({ project }) => {
     <>
       {downloaded.includes(project.id) ? (
         <>
-          {offer ? (
-            <div
-              className={`has-offers-wrapper no-height less-width ${
-                loading ? "lower-opacity" : ""
-              }`}
-            >
-              <p style={{ fontSize: "14px" }}>پیشنهاد من</p>
-              <div
-                className={`request-wrapper less-tp ${
-                  offer.status === "A" ? "more-pl" : ""
-                }`}
-              >
-                {offer.status === "A" && (
-                  <i
-                    className={`icon icon-close-background-red delete-offer ${
-                      loading ? "not-pointer" : ""
-                    }`}
-                    onClick={() => handleDelete(offer.id)}
-                  />
-                )}
-                <Offer project={project} offer={offer} />
-              </div>
-            </div>
-          ) : (
+          {!offer ? (
             <div className="request-offer-wrapper">
               <div className="request-offer-form-wrapper">
                 <Input
@@ -189,6 +166,29 @@ const SendOffer = ({ project }) => {
                     )}
                   </p>
                 </>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`has-offers-wrapper no-height less-width ${
+                loading ? "lower-opacity" : ""
+              }`}
+            >
+              <p style={{ fontSize: "14px" }}>پیشنهاد من</p>
+              <div
+                className={`request-wrapper less-tp ${
+                  offer.status === "A" ? "more-pl" : ""
+                }`}
+              >
+                {offer.status === "A" && (
+                  <i
+                    className={`icon icon-close-background-red delete-offer ${
+                      loading ? "not-pointer" : ""
+                    }`}
+                    onClick={() => handleDelete(offer.id)}
+                  />
+                )}
+                <Offer project={project} offer={offer} />
               </div>
             </div>
           )}

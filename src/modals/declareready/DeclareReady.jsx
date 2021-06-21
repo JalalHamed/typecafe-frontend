@@ -14,7 +14,7 @@ import socket from "requests/socket";
 import { TypistDeclareReady, handleErrors } from "requests";
 
 // Actions
-import { ClientAccept, Sounds, User } from "redux/actions";
+import { ClientAccept, Sounds, User, AddTypistReadyTime } from "redux/actions";
 
 // Design
 import "./declareready.scss";
@@ -29,13 +29,16 @@ const TheClientAccept = () => {
 
   const handleSubmit = () => {
     TypistDeclareReady({ id: data.offer })
-      .then(() => {
+      .then(res => {
         socket.send(
           JSON.stringify({
             status: "in-progress",
             project: data.project,
             typist: user.id,
           })
+        );
+        dispatch(
+          AddTypistReadyTime({ project: data.project, typist_ready: res })
         );
         dispatch(User({ credit: user.credit - data.total_price }));
         dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));

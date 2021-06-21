@@ -172,3 +172,10 @@ export const Sounds = payload => {
     payload,
   };
 };
+
+export const AddTypistReadyTime = payload => {
+  return {
+    type: "ADD_TYPIST_READY_TIME",
+    payload,
+  };
+};
