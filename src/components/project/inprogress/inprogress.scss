@@ -63,6 +63,12 @@
 
     .file-details-wrapper {
       display: flex;
+      position: relative;
+
+      .cancel-file {
+        right: -30px;
+        top: -25px;
+      }
 
       .title {
         font-size: 10px;
@@ -88,7 +94,13 @@
     .err {
       position: absolute;
       font-size: 13px;
-      bottom: 25px;
+      bottom: 20px;
+      line-height: 19px;
+      text-align: center;
+
+      &.less-bottom {
+        bottom: 5px;
+      }
     }
 
     .standard-format {

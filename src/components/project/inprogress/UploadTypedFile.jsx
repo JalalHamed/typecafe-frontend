@@ -1,19 +1,24 @@
 import React, { useRef, useState, useEffect } from "react";
 
 // Libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 // Components
 import Button from "components/buttons/Button";
+import Close from "components/buttons/Close";
 import Input from "components/inputs/Input";
 import { Skewloader } from "components/loader";
 import { fileNameFilter, farsiNumber } from "components/helper";
+
+// Actions
+import { Sidebar, RulesScrollTo } from "redux/actions";
 
 // Designs
 import "./inprogress.scss";
 
 const UploadTypedFile = ({ project }) => {
+  const dispatch = useDispatch();
   const uploadRef = useRef();
   const uploadInputRef = useRef();
   const submitRef = useRef();
@@ -46,9 +51,32 @@ const UploadTypedFile = ({ project }) => {
         setErr("");
       }
     } else {
-      setErr("تعداد صفحات تایپ شده را وارد کنید.");
+      setErr(
+        <>
+          تعداد صفحات تایپ شده را وارد کنید.
+          <br />
+          <span style={{ fontSize: "12px" }}>
+            محاسبه بر اساس{" "}
+            <span
+              className="standard-format"
+              onClick={() => {
+                dispatch(Sidebar({ page: "rules" }));
+                dispatch(RulesScrollTo("StandardFormat"));
+              }}
+            >
+              فرمت استاندارد سایت
+            </span>
+          </span>
+        </>
+      );
     }
+
+    // eslint-disable-next-line
   }, [numberOfPages]);
+
+  useEffect(() => {
+    console.log(typeof err === "object");
+  }, [err]);
 
   return (
     <>
@@ -99,6 +127,11 @@ const UploadTypedFile = ({ project }) => {
             ) : (
               <>
                 <div className="file-details-wrapper">
+                  <Close
+                    className="cancel-file"
+                    onClick={() => setFile(null)}
+                    red
+                  />
                   <i className="icon icon-zip-smaller" />
                   <div>
                     <p className="title">نام فایل</p>
@@ -133,7 +166,15 @@ const UploadTypedFile = ({ project }) => {
                     disabled={err}
                   />
                 </div>
-                {err && <p className="err">{err}</p>}
+                {err && (
+                  <p
+                    className={`err ${
+                      typeof err === "object" ? "less-bottom" : ""
+                    }`}
+                  >
+                    {err}
+                  </p>
+                )}
               </>
             )}
           </div>
