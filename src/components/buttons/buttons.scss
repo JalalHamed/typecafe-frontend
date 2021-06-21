@@ -41,15 +41,6 @@
     background-color: #29313b;
   }
 
-  &.disabled {
-    background-color: #666;
-    cursor: auto;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
   &.red {
     background-color: #d8000c;
   }
@@ -60,6 +51,15 @@
 
   &.no-break {
     margin-top: 0;
+  }
+
+  &.disabled {
+    background-color: #666;
+    cursor: auto;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Actions
-import { RulesScrollToHTWW } from "redux/actions";
+import { RulesScrollTo } from "redux/actions";
 
 // Designs
 import "./rules.scss";
@@ -30,8 +30,11 @@ const Rules = () => {
 
   useEffect(() => {
     if (scrollTo) {
-      HowTheWebsiteWorks.current.scrollIntoView();
-      dispatch(RulesScrollToHTWW(false));
+      if (scrollTo === "HowTheWebsiteWorks")
+        HowTheWebsiteWorks.current.scrollIntoView();
+      if (scrollTo === "StandardFormat")
+        StandardFormat.current.scrollIntoView();
+      dispatch(RulesScrollTo(""));
     }
 
     // eslint-disable-next-line

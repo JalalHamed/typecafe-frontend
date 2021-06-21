@@ -316,7 +316,7 @@
     height: 20px;
   }
 
-  &.icon-upload2 {
+  &.icon-upload-typed-file {
     content: url("../svgs/upload2.svg");
     width: 30px;
     height: 30px;
@@ -324,5 +324,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  &.icon-zip-smaller {
+    content: url("../svgs/zip.svg");
+    width: 70px;
+    height: 70px;
   }
 }

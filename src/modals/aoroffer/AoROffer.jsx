@@ -19,7 +19,7 @@ import {
   AoROfferAction,
   Sidebar,
   NotEnoughCreditAction,
-  RulesScrollToHTWW,
+  RulesScrollTo,
   ClientAccept,
   OffersAction,
 } from "redux/actions";
@@ -40,7 +40,7 @@ const AoROffer = () => {
   const [loading, setLoading] = useState(false);
 
   const handleGoToRules = () => {
-    dispatch(RulesScrollToHTWW(true));
+    dispatch(RulesScrollTo("HowTheWebsiteWorks"));
     dispatch(AoROfferAction({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };

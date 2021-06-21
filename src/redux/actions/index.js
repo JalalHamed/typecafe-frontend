@@ -145,9 +145,9 @@ export const NotEnoughCreditAction = payload => {
   };
 };
 
-export const RulesScrollToHTWW = payload => {
+export const RulesScrollTo = payload => {
   return {
-    type: "RULES_SCROLL_TO_HTWW",
+    type: "RULES_SCROLL_TO",
     payload,
   };
 };

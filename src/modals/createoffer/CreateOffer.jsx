@@ -17,7 +17,7 @@ import {
   Sidebar,
   OffersAction,
   NotEnoughCreditAction,
-  RulesScrollToHTWW,
+  RulesScrollTo,
 } from "redux/actions";
 
 // Request
@@ -40,7 +40,7 @@ const TheCreateOffer = () => {
   const totalPrice = addCommission(pageCount * pricePerPage);
 
   const handleMoreAboutThis = () => {
-    dispatch(RulesScrollToHTWW(true));
+    dispatch(RulesScrollTo("HowTheWebsiteWorks"));
     dispatch(CreateOffer({ isModalOpen: false }));
     dispatch(Sidebar({ page: "rules" }));
   };

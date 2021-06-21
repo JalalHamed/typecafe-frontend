@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
 import { Skewloader } from "components/loader";
+import { fileNameFilter, farsiNumber } from "components/helper";
 
 // Designs
 import "./inprogress.scss";
@@ -19,6 +20,8 @@ const UploadTypedFile = ({ project }) => {
   const offereds = useSelector(state => state.Offers.offereds);
   const [file, setFile] = useState(null);
   const [badFormat, setBadFormat] = useState(false);
+  const [numberOfPages, setNumberOfPages] = useState("");
+  const [err, setErr] = useState("");
 
   const openFileInput = () => {
     uploadInputRef.current.click();
@@ -34,8 +37,18 @@ const UploadTypedFile = ({ project }) => {
   };
 
   useEffect(() => {
-    console.log("file", file);
-  }, [file]);
+    if (numberOfPages) {
+      if (Number(numberOfPages) < 1) {
+        setErr("تعداد صفحات نمی‌تواند کوچکتر از 1 باشد.");
+      } else if (!Number.isInteger(Number(numberOfPages))) {
+        setErr("تعداد صفحات نمی‌تواند یک عدد اعشاری باشد.");
+      } else {
+        setErr("");
+      }
+    } else {
+      setErr("تعداد صفحات تایپ شده را وارد کنید.");
+    }
+  }, [numberOfPages]);
 
   return (
     <>
@@ -64,7 +77,7 @@ const UploadTypedFile = ({ project }) => {
             {!file ? (
               <>
                 <div className="upload-icon-circle" onClick={openFileInput}>
-                  <i className="icon icon-upload2" />
+                  <i className="icon icon-upload-typed-file" />
                 </div>
                 <p className="upload-typed-file-note">
                   فایل تایپ شده را آپلود کنید.
@@ -85,20 +98,42 @@ const UploadTypedFile = ({ project }) => {
               </>
             ) : (
               <>
+                <div className="file-details-wrapper">
+                  <i className="icon icon-zip-smaller" />
+                  <div>
+                    <p className="title">نام فایل</p>
+                    <p
+                      className="value"
+                      style={{ direction: "ltr", width: "max-content" }}
+                    >
+                      {fileNameFilter(file.name)}&nbsp;&nbsp;
+                    </p>
+                    <p className="title">حجم فایل</p>
+                    <p className="value">
+                      &nbsp;&nbsp;
+                      {farsiNumber((file.size / 1000).toFixed(1))} کیلوبایت
+                    </p>
+                  </div>
+                </div>
                 <div className="number-of-pages-and-submit-wrapper">
                   <Input
                     label="تعداد صفحات"
                     type="number"
                     wrapperStyle={{ width: "50%" }}
                     min="1"
+                    value={numberOfPages}
+                    onChange={e => setNumberOfPages(e.target.value)}
                     autoFocus
+                    noBreak
                   />
                   <Button
                     ref={submitRef}
                     title="ارسال"
-                    className="fit-width green submit"
+                    className="fit-width green no-break submit"
+                    disabled={err}
                   />
                 </div>
+                {err && <p className="err">{err}</p>}
               </>
             )}
           </div>
