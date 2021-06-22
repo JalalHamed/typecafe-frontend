@@ -57,6 +57,7 @@ const Offer = ({ offer, project, countdown }) => {
         if (deadline > 0) {
           setDeadline(remainingTime(ClientAcceptState.issued_at, 30));
         } else {
+          clearInterval(interval);
           dispatch(
             ClientAccept({
               client: "",
@@ -66,7 +67,6 @@ const Offer = ({ offer, project, countdown }) => {
             })
           );
           toast.info("تایپیست مورد نظر در اعلام آمادگی خود ناموفق بود.");
-          clearInterval(interval);
         }
       }, 1000);
       return () => clearInterval(interval);
