@@ -14,7 +14,13 @@ import socket from "requests/socket";
 import { TypistDeclareReady, handleErrors } from "requests";
 
 // Actions
-import { ClientAccept, Sounds, User, AddTypistReadyTime } from "redux/actions";
+import {
+  ClientAccept,
+  Sounds,
+  User,
+  AddOfferedTypistReadyTime,
+  ChangeOfferedStatus,
+} from "redux/actions";
 
 // Design
 import "./declareready.scss";
@@ -35,13 +41,19 @@ const TheClientAccept = () => {
             status: "in-progress",
             project: data.project,
             typist: user.id,
+            typist_ready: res,
           })
         );
         dispatch(
-          AddTypistReadyTime({ project: data.project, typist_ready: res })
+          AddOfferedTypistReadyTime({
+            project: data.project,
+            typist_ready: res,
+          })
         );
+        dispatch(ChangeOfferedStatus({ id: data.offer, status: "ACC" }));
         dispatch(User({ credit: user.credit - data.total_price }));
-        dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
+        if (user.playSounds)
+          dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
         dispatch(
           ClientAccept({
             isModalOpen: false,
@@ -76,9 +88,10 @@ const TheClientAccept = () => {
       if (deadline > 0) {
         setDeadline(remainingTime(data.issued_at, 30));
       } else {
-        dispatch(
-          Sounds({ typistFailedToAccept: sounds.typistFailedToAccept + 1 })
-        );
+        if (user.playSounds)
+          dispatch(
+            Sounds({ typistFailedToAccept: sounds.typistFailedToAccept + 1 })
+          );
         dispatch(
           ClientAccept({
             isModalOpen: false,

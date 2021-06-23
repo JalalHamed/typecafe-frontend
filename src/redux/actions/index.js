@@ -61,6 +61,13 @@ export const ChangeOfferedStatus = payload => {
   };
 };
 
+export const RemoveDeletedProjectOffer = payload => {
+  return {
+    type: "REMOVE_DELETED_RPOJECT_OFFER",
+    payload,
+  };
+};
+
 export const RemoveBusyTypistOffer = payload => {
   return {
     type: "REMOVE_BUSY_TYPIST_OFFER",
@@ -173,9 +180,16 @@ export const Sounds = payload => {
   };
 };
 
-export const AddTypistReadyTime = payload => {
+export const AddOfferedTypistReadyTime = payload => {
   return {
-    type: "ADD_TYPIST_READY_TIME",
+    type: "ADD_OFFERED_TYPIST_READY_TIME",
+    payload,
+  };
+};
+
+export const TypistReady = payload => {
+  return {
+    type: "TYPIST_READY",
     payload,
   };
 };

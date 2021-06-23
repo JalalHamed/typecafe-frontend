@@ -108,9 +108,10 @@ const SocketsAndRequests = () => {
               });
               if (total_unread) {
                 dispatch(actions.MessagesElse({ totalUnread: total_unread }));
-                dispatch(
-                  actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
-                );
+                if (state.User.playSounds)
+                  dispatch(
+                    actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
+                  );
               }
               let userIdArr = res.map(message => message.user_id);
               let uniqUserIdArr = [...new Set(userIdArr)];
@@ -247,7 +248,10 @@ const SocketsAndRequests = () => {
               projects: [data, ...state.Projects.projects],
             })
           );
-          dispatch(actions.Sounds({ newProject: state.Sounds.newProject + 1 }));
+          if (state.User.playSounds)
+            dispatch(
+              actions.Sounds({ newProject: state.Sounds.newProject + 1 })
+            );
           if (data.client_email === state.User.email) {
             dispatch(
               actions.ProjectsAction({
@@ -269,6 +273,8 @@ const SocketsAndRequests = () => {
               ),
             })
           );
+          if (state.Offers.offereds.find(x => x.project === data.id))
+            dispatch(actions.RemoveDeletedProjectOffer({ id: data.id }));
           break;
         case "new-offer":
           dispatch(
@@ -289,9 +295,10 @@ const SocketsAndRequests = () => {
                 totalUnread: state.Messages.totalUnread + 1,
               })
             );
-            dispatch(
-              actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
-            );
+            if (state.User.playSounds)
+              dispatch(
+                actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
+              );
           } else {
             ReadMessages({ sender_id: data.sender_id });
           }
@@ -322,7 +329,7 @@ const SocketsAndRequests = () => {
           }
           break;
         case "offer-rejected":
-          dispatch(actions.ChangeOfferedStatus({ id: data.id }));
+          dispatch(actions.ChangeOfferedStatus({ id: data.id, status: "REJ" }));
           toast.info(
             `پیشنهاد شما برای پروژه با شناسه ${farsiNumber(
               data.project
@@ -340,13 +347,29 @@ const SocketsAndRequests = () => {
               total_price: data.total_price,
             })
           );
-          dispatch(
-            actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
-          );
+          if (state.User.playSounds)
+            dispatch(
+              actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
+            );
           break;
         case "in-progress":
-          dispatch(actions.ProjectInProgress({ id: data.project }));
-          if (state.Offers.offers.find(x => x.typist_id === data.typist))
+          dispatch(
+            actions.ProjectInProgress({
+              id: data.project,
+            })
+          );
+          if (state.Offers.offers.find(x => x.project === data.project))
+            dispatch(
+              actions.TypistReady({
+                project: data.project,
+                typist_ready: data.typist_ready,
+              })
+            );
+          if (
+            state.Offers.offers.find(
+              x => x.typist_id === data.typist && x.project !== data.project
+            )
+          )
             dispatch(actions.RemoveBusyTypistOffer({ id: data.typist }));
           break;
         default:

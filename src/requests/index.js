@@ -194,6 +194,12 @@ export const handleErrors = error => {
       toast.error("شما قبلا برای این پروژه پیشنهاد ثبت کرده‌اید.");
     } else if (err === "Not enough credits.") {
       toast.error("اعتبار کافی نیست.");
+    } else if (
+      err === "Typist already has another project to declare ready for."
+    ) {
+      toast.error(
+        "پیشنهاد دیگری از تایپیست تایید شده و در انتظار اعلام آمادگی برای شروع کار می‌باشد."
+      );
     } else if (err.response?.data?.detail === "User not found") {
       sessionStorage.removeItem("_at");
       toast.error("کاربر یافت نشد.");

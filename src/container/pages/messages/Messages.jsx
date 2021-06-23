@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 // Components
 import User from "components/messages/User";

@@ -22,11 +22,14 @@ const InProgress = ({ project }) => {
   useEffect(() => {
     if (offered)
       setDeadline(
-        remainingTime(offered.typist_ready, project.delivery_deadline * 60 * 60)
+        remainingTime(
+          offered?.typist_ready,
+          project.delivery_deadline * 60 * 60
+        )
       );
     if (user.id === project.client_id)
       setDeadline(
-        remainingTime(offer.typist_ready, project.delivery_deadline * 60 * 60)
+        remainingTime(offer?.typist_ready, project.delivery_deadline * 60 * 60)
       );
     if (deadline && deadline > 0) {
       setHours(parseInt(deadline / 3600));
@@ -65,7 +68,7 @@ const InProgress = ({ project }) => {
       } else {
         clearInterval(interval);
       }
-    }, 1000);
+    }, 0);
 
     return () => clearInterval(interval);
 
@@ -75,7 +78,7 @@ const InProgress = ({ project }) => {
   return (
     <>
       {user.id === project.client_id || offered ? (
-        <div className="upload-typed-file-wrapper">
+        <div className="in-progress-wrapper">
           <div className="time-left-wrapper">
             {!!hours && (
               <>

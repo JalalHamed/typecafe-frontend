@@ -66,7 +66,8 @@ const Offer = ({ offer, project, countdown }) => {
               offer: null,
             })
           );
-          toast.info("تایپیست مورد نظر در اعلام آمادگی خود ناموفق بود.");
+          if (user.id === project.client_id)
+            toast.info("تایپیست مورد نظر در اعلام آمادگی خود ناموفق بود.");
         }
       }, 1000);
       return () => clearInterval(interval);
