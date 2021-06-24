@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 // Components
-import { Skewloader } from "components/loader";
 import UploadTypedFile from "./UploadTypedFile";
+import WaitingForTypedFile from "./WaitingForTypedFile";
 import { remainingTime, farsiNumber } from "components/helper";
+import { Skewloader } from "components/loader";
 
 const InProgress = ({ project }) => {
   const user = useSelector(state => state.User);
@@ -100,7 +101,9 @@ const InProgress = ({ project }) => {
             )}
           </div>
           {offered && <UploadTypedFile />}
-          {user.id === project.client_id && <>I own this shit brothy bro</>}
+          {user.id === project.client_id && offer && (
+            <WaitingForTypedFile offer={offer} />
+          )}
         </div>
       ) : (
         <Skewloader color="#fca636" />
