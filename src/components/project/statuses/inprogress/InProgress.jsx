@@ -93,12 +93,8 @@ const InProgress = ({ project }) => {
                 <p className="time-title">دقیقه</p>
               </>
             )}
-            {!!seconds && (
-              <>
-                <p className="time-digit">{farsiNumber(seconds)}</p>
-                <p className="time-title">ثانیه</p>
-              </>
-            )}
+            <p className="time-digit">{farsiNumber(seconds)}</p>
+            <p className="time-title">ثانیه</p>
           </div>
           {offered && <UploadTypedFile />}
           {user.id === project.client_id && offer && (

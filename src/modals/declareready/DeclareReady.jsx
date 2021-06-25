@@ -42,6 +42,7 @@ const TheClientAccept = () => {
             project: data.project,
             typist: user.id,
             typist_ready: res,
+            total_price: data.total_price,
           })
         );
         dispatch(

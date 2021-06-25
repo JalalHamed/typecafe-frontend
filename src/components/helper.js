@@ -10,9 +10,9 @@ export const emailOverFlow = props => {
   }
 };
 
-export const fileNameFilter = name => {
-  if (name.length > 20) {
-    return "..." + name.slice(0, 20);
+export const fileNameFilter = (name, length) => {
+  if (name.length > length) {
+    return "..." + name.slice(0, length);
   } else {
     return name;
   }

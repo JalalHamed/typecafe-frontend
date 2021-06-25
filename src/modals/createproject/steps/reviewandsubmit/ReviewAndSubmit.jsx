@@ -93,7 +93,7 @@ const ReviewAndSubmit = () => {
               width: "max-content",
             }}
           >
-            {fileNameFilter(state.file.name)}
+            {fileNameFilter(state.file.name, 20)}
           </p>
           <p className="label mt-10">حجم فایل</p>
           <p

@@ -94,7 +94,7 @@ const UploadFiles = () => {
             <div className="file-detials">
               <p className="label">نام فایل</p>
               <p style={{ direction: "ltr", width: "max-content" }}>
-                {fileNameFilter(file.name)}&nbsp;&nbsp;
+                {fileNameFilter(file.name, 20)}&nbsp;&nbsp;
               </p>
               <p className="label">حجم فایل</p>
               <p>

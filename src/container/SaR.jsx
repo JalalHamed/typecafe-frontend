@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 // Components
-import { farsiNumber } from "components/helper";
+import { farsiNumber, priceFormat } from "components/helper";
 
 // Actions
 import * as actions from "redux/actions";
@@ -358,6 +358,21 @@ const SocketsAndRequests = () => {
               id: data.project,
             })
           );
+          if (
+            state.Projects.projects.find(x => x.client_id === state.User.id)
+          ) {
+            dispatch(
+              actions.User({ credit: state.User.credit - data.total_price })
+            );
+            toast.info(
+              <>
+                <span style={{ fontSize: "14px" }}>برداشت از اعتبار</span>
+                <br />
+                <span style={{ fontSize: "14px" }}>مبلغ:</span>{" "}
+                {priceFormat(data.total_price)}
+              </>
+            );
+          }
           if (state.Offers.offers.find(x => x.project === data.project))
             dispatch(
               actions.TypistReady({

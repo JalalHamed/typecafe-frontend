@@ -116,7 +116,7 @@ const UploadTypedFile = () => {
                 className="value"
                 style={{ direction: "ltr", width: "max-content" }}
               >
-                {fileNameFilter(file.name)}&nbsp;&nbsp;
+                {fileNameFilter(file.name, 10)}&nbsp;&nbsp;
               </p>
               <p className="title">حجم فایل</p>
               <p className="value">
@@ -145,7 +145,7 @@ const UploadTypedFile = () => {
           </div>
           {err && (
             <p
-              className={`err ${typeof err === "object" ? "less-bottom" : ""}`}
+              className={`err ${typeof err === "object" ? "more-bottom" : ""}`}
             >
               {err}
             </p>
