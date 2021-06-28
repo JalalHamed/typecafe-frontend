@@ -27,15 +27,15 @@ import Button from "components/buttons/Button";
 const OthersProfile = () => {
   const dispatch = useDispatch();
   const sendMessage = useRef();
-  const user = useSelector(state => state.Profile);
-  const onlineUsers = useSelector(state => state.OnlineUsers);
-  const messages = useSelector(state => state.Messages.messages);
+  const user = useSelector((state) => state.Profile);
+  const onlineUsers = useSelector((state) => state.OnlineUsers);
+  const messages = useSelector((state) => state.Messages.messages);
   const [asTypist, setAsTypist] = useState(true);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
   const handleSendMessage = () => {
-    if (!messages.find(x => x.id === user.id)) {
+    if (!messages.find((x) => x.id === user.id)) {
       dispatch(
         Messages({
           id: user.id,
@@ -54,7 +54,7 @@ const OthersProfile = () => {
 
   useEffect(() => {
     UserProfile({ id: user.id })
-      .then(res => {
+      .then((res) => {
         setLoading(false);
         setData({
           typistSuccessfulProjects: res.typist_successful_projects,
@@ -67,7 +67,7 @@ const OthersProfile = () => {
           userLastLogin: res.last_login,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
         handleErrors(err);
       });
@@ -97,7 +97,13 @@ const OthersProfile = () => {
             }
           />
         ) : (
-          <i className="icon profile-pic-default profile-pic" />
+          <i
+            className={`icon profile-pic-default profile-pic ${
+              getUserTimeStatus(onlineUsers, user.id, data.userIsOnline)
+                ? "is-online"
+                : ""
+            }`}
+          />
         )}
         <p className="profile-displayname">{user.displayname}</p>
         {!loading && (
@@ -120,7 +126,7 @@ const OthersProfile = () => {
                 ) : (
                   <Moment fromNow locale="fa">
                     {
-                      onlineUsers.lastLogins.find(x => x.id === user.id)
+                      onlineUsers.lastLogins.find((x) => x.id === user.id)
                         .lastLogin
                     }
                   </Moment>

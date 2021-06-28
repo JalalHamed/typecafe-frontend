@@ -13,6 +13,12 @@
     height: 200px;
   }
 
+  &.profile-pic-70 {
+    content: url("../svgs/profile-pic.svg");
+    width: 70px;
+    height: 70px;
+  }
+
   &.project-client-default-pic {
     content: url("../svgs/profile-pic.svg");
     width: 50px;

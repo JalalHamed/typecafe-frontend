@@ -16,7 +16,7 @@ import { baseURL } from "components/xhr";
 
 const WaitingForTypedFile = ({ offer }) => {
   const dispatch = useDispatch();
-  const onlineUsers = useSelector(state => state.OnlineUsers);
+  const onlineUsers = useSelector((state) => state.OnlineUsers);
 
   const openProfile = () => {
     dispatch(
@@ -33,10 +33,25 @@ const WaitingForTypedFile = ({ offer }) => {
     <div className="waiting-wrapper">
       <div className="user-wrapper">
         {!!offer.typist_image ? (
-          <img
-            src={baseURL + offer.typist_image}
-            alt="profile-pic"
-            className={`profile-picture ${
+          <>
+            <img
+              src={baseURL + offer.typist_image}
+              alt="profile-pic"
+              className={`profile-picture ${
+                getUserTimeStatus(
+                  onlineUsers,
+                  offer.typist_id,
+                  offer.typist_is_online
+                )
+                  ? "is-online"
+                  : ""
+              }`}
+              onClick={openProfile}
+            />
+          </>
+        ) : (
+          <i
+            className={`icon profile-pic-70 profile-picture ${
               getUserTimeStatus(
                 onlineUsers,
                 offer.typist_id,
@@ -47,8 +62,6 @@ const WaitingForTypedFile = ({ offer }) => {
             }`}
             onClick={openProfile}
           />
-        ) : (
-          <i />
         )}
         <p className="username" onClick={openProfile}>
           {offer.typist}
@@ -80,7 +93,7 @@ const WaitingForTypedFile = ({ offer }) => {
               ) : (
                 <Moment fromNow locale="fa">
                   {
-                    onlineUsers.lastLogins.find(x => x.id === offer.typist_id)
+                    onlineUsers.lastLogins.find((x) => x.id === offer.typist_id)
                       .lastLogin
                   }
                 </Moment>
