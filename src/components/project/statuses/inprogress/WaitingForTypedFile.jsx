@@ -5,7 +5,8 @@ import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import { getUserTimeStatus, lastSeen } from "components/helper";
+// import Button from "components/buttons/Button";
+import { getUserTimeStatus, lastSeen, priceFormat } from "components/helper";
 
 // Actions
 import { Profile } from "redux/actions";
@@ -31,20 +32,24 @@ const WaitingForTypedFile = ({ offer }) => {
   return (
     <div className="waiting-wrapper">
       <div className="user-wrapper">
-        <img
-          src={baseURL + offer.typist_image}
-          alt="profile-pic"
-          className={`profile-picture ${
-            getUserTimeStatus(
-              onlineUsers,
-              offer.typist_id,
-              offer.typist_is_online
-            )
-              ? "is-online"
-              : ""
-          }`}
-          onClick={openProfile}
-        />
+        {!!offer.typist_image ? (
+          <img
+            src={baseURL + offer.typist_image}
+            alt="profile-pic"
+            className={`profile-picture ${
+              getUserTimeStatus(
+                onlineUsers,
+                offer.typist_id,
+                offer.typist_is_online
+              )
+                ? "is-online"
+                : ""
+            }`}
+            onClick={openProfile}
+          />
+        ) : (
+          <i />
+        )}
         <p className="username" onClick={openProfile}>
           {offer.typist}
         </p>
@@ -83,6 +88,16 @@ const WaitingForTypedFile = ({ offer }) => {
             </span>
           )}
         </p>
+      </div>
+      <div className="offer-details">
+        <div>
+          <p className="title">قیمت پیشنهادی</p>
+          <p>&nbsp;&nbsp;{priceFormat(offer.offered_price)}</p>
+        </div>
+        <div style={{ marginRight: "20px" }}>
+          <p className="title">قیمت کل</p>
+          <p>&nbsp;&nbsp;{priceFormat(offer.total_price)}</p>
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ const InProgress = ({ project }) => {
   const offers = useSelector(state => state.Offers.offers);
   const offered = offereds.find(x => x.project === project.id);
   const offer = offers.find(x => x.project === project.id);
+  const [width, setWidth] = useState(window.innerWidth);
   const [deadline, setDeadline] = useState(null);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -76,11 +77,22 @@ const InProgress = ({ project }) => {
     // eslint-disable-next-line
   }, [deadline, offered, offer, project]);
 
+  useEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    return () => {
+      window.removeEventListener("resize", () => setWidth(window.innerWidth));
+    };
+
+    // eslint-disable-next-line
+  }, [width]);
+
   return (
     <>
       {user.id === project.client_id || offered ? (
         <div className="in-progress-wrapper">
-          <div className="time-left-wrapper">
+          <div
+            className={`time-left-wrapper  ${width < 1500 ? "less-right" : ""}`}
+          >
             {!!hours && (
               <>
                 <p className="time-digit">{farsiNumber(hours)}</p>
@@ -93,8 +105,12 @@ const InProgress = ({ project }) => {
                 <p className="time-title">دقیقه</p>
               </>
             )}
-            <p className="time-digit">{farsiNumber(seconds)}</p>
-            <p className="time-title">ثانیه</p>
+            {!!seconds && (
+              <>
+                <p className="time-digit">{farsiNumber(seconds)}</p>
+                <p className="time-title">ثانیه</p>
+              </>
+            )}
           </div>
           {offered && <UploadTypedFile />}
           {user.id === project.client_id && offer && (
