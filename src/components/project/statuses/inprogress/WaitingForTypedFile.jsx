@@ -5,7 +5,6 @@ import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-// import Button from "components/buttons/Button";
 import { getUserTimeStatus, lastSeen, priceFormat } from "components/helper";
 
 // Actions
