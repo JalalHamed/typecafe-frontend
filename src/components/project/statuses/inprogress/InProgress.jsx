@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Libraries
 import { useSelector } from "react-redux";
@@ -10,16 +10,16 @@ import { remainingTime, farsiNumber } from "components/helper";
 import { Skewloader } from "components/loader";
 
 const InProgress = ({ project }) => {
-  const user = useSelector(state => state.User);
-  const offereds = useSelector(state => state.Offers.offereds);
-  const offers = useSelector(state => state.Offers.offers);
-  const offered = offereds.find(x => x.project === project.id);
-  const offer = offers.find(x => x.project === project.id);
+  const hours = useRef(0);
+  const minutes = useRef(0);
+  const seconds = useRef(0);
+  const user = useSelector((state) => state.User);
+  const offereds = useSelector((state) => state.Offers.offereds);
+  const offers = useSelector((state) => state.Offers.offers);
+  const offered = offereds.find((x) => x.project === project.id);
+  const offer = offers.find((x) => x.project === project.id);
   const [width, setWidth] = useState(window.innerWidth);
   const [deadline, setDeadline] = useState(null);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     if (offered)
@@ -34,13 +34,14 @@ const InProgress = ({ project }) => {
         remainingTime(offer?.typist_ready, project.delivery_deadline * 60 * 60)
       );
     if (deadline && deadline > 0) {
-      setHours(parseInt(deadline / 3600));
-      setMinutes(parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60));
-      setSeconds(
-        deadline -
-          parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60) * 60 -
-          parseInt(deadline / 3600) * 3600
+      hours.current = parseInt(deadline / 3600);
+      minutes.current = parseInt(
+        (deadline - parseInt(deadline / 3600) * 3600) / 60
       );
+      seconds.current =
+        deadline -
+        parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60) * 60 -
+        parseInt(deadline / 3600) * 3600;
     }
     let interval = setInterval(() => {
       if (deadline > 0) {
@@ -58,15 +59,15 @@ const InProgress = ({ project }) => {
               project.delivery_deadline * 60 * 60
             )
           );
-        setHours(parseInt(deadline / 3600));
-        setMinutes(
-          parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60)
+        hours.current = parseInt(deadline / 3600);
+        minutes.current = parseInt(
+          (deadline - parseInt(deadline / 3600) * 3600) / 60
         );
-        setSeconds(
+
+        seconds.current =
           deadline -
-            parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60) * 60 -
-            parseInt(deadline / 3600) * 3600
-        );
+          parseInt((deadline - parseInt(deadline / 3600) * 3600) / 60) * 60 -
+          parseInt(deadline / 3600) * 3600;
       } else {
         clearInterval(interval);
       }
@@ -93,21 +94,21 @@ const InProgress = ({ project }) => {
           <div
             className={`time-left-wrapper  ${width < 1500 ? "less-right" : ""}`}
           >
-            {!!hours && (
+            {Boolean(hours.current) && (
               <>
-                <p className="time-digit">{farsiNumber(hours)}</p>
+                <p className="time-digit">{farsiNumber(hours.current)}</p>
                 <p className="time-title">ساعت</p>
               </>
             )}
-            {!!minutes && (
+            {Boolean(minutes.current) && (
               <>
-                <p className="time-digit">{farsiNumber(minutes)}</p>
+                <p className="time-digit">{farsiNumber(minutes.current)}</p>
                 <p className="time-title">دقیقه</p>
               </>
             )}
-            {!!seconds && (
+            {Boolean(seconds.current) && (
               <>
-                <p className="time-digit">{farsiNumber(seconds)}</p>
+                <p className="time-digit">{farsiNumber(seconds.current)}</p>
                 <p className="time-title">ثانیه</p>
               </>
             )}
