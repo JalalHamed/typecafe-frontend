@@ -94,19 +94,19 @@ const InProgress = ({ project }) => {
           <div
             className={`time-left-wrapper  ${width < 1500 ? "less-right" : ""}`}
           >
-            {Boolean(hours.current) && (
+            {!!hours.current && (
               <>
                 <p className="time-digit">{farsiNumber(hours.current)}</p>
                 <p className="time-title">ساعت</p>
               </>
             )}
-            {Boolean(minutes.current) && (
+            {!!minutes.current && (
               <>
                 <p className="time-digit">{farsiNumber(minutes.current)}</p>
                 <p className="time-title">دقیقه</p>
               </>
             )}
-            {Boolean(seconds.current) && (
+            {!!seconds.current && (
               <>
                 <p className="time-digit">{farsiNumber(seconds.current)}</p>
                 <p className="time-title">ثانیه</p>
