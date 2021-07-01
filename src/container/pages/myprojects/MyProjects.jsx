@@ -25,43 +25,53 @@ const Projects = () => {
 
   return (
     <div className="my-projects-wrapper">
-      {!!myprojects.length && (
-        <>
-          <p className="mp-title">پروژه ها</p>
-          <div className="mp-counter">({farsiNumber(myprojects.length)})</div>
-          {myprojects.map(project => {
-            return <Project key={project.id} project={project} />;
-          })}
-        </>
-      )}
-      {!!offereds.length && (
-        <>
-          <p className="mp-title">پیشنهادها</p>
-          <div className="mp-counter">({farsiNumber(offereds.length)})</div>
-          {offereds.map(offer => {
-            let project = projects.find(x => x.id === offer.project);
-            return <Project key={project.id} project={project} />;
-          })}
-        </>
-      )}
-      {loading && (
+      {loading ? (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
-      )}
-      {!loading && !myprojects.length && !offereds.length && (
-        <div className="middle-of-the-page">
-          <p className="no-project-note">
-            هنوز پروژه یا پیشنهادی ثبت نکرده اید.
-          </p>
-          <RippleWrapper
-            ref={AddProjectRef}
-            className="add-a-project-wrapper no-select"
-            onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
-          >
-            <p className="add-a-project-right-now">یک پروژه ثبت کنید</p>
-          </RippleWrapper>
-        </div>
+      ) : (
+        <>
+          {!myprojects.length && !offereds.length ? (
+            <div className="middle-of-the-page">
+              <p className="no-project-note">
+                هنوز پروژه یا پیشنهادی ثبت نکرده اید.
+              </p>
+              <RippleWrapper
+                ref={AddProjectRef}
+                className="add-a-project-wrapper no-select"
+                onClick={() => dispatch(CreateProject({ isModalOpen: true }))}
+              >
+                <p className="add-a-project-right-now">یک پروژه ثبت کنید</p>
+              </RippleWrapper>
+            </div>
+          ) : (
+            <>
+              {!!offereds.length && (
+                <>
+                  <p className="mp-title">پیشنهادها</p>
+                  <div className="mp-counter">
+                    ({farsiNumber(offereds.length)})
+                  </div>
+                  {offereds.map(offer => {
+                    let project = projects.find(x => x.id === offer.project);
+                    return <Project key={project.id} project={project} />;
+                  })}
+                </>
+              )}
+              {!!myprojects.length && (
+                <>
+                  <p className="mp-title">پروژه ها</p>
+                  <div className="mp-counter">
+                    ({farsiNumber(myprojects.length)})
+                  </div>
+                  {myprojects.map(project => {
+                    return <Project key={project.id} project={project} />;
+                  })}
+                </>
+              )}
+            </>
+          )}
+        </>
       )}
     </div>
   );

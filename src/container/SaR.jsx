@@ -359,6 +359,10 @@ const SocketsAndRequests = () => {
             })
           );
           if (
+            state.Projects.myprojects.find(x => x.client_id === state.User.id)
+          )
+            dispatch(actions.MyProjectInProgress({ id: data.rpoject }));
+          if (
             state.Projects.projects.find(x => x.client_id === state.User.id)
           ) {
             dispatch(

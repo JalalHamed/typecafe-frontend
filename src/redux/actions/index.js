@@ -193,3 +193,10 @@ export const TypistReady = payload => {
     payload,
   };
 };
+
+export const MyProjectInProgress = payload => {
+  return {
+    type: "MY_PROJECT_IN_PROGRESS",
+    payload,
+  };
+};

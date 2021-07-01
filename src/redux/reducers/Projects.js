@@ -23,6 +23,16 @@ const Projects = (state = initialState, action) => {
           return project;
         }),
       };
+    case "MY_PROJECT_IN_PROGRESS":
+      return {
+        ...state,
+        myprojects: state.projects.map(project => {
+          if (project.id === action.payload.id) {
+            project.status = "IP";
+          }
+          return project;
+        }),
+      };
     default:
       return state;
   }
