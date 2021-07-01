@@ -13,7 +13,6 @@ const InProgress = ({ project }) => {
   const hours = useRef(0);
   const minutes = useRef(0);
   const seconds = useRef(0);
-  const user = useSelector(state => state.User);
   const offereds = useSelector(state => state.Offers.offereds);
   const offers = useSelector(state => state.Offers.offers);
   const offered = offereds.find(x => x.project === project.id);
@@ -24,15 +23,14 @@ const InProgress = ({ project }) => {
   useEffect(() => {
     if (offered)
       setDeadline(
-        remainingTime(
-          offered?.typist_ready,
-          project.delivery_deadline * 60 * 60
-        )
+        remainingTime(offered.typist_ready, project.delivery_deadline * 60 * 60)
       );
-    if (user.id === project.client_id)
-      setDeadline(
-        remainingTime(offer?.typist_ready, project.delivery_deadline * 60 * 60)
-      );
+    if (offer)
+      setTimeout(() => {
+        setDeadline(
+          remainingTime(offer.typist_ready, project.delivery_deadline * 60 * 60)
+        );
+      }, 0);
     if (deadline && deadline > 0) {
       hours.current = parseInt(deadline / 3600);
       minutes.current = parseInt(
@@ -88,7 +86,7 @@ const InProgress = ({ project }) => {
 
   return (
     <>
-      {user.id === project.client_id || offered ? (
+      {offer || offered ? (
         <div className="in-progress-wrapper">
           <div
             className={`time-left-wrapper  ${width < 1500 ? "less-right" : ""}`}
@@ -113,9 +111,7 @@ const InProgress = ({ project }) => {
             )}
           </div>
           {offered && <UploadTypedFile />}
-          {user.id === project.client_id && offer && (
-            <WaitingForTypedFile offer={offer} />
-          )}
+          {offer && <WaitingForTypedFile offer={offer} />}
         </div>
       ) : (
         <Skewloader color="#fca636" />
