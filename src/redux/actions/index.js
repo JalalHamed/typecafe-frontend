@@ -82,13 +82,6 @@ export const ProjectsAction = payload => {
   };
 };
 
-export const ProjectInProgress = payload => {
-  return {
-    type: "PROJECT_IN_PROGRESS",
-    payload,
-  };
-};
-
 export const OffersAction = payload => {
   return {
     type: "OFFERS",
@@ -194,9 +187,16 @@ export const TypistReady = payload => {
   };
 };
 
-export const MyProjectInProgress = payload => {
+export const ChangeProjectStatus = payload => {
   return {
-    type: "MY_PROJECT_IN_PROGRESS",
+    type: "CHANGE_PROJECT_STATUS",
+    payload,
+  };
+};
+
+export const ChangeMyProjectStatus = payload => {
+  return {
+    type: "CHANGE_MY_PROJECT_STATUS",
     payload,
   };
 };

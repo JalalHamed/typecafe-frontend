@@ -38,7 +38,7 @@ const TheClientAccept = () => {
       .then(res => {
         socket.send(
           JSON.stringify({
-            status: "in-progress",
+            status: "project-in-progress",
             project: data.project,
             typist: user.id,
             typist_ready: res,

@@ -13,22 +13,22 @@ const Projects = (state = initialState, action) => {
   switch (action.type) {
     case "PROJECTS":
       return { ...state, ...action.payload };
-    case "PROJECT_IN_PROGRESS":
+    case "CHANGE_PROJECT_STATUS":
       return {
         ...state,
         projects: state.projects.map(project => {
           if (project.id === action.payload.id) {
-            project.status = "I";
+            project.status = action.payload.status;
           }
           return project;
         }),
       };
-    case "MY_PROJECT_IN_PROGRESS":
+    case "CHANGE_MY_PROJECT_STATUS":
       return {
         ...state,
         myprojects: state.projects.map(project => {
           if (project.id === action.payload.id) {
-            project.status = "I";
+            project.status = action.payload.status;
           }
           return project;
         }),

@@ -352,16 +352,19 @@ const SocketsAndRequests = () => {
               actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
             );
           break;
-        case "in-progress":
+        case "project-in-progress":
           dispatch(
-            actions.ProjectInProgress({
+            actions.ChangeProjectStatus({
               id: data.project,
+              status: "I",
             })
           );
           if (
             state.Projects.myprojects.find(x => x.client_id === state.User.id)
           )
-            dispatch(actions.MyProjectInProgress({ id: data.rpoject }));
+            dispatch(
+              actions.ChangeMyProjectStatus({ id: data.rpoject, status: "I" })
+            );
           if (
             state.Projects.projects.find(x => x.client_id === state.User.id)
           ) {
