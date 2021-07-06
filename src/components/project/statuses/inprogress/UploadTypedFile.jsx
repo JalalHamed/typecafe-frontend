@@ -10,13 +10,16 @@ import Close from "components/buttons/Close";
 import Input from "components/inputs/Input";
 import { fileNameFilter, farsiNumber } from "components/helper";
 
+// Requests
+import { Deliver } from "requests";
+
 // Actions
 import { Sidebar, RulesScrollTo } from "redux/actions";
 
 // Designs
 import "./inprogress.scss";
 
-const UploadTypedFile = () => {
+const UploadTypedFile = ({ project }) => {
   const dispatch = useDispatch();
   const uploadRef = useRef();
   const uploadInputRef = useRef();
@@ -37,6 +40,16 @@ const UploadTypedFile = () => {
       setBadFormat(true);
       toast.error("فرمت فایل انتخاب شده صحیح نمی‌باشد.");
     }
+  };
+
+  const handleSubmit = () => {
+    let body = new FormData();
+    body.append("project", project.id);
+    body.append("file", file);
+    body.append("number_of_pages", numberOfPages);
+    Deliver(body)
+      .then(res => console.log(res))
+      .catch(err => toast.error(err));
   };
 
   useEffect(() => {
@@ -141,6 +154,7 @@ const UploadTypedFile = () => {
               title="تحویل"
               className="fit-width green no-break submit"
               disabled={err}
+              onClick={handleSubmit}
             />
           </div>
           {err && (

@@ -105,6 +105,14 @@ export const Downloaded = body => {
   return axios.post("downloaded/", body).then(res => res.data);
 };
 
+export const Deliver = body => {
+  return axios
+    .post("deliver/", body, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then(res => res.data);
+};
+
 // Messages
 export const GetMessages = () => {
   return axios.get("messages/").then(res => res.data);

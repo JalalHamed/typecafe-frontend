@@ -18,7 +18,7 @@ const Projects = (state = initialState, action) => {
         ...state,
         projects: state.projects.map(project => {
           if (project.id === action.payload.id) {
-            project.status = "IP";
+            project.status = "I";
           }
           return project;
         }),
@@ -28,7 +28,7 @@ const Projects = (state = initialState, action) => {
         ...state,
         myprojects: state.projects.map(project => {
           if (project.id === action.payload.id) {
-            project.status = "IP";
+            project.status = "I";
           }
           return project;
         }),

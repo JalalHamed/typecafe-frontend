@@ -110,7 +110,7 @@ const InProgress = ({ project }) => {
               </>
             )}
           </div>
-          {offered && <UploadTypedFile />}
+          {offered && <UploadTypedFile project={project} />}
           {offer && <WaitingForTypedFile offer={offer} />}
         </div>
       ) : (

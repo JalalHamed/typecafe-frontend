@@ -11,6 +11,7 @@ import { farsiNumber, getUserTimeStatus, lastSeen } from "components/helper";
 import HintArrow from "./HintArrow";
 import Open from "./statuses/open/Open";
 import InProgress from "./statuses/inprogress/InProgress";
+import Delivered from "./statuses/delivered/Delivered";
 
 // Requests
 import { Downloaded } from "requests";
@@ -55,8 +56,8 @@ const TheProject = ({ project }) => {
   return (
     <div
       className={`project-wrapper ${
-        project.status === "IP" ? "pw-in-progress" : ""
-      }`}
+        project.status === "I" ? "pw-in-progress" : ""
+      } ${project.status === "D" ? "pw-delivered" : ""}`}
     >
       <div className="right">
         <div className="client-wrapper">
@@ -162,7 +163,7 @@ const TheProject = ({ project }) => {
           ref={downloadFileRef}
           title="دانلود فایل پروژه"
           className={`fit-width ${
-            project.status === "IP" &&
+            project.status === "I" &&
             user.id !== project.client_id &&
             !offereds.find(x => x.project === project.id)
               ? "download-project-orange"
@@ -171,7 +172,7 @@ const TheProject = ({ project }) => {
           onClick={handleDownloaded}
           disabled={
             !user.isLoggedIn ||
-            (project.status === "IP" &&
+            (project.status === "I" &&
               user.id !== project.client_id &&
               !offereds.find(x => x.project === project.id))
           }
@@ -189,7 +190,8 @@ const TheProject = ({ project }) => {
       </div>
       <div className="left">
         {project.status === "O" && <Open project={project} />}
-        {project.status === "IP" && <InProgress project={project} />}
+        {project.status === "I" && <InProgress project={project} />}
+        {project.status === "D" && <Delivered project={project} />}
         {offereds.find(offer => offer.project === project.id)?.status ===
           "A" && (
           <div className="hint-arrow-wrapper">
@@ -210,13 +212,14 @@ const TheProject = ({ project }) => {
       <div className="bottom-left">
         <p
           className={`project-status ${
-            project.status === "IP" ? "ps-in-progress" : ""
-          }`}
+            project.status === "I" ? "ps-in-progress" : ""
+          } ${project.status === "D" ? "ps-delivered" : ""}`}
         >
           <span style={{ color: "#555", fontSize: "11px" }}>وضعیت پروژه</span>
           &nbsp;&nbsp;
           {project.status === "O" && <span>باز</span>}
-          {project.status === "IP" && <span>در دست اجرا</span>}
+          {project.status === "I" && <span>در دست اجرا</span>}
+          {project.status === "D" && <span>تحویل داده شده</span>}
         </p>
       </div>
       <div className="project-id">
