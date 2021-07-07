@@ -361,13 +361,10 @@ const SocketsAndRequests = () => {
           );
           if (
             state.Projects.myprojects.find(x => x.client_id === state.User.id)
-          )
-            dispatch(
-              actions.ChangeMyProjectStatus({ id: data.rpoject, status: "I" })
-            );
-          if (
-            state.Projects.projects.find(x => x.client_id === state.User.id)
           ) {
+            dispatch(
+              actions.ChangeMyProjectStatus({ id: data.project, status: "I" })
+            );
             dispatch(
               actions.User({ credit: state.User.credit - data.total_price })
             );
@@ -379,20 +376,27 @@ const SocketsAndRequests = () => {
                 {priceFormat(data.total_price)}
               </>
             );
-          }
-          if (state.Offers.offers.find(x => x.project === data.project))
             dispatch(
               actions.TypistReady({
                 project: data.project,
                 typist_ready: data.typist_ready,
               })
             );
+          }
           if (
             state.Offers.offers.find(
               x => x.typist_id === data.typist && x.project !== data.project
             )
           )
             dispatch(actions.RemoveBusyTypistOffer({ id: data.typist }));
+          break;
+        case "project-delivered":
+          dispatch(
+            actions.ChangeProjectStatus({
+              id: data.project,
+              status: "D",
+            })
+          );
           break;
         default:
           break;

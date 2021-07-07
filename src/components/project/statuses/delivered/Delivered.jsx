@@ -1,9 +1,9 @@
 import React from "react";
 
-const Delivered = () => {
+const Delivered = ({ project }) => {
   return (
     <div>
-      <p>haji</p>
+      <i className="icon icon-check-green-large" />
     </div>
   );
 };

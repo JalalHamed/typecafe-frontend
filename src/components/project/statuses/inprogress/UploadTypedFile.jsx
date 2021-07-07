@@ -11,6 +11,7 @@ import Input from "components/inputs/Input";
 import { fileNameFilter, farsiNumber } from "components/helper";
 
 // Requests
+import socket from "requests/socket";
 import { Deliver } from "requests";
 
 // Actions
@@ -48,7 +49,17 @@ const UploadTypedFile = ({ project }) => {
     body.append("file", file);
     body.append("number_of_pages", numberOfPages);
     Deliver(body)
-      .then(res => console.log(res))
+      .then(res => {
+        socket.send(
+          JSON.stringify({
+            status: "project-delivered",
+            project: project.id,
+          })
+        );
+        toast.success(
+          <>پروژه با شناسه {farsiNumber(project.id)} با موفقیت تحویل داده شد.</>
+        );
+      })
       .catch(err => toast.error(err));
   };
 
