@@ -1,22 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 
-// Libraries
-import { useSelector } from "react-redux";
-
 // Components
 import UploadTypedFile from "./UploadTypedFile";
 import WaitingForTypedFile from "./WaitingForTypedFile";
 import { remainingTime, farsiNumber } from "components/helper";
 import { Skewloader } from "components/loader";
 
-const InProgress = ({ project }) => {
+const InProgress = ({ project, offer, offered }) => {
   const hours = useRef(0);
   const minutes = useRef(0);
   const seconds = useRef(0);
-  const offereds = useSelector(state => state.Offers.offereds);
-  const offers = useSelector(state => state.Offers.offers);
-  const offered = offereds.find(x => x.project === project.id);
-  const offer = offers.find(x => x.project === project.id);
   const [width, setWidth] = useState(window.innerWidth);
   const [deadline, setDeadline] = useState(null);
 

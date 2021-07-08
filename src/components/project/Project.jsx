@@ -33,6 +33,13 @@ const TheProject = ({ project }) => {
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
   const offereds = useSelector(state => state.Offers.offereds);
+  const offers = useSelector(state => state.Offers.offers);
+  const offered = offereds.find(
+    x => x.project === project.id && (x.status === "ACC" || x.status === "END")
+  );
+  const offer = offers.find(
+    x => x.project === project.id && (x.status === "ACC" || x.status === "END")
+  );
 
   const handleDownloaded = () => {
     window.open(project.file, "_self");
@@ -190,8 +197,12 @@ const TheProject = ({ project }) => {
       </div>
       <div className="left">
         {project.status === "O" && <Open project={project} />}
-        {project.status === "I" && <InProgress project={project} />}
-        {project.status === "D" && <Delivered project={project} />}
+        {project.status === "I" && (
+          <InProgress project={project} offer={offer} offered={offered} />
+        )}
+        {project.status === "D" && (
+          <Delivered project={project} offer={offer} offered={offered} />
+        )}
         {offereds.find(offer => offer.project === project.id)?.status ===
           "A" && (
           <div className="hint-arrow-wrapper">

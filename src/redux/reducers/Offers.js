@@ -16,6 +16,16 @@ const Offers = (state = initialState, action) => {
           offer => offer.project !== action.payload.id
         ),
       };
+    case "CHANGE_OFFER_STATUS":
+      return {
+        ...state,
+        offers: state.offers.map(offer => {
+          if (offer.id === action.payload.id) {
+            offer.status = action.payload.status;
+          }
+          return offer;
+        }),
+      };
     case "CHANGE_OFFERED_STATUS":
       return {
         ...state,
@@ -26,27 +36,36 @@ const Offers = (state = initialState, action) => {
           return offer;
         }),
       };
-    case "REMOVE_BUSY_TYPIST_OFFER":
+    case "REMOVE_NOT_ACCEPTED_OFFEREDS":
+      return {
+        ...state,
+        offereds: state.offereds.filter(
+          offer => offer.project === action.payload.project
+        ),
+      };
+    case "REMOVE_NOT_ACCEPTED_OFFERS":
       return {
         ...state,
         offers: state.offers.filter(
-          offer => offer.typist_id !== action.payload.id
+          offer =>
+            offer.project !== action.payload.project ||
+            offer.id === action.payload.offer
         ),
       };
-    case "ADD_OFFERED_TYPIST_READY_TIME":
+    case "ADD_OFFER_TYPIST_READY_TIME":
       return {
         ...state,
-        offereds: state.offereds.map(offer => {
+        offers: state.offers.map(offer => {
           if (offer.project === action.payload.project) {
             offer.typist_ready = action.payload.typist_ready;
           }
           return offer;
         }),
       };
-    case "TYPIST_READY":
+    case "ADD_OFFERED_TYPIST_READY_TIME":
       return {
         ...state,
-        offers: state.offers.map(offer => {
+        offereds: state.offereds.map(offer => {
           if (offer.project === action.payload.project) {
             offer.typist_ready = action.payload.typist_ready;
           }

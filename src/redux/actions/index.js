@@ -68,13 +68,6 @@ export const RemoveDeletedProjectOffer = payload => {
   };
 };
 
-export const RemoveBusyTypistOffer = payload => {
-  return {
-    type: "REMOVE_BUSY_TYPIST_OFFER",
-    payload,
-  };
-};
-
 export const ProjectsAction = payload => {
   return {
     type: "PROJECTS",
@@ -180,9 +173,9 @@ export const AddOfferedTypistReadyTime = payload => {
   };
 };
 
-export const TypistReady = payload => {
+export const AddOfferTypistReadyTime = payload => {
   return {
-    type: "TYPIST_READY",
+    type: "ADD_OFFER_TYPIST_READY_TIME",
     payload,
   };
 };
@@ -197,6 +190,27 @@ export const ChangeProjectStatus = payload => {
 export const ChangeMyProjectStatus = payload => {
   return {
     type: "CHANGE_MY_PROJECT_STATUS",
+    payload,
+  };
+};
+
+export const RemoveNotAcceptedOffereds = payload => {
+  return {
+    type: "REMOVE_NOT_ACCEPTED_OFFEREDS",
+    payload,
+  };
+};
+
+export const ChangeOfferStatus = payload => {
+  return {
+    type: "CHANGE_OFFER_STATUS",
+    payload,
+  };
+};
+
+export const RemoveNotAcceptedOffers = payload => {
+  return {
+    type: "REMOVE_NOT_ACCEPTED_OFFERS",
     payload,
   };
 };

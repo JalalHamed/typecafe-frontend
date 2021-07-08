@@ -1,9 +1,13 @@
 import React from "react";
 
-const Delivered = ({ project }) => {
+const Delivered = ({ project, offer, offered }) => {
   return (
     <div>
-      <i className="icon icon-check-green-large" />
+      {offer || offered ? (
+        <>one the owners</>
+      ) : (
+        <i className="icon icon-check-green-large" />
+      )}
     </div>
   );
 };

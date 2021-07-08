@@ -360,10 +360,26 @@ const SocketsAndRequests = () => {
             })
           );
           if (
-            state.Projects.myprojects.find(x => x.client_id === state.User.id)
+            state.Offers.offers.find(
+              offer =>
+                offer.typist_id === data.typist &&
+                offer.project !== data.project
+            )
+          ) {
+            console.log("haji");
+          }
+          if (
+            state.Projects.myprojects.find(
+              project =>
+                project.id === data.project &&
+                project.client_id === state.User.id
+            )
           ) {
             dispatch(
               actions.ChangeMyProjectStatus({ id: data.project, status: "I" })
+            );
+            dispatch(
+              actions.ChangeOfferStatus({ id: data.offer, status: "ACC" })
             );
             dispatch(
               actions.User({ credit: state.User.credit - data.total_price })
@@ -376,19 +392,25 @@ const SocketsAndRequests = () => {
                 {priceFormat(data.total_price)}
               </>
             );
+            if (
+              state.Offers.offers.find(
+                offer =>
+                  offer.project === data.project && offer.id !== data.offer
+              )
+            )
+              dispatch(
+                actions.RemoveNotAcceptedOffers({
+                  project: data.project,
+                  offer: data.offer,
+                })
+              );
             dispatch(
-              actions.TypistReady({
+              actions.AddOfferTypistReadyTime({
                 project: data.project,
                 typist_ready: data.typist_ready,
               })
             );
           }
-          if (
-            state.Offers.offers.find(
-              x => x.typist_id === data.typist && x.project !== data.project
-            )
-          )
-            dispatch(actions.RemoveBusyTypistOffer({ id: data.typist }));
           break;
         case "project-delivered":
           dispatch(

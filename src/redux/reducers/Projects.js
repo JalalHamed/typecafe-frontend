@@ -26,7 +26,7 @@ const Projects = (state = initialState, action) => {
     case "CHANGE_MY_PROJECT_STATUS":
       return {
         ...state,
-        myprojects: state.projects.map(project => {
+        myprojects: state.myprojects.map(project => {
           if (project.id === action.payload.id) {
             project.status = action.payload.status;
           }
