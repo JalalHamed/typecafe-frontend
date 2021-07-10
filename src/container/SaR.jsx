@@ -362,12 +362,25 @@ const SocketsAndRequests = () => {
           if (
             state.Offers.offers.find(
               offer =>
-                offer.typist_id === data.typist &&
-                offer.project !== data.project
+                offer.project !== data.project &&
+                offer.typist_id === data.typist
             )
-          ) {
-            console.log("haji");
-          }
+          )
+            dispatch(
+              actions.RemoveBusyTypistOffersOnOtherProjects({
+                typist: data.typist,
+                project: data.project,
+              })
+            );
+          if (
+            data.typist !== state.User.id &&
+            state.Offers.offereds.find(offer => offer.project === data.project)
+          )
+            dispatch(
+              actions.RemoveNotAcceptedOfferedsForOtherTypists({
+                project: data.project,
+              })
+            );
           if (
             state.Projects.myprojects.find(
               project =>
@@ -399,7 +412,7 @@ const SocketsAndRequests = () => {
               )
             )
               dispatch(
-                actions.RemoveNotAcceptedOffers({
+                actions.RemoveNotAcceptedOffersOnTheProject({
                   project: data.project,
                   offer: data.offer,
                 })

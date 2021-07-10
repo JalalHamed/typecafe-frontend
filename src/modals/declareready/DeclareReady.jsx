@@ -20,7 +20,7 @@ import {
   User,
   AddOfferedTypistReadyTime,
   ChangeOfferedStatus,
-  RemoveNotAcceptedOffereds,
+  RemoveAllOtherTypistsOffereds,
 } from "redux/actions";
 
 // Design
@@ -57,7 +57,7 @@ const TheClientAccept = () => {
         dispatch(ChangeOfferedStatus({ id: data.offer, status: "ACC" }));
         dispatch(User({ credit: user.credit - data.total_price }));
         if (offereds.find(offer => offer.project !== data.project))
-          dispatch(RemoveNotAcceptedOffereds({ project: data.project }));
+          dispatch(RemoveAllOtherTypistsOffereds({ project: data.project }));
         if (user.playSounds)
           dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
         dispatch(

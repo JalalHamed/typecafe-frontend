@@ -194,9 +194,9 @@ export const ChangeMyProjectStatus = payload => {
   };
 };
 
-export const RemoveNotAcceptedOffereds = payload => {
+export const RemoveAllOtherTypistsOffereds = payload => {
   return {
-    type: "REMOVE_NOT_ACCEPTED_OFFEREDS",
+    type: "REMOVE_ALL_OTHER_TYPISTS_OFFEREDS",
     payload,
   };
 };
@@ -208,9 +208,23 @@ export const ChangeOfferStatus = payload => {
   };
 };
 
-export const RemoveNotAcceptedOffers = payload => {
+export const RemoveNotAcceptedOffersOnTheProject = payload => {
   return {
-    type: "REMOVE_NOT_ACCEPTED_OFFERS",
+    type: "REMOVE_NOT_ACCEPTED_OFFERS_ON_THE_PROJECT",
+    payload,
+  };
+};
+
+export const RemoveBusyTypistOffersOnOtherProjects = payload => {
+  return {
+    type: "REMOVE_BUSY_TYPIST_OFFERS_ON_OTHER_PROJECTS",
+    payload,
+  };
+};
+
+export const RemoveNotAcceptedOfferedsForOtherTypists = payload => {
+  return {
+    type: "REMOVE_NOT_ACCEPTED_OFFEREDS_FOR_OTHER_TYPISTS",
     payload,
   };
 };

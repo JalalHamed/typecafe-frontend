@@ -36,20 +36,36 @@ const Offers = (state = initialState, action) => {
           return offer;
         }),
       };
-    case "REMOVE_NOT_ACCEPTED_OFFEREDS":
+    case "REMOVE_ALL_OTHER_TYPISTS_OFFEREDS":
       return {
         ...state,
         offereds: state.offereds.filter(
           offer => offer.project === action.payload.project
         ),
       };
-    case "REMOVE_NOT_ACCEPTED_OFFERS":
+    case "REMOVE_NOT_ACCEPTED_OFFERS_ON_THE_PROJECT":
       return {
         ...state,
         offers: state.offers.filter(
           offer =>
             offer.project !== action.payload.project ||
             offer.id === action.payload.offer
+        ),
+      };
+    case "REMOVE_BUSY_TYPIST_OFFERS_ON_OTHER_PROJECTS":
+      return {
+        ...state,
+        offers: state.offers.filter(
+          offer =>
+            offer.typist_id !== action.payload.typist ||
+            offer.project === action.payload.project
+        ),
+      };
+    case "REMOVE_NOT_ACCEPTED_OFFEREDS_FOR_OTHER_TYPISTS":
+      return {
+        ...state,
+        offereds: state.offereds.filter(
+          offered => offered.project !== action.payload.project
         ),
       };
     case "ADD_OFFER_TYPIST_READY_TIME":
