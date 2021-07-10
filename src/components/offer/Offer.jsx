@@ -43,6 +43,7 @@ const Offer = ({ offer, project, countdown }) => {
         id: offer.id,
         project_id: project.id,
         typist: offer.typist,
+        typist_id: offer.typist_id,
         typistImage: offer.typist_image,
         offeredPrice: offer.offered_price,
         totalPrice: offer.total_price,

@@ -3,6 +3,7 @@ let initialState = {
   id: null,
   project_id: null,
   typist: "",
+  typist_id: "",
   typistImage: "",
   offeredPrice: 0,
   totalPrice: 0,

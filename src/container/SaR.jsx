@@ -360,6 +360,11 @@ const SocketsAndRequests = () => {
             })
           );
           if (
+            state.AoROffer.isModalOpen &&
+            state.AoROffer.typist_id === data.typist
+          )
+            dispatch(actions.AoROfferAction({ isModalOpen: false }));
+          if (
             state.Offers.offers.find(
               offer =>
                 offer.project !== data.project &&
