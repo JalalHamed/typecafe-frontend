@@ -30,7 +30,7 @@ const SendOffer = ({ project }) => {
   const submitReqeustRef = useRef();
   const user = useSelector(state => state.User);
   const downloaded = useSelector(state => state.Projects.downloaded);
-  const offereds = useSelector(state => state.Offers.offereds);
+  const myoffers = useSelector(state => state.Offers.myoffers);
   const [errMsg, setErrMsg] = useState("");
   const [inputDisabled, setInputDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -58,7 +58,7 @@ const SendOffer = ({ project }) => {
         .then(() => {
           setLoading(false);
           dispatch(
-            OffersAction({ offereds: offereds.filter(x => x.id !== id) })
+            OffersAction({ myoffers: myoffers.filter(x => x.id !== id) })
           );
           socket.send(
             JSON.stringify({
@@ -101,7 +101,7 @@ const SendOffer = ({ project }) => {
   }, [price]);
 
   useEffect(() => {
-    let ownOffer = offereds.find(offer => offer.project === project.id);
+    let ownOffer = myoffers.find(offer => offer.project === project.id);
     if (ownOffer) {
       setOffer(ownOffer);
       if (
@@ -122,7 +122,7 @@ const SendOffer = ({ project }) => {
     }
 
     // eslint-disable-next-line
-  }, [offereds]);
+  }, [myoffers]);
 
   return (
     <>

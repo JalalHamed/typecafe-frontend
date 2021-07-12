@@ -158,7 +158,7 @@ const SocketsAndRequests = () => {
             .then(res =>
               dispatch(
                 actions.OffersAction({
-                  offereds: res,
+                  myoffers: res,
                   offeredsLoading: false,
                 })
               )
@@ -273,7 +273,7 @@ const SocketsAndRequests = () => {
               ),
             })
           );
-          if (state.Offers.offereds.find(x => x.project === data.id))
+          if (state.Offers.myoffers.find(x => x.project === data.id))
             dispatch(actions.RemoveDeletedProjectOffer({ id: data.id }));
           break;
         case "new-offer":
@@ -379,7 +379,7 @@ const SocketsAndRequests = () => {
             );
           if (
             data.typist !== state.User.id &&
-            state.Offers.offereds.find(offer => offer.project === data.project)
+            state.Offers.myoffers.find(offer => offer.project === data.project)
           )
             dispatch(
               actions.RemoveNotAcceptedOfferedsForOtherTypists({

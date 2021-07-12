@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -17,11 +17,17 @@ import "./myprojects.scss";
 
 const Projects = () => {
   const dispatch = useDispatch();
+  const AddProjectRef = useRef();
   const projects = useSelector(state => state.Projects.projects);
   const myprojects = useSelector(state => state.Projects.myprojects);
-  const offereds = useSelector(state => state.Offers.offereds);
+  const myoffers = useSelector(state => state.Offers.myoffers);
   const loading = useSelector(state => state.Projects.myprojectsloading);
-  const AddProjectRef = useRef();
+  const [delivereds, setDelivereds] = useState([]);
+
+  useEffect(() => {
+    let delivered = projects.filter(project => project.status === "DELIVERED");
+    if (delivered.length) setDelivereds(delivered);
+  }, [projects]);
 
   return (
     <div className="my-projects-wrapper">
@@ -31,7 +37,7 @@ const Projects = () => {
         </div>
       ) : (
         <>
-          {!myprojects.length && !offereds.length ? (
+          {!myprojects.length && !myoffers.length ? (
             <div className="middle-of-the-page">
               <p className="no-project-note">
                 هنوز پروژه یا پیشنهادی ثبت نکرده اید.
@@ -46,13 +52,13 @@ const Projects = () => {
             </div>
           ) : (
             <>
-              {!!offereds.length && (
+              {!!myoffers.length && (
                 <>
                   <p className="mp-title">پیشنهادها</p>
                   <div className="mp-counter">
-                    ({farsiNumber(offereds.length)})
+                    ({farsiNumber(myoffers.length)})
                   </div>
-                  {offereds.map(offer => {
+                  {myoffers.map(offer => {
                     let project = projects.find(x => x.id === offer.project);
                     return <Project key={project.id} project={project} />;
                   })}
@@ -65,6 +71,17 @@ const Projects = () => {
                     ({farsiNumber(myprojects.length)})
                   </div>
                   {myprojects.map(project => {
+                    return <Project key={project.id} project={project} />;
+                  })}
+                </>
+              )}
+              {!!delivereds.length && (
+                <>
+                  <p className="mp-title">تحویل داده شده ها</p>
+                  <div className="mp-counter">
+                    ({farsiNumber(delivereds.length)})
+                  </div>
+                  {delivereds.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}
                 </>

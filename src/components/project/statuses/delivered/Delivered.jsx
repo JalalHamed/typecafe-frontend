@@ -1,5 +1,8 @@
 import React from "react";
 
+// Designs
+import "./Delivered.scss";
+
 const Delivered = ({ project, offer, offered }) => {
   return (
     <div>

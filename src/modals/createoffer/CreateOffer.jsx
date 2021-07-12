@@ -66,8 +66,8 @@ const TheCreateOffer = () => {
           );
           dispatch(
             OffersAction({
-              offereds: [
-                ...state.Offers.offereds,
+              myoffers: [
+                ...state.Offers.myoffers,
                 {
                   project: project_id,
                   offered_price: pricePerPage,

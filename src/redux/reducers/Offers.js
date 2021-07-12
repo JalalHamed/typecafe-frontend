@@ -2,7 +2,7 @@ let initialState = {
   offersLoading: true,
   offeredsLoading: true,
   offers: [],
-  offereds: [],
+  myoffers: [],
 };
 
 const Offers = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const Offers = (state = initialState, action) => {
     case "REMOVE_DELETED_RPOJECT_OFFER":
       return {
         ...state,
-        offereds: state.offereds.filter(
+        myoffers: state.myoffers.filter(
           offer => offer.project !== action.payload.id
         ),
       };
@@ -29,7 +29,7 @@ const Offers = (state = initialState, action) => {
     case "CHANGE_OFFERED_STATUS":
       return {
         ...state,
-        offereds: state.offereds.map(offer => {
+        myoffers: state.myoffers.map(offer => {
           if (offer.id === action.payload.id) {
             offer.status = action.payload.status;
           }
@@ -39,7 +39,7 @@ const Offers = (state = initialState, action) => {
     case "REMOVE_ALL_OTHER_TYPISTS_OFFEREDS":
       return {
         ...state,
-        offereds: state.offereds.filter(
+        myoffers: state.myoffers.filter(
           offer => offer.project === action.payload.project
         ),
       };
@@ -64,7 +64,7 @@ const Offers = (state = initialState, action) => {
     case "REMOVE_NOT_ACCEPTED_OFFEREDS_FOR_OTHER_TYPISTS":
       return {
         ...state,
-        offereds: state.offereds.filter(
+        myoffers: state.myoffers.filter(
           offered => offered.project !== action.payload.project
         ),
       };
@@ -81,7 +81,7 @@ const Offers = (state = initialState, action) => {
     case "ADD_OFFERED_TYPIST_READY_TIME":
       return {
         ...state,
-        offereds: state.offereds.map(offer => {
+        myoffers: state.myoffers.map(offer => {
           if (offer.project === action.payload.project) {
             offer.typist_ready = action.payload.typist_ready;
           }

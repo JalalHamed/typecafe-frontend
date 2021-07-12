@@ -94,7 +94,7 @@ export const GetOffers = () => {
 };
 
 export const GetOffereds = () => {
-  return axios.get("offereds/").then(res => res.data);
+  return axios.get("myoffers/").then(res => res.data);
 };
 
 export const GetDownloads = () => {
