@@ -134,13 +134,13 @@
     height: 30px;
   }
 
-  &.icon-my-projects-dark {
+  &.icon-mine-dark {
     content: url("../svgs/target-dark.svg");
     width: 30px;
     height: 30px;
   }
 
-  &.icon-my-projects-white {
+  &.icon-mine-white {
     content: url("../svgs/target-white.svg");
     width: 30px;
     height: 30px;
@@ -342,5 +342,12 @@
     content: url("../svgs/zip.svg");
     width: 70px;
     height: 70px;
+  }
+
+  &.icon-filter {
+    content: url("../svgs/filters.svg");
+    width: 23px;
+    height: 23px;
+    transform: rotate(90deg);
   }
 }

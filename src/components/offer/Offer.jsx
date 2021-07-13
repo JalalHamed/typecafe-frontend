@@ -107,15 +107,15 @@ const Offer = ({ offer, project, countdown }) => {
               </span>
             </div>
           )}
-          <div className="offered-price-wrapper">
-            <span className="offered-price-title">قیمت پیشنهادی</span>
-            <span className="offered-price">
+          <div className="myoffer-price-wrapper">
+            <span className="myoffer-price-title">قیمت پیشنهادی</span>
+            <span className="myoffer-price">
               {priceFormat(offer.offered_price)}
             </span>
           </div>
-          <div className="offered-price-wrapper">
-            <span className="offered-price-title">جمع کل</span>
-            <span className="offered-price">
+          <div className="myoffer-price-wrapper">
+            <span className="myoffer-price-title">جمع کل</span>
+            <span className="myoffer-price">
               {priceFormat(offer.total_price)}
             </span>
           </div>

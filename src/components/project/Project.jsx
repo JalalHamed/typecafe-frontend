@@ -34,7 +34,7 @@ const TheProject = ({ project }) => {
   const downloaded = useSelector(state => state.Projects.downloaded);
   const myoffers = useSelector(state => state.Offers.myoffers);
   const offers = useSelector(state => state.Offers.offers);
-  const offered = myoffers.find(
+  const myoffer = myoffers.find(
     x => x.project === project.id && (x.status === "ACC" || x.status === "END")
   );
   const offer = offers.find(
@@ -198,10 +198,10 @@ const TheProject = ({ project }) => {
       <div className="left">
         {project.status === "O" && <Open project={project} />}
         {project.status === "I" && (
-          <InProgress project={project} offer={offer} offered={offered} />
+          <InProgress project={project} offer={offer} myoffer={myoffer} />
         )}
         {project.status === "D" && (
-          <Delivered project={project} offer={offer} offered={offered} />
+          <Delivered project={project} offer={offer} myoffer={myoffer} />
         )}
         {myoffers.find(offer => offer.project === project.id)?.status ===
           "A" && (

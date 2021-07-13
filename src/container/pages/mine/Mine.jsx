@@ -7,13 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Puffloader } from "components/loader";
 import Project from "components/project/Project";
 import RippleWrapper from "components/ripple/RippleWrapper";
-import { farsiNumber } from "components/helper";
 
 // Actions
 import { CreateProject } from "redux/actions";
 
 // Design
-import "./myprojects.scss";
+import "./mine.scss";
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const Projects = () => {
   }, [projects]);
 
   return (
-    <div className="my-projects-wrapper">
+    <div className="mine-wrapper">
       {loading ? (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />
@@ -52,12 +51,13 @@ const Projects = () => {
             </div>
           ) : (
             <>
+              <div className="filters-wrapper">
+                <i className="icon icon-filter" />
+                <p className="filters-note">فیلترها</p>
+              </div>
+              <div className="horizental-break" />
               {!!myoffers.length && (
                 <>
-                  <p className="mp-title">پیشنهادها</p>
-                  <div className="mp-counter">
-                    ({farsiNumber(myoffers.length)})
-                  </div>
                   {myoffers.map(offer => {
                     let project = projects.find(x => x.id === offer.project);
                     return <Project key={project.id} project={project} />;
@@ -66,10 +66,6 @@ const Projects = () => {
               )}
               {!!myprojects.length && (
                 <>
-                  <p className="mp-title">پروژه ها</p>
-                  <div className="mp-counter">
-                    ({farsiNumber(myprojects.length)})
-                  </div>
                   {myprojects.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}
@@ -77,10 +73,6 @@ const Projects = () => {
               )}
               {!!delivereds.length && (
                 <>
-                  <p className="mp-title">تحویل داده شده ها</p>
-                  <div className="mp-counter">
-                    ({farsiNumber(delivereds.length)})
-                  </div>
                   {delivereds.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}

@@ -6,7 +6,7 @@ import WaitingForTypedFile from "./WaitingForTypedFile";
 import { remainingTime, farsiNumber } from "components/helper";
 import { Skewloader } from "components/loader";
 
-const InProgress = ({ project, offer, offered }) => {
+const InProgress = ({ project, offer, myoffer }) => {
   const hours = useRef(0);
   const minutes = useRef(0);
   const seconds = useRef(0);
@@ -14,9 +14,9 @@ const InProgress = ({ project, offer, offered }) => {
   const [deadline, setDeadline] = useState(null);
 
   useEffect(() => {
-    if (offered)
+    if (myoffer)
       setDeadline(
-        remainingTime(offered.typist_ready, project.delivery_deadline * 60 * 60)
+        remainingTime(myoffer.typist_ready, project.delivery_deadline * 60 * 60)
       );
     if (offer)
       setTimeout(() => {
@@ -36,10 +36,10 @@ const InProgress = ({ project, offer, offered }) => {
     }
     let interval = setInterval(() => {
       if (deadline > 0) {
-        if (offered)
+        if (myoffer)
           setDeadline(
             remainingTime(
-              offered.typist_ready,
+              myoffer.typist_ready,
               project.delivery_deadline * 60 * 60
             )
           );
@@ -66,7 +66,7 @@ const InProgress = ({ project, offer, offered }) => {
     return () => clearInterval(interval);
 
     // eslint-disable-next-line
-  }, [deadline, offered, offer, project]);
+  }, [deadline, myoffer, offer, project]);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -79,7 +79,7 @@ const InProgress = ({ project, offer, offered }) => {
 
   return (
     <>
-      {offer || offered ? (
+      {offer || myoffer ? (
         <div className="in-progress-wrapper">
           <div
             className={`time-left-wrapper  ${width < 1500 ? "less-right" : ""}`}
@@ -103,7 +103,7 @@ const InProgress = ({ project, offer, offered }) => {
               </>
             )}
           </div>
-          {offered && <UploadTypedFile project={project} />}
+          {myoffer && <UploadTypedFile project={project} />}
           {offer && <WaitingForTypedFile offer={offer} />}
         </div>
       ) : (

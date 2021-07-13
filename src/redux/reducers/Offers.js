@@ -65,7 +65,7 @@ const Offers = (state = initialState, action) => {
       return {
         ...state,
         myoffers: state.myoffers.filter(
-          offered => offered.project !== action.payload.project
+          myoffer => myoffer.project !== action.payload.project
         ),
       };
     case "ADD_OFFER_TYPIST_READY_TIME":

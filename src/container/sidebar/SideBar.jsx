@@ -38,7 +38,7 @@ const SideBar = () => {
             <SideBarItem status="projects" title="پروژه ها" ref={projectsRef} />
             {isLoggedIn && (
               <SideBarItem
-                status="my-projects"
+                status="mine"
                 title="کارهای من"
                 ref={myProjectsRef}
               />

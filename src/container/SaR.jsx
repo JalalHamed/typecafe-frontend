@@ -16,7 +16,7 @@ import {
   ReadMessages,
   UserData,
   GetProjects,
-  GetMyProjects,
+  GetMine,
   GetOffers,
   GetOffereds,
   GetDownloads,
@@ -84,7 +84,7 @@ const SocketsAndRequests = () => {
           dispatch(actions.User({ isTopbarLoading: false }));
 
           // Get My Projects
-          GetMyProjects()
+          GetMine()
             .then(res => {
               dispatch(
                 actions.ProjectsAction({

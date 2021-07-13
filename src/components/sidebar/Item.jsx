@@ -42,7 +42,7 @@ const Item = forwardRef(({ status, title }, ref) => {
       >
         {title}
       </p>
-      {status === "my-projects" && (
+      {status === "mine" && (
         <>
           {!!state.Projects.myprojects.length && (
             <div

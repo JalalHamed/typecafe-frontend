@@ -3,10 +3,10 @@ import React from "react";
 // Designs
 import "./Delivered.scss";
 
-const Delivered = ({ project, offer, offered }) => {
+const Delivered = ({ project, offer, myoffer }) => {
   return (
     <div>
-      {offer || offered ? (
+      {offer || myoffer ? (
         <>one the owners</>
       ) : (
         <i className="icon icon-check-green-large" />

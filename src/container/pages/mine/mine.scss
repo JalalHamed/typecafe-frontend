@@ -1,4 +1,4 @@
-.my-projects-wrapper {
+.mine-wrapper {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +29,19 @@
     .add-a-project-right-now {
       color: #1c3987;
       font-size: 14px;
+    }
+  }
+
+  .filters-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    .filters-note {
+      margin-right: 5px;
+      color: #606060;
+      font-size: 18px;
     }
   }
 }

@@ -61,8 +61,8 @@ export const CreateProjectReq = body => {
     .then(res => res.data);
 };
 
-export const GetMyProjects = () => {
-  return axios.get("my-projects/").then(res => res.data);
+export const GetMine = () => {
+  return axios.get("mine/").then(res => res.data);
 };
 
 export const DeleteProjectReq = id => {
@@ -94,7 +94,7 @@ export const GetOffers = () => {
 };
 
 export const GetOffereds = () => {
-  return axios.get("myoffers/").then(res => res.data);
+  return axios.get("my-offers/").then(res => res.data);
 };
 
 export const GetDownloads = () => {
