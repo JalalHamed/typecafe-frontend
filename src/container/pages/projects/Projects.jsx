@@ -22,7 +22,9 @@ const Projects = () => {
   const loading = useSelector(state => state.Projects.loading);
   const nextPage = useSelector(state => state.Projects.next);
   const error = useSelector(state => state.Projects.error);
+  const filter = useSelector(state => state.Projects.projectsFilter);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+  const [hovered, setHovered] = useState("");
 
   const handleMoreProjects = () => {
     setLoadMoreLoading(true);
@@ -46,6 +48,24 @@ const Projects = () => {
       });
   };
 
+  const FilterOption = ({ status, title }) => {
+    return (
+      <div
+        className={`filters-option ${
+          filter === status ? status + "-active" : ""
+        } ${filter !== status && hovered ? status + "-hovered" : ""} no-select`}
+        onClick={() =>
+          filter !== status &&
+          dispatch(ProjectsAction({ projectsFilter: status }))
+        }
+        onMouseEnter={() => setHovered(status)}
+        onMouseLeave={() => setHovered("")}
+      >
+        {title}
+      </div>
+    );
+  };
+
   return (
     <div className="projects-wrapper">
       {loading ? (
@@ -54,6 +74,18 @@ const Projects = () => {
         </div>
       ) : (
         <>
+          <div className="filters-wrapper">
+            <div className="filters-title-wrapper">
+              <i className="icon icon-filter" />
+              <p className="filters-note">فیلتر وضعیت پروژه</p>
+            </div>
+            <div className="filters-options-wrapper">
+              <FilterOption title="همه" status="all" />
+              <FilterOption title="باز" status="open" />
+              <FilterOption title="در دست اجرا" status="in-progress" />
+              <FilterOption title="پایان یافته" status="delivered" />
+            </div>
+          </div>
           {!!projects.length &&
             projects.map(project => (
               <Project key={project.id} project={project} />

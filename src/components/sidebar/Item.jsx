@@ -44,20 +44,20 @@ const Item = forwardRef(({ status, title }, ref) => {
       </p>
       {status === "mine" && (
         <>
-          {!!state.Projects.myprojects.length && (
+          {!!state.Projects.mine.length && (
             <div
               className={`sidebar-counter ${
                 !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
               }`}
             >
-              {farsiNumber(state.Projects.myprojects.length)}
+              {farsiNumber(state.Projects.mine.length)}
             </div>
           )}
           {!!state.Offers.myoffers.length && (
             <div
               className={`sidebar-counter light-blue ${
                 !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
-              } ${!!state.Projects.myprojects.length ? "left-50" : ""}`}
+              } ${!!state.Projects.mine.length ? "left-50" : ""}`}
             >
               {farsiNumber(state.Offers.myoffers.length)}
             </div>

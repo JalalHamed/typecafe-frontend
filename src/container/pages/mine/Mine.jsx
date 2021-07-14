@@ -9,7 +9,7 @@ import Project from "components/project/Project";
 import RippleWrapper from "components/ripple/RippleWrapper";
 
 // Actions
-import { CreateProject } from "redux/actions";
+import { CreateProject, ProjectsAction } from "redux/actions";
 
 // Design
 import "./mine.scss";
@@ -18,10 +18,29 @@ const Projects = () => {
   const dispatch = useDispatch();
   const AddProjectRef = useRef();
   const projects = useSelector(state => state.Projects.projects);
-  const myprojects = useSelector(state => state.Projects.myprojects);
+  const mine = useSelector(state => state.Projects.mine);
   const myoffers = useSelector(state => state.Offers.myoffers);
   const loading = useSelector(state => state.Projects.myprojectsloading);
+  const filter = useSelector(state => state.Projects.mineFilter);
   const [delivereds, setDelivereds] = useState([]);
+  const [hovered, setHovered] = useState("");
+
+  const FilterOption = ({ status, title }) => {
+    return (
+      <div
+        className={`filters-option ${
+          filter === status ? status + "-active" : ""
+        } ${filter !== status && hovered ? status + "-hovered" : ""} no-select`}
+        onClick={() =>
+          filter !== status && dispatch(ProjectsAction({ mineFilter: status }))
+        }
+        onMouseEnter={() => setHovered(status)}
+        onMouseLeave={() => setHovered("")}
+      >
+        {title}
+      </div>
+    );
+  };
 
   useEffect(() => {
     let delivered = projects.filter(project => project.status === "DELIVERED");
@@ -36,7 +55,7 @@ const Projects = () => {
         </div>
       ) : (
         <>
-          {!myprojects.length && !myoffers.length ? (
+          {!mine.length && !myoffers.length ? (
             <div className="middle-of-the-page">
               <p className="no-project-note">
                 هنوز پروژه یا پیشنهادی ثبت نکرده اید.
@@ -52,8 +71,16 @@ const Projects = () => {
           ) : (
             <>
               <div className="filters-wrapper">
-                <i className="icon icon-filter" />
-                <p className="filters-note">فیلترها</p>
+                <div className="filters-title-wrapper">
+                  <i className="icon icon-filter" />
+                  <p className="filters-note">فیلتر وضعیت پروژه</p>
+                </div>
+                <div className="filters-options-wrapper">
+                  <FilterOption title="همه" status="all" />
+                  <FilterOption title="باز" status="open" />
+                  <FilterOption title="در دست اجرا" status="in-progress" />
+                  <FilterOption title="پایان یافته" status="delivered" />
+                </div>
               </div>
               <div className="horizental-break" />
               {!!myoffers.length && (
@@ -64,9 +91,9 @@ const Projects = () => {
                   })}
                 </>
               )}
-              {!!myprojects.length && (
+              {!!mine.length && (
                 <>
-                  {myprojects.map(project => {
+                  {mine.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}
                 </>

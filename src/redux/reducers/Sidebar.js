@@ -1,7 +1,7 @@
 let initialState = {
   isOpen: true,
   isLoading: true,
-  page: "mine",
+  page: "projects",
 };
 
 const Sidebar = (state = initialState, action) => {

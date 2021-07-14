@@ -3,10 +3,12 @@ let initialState = {
   myprojectsloading: true,
   downloadsLoading: true,
   projects: [],
-  myprojects: [],
+  mine: [],
   downloaded: [],
   next: "",
   error: false,
+  projectsFilter: "open",
+  mineFilter: "open",
 };
 
 const Projects = (state = initialState, action) => {
@@ -26,7 +28,7 @@ const Projects = (state = initialState, action) => {
     case "CHANGE_MY_PROJECT_STATUS":
       return {
         ...state,
-        myprojects: state.myprojects.map(project => {
+        mine: state.mine.map(project => {
           if (project.id === action.payload.id) {
             project.status = action.payload.status;
           }

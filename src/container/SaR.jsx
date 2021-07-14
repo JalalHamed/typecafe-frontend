@@ -89,7 +89,7 @@ const SocketsAndRequests = () => {
               dispatch(
                 actions.ProjectsAction({
                   myprojectsloading: false,
-                  myprojects: res,
+                  mine: res,
                 })
               );
             })
@@ -255,7 +255,7 @@ const SocketsAndRequests = () => {
           if (data.client_email === state.User.email) {
             dispatch(
               actions.ProjectsAction({
-                myprojects: [data, ...state.Projects.myprojects],
+                mine: [data, ...state.Projects.mine],
               })
             );
           }
@@ -268,9 +268,7 @@ const SocketsAndRequests = () => {
           );
           dispatch(
             actions.ProjectsAction({
-              myprojects: state.Projects.myprojects.filter(
-                x => x.id !== data.id
-              ),
+              mine: state.Projects.mine.filter(x => x.id !== data.id),
             })
           );
           if (state.Offers.myoffers.find(x => x.project === data.id))
@@ -387,7 +385,7 @@ const SocketsAndRequests = () => {
               })
             );
           if (
-            state.Projects.myprojects.find(
+            state.Projects.mine.find(
               project =>
                 project.id === data.project &&
                 project.client_id === state.User.id
