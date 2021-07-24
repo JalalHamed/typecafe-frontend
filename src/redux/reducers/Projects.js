@@ -8,7 +8,8 @@ let initialState = {
   next: "",
   error: false,
   projectsFilter: "open",
-  mineFilter: "open",
+  mineStatusFilter: "all",
+  mineProjectsOffersFilter: "all",
 };
 
 const Projects = (state = initialState, action) => {

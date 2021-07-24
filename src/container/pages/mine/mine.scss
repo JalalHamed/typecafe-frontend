@@ -7,17 +7,6 @@
     margin-top: 15px;
   }
 
-  .mp-title {
-    font-size: 18px;
-    padding: 0 10px 7px 0;
-  }
-
-  .mp-counter {
-    color: #1c3987;
-    margin-right: 5px;
-    font-size: 15px;
-  }
-
   .add-a-project-wrapper {
     width: fit-content;
     margin-top: 5px;
@@ -34,71 +23,83 @@
 
   .filters-wrapper {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 15px;
 
-    .filters-title-wrapper {
+    .filter-wrapper {
       display: flex;
-      align-items: center;
-      margin-right: 10px;
 
       .filters-note {
-        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
         color: #606060;
       }
-    }
 
-    .filters-options-wrapper {
-      display: flex;
-      margin-right: 70px;
+      .filters-options-wrapper {
+        display: flex;
+        margin-right: 50px;
 
-      .filters-option {
-        margin-right: 15px;
-        padding: 2px 8px;
-        cursor: pointer;
-        color: #909090;
+        .filters-option {
+          margin-right: 15px;
+          padding: 2px 8px;
+          cursor: pointer;
+          color: #a1a1a1;
 
-        &:first-child {
-          margin-right: 0;
-        }
-
-        &.all-hovered {
-          &:hover {
-            color: #29313bab;
+          &:first-child {
+            margin-right: 0;
           }
-        }
 
-        &.open-hovered {
-          &:hover {
-            color: #1c3887ab;
+          &.all-hovered {
+            &:hover {
+              color: #29313bab;
+            }
           }
-        }
 
-        &.in-progress-hovered {
-          &:hover {
-            color: #fca636ab;
+          &.projects-hovered {
+            &:hover {
+              color: #29313bab;
+            }
           }
-        }
 
-        &.delivered-hovered {
-          &:hover {
-            color: #40810fab;
+          &.offers-hovered {
+            &:hover {
+              color: #29313bab;
+            }
           }
-        }
 
-        &.all-active {
-          color: #29313b;
-        }
+          &.in-progress-hovered {
+            &:hover {
+              color: #fca636ab;
+            }
+          }
 
-        &.open-active {
-          color: #1c3987;
-        }
+          &.delivered-hovered {
+            &:hover {
+              color: #40810fab;
+            }
+          }
 
-        &.in-progress-active {
-          color: #fca636;
-        }
+          &.all-active {
+            color: #29313b;
+          }
 
-        &.delivered-active {
-          color: #40810f;
+          &.projects-active {
+            color: #29313b;
+          }
+
+          &.offers-active {
+            color: #29313b;
+          }
+
+          &.in-progress-active {
+            color: #fca636;
+          }
+
+          &.delivered-active {
+            color: #40810f;
+          }
         }
       }
     }

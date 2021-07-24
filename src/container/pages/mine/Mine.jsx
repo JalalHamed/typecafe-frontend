@@ -21,18 +21,27 @@ const Projects = () => {
   const mine = useSelector(state => state.Projects.mine);
   const myoffers = useSelector(state => state.Offers.myoffers);
   const loading = useSelector(state => state.Projects.myprojectsloading);
-  const filter = useSelector(state => state.Projects.mineFilter);
+  const statusFilter = useSelector(state => state.Projects.mineStatusFilter);
+  const projectsOffersFilter = useSelector(
+    state => state.Projects.mineProjectsOffersFilter
+  );
   const [delivereds, setDelivereds] = useState([]);
   const [hovered, setHovered] = useState("");
 
-  const FilterOption = ({ status, title }) => {
+  const FilterOption = ({ status, title, filter }) => {
     return (
       <div
         className={`filters-option ${
-          filter === status ? status + "-active" : ""
-        } ${filter !== status && hovered ? status + "-hovered" : ""} no-select`}
+          statusFilter === status ? status + "-active" : ""
+        } ${
+          statusFilter !== status && hovered ? status + "-hovered" : ""
+        } no-select`}
         onClick={() =>
-          filter !== status && dispatch(ProjectsAction({ mineFilter: status }))
+          filter === "po"
+            ? statusFilter !== status &&
+              dispatch(ProjectsAction({ mineStatusFilter: status }))
+            : projectsOffersFilter !== status &&
+              dispatch(ProjectsAction({ mineProjectsOffersFilter: status }))
         }
         onMouseEnter={() => setHovered(status)}
         onMouseLeave={() => setHovered("")}
@@ -71,15 +80,38 @@ const Projects = () => {
           ) : (
             <>
               <div className="filters-wrapper">
-                <div className="filters-title-wrapper">
-                  <i className="icon icon-filter" />
-                  <p className="filters-note">فیلتر وضعیت پروژه</p>
+                <div className="filter-wrapper">
+                  <p className="filters-note">فیلتر پروژه ها و پیشنهاد ها</p>
+                  <div className="filters-options-wrapper">
+                    {/* po stands for projectsOffers */}
+                    <FilterOption title="همه" status="all" filter="po" />
+                    <FilterOption
+                      title="پروژه ها"
+                      status="projects"
+                      filter="po"
+                    />
+                    <FilterOption
+                      title="پیشنهاد ها"
+                      status="offers"
+                      filter="po"
+                    />
+                  </div>
                 </div>
-                <div className="filters-options-wrapper">
-                  <FilterOption title="همه" status="all" />
-                  <FilterOption title="باز" status="open" />
-                  <FilterOption title="در دست اجرا" status="in-progress" />
-                  <FilterOption title="پایان یافته" status="delivered" />
+                <div className="filter-wrapper">
+                  <p className="filters-note">فیلتر وضعیت پروژه</p>
+                  <div className="filters-options-wrapper">
+                    <FilterOption title="همه" status="all" filter="status" />
+                    <FilterOption
+                      title="در دست اجرا"
+                      status="in-progress"
+                      filter="status"
+                    />
+                    <FilterOption
+                      title="پایان یافته"
+                      status="delivered"
+                      filter="status"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="horizental-break" />

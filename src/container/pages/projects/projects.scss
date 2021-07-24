@@ -7,26 +7,22 @@
     display: flex;
     margin-bottom: 15px;
 
-    .filters-title-wrapper {
+    .filters-note {
       display: flex;
       align-items: center;
       margin-right: 10px;
-
-      .filters-note {
-        margin-right: 5px;
-        color: #606060;
-      }
+      color: #606060;
     }
 
     .filters-options-wrapper {
       display: flex;
-      margin-right: 70px;
+      margin-right: 50px;
 
       .filters-option {
         margin-right: 15px;
         padding: 2px 8px;
         cursor: pointer;
-        color: #909090;
+        color: #a1a1a1;
 
         &:first-child {
           margin-right: 0;
