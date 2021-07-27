@@ -45,8 +45,20 @@ export const DeleteProfileImage = () => {
 };
 
 // Projects
-export const GetProjects = () => {
-  return axios.get("projects/").then(res => res.data);
+export const GetAllProjects = () => {
+  return axios.get("all-projects/").then(res => res.data);
+};
+
+export const GetOpenProjects = () => {
+  return axios.get("open-projects/").then(res => res.data);
+};
+
+export const GetInProgressProjects = () => {
+  return axios.get("in-progress-projects/").then(res => res.data);
+};
+
+export const GetDeliveredProjects = () => {
+  return axios.get("delivered-projects/").then(res => res.data);
 };
 
 export const GetMoreProjects = url => {

@@ -32,9 +32,17 @@ const Projects = () => {
     return (
       <div
         className={`filters-option ${
-          statusFilter === status ? status + "-active" : ""
+          filter === "po"
+            ? statusFilter === status
+              ? status + "-active"
+              : ""
+            : projectsOffersFilter === status
+            ? status + "-active"
+            : ""
         } ${
-          statusFilter !== status && hovered ? status + "-hovered" : ""
+          statusFilter !== status && projectsOffersFilter !== status && hovered
+            ? status + "-hovered"
+            : ""
         } no-select`}
         onClick={() =>
           filter === "po"

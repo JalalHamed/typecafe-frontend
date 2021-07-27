@@ -8,7 +8,14 @@ import Project from "components/project/Project";
 import { Puffloader } from "components/loader";
 
 // Requests
-import { GetMoreProjects, handleErrors } from "requests";
+import {
+  GetMoreProjects,
+  handleErrors,
+  GetAllProjects,
+  GetOpenProjects,
+  GetInProgressProjects,
+  GetDeliveredProjects,
+} from "requests";
 
 // Actions
 import { ProjectsAction } from "redux/actions";
@@ -55,10 +62,51 @@ const Projects = () => {
         className={`filters-option ${
           filter === status ? status + "-active" : ""
         } ${filter !== status && hovered ? status + "-hovered" : ""} no-select`}
-        onClick={() =>
-          filter !== status &&
-          dispatch(ProjectsAction({ projectsFilter: status }))
-        }
+        onClick={() => {
+          if (filter !== status) {
+            dispatch(ProjectsAction({ projectsFilter: status, loading: true }));
+            switch (status) {
+              case "all":
+                GetAllProjects()
+                  .then(res =>
+                    dispatch(
+                      ProjectsAction({ projects: res.results, loading: false })
+                    )
+                  )
+                  .catch(err => handleErrors(err));
+                break;
+              case "open":
+                GetOpenProjects()
+                  .then(res =>
+                    dispatch(
+                      ProjectsAction({ projects: res.results, loading: false })
+                    )
+                  )
+                  .catch(err => handleErrors(err));
+                break;
+              case "in-progress":
+                GetInProgressProjects()
+                  .then(res =>
+                    dispatch(
+                      ProjectsAction({ projects: res.results, loading: false })
+                    )
+                  )
+                  .catch(err => handleErrors(err));
+                break;
+              case "delivered":
+                GetDeliveredProjects()
+                  .then(res =>
+                    dispatch(
+                      ProjectsAction({ projects: res.results, loading: false })
+                    )
+                  )
+                  .catch(err => handleErrors(err));
+                break;
+              default:
+                break;
+            }
+          }
+        }}
         onMouseEnter={() => setHovered(status)}
         onMouseLeave={() => setHovered("")}
       >
@@ -69,23 +117,23 @@ const Projects = () => {
 
   return (
     <div className="projects-wrapper">
+      {isLoggedIn && (
+        <div className="filters-wrapper">
+          <p className="filters-note">فیلتر وضعیت پروژه</p>
+          <div className="filters-options-wrapper">
+            <FilterOption title="همه" status="all" />
+            <FilterOption title="باز" status="open" />
+            <FilterOption title="در دست اجرا" status="in-progress" />
+            <FilterOption title="پایان یافته" status="delivered" />
+          </div>
+        </div>
+      )}
       {loading ? (
         <div className="middle-of-the-page">
           <Puffloader color="#1c3987" loading={loading} size={100} />
         </div>
       ) : (
         <>
-          {isLoggedIn && (
-            <div className="filters-wrapper">
-              <p className="filters-note">فیلتر وضعیت پروژه</p>
-              <div className="filters-options-wrapper">
-                <FilterOption title="همه" status="all" />
-                <FilterOption title="باز" status="open" />
-                <FilterOption title="در دست اجرا" status="in-progress" />
-                <FilterOption title="پایان یافته" status="delivered" />
-              </div>
-            </div>
-          )}
           {!!projects.length &&
             projects.map(project => (
               <Project key={project.id} project={project} />
@@ -96,7 +144,7 @@ const Projects = () => {
                 {error ? (
                   <>خطا در برقراری ارتباط با سرور</>
                 ) : (
-                  <>هنوز پروژه ای ثبت نشده است.</>
+                  <>پروژه ای موجود نمی باشد.</>
                 )}
               </p>
             </div>

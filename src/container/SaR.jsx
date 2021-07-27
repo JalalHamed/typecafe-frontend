@@ -15,7 +15,7 @@ import socket from "requests/socket";
 import {
   ReadMessages,
   UserData,
-  GetProjects,
+  GetOpenProjects,
   GetMine,
   GetOffers,
   GetOffereds,
@@ -30,7 +30,7 @@ const SocketsAndRequests = () => {
   const state = useSelector(state => state);
 
   useEffect(() => {
-    GetProjects()
+    GetOpenProjects()
       .then(res => {
         dispatch(
           actions.ProjectsAction({ loading: false, projects: res.results })
