@@ -5,7 +5,7 @@ let initialState = {
   typist: "",
   typist_id: "",
   typistImage: "",
-  offeredPrice: 0,
+  myOfferPrice: 0,
   totalPrice: 0,
   status: "",
 };

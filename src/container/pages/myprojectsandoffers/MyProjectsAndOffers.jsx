@@ -12,18 +12,20 @@ import RippleWrapper from "components/ripple/RippleWrapper";
 import { CreateProject, ProjectsAction } from "redux/actions";
 
 // Design
-import "./mine.scss";
+import "./myprojectsandoffers.scss";
 
 const Projects = () => {
   const dispatch = useDispatch();
   const AddProjectRef = useRef();
   const projects = useSelector(state => state.Projects.projects);
-  const mine = useSelector(state => state.Projects.mine);
-  const myoffers = useSelector(state => state.Offers.myoffers);
-  const loading = useSelector(state => state.Projects.myprojectsloading);
-  const statusFilter = useSelector(state => state.Projects.mineStatusFilter);
+  const myProjects = useSelector(state => state.Projects.myProjects);
+  const myOffers = useSelector(state => state.Offers.myOffers);
+  const loading = useSelector(state => state.Projects.myProjectsLoading);
+  const statusFilter = useSelector(
+    state => state.Projects.myProjectsAndOffersStatusFilter
+  );
   const projectsOffersFilter = useSelector(
-    state => state.Projects.mineProjectsOffersFilter
+    state => state.Projects.myProjectsAndOffersProjectsOffersFilter
   );
   const [delivereds, setDelivereds] = useState([]);
   const [hovered, setHovered] = useState("");
@@ -47,9 +49,15 @@ const Projects = () => {
         onClick={() =>
           filter === "po"
             ? statusFilter !== status &&
-              dispatch(ProjectsAction({ mineStatusFilter: status }))
+              dispatch(
+                ProjectsAction({ myProjectsAndOffersStatusFilter: status })
+              )
             : projectsOffersFilter !== status &&
-              dispatch(ProjectsAction({ mineProjectsOffersFilter: status }))
+              dispatch(
+                ProjectsAction({
+                  myProjectsAndOffersProjectsOffersFilter: status,
+                })
+              )
         }
         onMouseEnter={() => setHovered(status)}
         onMouseLeave={() => setHovered("")}
@@ -72,7 +80,7 @@ const Projects = () => {
         </div>
       ) : (
         <>
-          {!mine.length && !myoffers.length ? (
+          {!myProjects.length && !myOffers.length ? (
             <div className="middle-of-the-page">
               <p className="no-project-note">
                 هنوز پروژه یا پیشنهادی ثبت نکرده اید.
@@ -122,18 +130,17 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-              <div className="horizental-break" />
-              {!!myoffers.length && (
+              {!!myOffers.length && (
                 <>
-                  {myoffers.map(offer => {
+                  {myOffers.map(offer => {
                     let project = projects.find(x => x.id === offer.project);
                     return <Project key={project.id} project={project} />;
                   })}
                 </>
               )}
-              {!!mine.length && (
+              {!!myProjects.length && (
                 <>
-                  {mine.map(project => {
+                  {myProjects.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}
                 </>

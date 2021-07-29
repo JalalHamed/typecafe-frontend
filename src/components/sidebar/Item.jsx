@@ -42,9 +42,9 @@ const Item = forwardRef(({ status, title }, ref) => {
       >
         {title}
       </p>
-      {status === "mine" && (
+      {status === "myProjectsAndOffers" && (
         <>
-          {!!state.Projects.mine.length && (
+          {!!state.Projects.myProjects.length && (
             <div
               className={`sidebar-counter ${
                 !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
@@ -53,13 +53,13 @@ const Item = forwardRef(({ status, title }, ref) => {
               {farsiNumber(state.Projects.mine.length)}
             </div>
           )}
-          {!!state.Offers.myoffers.length && (
+          {!!state.Offers.myOffers.length && (
             <div
               className={`sidebar-counter light-blue ${
                 !state.Sidebar.isOpen ? "sidebar-counter-close" : ""
               } ${!!state.Projects.mine.length ? "left-50" : ""}`}
             >
-              {farsiNumber(state.Offers.myoffers.length)}
+              {farsiNumber(state.Offers.myOffers.length)}
             </div>
           )}
         </>

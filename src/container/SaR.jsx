@@ -16,9 +16,9 @@ import {
   ReadMessages,
   UserData,
   GetOpenProjects,
-  GetMine,
+  GetMyProjectsAndOffers,
   GetOffers,
-  GetOffereds,
+  GetmyOffers,
   GetDownloads,
   GetMessages,
   handleErrors,
@@ -84,17 +84,17 @@ const SocketsAndRequests = () => {
           dispatch(actions.User({ isTopbarLoading: false }));
 
           // Get My Projects
-          GetMine()
+          GetMyProjectsAndOffers()
             .then(res => {
               dispatch(
                 actions.ProjectsAction({
-                  myprojectsloading: false,
-                  mine: res,
+                  myProjectsLoading: false,
+                  myProjects: res,
                 })
               );
             })
             .catch(err => {
-              dispatch(actions.ProjectsAction({ myprojectsloading: false }));
+              dispatch(actions.ProjectsAction({ myProjectsLoading: false }));
               handleErrors(err);
             });
 
@@ -153,18 +153,18 @@ const SocketsAndRequests = () => {
               handleErrors(err);
             });
 
-          // Get Offereds
-          GetOffereds()
+          // Get myOffers
+          GetmyOffers()
             .then(res =>
               dispatch(
                 actions.OffersAction({
-                  myoffers: res,
-                  offeredsLoading: false,
+                  myOffers: res,
+                  myOffersLoading: false,
                 })
               )
             )
             .catch(err => {
-              dispatch(actions.OffersAction({ offeredsLoading: false }));
+              dispatch(actions.OffersAction({ myOffersLoading: false }));
               handleErrors(err);
             });
 
@@ -190,14 +190,14 @@ const SocketsAndRequests = () => {
           dispatch(
             actions.ProjectsAction({
               loading: false,
-              myprojectsloading: false,
+              myProjectsLoading: false,
               downloadsLoading: false,
             })
           );
           dispatch(
             actions.OffersAction({
               offersLoading: false,
-              offeredsLoading: true,
+              myOffersLoading: true,
             })
           );
         });
@@ -243,11 +243,15 @@ const SocketsAndRequests = () => {
           );
           break;
         case "new-project":
-          dispatch(
-            actions.ProjectsAction({
-              projects: [data, ...state.Projects.projects],
-            })
-          );
+          if (
+            state.Projects.projectsFilter === "open" ||
+            state.Projects.projectsFilter === "all"
+          )
+            dispatch(
+              actions.ProjectsAction({
+                projects: [data, ...state.Projects.projects],
+              })
+            );
           if (state.User.playSounds)
             dispatch(
               actions.Sounds({ newProject: state.Sounds.newProject + 1 })
@@ -255,7 +259,7 @@ const SocketsAndRequests = () => {
           if (data.client_email === state.User.email) {
             dispatch(
               actions.ProjectsAction({
-                mine: [data, ...state.Projects.mine],
+                myPorjects: [data, ...state.Projects.myProjects],
               })
             );
           }
@@ -268,10 +272,12 @@ const SocketsAndRequests = () => {
           );
           dispatch(
             actions.ProjectsAction({
-              mine: state.Projects.mine.filter(x => x.id !== data.id),
+              myProjects: state.Projects.myProjects.filter(
+                x => x.id !== data.id
+              ),
             })
           );
-          if (state.Offers.myoffers.find(x => x.project === data.id))
+          if (state.Offers.myOffers.find(x => x.project === data.id))
             dispatch(actions.RemoveDeletedProjectOffer({ id: data.id }));
           break;
         case "new-offer":
@@ -327,7 +333,7 @@ const SocketsAndRequests = () => {
           }
           break;
         case "offer-rejected":
-          dispatch(actions.ChangeOfferedStatus({ id: data.id, status: "REJ" }));
+          dispatch(actions.ChangemyOfferStatus({ id: data.id, status: "REJ" }));
           toast.info(
             `پیشنهاد شما برای پروژه با شناسه ${farsiNumber(
               data.project
@@ -377,15 +383,15 @@ const SocketsAndRequests = () => {
             );
           if (
             data.typist !== state.User.id &&
-            state.Offers.myoffers.find(offer => offer.project === data.project)
+            state.Offers.myOffers.find(offer => offer.project === data.project)
           )
             dispatch(
-              actions.RemoveNotAcceptedOfferedsForOtherTypists({
+              actions.RemoveNotAcceptedmyOffersForOtherTypists({
                 project: data.project,
               })
             );
           if (
-            state.Projects.mine.find(
+            state.Projects.myProjects.find(
               project =>
                 project.id === data.project &&
                 project.client_id === state.User.id

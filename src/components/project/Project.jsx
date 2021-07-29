@@ -32,9 +32,9 @@ const TheProject = ({ project }) => {
   const user = useSelector(state => state.User);
   const onlineUsers = useSelector(state => state.OnlineUsers);
   const downloaded = useSelector(state => state.Projects.downloaded);
-  const myoffers = useSelector(state => state.Offers.myoffers);
+  const myOffers = useSelector(state => state.Offers.myOffers);
   const offers = useSelector(state => state.Offers.offers);
-  const myoffer = myoffers.find(
+  const myoffer = myOffers.find(
     x => x.project === project.id && (x.status === "ACC" || x.status === "END")
   );
   const offer = offers.find(
@@ -172,7 +172,7 @@ const TheProject = ({ project }) => {
           className={`fit-width ${
             project.status === "I" &&
             user.id !== project.client_id &&
-            !myoffers.find(x => x.project === project.id)
+            !myOffers.find(x => x.project === project.id)
               ? "download-project-orange"
               : ""
           }`}
@@ -181,7 +181,7 @@ const TheProject = ({ project }) => {
             !user.isLoggedIn ||
             (project.status === "I" &&
               user.id !== project.client_id &&
-              !myoffers.find(x => x.project === project.id))
+              !myOffers.find(x => x.project === project.id))
           }
         />
         {user.id === project.client_id && project.status === "O" && (
@@ -203,7 +203,7 @@ const TheProject = ({ project }) => {
         {project.status === "D" && (
           <Delivered project={project} offer={offer} myoffer={myoffer} />
         )}
-        {myoffers.find(offer => offer.project === project.id)?.status ===
+        {myOffers.find(offer => offer.project === project.id)?.status ===
           "A" && (
           <div className="hint-arrow-wrapper">
             <div className="ha-arrow">

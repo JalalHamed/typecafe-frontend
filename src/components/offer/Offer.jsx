@@ -45,7 +45,7 @@ const Offer = ({ offer, project, countdown }) => {
         typist: offer.typist,
         typist_id: offer.typist_id,
         typistImage: offer.typist_image,
-        offeredPrice: offer.offered_price,
+        myOfferPrice: offer.myOffer_price,
         totalPrice: offer.total_price,
         status: status,
       })
@@ -110,7 +110,7 @@ const Offer = ({ offer, project, countdown }) => {
           <div className="myoffer-price-wrapper">
             <span className="myoffer-price-title">قیمت پیشنهادی</span>
             <span className="myoffer-price">
-              {priceFormat(offer.offered_price)}
+              {priceFormat(offer.offer_price)}
             </span>
           </div>
           <div className="myoffer-price-wrapper">

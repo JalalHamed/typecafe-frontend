@@ -30,7 +30,7 @@ const ModalWrapper = ({ children }) => {
             project_id: null,
             typist: "",
             typistImage: "",
-            offeredPrice: 0,
+            myOfferPrice: 0,
             totalPrice: 0,
             status: "",
           })

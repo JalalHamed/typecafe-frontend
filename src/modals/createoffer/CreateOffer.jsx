@@ -50,7 +50,7 @@ const TheCreateOffer = () => {
       let project_id = state.CreateOffer.selectedId;
       let body = {
         project: project_id,
-        offered_price: pricePerPage,
+        offer_price: pricePerPage,
       };
       setLoading(true);
       CreateOfferReq(body)
@@ -66,11 +66,11 @@ const TheCreateOffer = () => {
           );
           dispatch(
             OffersAction({
-              myoffers: [
-                ...state.Offers.myoffers,
+              myOffers: [
+                ...state.Offers.myOffers,
                 {
                   project: project_id,
-                  offered_price: pricePerPage,
+                  offer_price: pricePerPage,
                   total_price: res.total_price,
                   id: res.id,
                   created_at: new Date(),

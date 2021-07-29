@@ -25,7 +25,7 @@ const Open = ({ project }) => {
         </>
       ) : (
         <>
-          {!porjectsLoading.offeredsLoading &&
+          {!porjectsLoading.myOffersLoading &&
           !porjectsLoading.downloadsLoading ? (
             <SendOffer project={project} />
           ) : (

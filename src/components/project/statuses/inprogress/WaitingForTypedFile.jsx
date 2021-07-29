@@ -15,7 +15,7 @@ import { baseURL } from "components/xhr";
 
 const WaitingForTypedFile = ({ offer }) => {
   const dispatch = useDispatch();
-  const onlineUsers = useSelector((state) => state.OnlineUsers);
+  const onlineUsers = useSelector(state => state.OnlineUsers);
 
   const openProfile = () => {
     dispatch(
@@ -92,7 +92,7 @@ const WaitingForTypedFile = ({ offer }) => {
               ) : (
                 <Moment fromNow locale="fa">
                   {
-                    onlineUsers.lastLogins.find((x) => x.id === offer.typist_id)
+                    onlineUsers.lastLogins.find(x => x.id === offer.typist_id)
                       .lastLogin
                   }
                 </Moment>
@@ -104,7 +104,7 @@ const WaitingForTypedFile = ({ offer }) => {
       <div className="offer-details">
         <div>
           <p className="title">قیمت پیشنهادی</p>
-          <p>&nbsp;&nbsp;{priceFormat(offer.offered_price)}</p>
+          <p>&nbsp;&nbsp;{priceFormat(offer.myOffer_price)}</p>
         </div>
         <div style={{ marginRight: "20px" }}>
           <p className="title">قیمت کل</p>

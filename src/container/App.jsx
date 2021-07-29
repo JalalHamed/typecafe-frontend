@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 // Pages
 import Projects from "./pages/projects/Projects";
-import Mine from "./pages/mine/Mine";
+import MyProjectsAndOffers from "./pages/myprojectsandoffers/MyProjectsAndOffers";
 import TheMessages from "./pages/messages/Messages";
 import Financials from "./pages/financials/Financials";
 import Rules from "./pages/rules/Rules";
@@ -98,7 +98,9 @@ const App = () => {
         </div>
         <div className="content">
           {state.Sidebar.page === "projects" && <Projects />}
-          {state.Sidebar.page === "mine" && <Mine />}
+          {state.Sidebar.page === "myprojectsandoffers" && (
+            <MyProjectsAndOffers />
+          )}
           {state.Sidebar.page === "messages" && <TheMessages />}
           {state.Sidebar.page === "financials" && <Financials />}
           {state.Sidebar.page === "rules" && <Rules />}

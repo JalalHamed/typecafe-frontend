@@ -20,7 +20,7 @@ const SideBar = () => {
   const financialRef = useRef();
   const rulesRef = useRef();
   const tutorialRef = useRef();
-  const myProjectsRef = useRef();
+  const myProjectsAndOffersRef = useRef();
   const supportRef = useRef();
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const isLoading = useSelector(state => state.Sidebar.isLoading);
@@ -38,9 +38,9 @@ const SideBar = () => {
             <SideBarItem status="projects" title="پروژه ها" ref={projectsRef} />
             {isLoggedIn && (
               <SideBarItem
-                status="mine"
+                status="myprojectsandoffers"
                 title="کارهای من"
-                ref={myProjectsRef}
+                ref={myProjectsAndOffersRef}
               />
             )}
             {isLoggedIn && (

@@ -54,9 +54,9 @@ export const CreateOffer = payload => {
   };
 };
 
-export const ChangeOfferedStatus = payload => {
+export const ChangemyOfferStatus = payload => {
   return {
-    type: "CHANGE_OFFERED_STATUS",
+    type: "CHANGE_myOffer_STATUS",
     payload,
   };
 };
@@ -166,9 +166,9 @@ export const Sounds = payload => {
   };
 };
 
-export const AddOfferedTypistReadyTime = payload => {
+export const AddmyOfferTypistReadyTime = payload => {
   return {
-    type: "ADD_OFFERED_TYPIST_READY_TIME",
+    type: "ADD_myOffer_TYPIST_READY_TIME",
     payload,
   };
 };
@@ -194,9 +194,9 @@ export const ChangeMyProjectStatus = payload => {
   };
 };
 
-export const RemoveAllOtherTypistsOffereds = payload => {
+export const RemoveAllOtherTypistsmyOffers = payload => {
   return {
-    type: "REMOVE_ALL_OTHER_TYPISTS_OFFEREDS",
+    type: "REMOVE_ALL_OTHER_TYPISTS_myOfferS",
     payload,
   };
 };
@@ -222,9 +222,9 @@ export const RemoveBusyTypistOffersOnOtherProjects = payload => {
   };
 };
 
-export const RemoveNotAcceptedOfferedsForOtherTypists = payload => {
+export const RemoveNotAcceptedmyOffersForOtherTypists = payload => {
   return {
-    type: "REMOVE_NOT_ACCEPTED_OFFEREDS_FOR_OTHER_TYPISTS",
+    type: "REMOVE_NOT_ACCEPTED_myOfferS_FOR_OTHER_TYPISTS",
     payload,
   };
 };

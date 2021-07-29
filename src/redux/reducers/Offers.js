@@ -1,8 +1,8 @@
 let initialState = {
   offersLoading: true,
-  offeredsLoading: true,
+  myOffersLoading: true,
   offers: [],
-  myoffers: [],
+  myOffers: [],
 };
 
 const Offers = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const Offers = (state = initialState, action) => {
     case "REMOVE_DELETED_RPOJECT_OFFER":
       return {
         ...state,
-        myoffers: state.myoffers.filter(
+        myOffers: state.myOffers.filter(
           offer => offer.project !== action.payload.id
         ),
       };
@@ -26,20 +26,20 @@ const Offers = (state = initialState, action) => {
           return offer;
         }),
       };
-    case "CHANGE_OFFERED_STATUS":
+    case "CHANGE_myOffer_STATUS":
       return {
         ...state,
-        myoffers: state.myoffers.map(offer => {
+        myOffers: state.myOffers.map(offer => {
           if (offer.id === action.payload.id) {
             offer.status = action.payload.status;
           }
           return offer;
         }),
       };
-    case "REMOVE_ALL_OTHER_TYPISTS_OFFEREDS":
+    case "REMOVE_ALL_OTHER_TYPISTS_myOfferS":
       return {
         ...state,
-        myoffers: state.myoffers.filter(
+        myOffers: state.myOffers.filter(
           offer => offer.project === action.payload.project
         ),
       };
@@ -61,10 +61,10 @@ const Offers = (state = initialState, action) => {
             offer.project === action.payload.project
         ),
       };
-    case "REMOVE_NOT_ACCEPTED_OFFEREDS_FOR_OTHER_TYPISTS":
+    case "REMOVE_NOT_ACCEPTED_myOfferS_FOR_OTHER_TYPISTS":
       return {
         ...state,
-        myoffers: state.myoffers.filter(
+        myOffers: state.myOffers.filter(
           myoffer => myoffer.project !== action.payload.project
         ),
       };
@@ -78,10 +78,10 @@ const Offers = (state = initialState, action) => {
           return offer;
         }),
       };
-    case "ADD_OFFERED_TYPIST_READY_TIME":
+    case "ADD_myOffer_TYPIST_READY_TIME":
       return {
         ...state,
-        myoffers: state.myoffers.map(offer => {
+        myOffers: state.myOffers.map(offer => {
           if (offer.project === action.payload.project) {
             offer.typist_ready = action.payload.typist_ready;
           }

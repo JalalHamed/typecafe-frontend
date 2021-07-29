@@ -18,9 +18,9 @@ import {
   ClientAccept,
   Sounds,
   User,
-  AddOfferedTypistReadyTime,
-  ChangeOfferedStatus,
-  RemoveAllOtherTypistsOffereds,
+  AddmyOfferTypistReadyTime,
+  ChangemyOfferStatus,
+  RemoveAllOtherTypistsmyOffers,
 } from "redux/actions";
 
 // Design
@@ -32,7 +32,7 @@ const TheClientAccept = () => {
   const user = useSelector(state => state.User);
   const data = useSelector(state => state.ClientAccept);
   const sounds = useSelector(state => state.Sounds);
-  const myoffers = useSelector(state => state.Offers.myoffers);
+  const myOffers = useSelector(state => state.Offers.myOffers);
   const [deadline, setDeadline] = useState(remainingTime(data.issued_at, 30));
 
   const handleSubmit = () => {
@@ -49,15 +49,15 @@ const TheClientAccept = () => {
           })
         );
         dispatch(
-          AddOfferedTypistReadyTime({
+          AddmyOfferTypistReadyTime({
             project: data.project,
             typist_ready: res,
           })
         );
-        dispatch(ChangeOfferedStatus({ id: data.offer, status: "ACC" }));
+        dispatch(ChangemyOfferStatus({ id: data.offer, status: "ACC" }));
         dispatch(User({ credit: user.credit - data.total_price }));
-        if (myoffers.find(offer => offer.project !== data.project))
-          dispatch(RemoveAllOtherTypistsOffereds({ project: data.project }));
+        if (myOffers.find(offer => offer.project !== data.project))
+          dispatch(RemoveAllOtherTypistsmyOffers({ project: data.project }));
         if (user.playSounds)
           dispatch(Sounds({ typistAccept: sounds.typistAccept + 1 }));
         dispatch(
