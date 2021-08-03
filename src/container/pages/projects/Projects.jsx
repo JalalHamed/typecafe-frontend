@@ -28,7 +28,7 @@ const Projects = () => {
   const isLoggedIn = useSelector(state => state.User.isLoggedIn);
   const projects = useSelector(state => state.Projects.projects);
   const loading = useSelector(state => state.Projects.loading);
-  const nextPage = useSelector(state => state.Projects.next);
+  const nextPage = useSelector(state => state.Projects.projectsNext);
   const error = useSelector(state => state.Projects.error);
   const filter = useSelector(state => state.Projects.projectsFilter);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -45,9 +45,9 @@ const Projects = () => {
           })
         );
         if (res.next) {
-          dispatch(ProjectsAction({ next: res.next }));
+          dispatch(ProjectsAction({ projectsNext: res.next }));
         } else {
-          dispatch(ProjectsAction({ next: "" }));
+          dispatch(ProjectsAction({ projectsNext: "" }));
         }
       })
       .catch(err => {

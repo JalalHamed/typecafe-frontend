@@ -122,7 +122,7 @@ const AoROffer = () => {
         </div>
         <div className="aoroffer-details-wrapper">
           <p className="title">قیمت پیشنهادی به ازای هرصفحه</p>
-          <p className="value">{priceFormat(offer.myOfferPrice)}</p>
+          <p className="value">{priceFormat(offer.offerPrice)}</p>
           <p className="title" style={{ marginTop: "7px" }}>
             جمع کل با احتساب ۱۰٪ کارمزد سایت
           </p>

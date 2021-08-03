@@ -45,7 +45,7 @@ const Offer = ({ offer, project, countdown }) => {
         typist: offer.typist,
         typist_id: offer.typist_id,
         typistImage: offer.typist_image,
-        myOfferPrice: offer.myOffer_price,
+        offerPrice: offer.offer_price,
         totalPrice: offer.total_price,
         status: status,
       })

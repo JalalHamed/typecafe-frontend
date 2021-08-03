@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 
 // Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +27,6 @@ const Projects = () => {
   const projectsOffersFilter = useSelector(
     state => state.Projects.myProjectsAndOffersProjectsOffersFilter
   );
-  const [delivereds, setDelivereds] = useState([]);
   const [hovered, setHovered] = useState("");
 
   const FilterOption = ({ status, title, filter }) => {
@@ -67,11 +66,6 @@ const Projects = () => {
     );
   };
 
-  useEffect(() => {
-    let delivered = projects.filter(project => project.status === "DELIVERED");
-    if (delivered.length) setDelivereds(delivered);
-  }, [projects]);
-
   return (
     <div className="mine-wrapper">
       {loading ? (
@@ -102,12 +96,12 @@ const Projects = () => {
                     {/* po stands for projectsOffers */}
                     <FilterOption title="همه" status="all" filter="po" />
                     <FilterOption
-                      title="پروژه ها"
+                      title="پروژه های من"
                       status="projects"
                       filter="po"
                     />
                     <FilterOption
-                      title="پیشنهاد ها"
+                      title="پیشنهاد های من"
                       status="offers"
                       filter="po"
                     />
@@ -141,13 +135,6 @@ const Projects = () => {
               {!!myProjects.length && (
                 <>
                   {myProjects.map(project => {
-                    return <Project key={project.id} project={project} />;
-                  })}
-                </>
-              )}
-              {!!delivereds.length && (
-                <>
-                  {delivereds.map(project => {
                     return <Project key={project.id} project={project} />;
                   })}
                 </>

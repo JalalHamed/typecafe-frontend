@@ -16,9 +16,9 @@ import {
   ReadMessages,
   UserData,
   GetOpenProjects,
-  GetMyProjectsAndOffers,
+  GetMyProjects,
   GetOffers,
-  GetmyOffers,
+  GetMyOffers,
   GetDownloads,
   GetMessages,
   handleErrors,
@@ -35,9 +35,10 @@ const SocketsAndRequests = () => {
         dispatch(
           actions.ProjectsAction({ loading: false, projects: res.results })
         );
-        if (res.next) dispatch(actions.ProjectsAction({ next: res.next }));
+        if (res.next)
+          dispatch(actions.ProjectsAction({ projectsNext: res.next }));
         if (!res.next && state.Projects.next)
-          dispatch(actions.ProjectsAction({ next: "" }));
+          dispatch(actions.ProjectsAction({ projectsNext: "" }));
       })
       .catch(err => {
         dispatch(actions.ProjectsAction({ loading: false, error: true }));
@@ -84,12 +85,12 @@ const SocketsAndRequests = () => {
           dispatch(actions.User({ isTopbarLoading: false }));
 
           // Get My Projects
-          GetMyProjectsAndOffers()
+          GetMyProjects()
             .then(res => {
               dispatch(
                 actions.ProjectsAction({
                   myProjectsLoading: false,
-                  myProjects: res,
+                  myProjects: res.results,
                 })
               );
             })
@@ -154,7 +155,7 @@ const SocketsAndRequests = () => {
             });
 
           // Get myOffers
-          GetmyOffers()
+          GetMyOffers()
             .then(res =>
               dispatch(
                 actions.OffersAction({
@@ -259,7 +260,7 @@ const SocketsAndRequests = () => {
           if (data.client_email === state.User.email) {
             dispatch(
               actions.ProjectsAction({
-                myPorjects: [data, ...state.Projects.myProjects],
+                myProjects: [data, ...state.Projects.myProjects],
               })
             );
           }
