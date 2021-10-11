@@ -1,5 +1,3 @@
-import React from "react";
-
 // Libraries
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";

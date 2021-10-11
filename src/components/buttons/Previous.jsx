@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 // Components
 import TouchRipple from "components/ripple/TouchRipple";

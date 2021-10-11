@@ -1,7 +1,7 @@
 // Libraries
 import { combineReducers } from "redux";
 
-// Components
+// Reducers
 import Loading from "./Loading";
 import LR from "./LR";
 import Sidebar from "./Sidebar";

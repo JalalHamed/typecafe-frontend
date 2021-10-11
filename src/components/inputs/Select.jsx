@@ -1,5 +1,3 @@
-import React from "react";
-
 // Libraries
 import Select from "react-select";
 

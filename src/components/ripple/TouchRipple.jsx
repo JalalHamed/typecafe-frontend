@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import * as React from "react";
 
 // Libraries
 import { TransitionGroup } from "react-transition-group";
@@ -11,7 +11,7 @@ import "./ripple.scss";
 
 const DURATION = 500;
 
-const TouchRipple = forwardRef(function TouchRipple(
+const TouchRipple = React.forwardRef(function TouchRipple(
   { center: centerProp, classes },
   ref
 ) {

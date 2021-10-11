@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 // Components
 import TextArea from "components/inputs/TextArea";

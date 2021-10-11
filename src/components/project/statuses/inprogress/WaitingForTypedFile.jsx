@@ -1,5 +1,3 @@
-import React from "react";
-
 // Libraries
 import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";

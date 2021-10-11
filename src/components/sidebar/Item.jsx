@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 // Libraries
 import { useSelector, useDispatch } from "react-redux";
