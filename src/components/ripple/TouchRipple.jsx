@@ -1,6 +1,5 @@
-import * as React from "react";
-
 // Libraries
+import * as React from "react";
 import { TransitionGroup } from "react-transition-group";
 
 // Components

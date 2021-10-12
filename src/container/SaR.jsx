@@ -87,12 +87,9 @@ const SocketsAndRequests = () => {
           // Get My Projects
           GetMyProjects()
             .then(res => {
-              dispatch(
-                actions.ProjectsAction({
-                  myProjectsLoading: false,
-                  myProjects: res.results,
-                })
-              );
+              dispatch(actions.ProjectsAction({ myProjectsLoading: false }));
+              if (Boolean(res.length))
+                dispatch(actions.ProjectsAction({ myProjects: res }));
             })
             .catch(err => {
               dispatch(actions.ProjectsAction({ myProjectsLoading: false }));
