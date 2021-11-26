@@ -1,18 +1,19 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 // Libraries
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 // Components
-import { farsiNumber, priceFormat } from "components/helper";
+import { farsiNumber, priceFormat } from 'components/helper';
 
 // Actions
-import * as actions from "redux/actions";
+import * as actions from 'redux/actions';
 
 // Requests
-import socket from "requests/socket";
+import socket from 'requests/socket';
 import {
+  GetProjects,
   ReadMessages,
   UserData,
   GetOpenProjects,
@@ -22,7 +23,7 @@ import {
   GetDownloads,
   GetMessages,
   handleErrors,
-} from "requests";
+} from 'requests';
 
 const SocketsAndRequests = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const SocketsAndRequests = () => {
         if (res.next)
           dispatch(actions.ProjectsAction({ projectsNext: res.next }));
         if (!res.next && state.Projects.next)
-          dispatch(actions.ProjectsAction({ projectsNext: "" }));
+          dispatch(actions.ProjectsAction({ projectsNext: '' }));
       })
       .catch(err => {
         dispatch(actions.ProjectsAction({ loading: false, error: true }));
@@ -49,7 +50,7 @@ const SocketsAndRequests = () => {
   }, []);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("_at")) {
+    if (!sessionStorage.getItem('_at')) {
       dispatch(actions.Sidebar({ isLoading: false }));
       dispatch(actions.User({ isTopbarLoading: false }));
       dispatch(
@@ -64,7 +65,7 @@ const SocketsAndRequests = () => {
 
   if (state.Tokens.ac_t) {
     socket.onopen = () => {
-      console.log("socket open");
+      console.log('socket open');
       if (state.Loading) dispatch(actions.Loading(false));
       UserData()
         .then(res => {
@@ -101,7 +102,7 @@ const SocketsAndRequests = () => {
             .then(res => {
               let total_unread = 0;
               res.forEach(message => {
-                if (message.sor === "received" && !message.is_read)
+                if (message.sor === 'received' && !message.is_read)
                   total_unread += 1;
               });
               if (total_unread) {
@@ -120,7 +121,7 @@ const SocketsAndRequests = () => {
                   if (message.user_id === id) messages.push(message);
                 });
                 messages.forEach(message => {
-                  if (message.sor === "received" && !message.is_read)
+                  if (message.sor === 'received' && !message.is_read)
                     unread_count += 1;
                 });
                 dispatch(
@@ -199,17 +200,118 @@ const SocketsAndRequests = () => {
             })
           );
         });
+
+      // Get Downloads
+      GetDownloads()
+        .then(res => {
+          dispatch(
+            actions.ProjectsAction({
+              downloaded: res,
+              downloadsLoading: false,
+            })
+          );
+        })
+        .catch(err => {
+          dispatch(actions.ProjectsAction({ downloadsLoading: false }));
+          handleErrors(err);
+        });
+
+      // Get My Projects
+      GetMyProjects()
+        .then(res => {
+          dispatch(
+            actions.ProjectsAction({
+              myProjectsLoading: false,
+              myProjects: res.results,
+            })
+          );
+        })
+        .catch(err => {
+          dispatch(actions.ProjectsAction({ myProjectsLoading: false }));
+          handleErrors(err);
+        });
+
+      // Get Offers
+      GetOffers()
+        .then(res =>
+          dispatch(actions.OffersAction({ offers: res, offersLoading: false }))
+        )
+        .catch(err => {
+          dispatch(actions.OffersAction({ offersLoading: false }));
+          handleErrors(err);
+        });
+
+      // Get My Offers
+      GetMyOffers()
+        .then(res => {
+          dispatch(
+            actions.OffersAction({
+              myOffers: res,
+              myOffersLoading: false,
+            })
+          );
+          GetProjects(res.map(offer => offer.project))
+            .then(res => console.log(res))
+            .catch(err => handleErrors(err));
+        })
+        .catch(err => {
+          dispatch(actions.OffersAction({ myOffersLoading: false }));
+          handleErrors(err);
+        });
+
+      // Get Messages
+      GetMessages()
+        .then(res => {
+          let total_unread = 0;
+          res.forEach(message => {
+            if (message.sor === 'received' && !message.is_read)
+              total_unread += 1;
+          });
+          if (total_unread) {
+            dispatch(actions.MessagesElse({ totalUnread: total_unread }));
+            if (state.User.playSounds)
+              dispatch(
+                actions.Sounds({ newMessage: state.Sounds.newMessage + 1 })
+              );
+          }
+          let userIdArr = res.map(message => message.user_id);
+          let uniqUserIdArr = [...new Set(userIdArr)];
+          uniqUserIdArr.forEach(id => {
+            let messages = [];
+            let unread_count = 0;
+            res.forEach(message => {
+              if (message.user_id === id) messages.push(message);
+            });
+            messages.forEach(message => {
+              if (message.sor === 'received' && !message.is_read)
+                unread_count += 1;
+            });
+            dispatch(
+              actions.Messages({
+                displayname: messages[0].user,
+                id: messages[0].user_id,
+                is_online: messages[0].user_is_online,
+                last_login: messages[0].user_last_login,
+                image: messages[0].user_image,
+                unread: unread_count,
+                messages: messages,
+              })
+            );
+          });
+          dispatch(actions.MessagesElse({ isLoading: false }));
+        })
+        .catch(err => handleErrors(err));
     };
 
     socket.onclose = () => {
-      console.log("socket close");
+      console.log('socket close');
       dispatch(actions.Loading(true));
     };
 
     socket.onmessage = e => {
       let data = JSON.parse(e.data);
       switch (data.ws_type) {
-        case "user-online":
+        case 'user-online':
           if (!state.OnlineUsers.ids.includes(data.user_id))
             dispatch(
               actions.OnlineUsers({
@@ -228,7 +330,7 @@ const SocketsAndRequests = () => {
               })
             );
           break;
-        case "user-offline":
+        case 'user-offline':
           dispatch(
             actions.OnlineUsers({
               ids: state.OnlineUsers.ids.filter(x => x !== data.user_id),
@@ -240,10 +342,10 @@ const SocketsAndRequests = () => {
             })
           );
           break;
-        case "new-project":
+        case 'new-project':
           if (
-            state.Projects.projectsFilter === "open" ||
-            state.Projects.projectsFilter === "all"
+            state.Projects.projectsFilter === 'open' ||
+            state.Projects.projectsFilter === 'all'
           )
             dispatch(
               actions.ProjectsAction({
@@ -262,7 +364,7 @@ const SocketsAndRequests = () => {
             );
           }
           break;
-        case "delete-project":
+        case 'delete-project':
           dispatch(
             actions.ProjectsAction({
               projects: state.Projects.projects.filter(x => x.id !== data.id),
@@ -278,19 +380,19 @@ const SocketsAndRequests = () => {
           if (state.Offers.myOffers.find(x => x.project === data.id))
             dispatch(actions.RemoveDeletedProjectOffer({ id: data.id }));
           break;
-        case "new-offer":
+        case 'new-offer':
           dispatch(
             actions.OffersAction({ offers: [data, ...state.Offers.offers] })
           );
           break;
-        case "delete-offer":
+        case 'delete-offer':
           dispatch(
             actions.OffersAction({
               offers: state.Offers.offers.filter(x => x.id !== data.id),
             })
           );
           break;
-        case "new-message":
+        case 'new-message':
           if (state.Messages.isWatching !== data.sender_id) {
             dispatch(
               actions.MessagesElse({
@@ -330,15 +432,15 @@ const SocketsAndRequests = () => {
             );
           }
           break;
-        case "offer-rejected":
-          dispatch(actions.ChangemyOfferStatus({ id: data.id, status: "REJ" }));
+        case 'offer-rejected':
+          dispatch(actions.ChangemyOfferStatus({ id: data.id, status: 'REJ' }));
           toast.info(
             `پیشنهاد شما برای پروژه با شناسه ${farsiNumber(
               data.project
             )} رد شد.`
           );
           break;
-        case "client-accept":
+        case 'client-accept':
           dispatch(
             actions.ClientAccept({
               isModalOpen: true,
@@ -354,11 +456,11 @@ const SocketsAndRequests = () => {
               actions.Sounds({ clientAccept: state.Sounds.clientAccept + 1 })
             );
           break;
-        case "project-in-progress":
+        case 'project-in-progress':
           dispatch(
             actions.ChangeProjectStatus({
               id: data.project,
-              status: "I",
+              status: 'I',
             })
           );
           if (
@@ -396,19 +498,19 @@ const SocketsAndRequests = () => {
             )
           ) {
             dispatch(
-              actions.ChangeMyProjectStatus({ id: data.project, status: "I" })
+              actions.ChangeMyProjectStatus({ id: data.project, status: 'I' })
             );
             dispatch(
-              actions.ChangeOfferStatus({ id: data.offer, status: "ACC" })
+              actions.ChangeOfferStatus({ id: data.offer, status: 'ACC' })
             );
             dispatch(
               actions.User({ credit: state.User.credit - data.total_price })
             );
             toast.info(
               <>
-                <span style={{ fontSize: "14px" }}>برداشت از اعتبار</span>
+                <span style={{ fontSize: '14px' }}>برداشت از اعتبار</span>
                 <br />
-                <span style={{ fontSize: "14px" }}>مبلغ:</span>{" "}
+                <span style={{ fontSize: '14px' }}>مبلغ:</span>{' '}
                 {priceFormat(data.total_price)}
               </>
             );
@@ -432,11 +534,11 @@ const SocketsAndRequests = () => {
             );
           }
           break;
-        case "project-delivered":
+        case 'project-delivered':
           dispatch(
             actions.ChangeProjectStatus({
               id: data.project,
-              status: "D",
+              status: 'D',
             })
           );
           break;

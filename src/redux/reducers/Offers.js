@@ -3,6 +3,7 @@ let initialState = {
   myOffersLoading: true,
   offers: [],
   myOffers: [],
+  myOffersProjects: [],
 };
 
 const Offers = (state = initialState, action) => {

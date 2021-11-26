@@ -45,6 +45,10 @@ export const DeleteProfileImage = () => {
 };
 
 // Projects
+export const GetProjects = projectIDs => {
+  return axios.post("get-projects/", projectIDs).then(res => res.data);
+};
+
 export const GetAllProjects = () => {
   return axios.get("all-projects/").then(res => res.data);
 };
