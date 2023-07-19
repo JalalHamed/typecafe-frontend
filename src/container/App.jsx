@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
 
 // Libraries
-import { useSelector, useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 // Pages
-import Projects from './pages/projects/Projects';
-import MyProjectsAndOffers from './pages/myprojectsandoffers/MyProjectsAndOffers';
-import TheMessages from './pages/messages/Messages';
 import Financials from './pages/financials/Financials';
+import TheMessages from './pages/messages/Messages';
+import MyProjectsAndOffers from './pages/myprojectsandoffers/MyProjectsAndOffers';
+import Projects from './pages/projects/Projects';
 import Rules from './pages/rules/Rules';
 import Support from './pages/support/Support';
 
 // Components
-import TopBar from './topbar/TopBar';
-import SideBar from './sidebar/SideBar';
 import Modals from './Modals';
 import SaR from './SaR';
 import Sounds from './Sounds';
+import SideBar from './sidebar/SideBar';
+import TopBar from './topbar/TopBar';
 
 // Actions
 import { Sidebar, Tokens } from 'redux/actions';
@@ -26,20 +25,10 @@ import { Sidebar, Tokens } from 'redux/actions';
 // Design
 import './app.scss';
 
-interface State {
-  Tokens: {
-    ac_t: string;
-    re_t: string;
-  };
-  Sidebar: {
-    isOpen: boolean;
-    page: string;
-  };
-}
 
-const App: React.FC = () => {
+const App = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: State) => state);
+  const state = useSelector((state) => state);
   const [width, setWidth] = useState(window.innerWidth);
 
   window.onbeforeunload = () => {

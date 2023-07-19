@@ -3,50 +3,19 @@ import { useSelector } from 'react-redux';
 
 // Modals
 import ModalWrapper from 'modals/ModalWrapper';
+import AoROffer from 'modals/aoroffer/AoROffer';
+import OfferRequest from 'modals/createoffer/CreateOffer';
+import CreateProject from 'modals/createproject/CreateProject';
+import ClientAccept from 'modals/declareready/DeclareReady';
+import DeleteProject from 'modals/deleteproject/DeleteProject';
+import Image from 'modals/image/Image';
 import Loading from 'modals/loading/Loading';
 import LoginRegister from 'modals/loginregister/LoginRegister';
-import CreateProject from 'modals/createproject/CreateProject';
-import Image from 'modals/image/Image';
-import Profile from 'modals/profile/Profile';
-import OfferRequest from 'modals/createoffer/CreateOffer';
-import DeleteProject from 'modals/deleteproject/DeleteProject';
-import AoROffer from 'modals/aoroffer/AoROffer';
 import NotEnoughCredit from 'modals/notenoughcredit/NotEnoughCredit';
-import ClientAccept from 'modals/declareready/DeclareReady';
+import Profile from 'modals/profile/Profile';
 
-interface State {
-  LR: {
-    isModalOpen: boolean;
-  };
-  CreateProject: {
-    isModalOpen: boolean;
-  };
-  Profile: {
-    isModalOpen: boolean;
-  };
-  CreateOffer: {
-    isModalOpen: boolean;
-  };
-  DeleteProject: {
-    isModalOpen: boolean;
-  };
-  AoROffer: {
-    isModalOpen: boolean;
-  };
-  NotEnoughCredit: {
-    isModalOpen: boolean;
-  };
-  SelectedImage: {
-    isModalOpen: boolean;
-  };
-  ClientAccept: {
-    isModalOpen: boolean;
-  };
-  Loading: boolean;
-}
-
-const Modals: React.FC = () => {
-  const state = useSelector((state: State) => state);
+const Modals = () => {
+  const state = useSelector((state) => state);
 
   return (
     <>
